@@ -1,0 +1,17 @@
+Type: Website
+Title: Vehicle Trends 
+Version: 0.1.0
+Authors@R: c(
+    person(given   = "John",
+           family  = "Helveston",
+           role    = c("aut", "cre", "cph"),
+           email   = "john.helveston@gmail.com",
+           comment = c(ORCID = "0000-0002-2657-9191")))
+Depends: R (>= 4.0.2)
+License: CC-BY-SA
+Encoding: UTF-8
+Imports:
+    here,
+    kableExtra,
+    knitr,
+    rmarkdown

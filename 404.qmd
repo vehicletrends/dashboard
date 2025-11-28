@@ -1,0 +1,21 @@
+---
+execute: 
+  echo: false
+  message: false
+  warning: false
+---
+
+:::float-left
+
+<br>
+<center>
+<img src="images/404-hippo.png" width=350>
+</center>
+
+# Whoops!
+
+### The requested page does not exist 😔
+
+<br>
+
+:::

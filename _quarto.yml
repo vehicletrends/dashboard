@@ -1,0 +1,69 @@
+project:
+  type: website
+  output-dir: _site
+  preview:
+    port: 5896
+    browser: true
+  render:
+    - "*.qmd"
+
+website:
+  title: "US Vehicle Trends"
+  image: images/logo.png
+  site-url: https://google.com/
+  favicon: images/favicon.ico
+  repo-url: https://github.com/jhelvy/vehicletrends
+  search:
+    location: navbar
+    type: overlay
+  back-to-top-navigation: false
+  repo-actions: [edit, issue]
+  description: 'Something'
+  open-graph:
+    locale: es_ES
+    site-name: https://github.com/jhelvy/vehicletrends
+  twitter-card:
+    creator: "@johnhelveston"
+    site: "@johnhelveston"
+    image: "images/logo-square.png"
+    card-style: summary
+  navbar:
+    right:
+      - text: About
+        icon: question-square-fill
+        href: about.qmd
+      - text: "Daily VMT"
+        icon: clock-fill
+        href: daily-vmt.qmd
+      - text: "Annual VMT"
+        icon: clock-fill
+        href: annual-vmt.qmd
+      - text: "Depreciation"
+        icon: graph-down
+        href: depreciation.qmd
+      - text: "Market Conc"
+        icon: person-lines-fill
+        href: market-concentration.qmd
+      - text: "Listings"
+        icon: list-ul
+        href: listings.qmd
+      - text: "Dealerships"
+        icon: building
+        href: dealerships.qmd
+  
+  page-footer:
+    center:
+      - text: "© 2025 John Paul Helveston"
+
+format:
+  html:
+    page-layout: full
+    theme: cosmo
+    css: styles.css
+    anchor-sections: true
+    smooth-scroll: true
+    link-external-newwindow: true
+    link-external-icon: false
+    # This is to include fontawesome icons
+    include-in-header: "_includes/header.html"
+  

@@ -1,0 +1,99 @@
+:root {
+  --color-highlight: #18bc9c;
+}
+
+/* Text */
+
+blockquote {
+  background-color: #ecf0f1;
+  padding: 20px;
+  border-color: var(--color-highlight);
+  border-radius: 5px;
+}
+blockquote h3 {
+  margin-top: 0px;
+}
+
+/* Tables */
+
+table {
+  border-collapse: collapse;
+  margin-bottom:10px;
+}
+thead {
+  border-top: solid #DCDCDC;
+  border-bottom: solid #DCDCDC;
+}
+tr.odd {
+  background-color: #F8F8F8;
+}
+tr:first-child {
+  border-top: solid #DCDCDC;
+}
+tr:last-child {
+  border-bottom: solid #DCDCDC;
+}
+
+.class-buttons {
+  text-align: center;
+}
+
+.btn-slides {
+  background-color: var(--color-highlight);
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 10px; /* Rounded edges */
+  text-align: center;
+  text-decoration: none;
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  padding: .9rem;
+  line-height: .5;
+  border-radius: .3rem;
+}
+
+.btn-notes {
+  background-color: #000000;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 10px; /* Rounded edges */
+  text-align: center;
+  text-decoration: none;
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  padding: .9rem;
+  line-height: .5;
+  border-radius: .3rem;
+}
+
+.sidebar-title {
+  color: #cbcccc;
+}
+
+/* Navbar Styling for Dark Theme */
+.navbar {
+  background-color: #212529 !important; /* Dark background color */
+}
+
+.navbar-nav .nav-link {
+  color: rgba(255, 255, 255, 0.75) !important; /* Light text color for links */
+  padding-left: 1rem !important; /* Added spacing */
+  padding-right: 1rem !important; /* Added spacing */
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+  color: #ffffff !important; /* White text on hover and for active link */
+}
+
+.navbar-brand {
+  color: #ffffff !important; /* White text for brand/title */
+}

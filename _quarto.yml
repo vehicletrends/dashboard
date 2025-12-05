@@ -10,9 +10,9 @@ project:
 website:
   title: "US Vehicle Trends"
   image: images/logo.png
-  site-url: https://google.com/
+  site-url: https://vehicletrends.us
   favicon: images/favicon.ico
-  repo-url: https://github.com/jhelvy/vehicletrends
+  repo-url: https://github.com/vehicletrends
   search:
     location: navbar
     type: overlay
@@ -21,36 +21,39 @@ website:
   description: 'Something'
   open-graph:
     locale: es_ES
-    site-name: https://github.com/jhelvy/vehicletrends
+    site-name: https://github.com/vehicletrends
   twitter-card:
     creator: "@johnhelveston"
     site: "@johnhelveston"
-    image: "images/logo-square.png"
+    image: "images/logo.png"
     card-style: summary
-  navbar:
-    right:
-      - text: About
-        icon: question-square-fill
-        href: about.qmd
-      - text: "Daily VMT"
-        icon: clock-fill
-        href: daily-vmt.qmd
-      - text: "Annual VMT"
-        icon: clock-fill
-        href: annual-vmt.qmd
-      - text: "Depreciation"
-        icon: graph-down
-        href: depreciation.qmd
-      - text: "Market Conc"
-        icon: person-lines-fill
-        href: market-concentration.qmd
-      - text: "Listings"
-        icon: list-ul
-        href: listings.qmd
-      - text: "Dealerships"
-        icon: building
-        href: dealerships.qmd
-  
+  sidebar:
+    style: "docked"
+    background: "dark" 
+    collapse-level: 1
+    search: true
+    contents:
+    - text: About
+      icon: question-square-fill
+      href: about.qmd
+    - text: "Daily VMT"
+      icon: clock-fill
+      href: daily-vmt.qmd
+    - text: "Annual VMT"
+      icon: clock-fill
+      href: annual-vmt.qmd
+    - text: "Depreciation"
+      icon: graph-down
+      href: depreciation.qmd
+    - text: "Market Conc"
+      icon: person-lines-fill
+      href: market-concentration.qmd
+    - text: "Listings"
+      icon: list-ul
+      href: listings.qmd
+    - text: "Dealerships"
+      icon: building
+      href: dealerships.qmd
   page-footer:
     center:
       - text: "© 2025 John Paul Helveston"
@@ -67,3 +70,5 @@ format:
     # This is to include fontawesome icons
     include-in-header: "_includes/header.html"
   
+toc-location: right
+toc: true

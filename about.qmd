@@ -3,3 +3,11 @@ title: "About"
 ---
 
 This is the about page of the website.
+
+## Daily VMT
+
+About the daily vehicle miles traveled (VMT) metric.
+
+## Annual VMT
+
+About the annual vehicle miles traveled (VMT) metric.

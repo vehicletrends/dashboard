@@ -1,5 +1,5 @@
 ---
-title: "Market Concentration"
+title: "Dealership inventories"
 ---
 
 ::: {.panel-tabset}

@@ -13,9 +13,7 @@ website:
   site-url: https://vehicletrends.us
   favicon: images/favicon.ico
   repo-url: https://github.com/vehicletrends
-  search:
-    location: navbar
-    type: overlay
+  search: true
   back-to-top-navigation: false
   repo-actions: [edit, issue]
   description: 'Something'
@@ -45,18 +43,19 @@ website:
     - text: "Depreciation"
       icon: graph-down
       href: depreciation.qmd
-    - text: "Market Conc"
+    - text: "Market Concentration"
       icon: person-lines-fill
       href: market-concentration.qmd
-    - text: "Listings"
-      icon: list-ul
-      href: listings.qmd
-    - text: "Dealerships"
+    - text: "Dealerships Inventories"
       icon: building
-      href: dealerships.qmd
+      href: dealership-inventories.qmd
+    - text: "Nearest Vehicles"
+      icon: building
+      href: nearest-vehicles.qmd
+
   page-footer:
     center:
-      - text: "© 2025 John Paul Helveston"
+      - text: "© 2025 John Paul Helveston {{< fa creative-commons-sa >}} <a href='LICENSE.html'><i class='fab fa-creative-commons'></i><i class='fab fa-creative-commons-by'></i><i class='fab fa-creative-commons-sa'></i></a> | <a href='https://github.com/vehicletrends/'><i class='fab fa-github'></i></a>"
 
 format:
   html:
@@ -69,6 +68,9 @@ format:
     link-external-icon: false
     # This is to include fontawesome icons
     include-in-header: "_includes/header.html"
+    toc-location: right
+    toc: true
   
-toc-location: right
-toc: true
+execute:
+    echo: false
+    message: false

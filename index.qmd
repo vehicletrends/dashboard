@@ -1,7 +1,0 @@
----
-toc: false
----
-
-# Welcome to vehicletrends.us!
-
-This site is an ongoing project designed to make publicly available information about trends in the U.S. automotive market. The site pulls together a variety of data sources to reveal trends. See the [about](about.qmd) page for more details on the data sources and calculations. 

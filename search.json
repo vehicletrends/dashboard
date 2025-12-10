@@ -1,0 +1,153 @@
+[
+  {
+    "objectID": "nearest-vehicles.html",
+    "href": "nearest-vehicles.html",
+    "title": "Distance to nearest vehicle",
+    "section": "",
+    "text": "ChartsData\n\n\n\n\n\n\n\n\n\n\nSummary by powertrain\n\n\n\n\n\n\n\n\nSummary by model"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome to vehicletrends.us!",
+    "section": "",
+    "text": "Welcome to vehicletrends.us!\nThis site is an ongoing project designed to make publicly available information about trends in the U.S. automotive market. The site pulls together a variety of data sources to reveal trends. See the about page for more details on the data sources and calculations."
+  },
+  {
+    "objectID": "dealership-inventories.html",
+    "href": "dealership-inventories.html",
+    "title": "Dealership inventories",
+    "section": "",
+    "text": "ChartsData\n\n\n\n\n\n\n\n\n\n\nSummary by powertrain\n\n\n\n\n\n\n\n\nSummary by model",
+    "crumbs": [
+      "Dealerships Inventories"
+    ]
+  },
+  {
+    "objectID": "annual-vmt.html",
+    "href": "annual-vmt.html",
+    "title": "Annual VMT",
+    "section": "",
+    "text": "ChartsData\n\n\n\n\n\n\n\n\n\n\nSummary by powertrain\n\n\n\n\n\n\n\n\nSummary by model",
+    "crumbs": [
+      "Annual VMT"
+    ]
+  },
+  {
+    "objectID": "LICENSE.html",
+    "href": "LICENSE.html",
+    "title": "Licensing and copyright information",
+    "section": "",
+    "text": "The course material is licensed under the Creative Commons ShareAlike 4.0 International License. In addition to my own developed material, I have also modified material from the courses, workshops, and textbooks listed below:\n\nCourses / workshops\n\n\n\nName\nAuthor(s)\nLinks\n\n\n\n\nSTAT 545\nU. of British Columbia\ncourse; GitHub\n\n\nPatrick Meyer’s Youtube lectures\nProf. Patrick Meyer\nplaylists\n\n\nAndrew Heiss’s data viz courses\nAndrew Heiss\nMPA 635, more here\n\n\nIntro. to Data Visualization, Fall 2018\nPeter Aldhous\ncourse site\n\n\n\n\n\nBooks\n\n\n\nName\nAuthor(s)\nLinks\n\n\n\n\nR for Data Science\nGarrett Grolemund & Hadley Wickham\nonline book; GitHub; purchase\n\n\nData Visualization: A practical introduction\nKieran Healy\nonline book; GitHub; purchase\n\n\nFundamentals of Data Visualization\nClaus O. Wilke\nonline book; purchase"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "This is the about page of the website.",
+    "crumbs": [
+      "About"
+    ]
+  },
+  {
+    "objectID": "about.html#daily-vmt",
+    "href": "about.html#daily-vmt",
+    "title": "About",
+    "section": "Daily VMT",
+    "text": "Daily VMT\nAbout the daily vehicle miles traveled (VMT) metric.",
+    "crumbs": [
+      "About"
+    ]
+  },
+  {
+    "objectID": "about.html#annual-vmt",
+    "href": "about.html#annual-vmt",
+    "title": "About",
+    "section": "Annual VMT",
+    "text": "Annual VMT\nAbout the annual vehicle miles traveled (VMT) metric.",
+    "crumbs": [
+      "About"
+    ]
+  },
+  {
+    "objectID": "daily-vmt.html",
+    "href": "daily-vmt.html",
+    "title": "Daily VMT",
+    "section": "",
+    "text": "ChartsData\n\n\n\n\n\n\n\n\n\n\nSummary by powertrain\n\n\n\n\n\n\n\n\nSummary by model",
+    "crumbs": [
+      "Daily VMT"
+    ]
+  },
+  {
+    "objectID": "depreciation.html",
+    "href": "depreciation.html",
+    "title": "Depreciation",
+    "section": "",
+    "text": "ChartsData\n\n\n\n\n\n\n\n\n\n\nSummary by powertrain\n\n\n\n\n\n\n\n\nSummary by model",
+    "crumbs": [
+      "Depreciation"
+    ]
+  },
+  {
+    "objectID": "market-concentration.html",
+    "href": "market-concentration.html",
+    "title": "Market Concentration",
+    "section": "",
+    "text": "ChartsData\n\n\n\n\n\n\n\n\n\n\nSummary by powertrain\n\n\n\n\n\n\n\n\nSummary by model",
+    "crumbs": [
+      "Market Concentration"
+    ]
+  },
+  {
+    "objectID": "about.html#depreciation",
+    "href": "about.html#depreciation",
+    "title": "About",
+    "section": "Depreciation",
+    "text": "Depreciation",
+    "crumbs": [
+      "About"
+    ]
+  },
+  {
+    "objectID": "about.html#market-concentration",
+    "href": "about.html#market-concentration",
+    "title": "About",
+    "section": "Market Concentration",
+    "text": "Market Concentration",
+    "crumbs": [
+      "About"
+    ]
+  },
+  {
+    "objectID": "about.html#listings",
+    "href": "about.html#listings",
+    "title": "About",
+    "section": "Listings",
+    "text": "Listings",
+    "crumbs": [
+      "About"
+    ]
+  },
+  {
+    "objectID": "about.html#dealerships-inventories",
+    "href": "about.html#dealerships-inventories",
+    "title": "About",
+    "section": "Dealerships Inventories",
+    "text": "Dealerships Inventories",
+    "crumbs": [
+      "About"
+    ]
+  },
+  {
+    "objectID": "about.html#nearest-vehicles",
+    "href": "about.html#nearest-vehicles",
+    "title": "About",
+    "section": "Nearest Vehicles",
+    "text": "Nearest Vehicles",
+    "crumbs": [
+      "About"
+    ]
+  }
+]

@@ -12,6 +12,7 @@ License: CC-BY-SA
 Encoding: UTF-8
 Imports:
     here,
+    gapminder,
     kableExtra,
     knitr,
     rmarkdown

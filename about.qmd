@@ -2,20 +2,32 @@
 title: "About"
 ---
 
-This is the about page of the website.
+This dashboard analyzes over **10 million vehicle listings** from 2018 to 2024, providing insights into how different powertrain types—gasoline, hybrid, and electric vehicles—are used, valued, and compete in the American automotive market.
+
+Data from the [vehicletrends](https://github.com/jhelvy/vehicletrends) open-source project (Dr. John Paul Helveston, George Washington University) using MarketCheck automotive listing data covering all 50 US states.
+
+---
 
 ## Daily VMT
 
-About the daily vehicle miles traveled (VMT) metric.
+Analyzes the distribution of daily driving patterns across different powertrains (BEV, PHEV, HEV, conventional) and vehicle types. Shows how many miles vehicles travel per day on average, revealing whether electric vehicles are driven the same distances as gasoline vehicles in daily use.
 
 ## Annual VMT
 
-About the annual vehicle miles traveled (VMT) metric.
+Tracks long-term mileage accumulation patterns over time, showing how different vehicle categories rack up miles annually. Total annual driving patterns by powertrain typically range from 11,000-13,000 miles per year.
 
-## Depreciation 
+## Depreciation
+
+Examines how vehicles retain value over time across different powertrains. Shows the percentage of original price (MSRP) retained at each vehicle age, revealing which powertrains hold their value best and how quickly vehicles depreciate in their first 5 years.
 
 ## Market Concentration
 
+Tracks market share and competitive dynamics across manufacturers within each powertrain category. Measures how concentrated or competitive each segment is, showing whether markets are dominated by a few manufacturers or have healthy competition across many brands.
+
+## Listings
+
+Detailed analysis of vehicle listings data, including pricing trends, availability, and inventory levels across different segments. Shows current market inventory patterns and pricing across vehicle types and powertrains.
+
 ## Dealerships Inventories
 
-## Nearest Vehicles
+Explores dealership inventory patterns, stock levels, and geographic distribution of vehicle availability. Shows how dealer inventory is distributed across regions and vehicle types.

@@ -38,7 +38,7 @@ website:
       icon: clock-fill
       href: daily-vmt.qmd
     - text: "Annual VMT"
-      icon: clock-fill
+      icon: calendar-range
       href: annual-vmt.qmd
     - text: "Depreciation"
       icon: graph-down
@@ -46,11 +46,14 @@ website:
     - text: "Market Concentration"
       icon: person-lines-fill
       href: market-concentration.qmd
+    - text: "Listings"
+      icon: list-ul
+      href: listings.qmd
     - text: "Dealerships Inventories"
       icon: building
       href: dealership-inventories.qmd
     - text: "Nearest Vehicles"
-      icon: building
+      icon: geo-alt
       href: nearest-vehicles.qmd
 
   page-footer:

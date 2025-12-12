@@ -1,12 +1,6 @@
 ---
-title: "Daily VMT"
-echo: false
-message: false
+title: "Understanding HHI"
 ---
-
-::: {.panel-tabset}
-
-## Charts
 
 ```{r}
 library(gapminder)
@@ -21,23 +15,3 @@ htmltools::tags$iframe(
   frameBorder = "0"
 )
 ```
-
-## Data
-
-### **Summary by powertrain**
-
-```{R}
-gapminder %>%
-  datatable()
-```
-
-### **Summary by model**
-
-```{R}
-gapminder %>%
-  datatable()
-```
-
-:::
-
-

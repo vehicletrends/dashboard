@@ -7,8 +7,6 @@ title: "Distance to nearest vehicle"
 ## Charts
 
 ```{r}
-#| echo: false
-
 library(gapminder)
 library(DT)
 

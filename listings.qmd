@@ -7,8 +7,6 @@ title: "Listings"
 ## Charts
 
 ```{r}
-#| echo: false
-
 library(gapminder)
 library(DT)
 

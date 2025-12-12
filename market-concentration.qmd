@@ -38,6 +38,24 @@ gapminder %>%
   datatable()
 ```
 
+## About HHI
+
+```{r}
+#| echo: false
+
+library(gapminder)
+library(DT)
+
+htmltools::tags$iframe(
+  src = 'https://019aef63-7a29-6cae-c268-f3aec7a80cb2.share.connect.posit.cloud/',
+  width = "100%",
+  height = "800",
+  scrolling = "no",
+  seamless = "seamless",
+  frameBorder = "0"
+)
+```
+
 :::
 
 

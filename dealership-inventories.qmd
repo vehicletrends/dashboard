@@ -7,8 +7,7 @@ title: "Dealership inventories"
 ## Charts
 
 ```{r}
-library(gapminder)
-library(DT)
+#| echo: false
 
 htmltools::tags$iframe(
   src = 'https://019aef6d-d584-d1f2-0408-7e964da06288.share.connect.posit.cloud/',
@@ -18,22 +17,6 @@ htmltools::tags$iframe(
   seamless = "seamless",
   frameBorder = "0"
 )
-```
-
-## Data
-
-### **Summary by powertrain**
-
-```{R}
-gapminder %>%
-  datatable()
-```
-
-### **Summary by model**
-
-```{R}
-gapminder %>%
-  datatable()
 ```
 
 :::

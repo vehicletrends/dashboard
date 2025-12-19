@@ -9,8 +9,7 @@ message: false
 ## Charts
 
 ```{r}
-library(gapminder)
-library(DT)
+#| echo: false
 
 htmltools::tags$iframe(
   src = 'https://019acb0e-83cb-1ec2-5ac2-4ccc3ac9e70e.share.connect.posit.cloud/',
@@ -20,22 +19,6 @@ htmltools::tags$iframe(
   seamless = "seamless",
   frameBorder = "0"
 )
-```
-
-## Data
-
-### **Summary by powertrain**
-
-```{R}
-gapminder %>%
-  datatable()
-```
-
-### **Summary by model**
-
-```{R}
-gapminder %>%
-  datatable()
 ```
 
 :::

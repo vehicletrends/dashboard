@@ -7,8 +7,7 @@ title: "Annual VMT"
 ## Charts
 
 ```{r}
-library(gapminder)
-library(DT)
+#| echo: false
 
 htmltools::tags$iframe(
   src = 'https://019aed39-3086-77f8-d495-8da32cdb9c0d.share.connect.posit.cloud/',
@@ -18,22 +17,6 @@ htmltools::tags$iframe(
   seamless = "seamless",
   frameBorder = "0"
 )
-```
-
-## Data
-
-### **Summary by powertrain**
-
-```{R}
-gapminder %>%
-  datatable()
-```
-
-### **Summary by model**
-
-```{R}
-gapminder %>%
-  datatable()
 ```
 
 :::

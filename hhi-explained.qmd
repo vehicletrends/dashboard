@@ -3,8 +3,7 @@ title: "Understanding HHI"
 ---
 
 ```{r}
-library(gapminder)
-library(DT)
+#| echo: false
 
 htmltools::tags$iframe(
   src = 'https://019acb0e-83cb-1ec2-5ac2-4ccc3ac9e70e.share.connect.posit.cloud/',

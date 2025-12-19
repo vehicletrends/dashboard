@@ -7,8 +7,7 @@ title: "Listings"
 ## Charts
 
 ```{r}
-library(gapminder)
-library(DT)
+#| echo: false
 
 htmltools::tags$iframe(
   src = 'https://019aef6a-ccf6-b05d-89a6-c706245c04f2.share.connect.posit.cloud/',
@@ -18,22 +17,6 @@ htmltools::tags$iframe(
   seamless = "seamless",
   frameBorder = "0"
 )
-```
-
-## Data
-
-### **Summary by powertrain**
-
-```{R}
-gapminder %>%
-  datatable()
-```
-
-### **Summary by model**
-
-```{R}
-gapminder %>%
-  datatable()
 ```
 
 :::

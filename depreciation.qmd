@@ -7,8 +7,7 @@ title: "Depreciation"
 ## Charts
 
 ```{r}
-library(gapminder)
-library(DT)
+#| echo: false
 
 htmltools::tags$iframe(
   src = 'https://019aef5c-6073-7f45-c95f-539e27e122e1.share.connect.posit.cloud/',
@@ -18,22 +17,6 @@ htmltools::tags$iframe(
   seamless = "seamless",
   frameBorder = "0"
 )
-```
-
-## Data
-
-### **Summary by powertrain**
-
-```{R}
-gapminder %>%
-  datatable()
-```
-
-### **Summary by model**
-
-```{R}
-gapminder %>%
-  datatable()
 ```
 
 :::

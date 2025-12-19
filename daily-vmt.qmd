@@ -1,16 +1,22 @@
 ---
 title: "Daily VMT"
-echo: false
-message: false
 ---
+
+```{r}
+#| label: setup
+#| include: false
+
+library(dplyr)
+
+data_url <- "https://cdn.jsdelivr.net/gh/vehicletrends/data@main/data/quantiles_dvmt.csv"
+quantiles_dvmt <- read.csv(data_url)
+```
 
 ::: {.panel-tabset}
 
 ## Charts
 
 ```{r}
-#| echo: false
-
 htmltools::tags$iframe(
   src = 'https://019acb0e-83cb-1ec2-5ac2-4ccc3ac9e70e.share.connect.posit.cloud/',
   width = "100%",
@@ -19,6 +25,32 @@ htmltools::tags$iframe(
   seamless = "seamless",
   frameBorder = "0"
 )
+```
+
+## Data
+
+```{r}
+quantiles_dvmt |>
+  mutate(
+    powertrain = case_when(
+      powertrain == "all" ~ "All",
+      powertrain == "bev" ~ "BEV",
+      powertrain == "bev_non_tesla" ~ "BEV (non-Tesla)",
+      powertrain == "bev_tesla" ~ "BEV (Tesla)",
+      powertrain == "phev" ~ "PHEV",
+      powertrain == "hev" ~ "HEV",
+      powertrain == "cv" ~ "Conventional Vehicle",
+      TRUE ~ powertrain
+    )
+  ) |>
+  reactable::reactable(
+    searchable = TRUE,
+    highlight = TRUE,
+    filterable = TRUE,
+    defaultPageSize = 25,
+    showPageSizeOptions = TRUE,
+    pageSizeOptions = c(5, 10, 15)
+  )
 ```
 
 :::

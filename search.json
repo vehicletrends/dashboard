@@ -4,21 +4,27 @@
     "href": "nearest-vehicles.html",
     "title": "Distance to nearest vehicle",
     "section": "",
-    "text": "ChartsData\n\n\n\n\n\n\n\n\n\n\nSummary by powertrain\n\n\n\n\n\n\n\n\nSummary by model"
+    "text": "Charts",
+    "crumbs": [
+      "Nearest Vehicles"
+    ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Welcome to vehicletrends.us!",
+    "objectID": "listings.html",
+    "href": "listings.html",
+    "title": "Listings",
     "section": "",
-    "text": "Welcome to vehicletrends.us!\nThis site is an ongoing project designed to make publicly available information about trends in the U.S. automotive market. The site pulls together a variety of data sources to reveal trends. See the about page for more details on the data sources and calculations."
+    "text": "Charts",
+    "crumbs": [
+      "Listings"
+    ]
   },
   {
     "objectID": "dealership-inventories.html",
     "href": "dealership-inventories.html",
     "title": "Dealership inventories",
     "section": "",
-    "text": "ChartsData\n\n\n\n\n\n\n\n\n\n\nSummary by powertrain\n\n\n\n\n\n\n\n\nSummary by model",
+    "text": "Charts",
     "crumbs": [
       "Dealerships Inventories"
     ]
@@ -28,7 +34,7 @@
     "href": "annual-vmt.html",
     "title": "Annual VMT",
     "section": "",
-    "text": "ChartsData\n\n\n\n\n\n\n\n\n\n\nSummary by powertrain\n\n\n\n\n\n\n\n\nSummary by model",
+    "text": "Charts",
     "crumbs": [
       "Annual VMT"
     ]
@@ -45,7 +51,7 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "This is the about page of the website.",
+    "text": "This dashboard analyzes over 10 million vehicle listings from 2018 to 2024, providing insights into how different powertrain types—gasoline, hybrid, and electric vehicles—are used, valued, and compete in the American automotive market.\nData from the vehicletrends open-source project (Dr. John Paul Helveston, George Washington University) using MarketCheck automotive listing data covering all 50 US states.",
     "crumbs": [
       "About"
     ]
@@ -55,7 +61,7 @@
     "href": "about.html#daily-vmt",
     "title": "About",
     "section": "Daily VMT",
-    "text": "Daily VMT\nAbout the daily vehicle miles traveled (VMT) metric.",
+    "text": "Daily VMT\nAnalyzes the distribution of daily driving patterns across different powertrains (BEV, PHEV, HEV, conventional) and vehicle types. Shows how many miles vehicles travel per day on average, revealing whether electric vehicles are driven the same distances as gasoline vehicles in daily use.",
     "crumbs": [
       "About"
     ]
@@ -65,39 +71,9 @@
     "href": "about.html#annual-vmt",
     "title": "About",
     "section": "Annual VMT",
-    "text": "Annual VMT\nAbout the annual vehicle miles traveled (VMT) metric.",
+    "text": "Annual VMT\nTracks long-term mileage accumulation patterns over time, showing how different vehicle categories rack up miles annually. Total annual driving patterns by powertrain typically range from 11,000-13,000 miles per year.",
     "crumbs": [
       "About"
-    ]
-  },
-  {
-    "objectID": "daily-vmt.html",
-    "href": "daily-vmt.html",
-    "title": "Daily VMT",
-    "section": "",
-    "text": "ChartsData\n\n\n\n\n\n\n\n\n\n\nSummary by powertrain\n\n\n\n\n\n\n\n\nSummary by model",
-    "crumbs": [
-      "Daily VMT"
-    ]
-  },
-  {
-    "objectID": "depreciation.html",
-    "href": "depreciation.html",
-    "title": "Depreciation",
-    "section": "",
-    "text": "ChartsData\n\n\n\n\n\n\n\n\n\n\nSummary by powertrain\n\n\n\n\n\n\n\n\nSummary by model",
-    "crumbs": [
-      "Depreciation"
-    ]
-  },
-  {
-    "objectID": "market-concentration.html",
-    "href": "market-concentration.html",
-    "title": "Market Concentration",
-    "section": "",
-    "text": "ChartsData\n\n\n\n\n\n\n\n\n\n\nSummary by powertrain\n\n\n\n\n\n\n\n\nSummary by model",
-    "crumbs": [
-      "Market Concentration"
     ]
   },
   {
@@ -105,7 +81,7 @@
     "href": "about.html#depreciation",
     "title": "About",
     "section": "Depreciation",
-    "text": "Depreciation",
+    "text": "Depreciation\nExamines how vehicles retain value over time across different powertrains. Shows the percentage of original price (MSRP) retained at each vehicle age, revealing which powertrains hold their value best and how quickly vehicles depreciate in their first 5 years.",
     "crumbs": [
       "About"
     ]
@@ -115,7 +91,7 @@
     "href": "about.html#market-concentration",
     "title": "About",
     "section": "Market Concentration",
-    "text": "Market Concentration",
+    "text": "Market Concentration\nTracks market share and competitive dynamics across manufacturers within each powertrain category. Measures how concentrated or competitive each segment is, showing whether markets are dominated by a few manufacturers or have healthy competition across many brands.",
     "crumbs": [
       "About"
     ]
@@ -125,7 +101,7 @@
     "href": "about.html#listings",
     "title": "About",
     "section": "Listings",
-    "text": "Listings",
+    "text": "Listings\nDetailed analysis of vehicle listings data, including pricing trends, availability, and inventory levels across different segments. Shows current market inventory patterns and pricing across vehicle types and powertrains.",
     "crumbs": [
       "About"
     ]
@@ -135,19 +111,46 @@
     "href": "about.html#dealerships-inventories",
     "title": "About",
     "section": "Dealerships Inventories",
-    "text": "Dealerships Inventories",
+    "text": "Dealerships Inventories\nExplores dealership inventory patterns, stock levels, and geographic distribution of vehicle availability. Shows how dealer inventory is distributed across regions and vehicle types.",
     "crumbs": [
       "About"
     ]
   },
   {
-    "objectID": "about.html#nearest-vehicles",
-    "href": "about.html#nearest-vehicles",
-    "title": "About",
-    "section": "Nearest Vehicles",
-    "text": "Nearest Vehicles",
+    "objectID": "daily-vmt.html",
+    "href": "daily-vmt.html",
+    "title": "Daily VMT",
+    "section": "",
+    "text": "Charts",
     "crumbs": [
-      "About"
+      "Daily VMT"
+    ]
+  },
+  {
+    "objectID": "depreciation.html",
+    "href": "depreciation.html",
+    "title": "Depreciation",
+    "section": "",
+    "text": "Charts",
+    "crumbs": [
+      "Depreciation"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome to vehicletrends.us!",
+    "section": "",
+    "text": "Welcome to vehicletrends.us!\nThis site is an ongoing project designed to make publicly available information about trends in the U.S. automotive market. The site pulls together a variety of data sources to reveal trends. See the about page for more details on the data sources and calculations."
+  },
+  {
+    "objectID": "market-concentration.html",
+    "href": "market-concentration.html",
+    "title": "Market Concentration",
+    "section": "",
+    "text": "ChartsAbout HHI\n\n\n\n\n\n\n\n\n\nThis section explains the Herfindahl-Hirschman Index (HHI) and its relevance to market concentration analysis.\nSee Understanding HHI for more details.",
+    "crumbs": [
+      "Market Concentration"
     ]
   }
 ]

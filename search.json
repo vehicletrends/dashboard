@@ -4,7 +4,7 @@
     "href": "nearest-vehicles.html",
     "title": "Distance to nearest vehicle",
     "section": "",
-    "text": "Charts",
+    "text": "ChartsData\n\n\n\n\n\n\n\n\n\nThis is an interactive analysis tool that computes vehicle similarity based on selected parameters. The data is generated dynamically based on your search criteria in the Charts tab above.\nHow it works: - Select target vehicle characteristics (make, type, price range) - The app identifies similar vehicles based on multiple attributes - View results as scatter plots or data tables - Adjust the number of similar vehicles to display",
     "crumbs": [
       "Nearest Vehicles"
     ]
@@ -14,7 +14,7 @@
     "href": "listings.html",
     "title": "Listings",
     "section": "",
-    "text": "Charts",
+    "text": "ChartsData\n\n\n\n\n\n\n\n\n\n\nDownload data",
     "crumbs": [
       "Listings"
     ]
@@ -24,7 +24,7 @@
     "href": "dealership-inventories.html",
     "title": "Dealership inventories",
     "section": "",
-    "text": "Charts",
+    "text": "ChartsData\n\n\n\n\n\n\n\n\n\n\nDownload data",
     "crumbs": [
       "Dealerships Inventories"
     ]
@@ -34,7 +34,7 @@
     "href": "annual-vmt.html",
     "title": "Annual VMT",
     "section": "",
-    "text": "Charts",
+    "text": "ChartsData\n\n\n\n\n\n\n\n\n\n\nDownload data",
     "crumbs": [
       "Annual VMT"
     ]
@@ -121,7 +121,7 @@
     "href": "daily-vmt.html",
     "title": "Daily VMT",
     "section": "",
-    "text": "ChartsData",
+    "text": "ChartsData\n\n\n\n\n\n\n\n\n\n\nDownload data",
     "crumbs": [
       "Daily VMT"
     ]
@@ -131,7 +131,7 @@
     "href": "depreciation.html",
     "title": "Depreciation",
     "section": "",
-    "text": "Charts",
+    "text": "ChartsData\n\n\n\n\n\n\n\n\n\n\nDownload data",
     "crumbs": [
       "Depreciation"
     ]
@@ -148,7 +148,7 @@
     "href": "market-concentration.html",
     "title": "Market Concentration",
     "section": "",
-    "text": "ChartsAbout HHI\n\n\n\n\n\n\n\n\n\nThis section explains the Herfindahl-Hirschman Index (HHI) and its relevance to market concentration analysis.\nSee Understanding HHI for more details.",
+    "text": "ChartsDataAbout HHI\n\n\n\n\n\n\n\n\n\n\nDownload data: By Make | By Type | By Price\n\n\n\n\n\n\n\n\n\n\n\nThis section explains the Herfindahl-Hirschman Index (HHI) and its relevance to market concentration analysis.\nSee Understanding HHI for more details.",
     "crumbs": [
       "Market Concentration"
     ]

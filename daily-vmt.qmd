@@ -30,7 +30,6 @@ htmltools::tags$iframe(
 ## Data
 
 <center>
-
 [Download data](https://cdn.jsdelivr.net/gh/vehicletrends/data@main/data/quantiles_dvmt.csv)
 
 <div style="width:700px">
@@ -51,13 +50,13 @@ quantiles_dvmt |>
   ) |>
   mutate(
     dvmt = round(dvmt, 2)
-  ) |> 
+  ) |>
   rename(
-    Powertrain = powertrain, 
-    `Vehicle Type` = vehicle_type, 
-    Quantile = quantile, 
+    Powertrain = powertrain,
+    `Vehicle Type` = vehicle_type,
+    Quantile = quantile,
     DVMT = dvmt
-  ) |> 
+  ) |>
   reactable::reactable(
     searchable = TRUE,
     highlight = TRUE,
@@ -72,5 +71,3 @@ quantiles_dvmt |>
 </center>
 
 :::
-
-

@@ -2,6 +2,16 @@
 title: "Depreciation"
 ---
 
+```{r}
+#| label: setup
+#| include: false
+
+library(dplyr)
+
+data_url <- "https://cdn.jsdelivr.net/gh/vehicletrends/data@main/data/depreciation_powertrain_type.csv"
+depreciation_data <- read.csv(data_url)
+```
+
 ::: {.panel-tabset}
 
 ## Charts
@@ -21,27 +31,34 @@ htmltools::tags$iframe(
 
 ## Data
 
+<center>
+[Download data](https://cdn.jsdelivr.net/gh/vehicletrends/data@main/data/depreciation_powertrain_type.csv)
+
+<div style="width:700px">
+
 ```{r}
-#| echo: false
-library(DT)
-
-# Load depreciation data
-depreciation_url <- "https://cdn.jsdelivr.net/gh/jhelvy/vehicletrends@main/data/depreciation_powertrain_type.csv"
-depreciation_data <- read.csv(depreciation_url)
-
-# Display data table
-datatable(
-  depreciation_data,
-  options = list(
-    pageLength = 10,
-    scrollX = TRUE,
-    dom = 'Bfrtip',
-    buttons = c('copy', 'csv', 'excel')
-  ),
-  caption = "Vehicle Retention Rates by Powertrain and Vehicle Type"
-)
+depreciation_data |>
+  mutate(
+    rr_predicted = round(rr_predicted, 3),
+    age_years = round(age_years, 1)
+  ) |>
+  rename(
+    Powertrain = powertrain,
+    `Vehicle Type` = vehicle_type,
+    `Age (years)` = age_years,
+    `Retention Rate` = rr_predicted
+  ) |>
+  reactable::reactable(
+    searchable = TRUE,
+    highlight = TRUE,
+    filterable = TRUE,
+    defaultPageSize = 10,
+    showPageSizeOptions = TRUE,
+    pageSizeOptions = c(5, 10, 25, 50)
+  )
 ```
 
+</div>
+</center>
+
 :::
-
-

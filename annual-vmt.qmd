@@ -2,6 +2,16 @@
 title: "Annual VMT"
 ---
 
+```{r}
+#| label: setup
+#| include: false
+
+library(dplyr)
+
+data_url <- "https://cdn.jsdelivr.net/gh/vehicletrends/data@main/data/mileage_powertrain_type.csv"
+mileage_data <- read.csv(data_url)
+```
+
 ::: {.panel-tabset}
 
 ## Charts
@@ -21,27 +31,34 @@ htmltools::tags$iframe(
 
 ## Data
 
+<center>
+[Download data](https://cdn.jsdelivr.net/gh/vehicletrends/data@main/data/mileage_powertrain_type.csv)
+
+<div style="width:700px">
+
 ```{r}
-#| echo: false
-library(DT)
-
-# Load annual mileage data
-mileage_url <- "https://cdn.jsdelivr.net/gh/jhelvy/vehicletrends@main/data/mileage_powertrain_type.csv"
-mileage_data <- read.csv(mileage_url)
-
-# Display data table
-datatable(
-  mileage_data,
-  options = list(
-    pageLength = 10,
-    scrollX = TRUE,
-    dom = 'Bfrtip',
-    buttons = c('copy', 'csv', 'excel')
-  ),
-  caption = "Annual Mileage Predictions by Powertrain and Vehicle Type"
-)
+mileage_data |>
+  mutate(
+    mileage_predicted = round(mileage_predicted, 0),
+    age_years = round(age_years, 1)
+  ) |>
+  rename(
+    Powertrain = powertrain,
+    `Vehicle Type` = vehicle_type,
+    `Age (years)` = age_years,
+    `Predicted Mileage` = mileage_predicted
+  ) |>
+  reactable::reactable(
+    searchable = TRUE,
+    highlight = TRUE,
+    filterable = TRUE,
+    defaultPageSize = 10,
+    showPageSizeOptions = TRUE,
+    pageSizeOptions = c(5, 10, 25, 50)
+  )
 ```
 
+</div>
+</center>
+
 :::
-
-

@@ -2,6 +2,16 @@
 title: "Dealership inventories"
 ---
 
+```{r}
+#| label: setup
+#| include: false
+
+library(dplyr)
+
+data_url <- "https://cdn.jsdelivr.net/gh/jhelvy/vehicletrends@main/data/p_one_powertrain_vehicle_type.csv"
+dealer_data <- read.csv(data_url)
+```
+
 ::: {.panel-tabset}
 
 ## Charts
@@ -21,26 +31,36 @@ htmltools::tags$iframe(
 
 ## Data
 
+<center>
+[Download data](https://cdn.jsdelivr.net/gh/jhelvy/vehicletrends@main/data/p_one_powertrain_vehicle_type.csv)
+
+<div style="width:700px">
+
 ```{r}
 #| echo: false
-library(DT)
 
-# Load dealership inventory data
-dealer_url <- "https://cdn.jsdelivr.net/gh/jhelvy/vehicletrends@main/data/p_one_powertrain_vehicle_type.csv"
-dealer_data <- read.csv(dealer_url)
-
-# Display data table
-datatable(
-  dealer_data,
-  options = list(
-    pageLength = 10,
-    scrollX = TRUE,
-    dom = 'Bfrtip',
-    buttons = c('copy', 'csv', 'excel')
-  ),
-  caption = "Dealership Inventory Patterns by Powertrain and Vehicle Type"
-)
+dealer_data |>
+  mutate(
+    p = round(p, 3)
+  ) |>
+  rename(
+    Powertrain = powertrain,
+    `Vehicle Type` = vehicle_type,
+    `Listing Year` = listing_year,
+    `Percentage` = p
+  ) |>
+  reactable::reactable(
+    searchable = TRUE,
+    highlight = TRUE,
+    filterable = TRUE,
+    defaultPageSize = 10,
+    showPageSizeOptions = TRUE,
+    pageSizeOptions = c(5, 10, 25, 50)
+  )
 ```
+
+</div>
+</center>
 
 :::
 

@@ -2,6 +2,16 @@
 title: "Market Concentration"
 ---
 
+```{r}
+#| label: setup
+#| include: false
+
+library(dplyr)
+
+data_url <- "https://cdn.jsdelivr.net/gh/vehicletrends/data@main/data/hhi_make.csv"
+hhi_data <- read.csv(data_url)
+```
+
 ::: {.panel-tabset}
 
 ## Charts
@@ -21,26 +31,44 @@ htmltools::tags$iframe(
 
 ## Data
 
+<center>
+[Download data](https://cdn.jsdelivr.net/gh/vehicletrends/data@main/data/hhi_make.csv)
+
+<div style="width:700px">
+
 ```{r}
-#| echo: false
-library(DT)
-
-# Load HHI market concentration data
-hhi_url <- "https://cdn.jsdelivr.net/gh/jhelvy/vehicletrends@main/data/hhi_make.csv"
-hhi_data <- read.csv(hhi_url)
-
-# Display data table
-datatable(
-  hhi_data,
-  options = list(
-    pageLength = 10,
-    scrollX = TRUE,
-    dom = 'Bfrtip',
-    buttons = c('copy', 'csv', 'excel')
-  ),
-  caption = "Market Concentration (HHI) by Brand"
-)
+hhi_data |>
+  mutate(
+    hhi = round(hhi, 3),
+    median = round(median, 3),
+    q25 = round(q25, 3),
+    q75 = round(q75, 3),
+    lower = round(lower, 3),
+    upper = round(upper, 3)
+  ) |>
+  rename(
+    Year = year,
+    Powertrain = powertrain,
+    Make = make,
+    HHI = hhi,
+    Median = median,
+    Q25 = q25,
+    Q75 = q75,
+    Lower = lower,
+    Upper = upper
+  ) |>
+  reactable::reactable(
+    searchable = TRUE,
+    highlight = TRUE,
+    filterable = TRUE,
+    defaultPageSize = 10,
+    showPageSizeOptions = TRUE,
+    pageSizeOptions = c(5, 10, 25, 50)
+  )
 ```
+
+</div>
+</center>
 
 ## About HHI
 
@@ -49,5 +77,3 @@ This section explains the Herfindahl-Hirschman Index (HHI) and its relevance to 
 See [Understanding HHI](hhi-explained.qmd) for more details.
 
 :::
-
-

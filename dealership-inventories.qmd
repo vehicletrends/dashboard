@@ -10,12 +10,35 @@ title: "Dealership inventories"
 #| echo: false
 
 htmltools::tags$iframe(
-  src = 'https://019aef6d-d584-d1f2-0408-7e964da06288.share.connect.posit.cloud/',
+  src = 'https://019ba1a1-6798-c19f-7482-1f96111440cd.share.connect.posit.cloud/',
   width = "100%",
   height = "800",
   scrolling = "no",
   seamless = "seamless",
   frameBorder = "0"
+)
+```
+
+## Data
+
+```{r}
+#| echo: false
+library(DT)
+
+# Load dealership inventory data
+dealer_url <- "https://cdn.jsdelivr.net/gh/jhelvy/vehicletrends@main/data/p_one_powertrain_vehicle_type.csv"
+dealer_data <- read.csv(dealer_url)
+
+# Display data table
+datatable(
+  dealer_data,
+  options = list(
+    pageLength = 10,
+    scrollX = TRUE,
+    dom = 'Bfrtip',
+    buttons = c('copy', 'csv', 'excel')
+  ),
+  caption = "Dealership Inventory Patterns by Powertrain and Vehicle Type"
 )
 ```
 

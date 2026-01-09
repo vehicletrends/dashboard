@@ -19,6 +19,16 @@ htmltools::tags$iframe(
 )
 ```
 
+## Data
+
+This is an interactive analysis tool that computes vehicle similarity based on selected parameters. The data is generated dynamically based on your search criteria in the Charts tab above.
+
+**How it works:**
+- Select target vehicle characteristics (make, type, price range)
+- The app identifies similar vehicles based on multiple attributes
+- View results as scatter plots or data tables
+- Adjust the number of similar vehicles to display
+
 :::
 
 

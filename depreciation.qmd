@@ -10,12 +10,35 @@ title: "Depreciation"
 #| echo: false
 
 htmltools::tags$iframe(
-  src = 'https://019aef5c-6073-7f45-c95f-539e27e122e1.share.connect.posit.cloud/',
+  src = 'https://019ba196-b520-13ed-4198-caed05339ae5.share.connect.posit.cloud/',
   width = "100%",
   height = "800",
   scrolling = "no",
   seamless = "seamless",
   frameBorder = "0"
+)
+```
+
+## Data
+
+```{r}
+#| echo: false
+library(DT)
+
+# Load depreciation data
+depreciation_url <- "https://cdn.jsdelivr.net/gh/jhelvy/vehicletrends@main/data/depreciation_powertrain_type.csv"
+depreciation_data <- read.csv(depreciation_url)
+
+# Display data table
+datatable(
+  depreciation_data,
+  options = list(
+    pageLength = 10,
+    scrollX = TRUE,
+    dom = 'Bfrtip',
+    buttons = c('copy', 'csv', 'excel')
+  ),
+  caption = "Vehicle Retention Rates by Powertrain and Vehicle Type"
 )
 ```
 

@@ -10,12 +10,35 @@ title: "Market Concentration"
 #| echo: false
 
 htmltools::tags$iframe(
-  src = 'https://019aef63-7a29-6cae-c268-f3aec7a80cb2.share.connect.posit.cloud/',
+  src = 'https://019ba305-5eb9-798a-0dd9-7a01ccfc937f.share.connect.posit.cloud/',
   width = "100%",
   height = "800",
   scrolling = "no",
   seamless = "seamless",
   frameBorder = "0"
+)
+```
+
+## Data
+
+```{r}
+#| echo: false
+library(DT)
+
+# Load HHI market concentration data
+hhi_url <- "https://cdn.jsdelivr.net/gh/jhelvy/vehicletrends@main/data/hhi_make.csv"
+hhi_data <- read.csv(hhi_url)
+
+# Display data table
+datatable(
+  hhi_data,
+  options = list(
+    pageLength = 10,
+    scrollX = TRUE,
+    dom = 'Bfrtip',
+    buttons = c('copy', 'csv', 'excel')
+  ),
+  caption = "Market Concentration (HHI) by Brand"
 )
 ```
 

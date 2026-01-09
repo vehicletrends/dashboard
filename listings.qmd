@@ -19,6 +19,29 @@ htmltools::tags$iframe(
 )
 ```
 
+## Data
+
+```{r}
+#| echo: false
+library(DT)
+
+# Load market share data
+market_url <- "https://cdn.jsdelivr.net/gh/jhelvy/vehicletrends@main/data/p_market_powertrain_vehicle_type.csv"
+market_data <- read.csv(market_url)
+
+# Display data table
+datatable(
+  market_data,
+  options = list(
+    pageLength = 10,
+    scrollX = TRUE,
+    dom = 'Bfrtip',
+    buttons = c('copy', 'csv', 'excel')
+  ),
+  caption = "Market Share of Listings by Powertrain and Vehicle Type (2018 vs 2024)"
+)
+```
+
 :::
 
 

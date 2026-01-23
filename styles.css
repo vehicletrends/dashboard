@@ -1,99 +1,510 @@
+/* ============================================
+   US Vehicle Trends - Modern Clean Design
+   Gray theme with clean typography
+   ============================================ */
+
+/* CSS Variables */
 :root {
-  --color-highlight: #18bc9c;
+  --color-primary: #2563eb;
+  --color-primary-hover: #1d4ed8;
+  --color-accent: #10b981;
+
+  /* Gray palette */
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Spacing */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
-/* Text */
+/* Import Inter font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-blockquote {
-  background-color: #ecf0f1;
-  padding: 20px;
-  border-color: var(--color-highlight);
-  border-radius: 5px;
-}
-blockquote h3 {
-  margin-top: 0px;
+/* ============================================
+   Base Typography
+   ============================================ */
+
+body {
+  font-family: var(--font-sans);
+  color: var(--gray-800);
+  line-height: 1.6;
+  background-color: var(--gray-50);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Tables */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  color: var(--gray-900);
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: 2rem; margin-bottom: 1rem; }
+h2 { font-size: 1.5rem; margin-bottom: 0.75rem; }
+h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+
+p {
+  color: var(--gray-600);
+  margin-bottom: 1rem;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+a:hover {
+  color: var(--color-primary-hover);
+}
+
+/* ============================================
+   Main Content Area
+   ============================================ */
+
+.main-container,
+#quarto-content {
+  background-color: var(--gray-50);
+}
+
+.content {
+  padding: 2rem;
+}
+
+/* Page title styling */
+.title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+/* ============================================
+   Sidebar Navigation
+   ============================================ */
+
+#quarto-sidebar,
+.sidebar {
+  background-color: var(--gray-100) !important;
+  border-right: 1px solid var(--gray-200);
+}
+
+.sidebar-title,
+#quarto-sidebar .sidebar-title {
+  color: var(--gray-900) !important;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 1.25rem 1rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.sidebar-navigation .sidebar-item {
+  margin: 2px 8px;
+}
+
+.sidebar-navigation .sidebar-item .sidebar-item-text,
+.sidebar-navigation a {
+  color: var(--gray-600) !important;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-md);
+  transition: all 0.15s ease;
+}
+
+.sidebar-navigation .sidebar-item:hover .sidebar-item-text,
+.sidebar-navigation a:hover {
+  color: var(--gray-900) !important;
+  background-color: var(--gray-200);
+}
+
+.sidebar-navigation .sidebar-item.active .sidebar-item-text,
+.sidebar-navigation a.active {
+  color: var(--gray-900) !important;
+  background-color: var(--gray-200) !important;
+}
+
+/* Sidebar icons */
+.sidebar-item i,
+.sidebar .bi {
+  color: var(--gray-500);
+  margin-right: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.sidebar-item:hover i,
+.sidebar-item.active i {
+  color: var(--gray-700);
+}
+
+/* ============================================
+   Panel Tabset (Charts/Data tabs)
+   ============================================ */
+
+.panel-tabset {
+  background-color: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  margin: 1.5rem 0;
+}
+
+.panel-tabset .nav-tabs {
+  background-color: var(--gray-100);
+  border-bottom: 1px solid var(--gray-200);
+  padding: 0.5rem 0.5rem 0;
+  gap: 0.25rem;
+}
+
+.panel-tabset .nav-tabs .nav-link {
+  color: var(--gray-600);
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 0.625rem 1.25rem;
+  border: none;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  background-color: transparent;
+  transition: all 0.15s ease;
+}
+
+.panel-tabset .nav-tabs .nav-link:hover {
+  color: var(--gray-900);
+  background-color: var(--gray-200);
+}
+
+.panel-tabset .nav-tabs .nav-link.active {
+  color: var(--gray-900);
+  background-color: white;
+  border-bottom: 2px solid var(--color-primary);
+}
+
+.panel-tabset .tab-content {
+  padding: 1.5rem;
+}
+
+/* ============================================
+   Tables (reactable & standard)
+   ============================================ */
 
 table {
+  width: 100%;
   border-collapse: collapse;
-  margin-bottom:10px;
-}
-thead {
-  border-top: solid #DCDCDC;
-  border-bottom: solid #DCDCDC;
-}
-tr.odd {
-  background-color: #F8F8F8;
-}
-tr:first-child {
-  border-top: solid #DCDCDC;
-}
-tr:last-child {
-  border-bottom: solid #DCDCDC;
+  font-size: 0.875rem;
 }
 
-.class-buttons {
-  text-align: center;
+thead {
+  background-color: var(--gray-100);
+  border-bottom: 2px solid var(--gray-200);
+}
+
+thead th {
+  color: var(--gray-700);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+tbody tr {
+  border-bottom: 1px solid var(--gray-100);
+  transition: background-color 0.1s ease;
+}
+
+tbody tr:hover {
+  background-color: var(--gray-50);
+}
+
+tbody td {
+  padding: 0.75rem 1rem;
+  color: var(--gray-700);
+}
+
+/* Reactable specific */
+.reactable {
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.rt-thead {
+  background-color: var(--gray-100) !important;
+}
+
+.rt-th {
+  font-weight: 600 !important;
+  color: var(--gray-700) !important;
+  border-bottom: 2px solid var(--gray-200) !important;
+}
+
+.rt-tr-group:hover {
+  background-color: var(--gray-50) !important;
+}
+
+.rt-search {
+  border: 1px solid var(--gray-300) !important;
+  border-radius: var(--radius-md) !important;
+  padding: 0.5rem 0.75rem !important;
+  font-size: 0.875rem !important;
+}
+
+.rt-search:focus {
+  border-color: var(--color-primary) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2) !important;
+}
+
+/* Pagination */
+.rt-pagination {
+  border-top: 1px solid var(--gray-200);
+  padding: 0.75rem 1rem;
+  background-color: var(--gray-50);
+}
+
+.rt-pagination button {
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-sm);
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  background-color: white;
+  color: var(--gray-700);
+  transition: all 0.15s ease;
+}
+
+.rt-pagination button:hover:not(:disabled) {
+  background-color: var(--gray-100);
+  border-color: var(--gray-400);
+}
+
+.rt-pagination select {
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-sm);
+  padding: 0.375rem 0.5rem;
+  font-size: 0.875rem;
+  background-color: white;
+}
+
+/* ============================================
+   Buttons
+   ============================================ */
+
+.btn,
+.btn-slides,
+.btn-notes {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-decoration: none;
 }
 
 .btn-slides {
-  background-color: var(--color-highlight);
-  color: #fff;
-  font-weight: bold;
-  font-size: 16px;
-  border-radius: 10px; /* Rounded edges */
-  text-align: center;
-  text-decoration: none;
-  box-sizing: border-box;
-  display: inline-block;
-  vertical-align: middle;
-  cursor: pointer;
-  user-select: none;
-  padding: .9rem;
-  line-height: .5;
-  border-radius: .3rem;
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.btn-slides:hover {
+  background-color: var(--color-primary-hover);
+  color: white;
 }
 
 .btn-notes {
-  background-color: #000000;
-  color: #fff;
-  font-weight: bold;
-  font-size: 16px;
-  border-radius: 10px; /* Rounded edges */
-  text-align: center;
-  text-decoration: none;
-  box-sizing: border-box;
-  display: inline-block;
-  vertical-align: middle;
-  cursor: pointer;
-  user-select: none;
-  padding: .9rem;
-  line-height: .5;
-  border-radius: .3rem;
+  background-color: var(--gray-800);
+  color: white;
 }
 
-.sidebar-title {
-  color: #cbcccc;
+.btn-notes:hover {
+  background-color: var(--gray-900);
+  color: white;
 }
 
-/* Navbar Styling for Dark Theme */
-.navbar {
-  background-color: #212529 !important; /* Dark background color */
+/* Download link styling */
+a[href*="download"],
+a[href$=".csv"] {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--gray-100);
+  color: var(--gray-700);
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  font-size: 0.875rem;
+  transition: all 0.15s ease;
+  margin-bottom: 1rem;
 }
 
-.navbar-nav .nav-link {
-  color: rgba(255, 255, 255, 0.75) !important; /* Light text color for links */
-  padding-left: 1rem !important; /* Added spacing */
-  padding-right: 1rem !important; /* Added spacing */
+a[href*="download"]:hover,
+a[href$=".csv"]:hover {
+  background-color: var(--gray-200);
+  color: var(--gray-900);
 }
 
-.navbar-nav .nav-link:hover,
-.navbar-nav .nav-link.active {
-  color: #ffffff !important; /* White text on hover and for active link */
+/* ============================================
+   Blockquotes & Callouts
+   ============================================ */
+
+blockquote {
+  background-color: var(--gray-100);
+  border-left: 4px solid var(--color-primary);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  color: var(--gray-700);
 }
 
-.navbar-brand {
-  color: #ffffff !important; /* White text for brand/title */
+blockquote h3 {
+  margin-top: 0;
+  color: var(--gray-900);
+}
+
+/* ============================================
+   Iframes (Posit embeds)
+   ============================================ */
+
+iframe {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--gray-200);
+  background-color: white;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+
+.page-footer {
+  background-color: var(--gray-100);
+  border-top: 1px solid var(--gray-200);
+  padding: 1.5rem;
+  color: var(--gray-600);
+  font-size: 0.875rem;
+}
+
+.page-footer a {
+  color: var(--gray-600);
+}
+
+.page-footer a:hover {
+  color: var(--gray-900);
+}
+
+/* ============================================
+   TOC (Table of Contents)
+   ============================================ */
+
+#quarto-sidebar-glass-pane {
+  display: none;
+}
+
+#quarto-margin-sidebar,
+.sidebar.toc-left,
+.toc-sidebar {
+  background-color: var(--gray-100) !important;
+  border-left: 1px solid var(--gray-200);
+}
+
+#TOC,
+.toc,
+nav.toc-active {
+  font-size: 0.875rem;
+  background-color: var(--gray-100);
+  padding: 1rem;
+}
+
+#TOC a,
+.toc a,
+.nav-link.active,
+#TOC .nav-link,
+.toc-actions a {
+  color: var(--gray-600) !important;
+  padding: 0.25rem 0;
+  display: block;
+  border-left: 2px solid transparent;
+  padding-left: 0.75rem;
+  transition: all 0.15s ease;
+}
+
+#TOC a:hover,
+.toc a:hover,
+#TOC .nav-link:hover {
+  color: var(--gray-900) !important;
+  border-left-color: var(--gray-400);
+}
+
+#TOC a.active,
+.toc a.active,
+#TOC .nav-link.active,
+.sidebar-navigation .nav-link.active {
+  color: var(--gray-900) !important;
+  border-left-color: var(--gray-600);
+  background-color: transparent !important;
+}
+
+/* Override any green/teal accent colors in TOC */
+.nav-link.active .nav-link-text,
+#toc-title {
+  color: var(--gray-700) !important;
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+
+.class-buttons {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Center utility */
+center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ============================================
+   Responsive Adjustments
+   ============================================ */
+
+@media (max-width: 768px) {
+  .panel-tabset .tab-content {
+    padding: 1rem;
+  }
+
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.25rem; }
+
+  .content {
+    padding: 1rem;
+  }
 }

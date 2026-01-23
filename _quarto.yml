@@ -27,9 +27,9 @@ website:
     card-style: summary
   sidebar:
     style: "docked"
-    background: "dark" 
+    background: "light"
     collapse-level: 1
-    search: true
+    search: false
     contents:
     - text: About
       icon: question-square-fill
@@ -67,16 +67,17 @@ website:
 format:
   html:
     page-layout: full
-    theme: cosmo
+    theme:
+      light: flatly
     css: styles.css
     anchor-sections: true
     smooth-scroll: true
     link-external-newwindow: true
     link-external-icon: false
-    # This is to include fontawesome icons
     include-in-header: "_includes/header.html"
     toc-location: right
     toc: true
+    mainfont: Inter, -apple-system, BlinkMacSystemFont, sans-serif
   
 execute:
     echo: false

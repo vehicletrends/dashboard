@@ -9,7 +9,7 @@ title: "Daily VMT"
 library(dplyr)
 
 data_url <- "https://cdn.jsdelivr.net/gh/vehicletrends/data@main/data/quantiles_dvmt.csv"
-quantiles_dvmt <- read.csv(data_url)
+data <- read.csv(data_url)
 ```
 
 ::: {.panel-tabset}
@@ -18,7 +18,7 @@ quantiles_dvmt <- read.csv(data_url)
 
 ```{r}
 htmltools::tags$iframe(
-  src = 'https://019ba18d-a0d1-7762-3da9-bc57e4f3c0d8.share.connect.posit.cloud/',
+  src = 'https://shinylive.io/r/app/#h=0&code=NobwRAdghgtgpmAXGKAHVA6ASmANGAYwHsIAXOMpMAGwEsAjAJykYE8AKAZwAtaJWAlAB0IdJiw71OY4aIbM27OAW4tSnACyNZYhRwAmqaq20iRAYgAEAGSJR9l-VFJQRTlwH0Aro2qWAPAC0lkJg3KSkqJyIAPQxBPoQGABWnPpwdABujBgQcKQxAObcMZlwvATU+YwU+pwx7lAAAjBQfA3OUDEAjl5QZLRVnB76mTCkGAScmaFunQHBNfaT0+yN3r6yIl60C5aoUIVwHpy06fQs7CKWlqS0pFWWALwhYAAiAGoAsgAqlgCKfQGQ0s9FYlg+5VolTglh+rFQcFCuGullO5xYzzRZzgF0YVwgNxuRERhJedE4pDWcE4AGtSCSsaEoNQAO5QVicUICXA3KwAQTZHM4lhJFF5EBIgWI1GoaFO9CqqJuzH0tCIACEvBESJwCUSiaEAGZQAj5Dxg5HKw1gABipvyoNYiCthINlhURGhNKxBCuYAACkRWXBGKRmHxQkywKhg6Hw20IMjXpCKo94Yioy9QmU08dSAikWAedabpwMspyA5szG42GI0mwNaS26biplLT6EQAB4AcUYRC8qAAkhBUNr9e6c1CYR4C4iuXhSymZ+nC9FXe6PdwvWaRS8vBBaL04GtOgASXPQqpzwstrflqoEKtYw-HrynxqX1f5u-NlGttuHZdn2A5DqO45UsuoSxiG9aJouAFbqEQZwQmfAbkugFtju3r7pYb4nmeLjnrB8YNve7qPpWcDVgRR5EV+ZHwXwsgGmxliUTsADy2qQf6KhqIushbBA5aMGUjB7Eah7PuqEDsHwkG8oOkTary5acKcJACJYICoqiRqDOQNT6CM8xBJYSxyWU7D6YBjSWAApAAfE5y5GdQJmTluV6zvOsJOXwTmWEp2rfnmt4LkhW77HW6GEkFEAhWFpCkfFDZcthnGogAvhxqKqZB56CWGIqWTUEDpIwACqw52daNTdOwEADqy7CeSZtHmS47ACLpLmWAADBxNzWlYbz5KGMB8LCrIVNwliZCwtBQIqsIMpYJpmqQTrWrQRqWIpY7hdt5pgs8NbMQl3J6R5DqkB4y3UB+5XBJwRBhuwhEfh1xmht1jR9elaEUaNli5ZYGTlnd2VnY9z2vXsH1fT9p6dQDZlAwIEXXr+iL9dauXWtapWPUV2pvZYcroMYHUPU9LKvbyMkQHJJAdZkun2VuFOPWcewHJScBDQJqhhh4yaFJwXj0P6wAAHr8oEABaUCBAAXkNgQAJwALrJqEkt4FtXPg2N2UECw+g+e6VuMGZ3BwPYoac5RW7KOL6haLxalUnzHhnLyTu0MUu01gAzAArENqDdtyy7g-lJOAXKrCqR4MpeDAEAeKyzCoLbNysmcpCLS8ACMMQAEwxQaACEjdkx4fNZexeUFW6RBSKGtk80STUtW1f1eZjPVQH1A3DeD42WJNJkzXkljzdCi3LYwq3rbcRBbQ9TqWP0Dgryo28ETDRqfdTs1t0SB1Hal57wxa4JPFdGWJrd-cGk-iM+pZKNUjRiPLqWNOjA2umDe6O1GZSUsjBd+kYmzZToHkGBexpyRQCrMQCkNoawi-kSH+TM-7vU+oAhiv0MamXHsDPyN4AqEzhgzde6CwB0PxkWZcKDjgsLgbWUGH8kEGmJoBa0NMjAcCIS9GkLNZJ3A5kaLmsNeZ8W1IHBwlkhbkFFqEZuUsZZy1CIrZWatNba31obMAxsWZm2gsgogVtqANWyjcRRHhqAOJZNJGYLjRSqNIMAYAAczh6z1nsSq1UACiZNND4gIVuZujlLJUMBmA3Srl3K+O-v9fEGBGiBKIYwUJl1TbuM8dQc2U4snbjUOPZybllxbkKGBVAz92B5M6IE7hMDQnpIadUm4xwYlrDGKQPpmTYrumONw9gvR+h3CqBpVgMAux+BrJKPIyZOAwCIEQMuWJbT8msAAZUieMxpUy5y7K8rQQu4ZQ5HCkjWKA3ZaDCXqRMyZRJjjdg8C8t5LVYCwhrJ8X4t0MkXINMcVgfzXl6mgPAaMgJ5mDCLOcgZUN3FwCOFVIuXyeDBixD8LANVIl1y+cSDeFBw6vB3BvDWJAXDUE3BSokXYdQwCxENclFKqhGhpbo6loYWWstCuQGAvY0BYgrlHSFRJ0WiqGUQDx+ILgEFpM0wcVVowJjEgcSqpBwX9MVVc5VIEPBGmdqQHw6MrU2ujJwKAZR+ScGHK0I4CdfHJ2yt64RHFvUiJEDwPgrB+ToG+rQDSvdQyyDALlPWQA',
   width = "100%",
   height = "800",
   scrolling = "no",
@@ -35,7 +35,7 @@ htmltools::tags$iframe(
 <div style="width:700px">
 
 ```{r}
-quantiles_dvmt |>
+data |>
   mutate(
     powertrain = case_when(
       powertrain == "all" ~ "All",

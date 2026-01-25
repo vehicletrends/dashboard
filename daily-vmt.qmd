@@ -1,30 +1,142 @@
 ---
 title: "Daily VMT"
+format:
+  html:
+    include-in-header:
+      text: |
+        <style>
+        .shinylive-wrapper,
+        .shinylive-container {
+          box-shadow: none !important;
+          border: none !important;
+        }
+        </style>
+filters:
+  - shinylive
+warning: false
 ---
-
-```{r}
-#| label: setup
-#| include: false
-
-library(dplyr)
-
-data_url <- "https://cdn.jsdelivr.net/gh/vehicletrends/data@main/data/quantiles_dvmt.csv"
-data <- read.csv(data_url)
-```
 
 ::: {.panel-tabset}
 
 ## Charts
 
-```{r}
-htmltools::tags$iframe(
-  src = 'https://shinylive.io/r/app/#h=0&code=NobwRAdghgtgpmAXGKAHVA6ASmANGAYwHsIAXOMpMAGwEsAjAJykYE8AKAZwAtaJWAlAB0IdJiw71OY4aIbM27OAW4tSnACyNZYhRwAmqaq20iRAYgAEAGSJR9l-VFJQRTlwH0Aro2qWAPAC0lkJg3KSkqJyIAPQxBPoQGABWnPpwdABujBgQcKQxAObcMZlwvATU+YwU+pwx7lAAAjBQfA3OUDEAjl5QZLRVnB76mTCkGAScmaFunQHBNfaT0+yN3r6yIl60C5aoUIVwHpy06fQs7CKWlqS0pFWWALwhYAAiAGoAsgAqlgCKfQGQ0s9FYlg+5VolTglh+rFQcFCuGullO5xYzzRZzgF0YVwgNxuRERhJedE4pDWcE4AGtSCSsaEoNQAO5QVicUICXA3KwAQTZHM4lhJFF5EBIgWI1GoaFO9CqqJuzH0tCIACEvBESJwCUSiaEAGZQAj5Dxg5HKw1gABipvyoNYiCthINlhURGhNKxBCuYAACkRWXBGKRmHxQkywKhg6Hw20IMjXpCKo94Yioy9QmU08dSAikWAedabpwMspyA5szG42GI0mwNaS26biplLT6EQAB4AcUYRC8qAAkhBUNr9e6c1CYR4C4iuXhSymZ+nC9FXe6PdwvWaRS8vBBaL04GtOgASXPQqpzwstrflqoEKtYw-HrynxqX1f5u-NlGttuHZdn2A5DqO45UsuoSxiG9aJouAFbqEQZwQmfAbkugFtju3r7pYb4nmeLjnrB8YNve7qPpWcDVgRR5EV+ZHwXwsgGmxliUTsADy2qQf6KhqIushbBA5aMGUjB7Eah7PuqEDsHwkG8oOkTary5acKcJACJYICoqiRqDOQNT6CM8xBJYSxyWU7D6YBjSWAApAAfE5y5GdQJmTluV6zvOsJOXwTmWEp2rfnmt4LkhW77HW6GEkFEAhWFpCkfFDZcthnGogAvhxqKqZB56CWGIqWTUEDpIwACqw52daNTdOwEADqy7CeSZtHmS47ACLpLmWAADBxNzWlYbz5KGMB8LCrIVNwliZCwtBQIqsIMpYJpmqQTrWrQRqWIpY7hdt5pgs8NbMQl3J6R5DqkB4y3UB+5XBJwRBhuwhEfh1xmht1jR9elaEUaNli5ZYGTlnd2VnY9z2vXsH1fT9p6dQDZlAwIEXXr+iL9dauXWtapWPUV2pvZYcroMYHUPU9LKvbyMkQHJJAdZkun2VuFOPWcewHJScBDQJqhhh4yaFJwXj0P6wAAHr8oEABaUCBAAXkNgQAJwALrJqEkt4FtXPg2N2UECw+g+e6VuMGZ3BwPYoac5RW7KOL6haLxalUnzHhnLyTu0MUu01gAzAArENqDdtyy7g-lJOAXKrCqR4MpeDAEAeKyzCoLbNysmcpCLS8ACMMQAEwxQaACEjdkx4fNZexeUFW6RBSKGtk80STUtW1f1eZjPVQH1A3DeD42WJNJkzXkljzdCi3LYwq3rbcRBbQ9TqWP0Dgryo28ETDRqfdTs1t0SB1Hal57wxa4JPFdGWJrd-cGk-iM+pZKNUjRiPLqWNOjA2umDe6O1GZSUsjBd+kYmzZToHkGBexpyRQCrMQCkNoawi-kSH+TM-7vU+oAhiv0MamXHsDPyN4AqEzhgzde6CwB0PxkWZcKDjgsLgbWUGH8kEGmJoBa0NMjAcCIS9GkLNZJ3A5kaLmsNeZ8W1IHBwlkhbkFFqEZuUsZZy1CIrZWatNba31obMAxsWZm2gsgogVtqANWyjcRRHhqAOJZNJGYLjRSqNIMAYAAczh6z1nsSq1UACiZNND4gIVuZujlLJUMBmA3Srl3K+O-v9fEGBGiBKIYwUJl1TbuM8dQc2U4snbjUOPZybllxbkKGBVAz92B5M6IE7hMDQnpIadUm4xwYlrDGKQPpmTYrumONw9gvR+h3CqBpVgMAux+BrJKPIyZOAwCIEQMuWJbT8msAAZUieMxpUy5y7K8rQQu4ZQ5HCkjWKA3ZaDCXqRMyZRJjjdg8C8t5LVYCwhrJ8X4t0MkXINMcVgfzXl6mgPAaMgJ5mDCLOcgZUN3FwCOFVIuXyeDBixD8LANVIl1y+cSDeFBw6vB3BvDWJAXDUE3BSokXYdQwCxENclFKqhGhpbo6loYWWstCuQGAvY0BYgrlHSFRJ0WiqGUQDx+ILgEFpM0wcVVowJjEgcSqpBwX9MVVc5VIEPBGmdqQHw6MrU2ujJwKAZR+ScGHK0I4CdfHJ2yt64RHFvUiJEDwPgrB+ToG+rQDSvdQyyDALlPWQA',
-  width = "100%",
-  height = "800",
-  scrolling = "no",
-  seamless = "seamless",
-  frameBorder = "0"
+```{shinylive-r}
+#| standalone: true
+#| viewerHeight: 800
+
+library(shiny)
+library(dplyr)
+library(bslib)
+library(echarts4r)
+
+data_url <- "https://raw.githubusercontent.com/vehicletrends/data/refs/heads/main/data/quantiles_dvmt.csv"
+data <- read.csv(data_url)
+
+ui <- page_sidebar(
+  title = "DVMT Quantiles by Vehicle Type",
+  sidebar = sidebar(
+    radioButtons(
+      "facet_by",
+      "Facet by:",
+      choices = c("Powertrain" = "powertrain", "Vehicle Type" = "vehicle_type"),
+      selected = "powertrain"
+    ),
+    checkboxGroupInput(
+      "vehicle_types",
+      "Vehicle Types:",
+      choices = unique(data$vehicle_type),
+      selected = unique(data$vehicle_type)
+    ),
+    checkboxGroupInput(
+      "powertrains",
+      "Powertrains:",
+      choices = unique(data$powertrain),
+      selected = unique(data$powertrain)
+    )
+  ),
+  uiOutput("charts")
 )
+
+server <- function(input, output, session) {
+  filtered_data <- reactive({
+    data %>%
+      filter(
+        vehicle_type %in% input$vehicle_types,
+        powertrain %in% input$powertrains
+      )
+  })
+
+  output$charts <- renderUI({
+    req(nrow(filtered_data()) > 0)
+
+    # Determine which variable to facet by
+    if (input$facet_by == "powertrain") {
+      facet_values <- sort(unique(filtered_data()$powertrain))
+    } else {
+      facet_values <- sort(unique(filtered_data()$vehicle_type))
+    }
+
+    chart_outputs <- lapply(facet_values, function(fv) {
+      output_id <- paste0("chart_", gsub("[^A-Za-z0-9]", "_", fv))
+
+      card(
+        card_header(fv),
+        echarts4rOutput(output_id, height = "300px")
+      )
+    })
+
+    layout_column_wrap(
+      width = 1 / 2,
+      !!!chart_outputs
+    )
+  })
+
+  observe({
+    req(nrow(filtered_data()) > 0)
+
+    # Determine which variable to facet by and which to use for lines
+    if (input$facet_by == "powertrain") {
+      facet_values <- sort(unique(filtered_data()$powertrain))
+      facet_var <- "powertrain"
+      line_var <- "vehicle_type"
+    } else {
+      facet_values <- sort(unique(filtered_data()$vehicle_type))
+      facet_var <- "vehicle_type"
+      line_var <- "powertrain"
+    }
+
+    lapply(facet_values, function(fv) {
+      output_id <- paste0("chart_", gsub("[^A-Za-z0-9]", "_", fv))
+
+      local({
+        fv_local <- fv
+        output[[output_id]] <- renderEcharts4r({
+          chart_data <- filtered_data() %>%
+            filter(.data[[facet_var]] == fv_local)
+
+          chart_data %>%
+            group_by(.data[[line_var]]) %>%
+            e_charts(dvmt) %>%
+            e_line(quantile, symbol = "none", smooth = FALSE) %>%
+            e_tooltip(trigger = "axis") %>%
+            e_x_axis(name = "DVMT") %>%
+            e_y_axis(name = "Quantile") %>%
+            e_legend(
+              show = TRUE,
+              orient = "horizontal",
+              left = "center",
+              bottom = 0
+            ) %>%
+            e_grid(bottom = 80) %>%
+            e_color(background = "transparent") %>%
+            e_toolbox_feature(feature = "saveAsImage")
+        })
+      })
+    })
+  })
+}
+
+shinyApp(ui, server)
 ```
 
 ## Data
@@ -35,6 +147,11 @@ htmltools::tags$iframe(
 <div style="width:700px">
 
 ```{r}
+library(dplyr)
+
+data_url <- "https://raw.githubusercontent.com/vehicletrends/data/refs/heads/main/data/quantiles_dvmt.csv"
+data <- read.csv(data_url)
+
 data |>
   mutate(
     powertrain = case_when(

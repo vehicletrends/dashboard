@@ -12,9 +12,10 @@ License: CC-BY-SA
 Encoding: UTF-8
 Imports:
     dplyr,
-    here,
+    shiny,
     htmltools,
     kableExtra,
     knitr,
     reactable,
-    rmarkdown
+    rmarkdown,
+    shinylive (>= 0.3.0)

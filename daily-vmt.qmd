@@ -1,157 +1,138 @@
 ---
 title: "Daily VMT"
-format:
-  html:
-    include-in-header:
-      text: |
-        <style>
-        .shinylive-wrapper,
-        .shinylive-container {
-          box-shadow: none !important;
-          border: none !important;
-        }
-        </style>
-filters:
-  - shinylive
-warning: false
 ---
 
-::: {.panel-tabset}
+```{r}
+#| include: false
 
-## Charts
-
-```{shinylive-r}
-#| standalone: true
-#| viewerHeight: 800
-
-library(shiny)
 library(dplyr)
-library(bslib)
 library(echarts4r)
 
 data_url <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/vmt_daily.csv"
 data <- read.csv(data_url)
 
-ui <- page_sidebar(
-  title = "DVMT Quantiles by Vehicle Type",
-  sidebar = sidebar(
-    radioButtons(
-      "facet_by",
-      "Facet by:",
-      choices = c("Powertrain" = "powertrain", "Vehicle Type" = "vehicle_type"),
-      selected = "powertrain"
-    ),
-    checkboxGroupInput(
-      "vehicle_types",
-      "Vehicle Types:",
-      choices = unique(data$vehicle_type),
-      selected = unique(data$vehicle_type)
-    ),
-    checkboxGroupInput(
-      "powertrains",
-      "Powertrains:",
-      choices = unique(data$powertrain),
-      selected = unique(data$powertrain)
-    )
-  ),
-  uiOutput("charts")
-)
+# Helper function to create a chart for a given facet
+make_chart <- function(data, facet_var, facet_value, line_var) {
+  chart_data <- data |>
+    filter(.data[[facet_var]] == facet_value)
 
-server <- function(input, output, session) {
-  filtered_data <- reactive({
-    data %>%
-      filter(
-        vehicle_type %in% input$vehicle_types,
-        powertrain %in% input$powertrains
-      )
-  })
-
-  output$charts <- renderUI({
-    req(nrow(filtered_data()) > 0)
-
-    # Determine which variable to facet by
-    if (input$facet_by == "powertrain") {
-      facet_values <- sort(unique(filtered_data()$powertrain))
-    } else {
-      facet_values <- sort(unique(filtered_data()$vehicle_type))
-    }
-
-    chart_outputs <- lapply(facet_values, function(fv) {
-      output_id <- paste0("chart_", gsub("[^A-Za-z0-9]", "_", fv))
-
-      card(
-        card_header(fv),
-        echarts4rOutput(output_id, height = "300px")
-      )
-    })
-
-    layout_column_wrap(
-      width = 1 / 2,
-      !!!chart_outputs
-    )
-  })
-
-  observe({
-    req(nrow(filtered_data()) > 0)
-
-    # Determine which variable to facet by and which to use for lines
-    if (input$facet_by == "powertrain") {
-      facet_values <- sort(unique(filtered_data()$powertrain))
-      facet_var <- "powertrain"
-      line_var <- "vehicle_type"
-    } else {
-      facet_values <- sort(unique(filtered_data()$vehicle_type))
-      facet_var <- "vehicle_type"
-      line_var <- "powertrain"
-    }
-
-    lapply(facet_values, function(fv) {
-      output_id <- paste0("chart_", gsub("[^A-Za-z0-9]", "_", fv))
-
-      local({
-        fv_local <- fv
-        output[[output_id]] <- renderEcharts4r({
-          chart_data <- filtered_data() %>%
-            filter(.data[[facet_var]] == fv_local)
-
-          chart_data %>%
-            group_by(.data[[line_var]]) %>%
-            e_charts(miles) %>%
-            e_line(quantile, symbol = "none", smooth = FALSE) %>%
-            e_tooltip(trigger = "axis") %>%
-            e_x_axis(name = "DVMT") %>%
-            e_y_axis(name = "Quantile") %>%
-            e_legend(
-              show = TRUE,
-              orient = "horizontal",
-              left = "center",
-              bottom = 0
-            ) %>%
-            e_grid(bottom = 80) %>%
-            e_color(background = "transparent") %>%
-            e_toolbox_feature(feature = "saveAsImage")
-        })
-      })
-    })
-  })
+  chart_data |>
+    group_by(.data[[line_var]]) |>
+    e_charts(miles) |>
+    e_line(quantile, symbol = "none", smooth = FALSE) |>
+    e_tooltip(trigger = "axis") |>
+    e_x_axis(name = "DVMT") |>
+    e_y_axis(name = "Quantile") |>
+    e_legend(
+      show = TRUE,
+      orient = "horizontal",
+      left = "center",
+      bottom = 0,
+      width = "70%",
+      selector = list(
+        list(type = "all", title = "All"),
+        list(type = "inverse", title = "Inverse")
+      ),
+      selectorPosition = "start"
+    ) |>
+    e_grid(bottom = 100) |>
+    e_color(background = "transparent") |>
+    e_toolbox_feature(feature = "dataZoom") |>
+    e_toolbox_feature(feature = "saveAsImage")
 }
-
-shinyApp(ui, server)
 ```
+
+This page shows the distribution of daily vehicle miles traveled (VMT) across all vehicles in the dataset. Each chart displays quantiles of daily mileage for a given combination of powertrain and vehicle type. For example, the 0.5 quantile represents the median daily mileage (half of vehicles drive less than this amount and half drive more).
+
+::: {.panel-tabset}
+
+## By Vehicle Type
+
+*Click legend items to show/hide lines.*
+
+::: {.grid}
+
+::: {.g-col-6}
+#### Car
+```{r}
+make_chart(data, "vehicle_type", "Car", "powertrain")
+```
+:::
+
+::: {.g-col-6}
+#### SUV
+```{r}
+make_chart(data, "vehicle_type", "SUV", "powertrain")
+```
+:::
+
+::: {.g-col-6}
+#### CUV
+```{r}
+make_chart(data, "vehicle_type", "CUV", "powertrain")
+```
+:::
+
+::: {.g-col-6}
+#### Pickup
+```{r}
+make_chart(data, "vehicle_type", "Pickup", "powertrain")
+```
+:::
+
+::: {.g-col-6}
+#### Minivan
+```{r}
+make_chart(data, "vehicle_type", "Minivan", "powertrain")
+```
+:::
+
+:::
+
+## By Powertrain
+
+*Click legend items to show/hide lines.*
+
+::: {.grid}
+
+::: {.g-col-6}
+#### BEV
+```{r}
+make_chart(data, "powertrain", "BEV", "vehicle_type")
+```
+:::
+
+::: {.g-col-6}
+#### Conventional
+```{r}
+make_chart(data, "powertrain", "Conventional", "vehicle_type")
+```
+:::
+
+::: {.g-col-6}
+#### Hybrid
+```{r}
+make_chart(data, "powertrain", "Hybrid", "vehicle_type")
+```
+:::
+
+::: {.g-col-6}
+#### PHEV
+```{r}
+make_chart(data, "powertrain", "PHEV", "vehicle_type")
+```
+:::
+
+:::
 
 ## Data
 
 <center>
-[Download data](https://cdn.jsdelivr.net/gh/vehicletrends/data@main/data/quantiles_dvmt.csv)
+[Download data](https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/vmt_daily.csv)
 
-<div style="width:700px">
+<div style="width:900px">
 
 ```{r}
-library(dplyr)
-
-data_url <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/vmt_daily.csv"
-data <- read.csv(data_url)
-
 data |>
   mutate(
     miles = round(miles, 2)

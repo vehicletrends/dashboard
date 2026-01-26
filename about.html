@@ -134,9 +134,9 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./annual-vmt.html" class="sidebar-item-text sidebar-link"><i class="bi bi-calendar-range" role="img">
+  <a href="./age-vmt.html" class="sidebar-item-text sidebar-link"><i class="bi bi-calendar-range" role="img">
 </i> 
- <span class="menu-text">Annual VMT</span></a>
+ <span class="menu-text">VMT by Age</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -191,8 +191,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#daily-vmt" id="toc-daily-vmt" class="nav-link active" data-scroll-target="#daily-vmt">Daily VMT</a></li>
-  <li><a href="#annual-vmt" id="toc-annual-vmt" class="nav-link" data-scroll-target="#annual-vmt">Annual VMT</a></li>
+  <li><a href="#vehicle-miles-traveled-vmt" id="toc-vehicle-miles-traveled-vmt" class="nav-link active" data-scroll-target="#vehicle-miles-traveled-vmt">Vehicle Miles Traveled (VMT)</a></li>
   <li><a href="#depreciation" id="toc-depreciation" class="nav-link" data-scroll-target="#depreciation">Depreciation</a></li>
   <li><a href="#market-concentration" id="toc-market-concentration" class="nav-link" data-scroll-target="#market-concentration">Market Concentration</a></li>
   <li><a href="#listings" id="toc-listings" class="nav-link" data-scroll-target="#listings">Listings</a></li>
@@ -224,14 +223,11 @@ ul.task-list li input[type="checkbox"] {
 
 <p>This dashboard analyzes over <strong>10 million vehicle listings</strong> from 2018 to 2024, providing insights into how different powertrain types—gasoline, hybrid, and electric vehicles—are used, valued, and compete in the American automotive market.</p>
 <p>Data from the <a href="https://github.com/jhelvy/vehicletrends">vehicletrends</a> open-source project (Dr.&nbsp;John Paul Helveston, George Washington University) using MarketCheck automotive listing data covering all 50 US states.</p>
-<hr>
-<section id="daily-vmt" class="level2">
-<h2 class="anchored" data-anchor-id="daily-vmt">Daily VMT</h2>
-<p>Analyzes the distribution of daily driving patterns across different powertrains (BEV, PHEV, HEV, conventional) and vehicle types. Shows how many miles vehicles travel per day on average, revealing whether electric vehicles are driven the same distances as gasoline vehicles in daily use.</p>
-</section>
-<section id="annual-vmt" class="level2">
-<h2 class="anchored" data-anchor-id="annual-vmt">Annual VMT</h2>
-<p>Tracks long-term mileage accumulation patterns over time, showing how different vehicle categories rack up miles annually. Total annual driving patterns by powertrain typically range from 11,000-13,000 miles per year.</p>
+<section id="vehicle-miles-traveled-vmt" class="level2">
+<h2 class="anchored" data-anchor-id="vehicle-miles-traveled-vmt">Vehicle Miles Traveled (VMT)</h2>
+<p>The <a href="./daily-vmt.html">Daily VMT</a> page shows the distribution of daily VMT across all vehicles in the dataset. Each chart displays quantiles of daily mileage for a given combination of powertrain and vehicle type. For example, the 0.5 quantile represents the median daily mileage (half of vehicles drive less than this amount and half drive more).</p>
+<p>The <a href="./age-vmt.html">VMT by Age</a> page shows median cumulative vehicle miles traveled (VMT) by vehicle age. Each chart displays the 50th quantile (median) of total mileage for a given combination of powertrain and vehicle type as vehicles age over time.</p>
+<p>For both of the VMT pages, we estimate mileage by computing quantiles of the odometer readings of vehicles listed in the used market. For the Daily VMT, we use all vehicles (regardless of age) and compute a detailed accounting of VMT for every quantile from 1 to 99. For VMT by age, we estimate the age of the vehicle as the listing date minus the production date, which we estimate as June 30 of the year previous to the model year (e.g., we estimate a 2020 model year vehicle was produced June 30, 2019).</p>
 </section>
 <section id="depreciation" class="level2">
 <h2 class="anchored" data-anchor-id="depreciation">Depreciation</h2>

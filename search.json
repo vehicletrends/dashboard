@@ -30,13 +30,13 @@
     ]
   },
   {
-    "objectID": "annual-vmt.html",
-    "href": "annual-vmt.html",
-    "title": "Annual VMT",
+    "objectID": "age-vmt.html",
+    "href": "age-vmt.html",
+    "title": "Vehicle Miles Traveled (VMT) by Age",
     "section": "",
-    "text": "ChartsData\n\n\n\n\n\n\n\n\n\n\nDownload data",
+    "text": "This page shows median cumulative vehicle miles traveled (VMT) by vehicle age. Each chart displays the 50th quantile (median) of total mileage for a given combination of powertrain and vehicle type as vehicles age over time. The “Data” tab shows the raw data, which also includes the 25th and 75th quantiles. Lines that are less smooth are the result of less data for that particular combination of powertrain and vehicle type. See the about page for more details.\n\nBy Vehicle TypeBy PowertrainData\n\n\nClick legend items to show/hide lines.\n\n\nCar\n\n\n\n\n\n\n\n\nSUV\n\n\n\n\n\n\n\n\nCUV\n\n\n\n\n\n\n\n\nPickup\n\n\n\n\n\n\n\n\nMinivan\n\n\n\n\n\n\n\n\n\n\nClick legend items to show/hide lines.\n\n\nBEV\n\n\n\n\n\n\n\n\nConventional\n\n\n\n\n\n\n\n\nHybrid\n\n\n\n\n\n\n\n\nPHEV\n\n\n\n\n\n\n\n\n\n\n\nDownload data",
     "crumbs": [
-      "Annual VMT"
+      "VMT by Age"
     ]
   },
   {
@@ -57,21 +57,11 @@
     ]
   },
   {
-    "objectID": "about.html#daily-vmt",
-    "href": "about.html#daily-vmt",
+    "objectID": "about.html#vehicle-miles-traveled-vmt",
+    "href": "about.html#vehicle-miles-traveled-vmt",
     "title": "About",
-    "section": "Daily VMT",
-    "text": "Daily VMT\nAnalyzes the distribution of daily driving patterns across different powertrains (BEV, PHEV, HEV, conventional) and vehicle types. Shows how many miles vehicles travel per day on average, revealing whether electric vehicles are driven the same distances as gasoline vehicles in daily use.",
-    "crumbs": [
-      "About"
-    ]
-  },
-  {
-    "objectID": "about.html#annual-vmt",
-    "href": "about.html#annual-vmt",
-    "title": "About",
-    "section": "Annual VMT",
-    "text": "Annual VMT\nTracks long-term mileage accumulation patterns over time, showing how different vehicle categories rack up miles annually. Total annual driving patterns by powertrain typically range from 11,000-13,000 miles per year.",
+    "section": "Vehicle Miles Traveled (VMT)",
+    "text": "Vehicle Miles Traveled (VMT)\nThe Daily VMT page shows the distribution of daily VMT across all vehicles in the dataset. Each chart displays quantiles of daily mileage for a given combination of powertrain and vehicle type. For example, the 0.5 quantile represents the median daily mileage (half of vehicles drive less than this amount and half drive more).\nThe VMT by Age page shows median cumulative vehicle miles traveled (VMT) by vehicle age. Each chart displays the 50th quantile (median) of total mileage for a given combination of powertrain and vehicle type as vehicles age over time.\nFor both of the VMT pages, we estimate mileage by computing quantiles of the odometer readings of vehicles listed in the used market. For the Daily VMT, we use all vehicles (regardless of age) and compute a detailed accounting of VMT for every quantile from 1 to 99. For VMT by age, we estimate the age of the vehicle as the listing date minus the production date, which we estimate as June 30 of the year previous to the model year (e.g., we estimate a 2020 model year vehicle was produced June 30, 2019).",
     "crumbs": [
       "About"
     ]
@@ -119,9 +109,9 @@
   {
     "objectID": "daily-vmt.html",
     "href": "daily-vmt.html",
-    "title": "Daily VMT",
+    "title": "Daily Vehicle Miles Traveled (VMT)",
     "section": "",
-    "text": "ChartsData\n\n\n#| '!! shinylive warning !!': |\n#|   shinylive does not work in self-contained HTML documents.\n#|   Please set `embed-resources: false` in your metadata.\n#| standalone: true\n#| viewerHeight: 800\n\nlibrary(shiny)\nlibrary(dplyr)\nlibrary(bslib)\nlibrary(echarts4r)\n\ndata_url &lt;- \"https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/vmt_daily.csv\"\ndata &lt;- read.csv(data_url)\n\nui &lt;- page_sidebar(\n  title = \"DVMT Quantiles by Vehicle Type\",\n  sidebar = sidebar(\n    radioButtons(\n      \"facet_by\",\n      \"Facet by:\",\n      choices = c(\"Powertrain\" = \"powertrain\", \"Vehicle Type\" = \"vehicle_type\"),\n      selected = \"powertrain\"\n    ),\n    checkboxGroupInput(\n      \"vehicle_types\",\n      \"Vehicle Types:\",\n      choices = unique(data$vehicle_type),\n      selected = unique(data$vehicle_type)\n    ),\n    checkboxGroupInput(\n      \"powertrains\",\n      \"Powertrains:\",\n      choices = unique(data$powertrain),\n      selected = unique(data$powertrain)\n    )\n  ),\n  uiOutput(\"charts\")\n)\n\nserver &lt;- function(input, output, session) {\n  filtered_data &lt;- reactive({\n    data %&gt;%\n      filter(\n        vehicle_type %in% input$vehicle_types,\n        powertrain %in% input$powertrains\n      )\n  })\n\n  output$charts &lt;- renderUI({\n    req(nrow(filtered_data()) &gt; 0)\n\n    # Determine which variable to facet by\n    if (input$facet_by == \"powertrain\") {\n      facet_values &lt;- sort(unique(filtered_data()$powertrain))\n    } else {\n      facet_values &lt;- sort(unique(filtered_data()$vehicle_type))\n    }\n\n    chart_outputs &lt;- lapply(facet_values, function(fv) {\n      output_id &lt;- paste0(\"chart_\", gsub(\"[^A-Za-z0-9]\", \"_\", fv))\n\n      card(\n        card_header(fv),\n        echarts4rOutput(output_id, height = \"300px\")\n      )\n    })\n\n    layout_column_wrap(\n      width = 1 / 2,\n      !!!chart_outputs\n    )\n  })\n\n  observe({\n    req(nrow(filtered_data()) &gt; 0)\n\n    # Determine which variable to facet by and which to use for lines\n    if (input$facet_by == \"powertrain\") {\n      facet_values &lt;- sort(unique(filtered_data()$powertrain))\n      facet_var &lt;- \"powertrain\"\n      line_var &lt;- \"vehicle_type\"\n    } else {\n      facet_values &lt;- sort(unique(filtered_data()$vehicle_type))\n      facet_var &lt;- \"vehicle_type\"\n      line_var &lt;- \"powertrain\"\n    }\n\n    lapply(facet_values, function(fv) {\n      output_id &lt;- paste0(\"chart_\", gsub(\"[^A-Za-z0-9]\", \"_\", fv))\n\n      local({\n        fv_local &lt;- fv\n        output[[output_id]] &lt;- renderEcharts4r({\n          chart_data &lt;- filtered_data() %&gt;%\n            filter(.data[[facet_var]] == fv_local)\n\n          chart_data %&gt;%\n            group_by(.data[[line_var]]) %&gt;%\n            e_charts(miles) %&gt;%\n            e_line(quantile, symbol = \"none\", smooth = FALSE) %&gt;%\n            e_tooltip(trigger = \"axis\") %&gt;%\n            e_x_axis(name = \"DVMT\") %&gt;%\n            e_y_axis(name = \"Quantile\") %&gt;%\n            e_legend(\n              show = TRUE,\n              orient = \"horizontal\",\n              left = \"center\",\n              bottom = 0\n            ) %&gt;%\n            e_grid(bottom = 80) %&gt;%\n            e_color(background = \"transparent\") %&gt;%\n            e_toolbox_feature(feature = \"saveAsImage\")\n        })\n      })\n    })\n  })\n}\n\nshinyApp(ui, server)\n\n\n\nDownload data",
+    "text": "This page shows the distribution of daily vehicle miles traveled (VMT) across all vehicles in the dataset. Each chart displays quantiles of daily mileage for a given combination of powertrain and vehicle type. For example, the 0.5 quantile represents the median daily mileage (half of vehicles drive less than this amount and half drive more). See the about page for more details.\n\nBy Vehicle TypeBy PowertrainData\n\n\nClick legend items to show/hide lines.\n\n\nCar\n\n\n\n\n\n\n\n\nSUV\n\n\n\n\n\n\n\n\nCUV\n\n\n\n\n\n\n\n\nPickup\n\n\n\n\n\n\n\n\nMinivan\n\n\n\n\n\n\n\n\n\n\nClick legend items to show/hide lines.\n\n\nBEV\n\n\n\n\n\n\n\n\nConventional\n\n\n\n\n\n\n\n\nHybrid\n\n\n\n\n\n\n\n\nPHEV\n\n\n\n\n\n\n\n\n\n\n\nDownload data",
     "crumbs": [
       "Daily VMT"
     ]

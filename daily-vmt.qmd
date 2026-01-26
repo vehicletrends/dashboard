@@ -29,7 +29,7 @@ library(dplyr)
 library(bslib)
 library(echarts4r)
 
-data_url <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/quantiles_dvmt.csv"
+data_url <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/vmt_daily.csv"
 data <- read.csv(data_url)
 
 ui <- page_sidebar(
@@ -116,7 +116,7 @@ server <- function(input, output, session) {
 
           chart_data %>%
             group_by(.data[[line_var]]) %>%
-            e_charts(dvmt) %>%
+            e_charts(miles) %>%
             e_line(quantile, symbol = "none", smooth = FALSE) %>%
             e_tooltip(trigger = "axis") %>%
             e_x_axis(name = "DVMT") %>%
@@ -149,30 +149,18 @@ shinyApp(ui, server)
 ```{r}
 library(dplyr)
 
-data_url <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/quantiles_dvmt.csv"
+data_url <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/vmt_daily.csv"
 data <- read.csv(data_url)
 
 data |>
   mutate(
-    powertrain = case_when(
-      powertrain == "all" ~ "All",
-      powertrain == "bev" ~ "BEV",
-      powertrain == "bev_non_tesla" ~ "BEV (non-Tesla)",
-      powertrain == "bev_tesla" ~ "BEV (Tesla)",
-      powertrain == "phev" ~ "PHEV",
-      powertrain == "hev" ~ "HEV",
-      powertrain == "cv" ~ "Conventional Vehicle",
-      TRUE ~ powertrain
-    )
-  ) |>
-  mutate(
-    dvmt = round(dvmt, 2)
+    miles = round(miles, 2)
   ) |>
   rename(
     Powertrain = powertrain,
     `Vehicle Type` = vehicle_type,
     Quantile = quantile,
-    DVMT = dvmt
+    Miles = miles
   ) |>
   reactable::reactable(
     searchable = TRUE,

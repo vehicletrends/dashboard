@@ -7,9 +7,6 @@ title: "Annual VMT"
 #| include: false
 
 library(dplyr)
-
-data_url <- "https://cdn.jsdelivr.net/gh/vehicletrends/data@main/data/mileage_powertrain_type.csv"
-mileage_data <- read.csv(data_url)
 ```
 
 ::: {.panel-tabset}
@@ -32,21 +29,24 @@ htmltools::tags$iframe(
 ## Data
 
 <center>
-[Download data](https://cdn.jsdelivr.net/gh/vehicletrends/data@main/data/mileage_powertrain_type.csv)
+[Download data](https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/vmt_age.csv)
 
 <div style="width:700px">
 
 ```{r}
+data_url <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/vmt_age.csv"
+mileage_data <- read.csv(data_url)
+
 mileage_data |>
   mutate(
-    mileage_predicted = round(mileage_predicted, 0),
-    age_years = round(age_years, 1)
+    miles = round(miles, 0)
   ) |>
   rename(
     Powertrain = powertrain,
     `Vehicle Type` = vehicle_type,
-    `Age (years)` = age_years,
-    `Predicted Mileage` = mileage_predicted
+    `Age (months)` = age_bin,
+    Quantile = quantile,
+    Miles = miles
   ) |>
   reactable::reactable(
     searchable = TRUE,

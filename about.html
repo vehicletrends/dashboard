@@ -76,6 +76,14 @@ ul.task-list li input[type="checkbox"] {
 <script src="https://kit.fontawesome.com/1392a7030f.js" crossorigin="anonymous"></script>
 
 
+<script src="site_libs/core-js-2.5.3/shim.min.js"></script>
+<script src="site_libs/react-18.2.0/react.min.js"></script>
+<script src="site_libs/react-18.2.0/react-dom.min.js"></script>
+<script src="site_libs/reactwidget-2.0.0/react-tools.js"></script>
+<link href="site_libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<link href="site_libs/reactable-0.4.5/reactable.css" rel="stylesheet">
+<script src="site_libs/reactable-binding-0.4.5/reactable.js"></script>
 
 
 <link rel="stylesheet" href="styles.css">
@@ -196,6 +204,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#market-concentration" id="toc-market-concentration" class="nav-link" data-scroll-target="#market-concentration">Market Concentration</a></li>
   <li><a href="#listings" id="toc-listings" class="nav-link" data-scroll-target="#listings">Listings</a></li>
   <li><a href="#dealerships-inventories" id="toc-dealerships-inventories" class="nav-link" data-scroll-target="#dealerships-inventories">Dealerships Inventories</a></li>
+  <li><a href="#listing-counts" id="toc-listing-counts" class="nav-link" data-scroll-target="#listing-counts">Listing Counts</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/vehicletrends/edit/main/about.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/vehicletrends/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -221,13 +230,13 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This dashboard analyzes over <strong>10 million vehicle listings</strong> from 2018 to 2024, providing insights into how different powertrain types—gasoline, hybrid, and electric vehicles—are used, valued, and compete in the American automotive market.</p>
-<p>Data from the <a href="https://github.com/jhelvy/vehicletrends">vehicletrends</a> open-source project (Dr.&nbsp;John Paul Helveston, George Washington University) using MarketCheck automotive listing data covering all 50 US states.</p>
+<p>This dashboard provides summary information about various trends in the U.S. automobile market. The primary data source is 62,889,029 new and 80,132,111 used vehicle listings from over 100,000 dealerships across all 50 states in the U.S. The original data are licensed from marketcheck.com and cannot be made public, but this website provides public access to various summaries of the original listings data.</p>
+<p>The open-source project was created and is maintained by <a href="./https://jhelvy.com">Dr.&nbsp;John Paul Helveston</a>, an Associate Professor in the Engineering Management and Systems Engineering Department at The George Washington University.</p>
 <section id="vehicle-miles-traveled-vmt" class="level2">
 <h2 class="anchored" data-anchor-id="vehicle-miles-traveled-vmt">Vehicle Miles Traveled (VMT)</h2>
 <p>The <a href="./daily-vmt.html">Daily VMT</a> page shows the distribution of daily VMT across all vehicles in the dataset. Each chart displays quantiles of daily mileage for a given combination of powertrain and vehicle type. For example, the 0.5 quantile represents the median daily mileage (half of vehicles drive less than this amount and half drive more).</p>
 <p>The <a href="./age-vmt.html">VMT by Age</a> page shows median cumulative vehicle miles traveled (VMT) by vehicle age. Each chart displays the 50th quantile (median) of total mileage for a given combination of powertrain and vehicle type as vehicles age over time.</p>
-<p>For both of the VMT pages, we estimate mileage by computing quantiles of the odometer readings of vehicles listed in the used market. For the Daily VMT, we use all vehicles (regardless of age) and compute a detailed accounting of VMT for every quantile from 1 to 99. For VMT by age, we estimate the age of the vehicle as the listing date minus the production date, which we estimate as June 30 of the year previous to the model year (e.g., we estimate a 2020 model year vehicle was produced June 30, 2019).</p>
+<p>For both of the VMT pages, we estimate VMT by dividing the odometer readings (mileage) of used vehicles by their age, which gives an approximation of the VMT over time. We estimate the age of the vehicle as the listing date minus the production date, which we estimate as June 30 of the year previous to the model year (e.g., we estimate a 2020 model year vehicle was produced June 30, 2019). We summarize this quantity by taking quantiles of the observations. For daily VMT, we use all vehicles regardless of age and compute the VMT for every quantile from 1 to 99. For VMT by age, we only include the 25th, 50th, and 75th quantile.</p>
 </section>
 <section id="depreciation" class="level2">
 <h2 class="anchored" data-anchor-id="depreciation">Depreciation</h2>
@@ -244,6 +253,16 @@ ul.task-list li input[type="checkbox"] {
 <section id="dealerships-inventories" class="level2">
 <h2 class="anchored" data-anchor-id="dealerships-inventories">Dealerships Inventories</h2>
 <p>Explores dealership inventory patterns, stock levels, and geographic distribution of vehicle availability. Shows how dealer inventory is distributed across regions and vehicle types.</p>
+</section>
+<section id="listing-counts" class="level2">
+<h2 class="anchored" data-anchor-id="listing-counts">Listing Counts</h2>
+<p>The table below summarises how many observations of vehicle listings were included in the summary data presented on this website.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="reactable html-widget html-fill-item" id="htmlwidget-347cfce46fe475c47f6f" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-347cfce46fe475c47f6f">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Market":["New","New","New","New","New","New","New","New","New","New","New","New","New","New","New","New","New","New","New","New","New","New","New","New","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used"],"Powertrain":["BEV","BEV","BEV","BEV","BEV","Conventional","Conventional","Conventional","Conventional","Conventional","Flex Fuel","Flex Fuel","Flex Fuel","Flex Fuel","Flex Fuel","Fuel Cell EV","Fuel Cell EV","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","PHEV","PHEV","BEV","BEV","BEV","BEV","BEV","Conventional","Conventional","Conventional","Conventional","Conventional","Diesel","Diesel","Diesel","Diesel","Diesel","Flex Fuel","Flex Fuel","Flex Fuel","Flex Fuel","Flex Fuel","Fuel Cell EV","Fuel Cell EV","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","PHEV","PHEV","PHEV","PHEV"],"Vehicle Type":["CUV","Car","Minivan","Pickup","SUV","CUV","Car","Minivan","Pickup","SUV","CUV","Car","Minivan","Pickup","SUV","CUV","Car","CUV","Car","Minivan","Pickup","SUV","CUV","Car","CUV","Car","Minivan","Pickup","SUV","CUV","Car","Minivan","Pickup","SUV","CUV","Car","Minivan","Pickup","SUV","CUV","Car","Minivan","Pickup","SUV","CUV","Car","CUV","Car","Minivan","Pickup","SUV","CUV","Car","Minivan","SUV"],"count":["878,374","295,929","965","65,299","12,200","25,610,437","13,580,820","882,878","10,708,928","6,777,427","275,731","70,081","61,740","1,062,172","135,152","319","1,696","986,801","843,052","320,859","44,348","98,590","59,299","115,932","249,233","482,198","1,867","10,692","2,777","23,497,780","24,537,412","1,582,106","9,254,198","7,924,548","81,734","241,613","471","2,038,671","73,644","1,358,229","1,382,802","751,325","2,951,345","1,707,008","352","4,371","353,676","1,098,501","153,878","88,490","35,441","65,353","176,987","90","25,319"]},"columns":[{"id":"Market","name":"Market","type":"character"},{"id":"Powertrain","name":"Powertrain","type":"character"},{"id":"Vehicle Type","name":"Vehicle Type","type":"character"},{"id":"count","name":"count","type":"character"}],"filterable":true,"searchable":true,"defaultPageSize":55,"showPageSizeOptions":true,"highlight":true,"dataKey":"eac7132b8c64e5e150ad213ff0c9dbab"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
 
 
 </section>

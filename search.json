@@ -34,7 +34,7 @@
     "href": "age-vmt.html",
     "title": "Vehicle Miles Traveled (VMT) by Age",
     "section": "",
-    "text": "This page shows median cumulative vehicle miles traveled (VMT) by vehicle age. Each chart displays the 50th quantile (median) of total mileage for a given combination of powertrain and vehicle type as vehicles age over time. The “Data” tab shows the raw data, which also includes the 25th and 75th quantiles. Lines that are less smooth are the result of less data for that particular combination of powertrain and vehicle type. See the about page for more details.\n\nBy Vehicle TypeBy PowertrainData\n\n\nClick legend items to show/hide lines.\n\n\nCar\n\n\n\n\n\n\n\n\nSUV\n\n\n\n\n\n\n\n\nCUV\n\n\n\n\n\n\n\n\nPickup\n\n\n\n\n\n\n\n\nMinivan\n\n\n\n\n\n\n\n\n\n\nClick legend items to show/hide lines.\n\n\nBEV\n\n\n\n\n\n\n\n\nConventional\n\n\n\n\n\n\n\n\nHybrid\n\n\n\n\n\n\n\n\nPHEV\n\n\n\n\n\n\n\n\n\n\n\nDownload data",
+    "text": "This page shows median cumulative vehicle miles traveled (VMT) by vehicle age. Each chart displays the 50th quantile (median) of total mileage for a given combination of powertrain and vehicle type as vehicles age over time. The “Data” tab shows the raw data, which also includes the 25th and 75th quantiles. Lines that are less smooth are the result of less data for that particular combination of powertrain and vehicle type. See the about page for more details.\n\nBy Vehicle TypeBy PowertrainData\n\n\nClick legend items to show/hide lines.\n\n\nCar\n\n\n\n\n\n\n\n\nSUV\n\n\n\n\n\n\n\n\nCUV\n\n\n\n\n\n\n\n\nPickup\n\n\n\n\n\n\n\n\nMinivan\n\n\n\n\n\n\n\n\n\n\nClick legend items to show/hide lines.\n\n\nBEV\n\n\n\n\n\n\n\n\nBEV (Tesla)\n\n\n\n\n\n\n\n\nBEV (Non-Tesla)\n\n\n\n\n\n\n\n\nConventional\n\n\n\n\n\n\n\n\nDiesel\n\n\n\n\n\n\n\n\nFlex Fuel\n\n\n\n\n\n\n\n\nFuel Cell EV\n\n\n\n\n\n\n\n\nHybrid\n\n\n\n\n\n\n\n\nPHEV\n\n\n\n\n\n\n\n\n\n\n\nDownload data",
     "crumbs": [
       "VMT by Age"
     ]
@@ -51,7 +51,7 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "This dashboard analyzes over 10 million vehicle listings from 2018 to 2024, providing insights into how different powertrain types—gasoline, hybrid, and electric vehicles—are used, valued, and compete in the American automotive market.\nData from the vehicletrends open-source project (Dr. John Paul Helveston, George Washington University) using MarketCheck automotive listing data covering all 50 US states.",
+    "text": "This dashboard provides summary information about various trends in the U.S. automobile market. The primary data source is 62,889,029 new and 80,132,111 used vehicle listings from over 100,000 dealerships across all 50 states in the U.S. The original data are licensed from marketcheck.com and cannot be made public, but this website provides public access to various summaries of the original listings data.\nThe open-source project was created and is maintained by Dr. John Paul Helveston, an Associate Professor in the Engineering Management and Systems Engineering Department at The George Washington University.",
     "crumbs": [
       "About"
     ]
@@ -61,7 +61,7 @@
     "href": "about.html#vehicle-miles-traveled-vmt",
     "title": "About",
     "section": "Vehicle Miles Traveled (VMT)",
-    "text": "Vehicle Miles Traveled (VMT)\nThe Daily VMT page shows the distribution of daily VMT across all vehicles in the dataset. Each chart displays quantiles of daily mileage for a given combination of powertrain and vehicle type. For example, the 0.5 quantile represents the median daily mileage (half of vehicles drive less than this amount and half drive more).\nThe VMT by Age page shows median cumulative vehicle miles traveled (VMT) by vehicle age. Each chart displays the 50th quantile (median) of total mileage for a given combination of powertrain and vehicle type as vehicles age over time.\nFor both of the VMT pages, we estimate mileage by computing quantiles of the odometer readings of vehicles listed in the used market. For the Daily VMT, we use all vehicles (regardless of age) and compute a detailed accounting of VMT for every quantile from 1 to 99. For VMT by age, we estimate the age of the vehicle as the listing date minus the production date, which we estimate as June 30 of the year previous to the model year (e.g., we estimate a 2020 model year vehicle was produced June 30, 2019).",
+    "text": "Vehicle Miles Traveled (VMT)\nThe Daily VMT page shows the distribution of daily VMT across all vehicles in the dataset. Each chart displays quantiles of daily mileage for a given combination of powertrain and vehicle type. For example, the 0.5 quantile represents the median daily mileage (half of vehicles drive less than this amount and half drive more).\nThe VMT by Age page shows median cumulative vehicle miles traveled (VMT) by vehicle age. Each chart displays the 50th quantile (median) of total mileage for a given combination of powertrain and vehicle type as vehicles age over time.\nFor both of the VMT pages, we estimate VMT by dividing the odometer readings (mileage) of used vehicles by their age, which gives an approximation of the VMT over time. We estimate the age of the vehicle as the listing date minus the production date, which we estimate as June 30 of the year previous to the model year (e.g., we estimate a 2020 model year vehicle was produced June 30, 2019). We summarize this quantity by taking quantiles of the observations. For daily VMT, we use all vehicles regardless of age and compute the VMT for every quantile from 1 to 99. For VMT by age, we only include the 25th, 50th, and 75th quantile.",
     "crumbs": [
       "About"
     ]
@@ -107,11 +107,21 @@
     ]
   },
   {
+    "objectID": "about.html#listing-counts",
+    "href": "about.html#listing-counts",
+    "title": "About",
+    "section": "Listing Counts",
+    "text": "Listing Counts\nThe table below summarises how many observations of vehicle listings were included in the summary data presented on this website.",
+    "crumbs": [
+      "About"
+    ]
+  },
+  {
     "objectID": "daily-vmt.html",
     "href": "daily-vmt.html",
     "title": "Daily Vehicle Miles Traveled (VMT)",
     "section": "",
-    "text": "This page shows the distribution of daily vehicle miles traveled (VMT) across all vehicles in the dataset. Each chart displays quantiles of daily mileage for a given combination of powertrain and vehicle type. For example, the 0.5 quantile represents the median daily mileage (half of vehicles drive less than this amount and half drive more). See the about page for more details.\n\nBy Vehicle TypeBy PowertrainData\n\n\nClick legend items to show/hide lines.\n\n\nCar\n\n\n\n\n\n\n\n\nSUV\n\n\n\n\n\n\n\n\nCUV\n\n\n\n\n\n\n\n\nPickup\n\n\n\n\n\n\n\n\nMinivan\n\n\n\n\n\n\n\n\n\n\nClick legend items to show/hide lines.\n\n\nBEV\n\n\n\n\n\n\n\n\nConventional\n\n\n\n\n\n\n\n\nHybrid\n\n\n\n\n\n\n\n\nPHEV\n\n\n\n\n\n\n\n\n\n\n\nDownload data",
+    "text": "This page shows the distribution of daily vehicle miles traveled (VMT) across all vehicles in the dataset. Each chart displays quantiles of daily mileage for a given combination of powertrain and vehicle type. For example, the 0.5 quantile represents the median daily mileage (half of vehicles drive less than this amount and half drive more). See the about page for more details.\n\nBy Vehicle TypeBy PowertrainData\n\n\nClick legend items to show/hide lines.\n\n\nCar\n\n\n\n\n\n\n\n\nSUV\n\n\n\n\n\n\n\n\nCUV\n\n\n\n\n\n\n\n\nPickup\n\n\n\n\n\n\n\n\nMinivan\n\n\n\n\n\n\n\n\n\n\nClick legend items to show/hide lines.\n\n\nBEV\n\n\n\n\n\n\n\n\nBEV (Tesla)\n\n\n\n\n\n\n\n\nBEV (Non-Tesla)\n\n\n\n\n\n\n\n\nConventional\n\n\n\n\n\n\n\n\nDiesel\n\n\n\n\n\n\n\n\nFlex Fuel\n\n\n\n\n\n\n\n\nFuel Cell EV\n\n\n\n\n\n\n\n\nHybrid\n\n\n\n\n\n\n\n\nPHEV\n\n\n\n\n\n\n\n\n\n\n\nDownload data",
     "crumbs": [
       "Daily VMT"
     ]

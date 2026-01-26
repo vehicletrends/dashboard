@@ -9,11 +9,17 @@ title: "Market Concentration"
 library(dplyr)
 
 # Load all three HHI datasets
-hhi_make <- read.csv("https://cdn.jsdelivr.net/gh/vehicletrends/data@main/data/hhi_make.csv") |>
+hhi_make <- read.csv(
+  "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/hhi_make.csv"
+) |>
   mutate(metric = "Make")
-hhi_type <- read.csv("https://cdn.jsdelivr.net/gh/vehicletrends/data@main/data/hhi_type.csv") |>
+hhi_type <- read.csv(
+  "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/hhi_type.csv"
+) |>
   mutate(metric = "Vehicle Type")
-hhi_price <- read.csv("https://cdn.jsdelivr.net/gh/vehicletrends/data@main/data/hhi_price.csv") |>
+hhi_price <- read.csv(
+  "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/hhi_price.csv"
+) |>
   mutate(metric = "Price Bin")
 
 # Combine all datasets

@@ -1,5 +1,5 @@
 ---
-title: "Daily Vehicle Miles Traveled (VMT)"
+title: "Vehicle Miles Traveled (VMT) by Age"
 ---
 
 ```{r}
@@ -8,8 +8,13 @@ title: "Daily Vehicle Miles Traveled (VMT)"
 library(dplyr)
 library(echarts4r)
 
-data_url <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/vmt_daily.csv"
+data_url <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/vmt_age.csv"
 data <- read.csv(data_url)
+
+# Filter to 50th quantile only and convert age from months to years
+data <- data |>
+  filter(quantile == 50) |>
+  mutate(age_years = age_bin / 12)
 
 # Helper function to create a chart for a given facet
 make_chart <- function(data, facet_var, facet_value, line_var) {
@@ -18,11 +23,11 @@ make_chart <- function(data, facet_var, facet_value, line_var) {
 
   chart_data |>
     group_by(.data[[line_var]]) |>
-    e_charts(miles) |>
-    e_line(quantile, symbol = "none", smooth = FALSE) |>
+    e_charts(age_years) |>
+    e_line(miles, symbol = "none", smooth = FALSE) |>
     e_tooltip(trigger = "axis") |>
-    e_x_axis(name = "DVMT") |>
-    e_y_axis(name = "Quantile") |>
+    e_x_axis(name = "Age (years)") |>
+    e_y_axis(name = "Miles") |>
     e_legend(
       show = TRUE,
       orient = "horizontal",
@@ -42,7 +47,7 @@ make_chart <- function(data, facet_var, facet_value, line_var) {
 }
 ```
 
-This page shows the distribution of daily vehicle miles traveled (VMT) across all vehicles in the dataset. Each chart displays quantiles of daily mileage for a given combination of powertrain and vehicle type. For example, the 0.5 quantile represents the median daily mileage (half of vehicles drive less than this amount and half drive more). See the [about](about.html#vehicle-miles-traveled-vmt) page for more details.
+This page shows median cumulative vehicle miles traveled (VMT) by vehicle age. Each chart displays the 50th quantile (median) of total mileage for a given combination of powertrain and vehicle type as vehicles age over time. The "Data" tab shows the raw data, which also includes the 25th and 75th quantiles. Lines that are less smooth are the result of less data for that particular combination of powertrain and vehicle type. See the [about](about.html#vehicle-miles-traveled-vmt) page for more details.
 
 ::: {.panel-tabset}
 
@@ -128,18 +133,25 @@ make_chart(data, "powertrain", "PHEV", "vehicle_type")
 ## Data
 
 <center>
-[Download data](https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/vmt_daily.csv)
+[Download data](https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/vmt_age.csv)
 
 <div style="width:900px">
 
 ```{r}
-data |>
+# Reload full data for the table
+data_url <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/vmt_age.csv"
+full_data <- read.csv(data_url)
+
+full_data |>
   mutate(
-    miles = round(miles, 2)
+    age_years = round(age_bin / 12, 2),
+    miles = round(miles, 0)
   ) |>
+  select(powertrain, vehicle_type, age_years, quantile, miles) |>
   rename(
     Powertrain = powertrain,
     `Vehicle Type` = vehicle_type,
+    `Age (years)` = age_years,
     Quantile = quantile,
     Miles = miles
   ) |>

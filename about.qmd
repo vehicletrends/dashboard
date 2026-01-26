@@ -6,15 +6,13 @@ This dashboard analyzes over **10 million vehicle listings** from 2018 to 2024, 
 
 Data from the [vehicletrends](https://github.com/jhelvy/vehicletrends) open-source project (Dr. John Paul Helveston, George Washington University) using MarketCheck automotive listing data covering all 50 US states.
 
----
+## Vehicle Miles Traveled (VMT)
 
-## Daily VMT
+The [Daily VMT](daily-vmt.qmd) page shows the distribution of daily VMT across all vehicles in the dataset. Each chart displays quantiles of daily mileage for a given combination of powertrain and vehicle type. For example, the 0.5 quantile represents the median daily mileage (half of vehicles drive less than this amount and half drive more). 
 
-Analyzes the distribution of daily driving patterns across different powertrains (BEV, PHEV, HEV, conventional) and vehicle types. Shows how many miles vehicles travel per day on average, revealing whether electric vehicles are driven the same distances as gasoline vehicles in daily use.
+The [VMT by Age](age-vmt.qmd) page shows median cumulative vehicle miles traveled (VMT) by vehicle age. Each chart displays the 50th quantile (median) of total mileage for a given combination of powertrain and vehicle type as vehicles age over time. 
 
-## Annual VMT
-
-Tracks long-term mileage accumulation patterns over time, showing how different vehicle categories rack up miles annually. Total annual driving patterns by powertrain typically range from 11,000-13,000 miles per year.
+For both of the VMT pages, we estimate mileage by computing quantiles of the odometer readings of vehicles listed in the used market. For the Daily VMT, we use all vehicles (regardless of age) and compute a detailed accounting of VMT for every quantile from 1 to 99. For VMT by age, we estimate the age of the vehicle as the listing date minus the production date, which we estimate as June 30 of the year previous to the model year (e.g., we estimate a 2020 model year vehicle was produced June 30, 2019).
 
 ## Depreciation
 

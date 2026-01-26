@@ -37,9 +37,9 @@ website:
     - text: "Daily VMT"
       icon: clock-fill
       href: daily-vmt.qmd
-    - text: "Annual VMT"
+    - text: "VMT by Age"
       icon: calendar-range
-      href: annual-vmt.qmd
+      href: age-vmt.qmd
     - text: "Depreciation"
       icon: graph-down
       href: depreciation.qmd

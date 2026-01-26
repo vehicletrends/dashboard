@@ -8,7 +8,7 @@ title: "Depreciation"
 
 library(dplyr)
 
-data_url <- "https://cdn.jsdelivr.net/gh/vehicletrends/data@main/data/depreciation_powertrain_type.csv"
+data_url <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/depreciation_powertrain_type.csv"
 depreciation_data <- read.csv(data_url)
 ```
 
@@ -32,7 +32,7 @@ htmltools::tags$iframe(
 ## Data
 
 <center>
-[Download data](https://cdn.jsdelivr.net/gh/vehicletrends/data@main/data/depreciation_powertrain_type.csv)
+[Download data](https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/depreciation_powertrain_type.csv)
 
 <div style="width:700px">
 

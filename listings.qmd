@@ -8,7 +8,7 @@ title: "Listings"
 
 library(dplyr)
 
-data_url <- "https://cdn.jsdelivr.net/gh/jhelvy/vehicletrends@main/data/p_market_powertrain_vehicle_type.csv"
+data_url <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/p_market_powertrain_vehicle_type.csv"
 market_data <- read.csv(data_url)
 ```
 
@@ -32,7 +32,7 @@ htmltools::tags$iframe(
 ## Data
 
 <center>
-[Download data](https://cdn.jsdelivr.net/gh/jhelvy/vehicletrends@main/data/p_market_powertrain_vehicle_type.csv)
+[Download data](https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/p_market_powertrain_vehicle_type.csv)
 
 <div style="width:700px">
 

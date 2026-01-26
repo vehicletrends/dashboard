@@ -2,9 +2,25 @@
 title: "About"
 ---
 
-This dashboard analyzes over **10 million vehicle listings** from 2018 to 2024, providing insights into how different powertrain types—gasoline, hybrid, and electric vehicles—are used, valued, and compete in the American automotive market.
+```{r}
+#| message: false
 
-Data from the [vehicletrends](https://github.com/jhelvy/vehicletrends) open-source project (Dr. John Paul Helveston, George Washington University) using MarketCheck automotive listing data covering all 50 US states.
+library(dplyr)
+
+data_url <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/listings_summary.csv"
+listing_summary <- read.csv(data_url)
+counts_type <- listing_summary |>
+  group_by(inventory_type) |>
+  summarise(n = sum(n))
+n_new <- counts_type[counts_type$inventory_type == 'new', ]$n
+n_used <- counts_type[counts_type$inventory_type == 'used', ]$n
+n_new <- scales::comma(n_new)
+n_used <- scales::comma(n_used)
+```
+
+This dashboard provides summary information about various trends in the U.S. automobile market. The primary data source is `r n_new` new and `r n_used` used vehicle listings from over 100,000 dealerships across all 50 states in the U.S. The original data are licensed from marketcheck.com and cannot be made public, but this website provides public access to various summaries of the original listings data.
+
+The open-source project was created and is maintained by [Dr. John Paul Helveston](//https://jhelvy.com), an Associate Professor in the Engineering Management and Systems Engineering Department at The George Washington University.
 
 ## Vehicle Miles Traveled (VMT)
 
@@ -12,7 +28,7 @@ The [Daily VMT](daily-vmt.qmd) page shows the distribution of daily VMT across a
 
 The [VMT by Age](age-vmt.qmd) page shows median cumulative vehicle miles traveled (VMT) by vehicle age. Each chart displays the 50th quantile (median) of total mileage for a given combination of powertrain and vehicle type as vehicles age over time. 
 
-For both of the VMT pages, we estimate mileage by computing quantiles of the odometer readings of vehicles listed in the used market. For the Daily VMT, we use all vehicles (regardless of age) and compute a detailed accounting of VMT for every quantile from 1 to 99. For VMT by age, we estimate the age of the vehicle as the listing date minus the production date, which we estimate as June 30 of the year previous to the model year (e.g., we estimate a 2020 model year vehicle was produced June 30, 2019).
+For both of the VMT pages, we estimate VMT by dividing the odometer readings (mileage) of used vehicles by their age, which gives an approximation of the VMT over time. We estimate the age of the vehicle as the listing date minus the production date, which we estimate as June 30 of the year previous to the model year (e.g., we estimate a 2020 model year vehicle was produced June 30, 2019). We summarize this quantity by taking quantiles of the observations. For daily VMT, we use all vehicles regardless of age and compute the VMT for every quantile from 1 to 99. For VMT by age, we only include the 25th, 50th, and 75th quantile.  
 
 ## Depreciation
 
@@ -29,3 +45,34 @@ Detailed analysis of vehicle listings data, including pricing trends, availabili
 ## Dealerships Inventories
 
 Explores dealership inventory patterns, stock levels, and geographic distribution of vehicle availability. Shows how dealer inventory is distributed across regions and vehicle types.
+
+## Listing Counts
+
+The table below summarises how many observations of vehicle listings were included in the summary data presented on this website.
+
+```{r}
+#| message: false
+
+library(dplyr)
+
+data_url <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/listings_summary.csv"
+
+read.csv(data_url) |>
+  mutate(
+    inventory_type = tools::toTitleCase(inventory_type),
+    count = scales::comma(n)
+  ) |>
+  select(-n) |>
+  rename(
+    Market = inventory_type,
+    Powertrain = powertrain,
+    `Vehicle Type` = vehicle_type
+  ) |>
+  reactable::reactable(
+    searchable = TRUE,
+    highlight = TRUE,
+    filterable = TRUE,
+    defaultPageSize = 55,
+    showPageSizeOptions = TRUE
+  )
+```

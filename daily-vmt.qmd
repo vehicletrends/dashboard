@@ -103,9 +103,44 @@ make_chart(data, "powertrain", "BEV", "vehicle_type")
 :::
 
 ::: {.g-col-6}
+#### BEV (Tesla)
+```{r}
+make_chart(data, "powertrain", "BEV (Tesla)", "vehicle_type")
+```
+:::
+
+::: {.g-col-6}
+#### BEV (Non-Tesla)
+```{r}
+make_chart(data, "powertrain", "BEV (Non-Tesla)", "vehicle_type")
+```
+:::
+
+::: {.g-col-6}
 #### Conventional
 ```{r}
 make_chart(data, "powertrain", "Conventional", "vehicle_type")
+```
+:::
+
+::: {.g-col-6}
+#### Diesel
+```{r}
+make_chart(data, "powertrain", "Diesel", "vehicle_type")
+```
+:::
+
+::: {.g-col-6}
+#### Flex Fuel
+```{r}
+make_chart(data, "powertrain", "Flex Fuel", "vehicle_type")
+```
+:::
+
+::: {.g-col-6}
+#### Fuel Cell EV
+```{r}
+make_chart(data, "powertrain", "Fuel Cell EV", "vehicle_type")
 ```
 :::
 

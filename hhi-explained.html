@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Understanding HHI – US Vehicle Trends</title>
+<title>HHI Explained – US Vehicle Trends</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -42,6 +42,11 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-b73eb1ff69023380ee34975ee74bf242.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<meta name="shinylive:serviceworker_dir" content=".">
+<script src="site_libs/quarto-contrib/shinylive-0.9.1/shinylive/load-shinylive-sw.js" type="module"></script>
+<script src="site_libs/quarto-contrib/shinylive-0.9.1/shinylive/run-python-blocks.js" type="module"></script>
+<link href="site_libs/quarto-contrib/shinylive-0.9.1/shinylive/shinylive.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/shinylive-quarto-css/shinylive-quarto.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -76,14 +81,23 @@ ul.task-list li input[type="checkbox"] {
 <script src="https://kit.fontawesome.com/1392a7030f.js" crossorigin="anonymous"></script>
 
 
+<style>
+.shinylive-wrapper,
+.shinylive-container {
+  box-shadow: none !important;
+  border: none !important;
+}
+</style>
 
 
 <link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="Understanding HHI – US Vehicle Trends">
+<meta property="og:title" content="HHI Explained – US Vehicle Trends">
+<meta property="og:description" content="Something">
 <meta property="og:image" content="https://vehicletrends.us/images/logo.png">
 <meta property="og:site_name" content="https://github.com/vehicletrends">
 <meta property="og:locale" content="es_ES">
-<meta name="twitter:title" content="Understanding HHI – US Vehicle Trends">
+<meta name="twitter:title" content="HHI Explained – US Vehicle Trends">
+<meta name="twitter:description" content="Something">
 <meta name="twitter:image" content="https://vehicletrends.us/images/logo.png">
 <meta name="twitter:creator" content="@johnhelveston">
 <meta name="twitter:site" content="@johnhelveston">
@@ -99,7 +113,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./hhi-explained.html">Understanding HHI</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./hhi-explained.html">HHI Explained</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -153,6 +167,13 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./hhi-explained.html" class="sidebar-item-text sidebar-link active"><i class="bi bi-geo-alt" role="img">
+</i> 
+ <span class="menu-text">HHI Explained</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./listings.html" class="sidebar-item-text sidebar-link"><i class="bi bi-list-ul" role="img">
 </i> 
  <span class="menu-text">Listings</span></a>
@@ -172,13 +193,6 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Nearest Vehicles</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./hhi-explained.html" class="sidebar-item-text sidebar-link active"><i class="bi bi-geo-alt" role="img">
-</i> 
- <span class="menu-text">Understanding HHI</span></a>
-  </div>
-</li>
     </ul>
     </div>
 </nav>
@@ -192,7 +206,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Understanding HHI</h1>
+<h1 class="title">HHI Explained</h1>
 </div>
 
 
@@ -209,11 +223,318 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="cell">
-<div class="cell-output-display">
-<iframe src="https://shinylive.io/r/app/#h=0&amp;code=NobwRAdghgtgpmAXGKAHVA6ASmANGAYwHsIAXOMpMAGwEsAjAJykYE8AKAZwAtaJWAlAB0IdJiw4BzSampFSAJmGiGzNuwAms1o2Vi1HepzHKRkinGbkA+jBYBrOKWs8WcTgAIAPAFoPAMwBXCAJSWhJ2UhZzZ25eXA8Ia2IYVCgIWncBDxARD3yPWn8PdiSUtIz3bwBeDwAGbNyIApaPRidAxgh2Ok5SLm43T1qIQPhGWgJ2BoSyolT0zOH6hKhQwKhqazjaD1q6hLzW45OPGD5t3j2Vs6gAD0vd-YTaTms13jgANyh6ajhrgAxACCABkAMoAUQEyhaAF8jvlEYViqVkvMKks9rUAIyNZEtdqkTrdXr9VztZY42bohaVKmrdabR7XakeAmnE7nJI7VkJOwPXm4l5vD6ZH5-AG1SLRJwsgB8+wwAE5lTDYQUEc0CsjuSzfB4cR4APSJWmY9y6+76vw4jB1ZGvd4ET4S-7ePwyxgxBW1PW8vx1e11I0AMlDHii3rlvK8futvIA1PVg3jkY7UQBCJ1i76-f747XHClVA3tVDsI2muZ0pY08qLLIc-JEkk9V7kwaU64lzj1jGN5Y1i19jxrYnMoVnC47Q5Fzmnf1XP0z+K3QXL9ePEXO135qUeEEQ6Ea-JaloZkpRn2xlc8q7JoN1EOF069j1tOAVqtmhv0-u1k285wh4cDUJwAJFFesqxFciopqqao5M2HjvgaUxBohyoJOW0zBiGJolMOg4eLaAgASOpGGjCyIgWBEEokR5okdUtRKMh84tBorwEBM3LpKQH4KB4ABUkYwSytooVBmg8XxfACR48ENBxC75JwRoGpWHjJpwACOjD9NxnC8bQ-FkDChEKChLRoX4UwaQkRp+Bpp6tHR4EAk0amoV2pb2XhACsCRBoFbnwrRoGeapJw7NYEBEIwdh0AAXnAGgfl6N5XH4S60NkprsAKknTve+UoXAdyoCQFCCQaQbCcmcUJUlmy0GlGViQALChzAQPYngGjiiDEfSKF2SUP59QNAgAHqVdVEC1eNfmDS5q2EZwYwDEM4U6pxBT+IlJS0OQVjhM0fCGogCjPip3lqQQnTtGQNqodtvazUoNkFJYjDHehz21SV14xrwP35DJvycOwf2JdkXgpndL4eEwcBQPYEPsgdxz-CwGQQJI1hWAC9UYEaYl4cqs3sKdlhQGEJAeAApMazOGs+NE460Mlw4wSn1K+PkFKQfWcP4lgftyO2UsAOIALqiR4eNdHwRMk6sRiw4w-26EroV7QuvZy4rBrGwrVGi+k4uWFjtmrcAo1LKb61DI7zH0oryZWxANuMFjHkMQ9wuRmLEv8wa0vG077iK2JKsE+rDNwJrMN89kYkG3bBQydHHvOwLPt+0LIf227Ftmw7Fve2Htvcz5ed-gXlduzHnCK34Rfh9nZ4B1jE2oAKMvuCF+Evv3G0t92ppbTAw+cIbHjnpq6bzmS889qtFEsb+A7-mOTJbFOs-z195HY5yeXXHl-IJpuxWzoUoouuK+7XAAKlgACq0IiFqIiBF2AaNI5gXC0A0HAegLB2DIlINwOA8BrhGGsHAhBcAYHcy+JYTgF1rjBRQvQSQ1whBgAAMT+AoZQkhuAUL+CIbUEhpDkbPmoShVAfEJDELIQANgIAAdkCnwjQJDkTkVXrZcBkCWA9kkVAxgGDThEFQBQLhmwADuUBWCcFYdzbgXUYFgAALIOCcB4AACiwWAThsEkLEdzYwkjGAAEkICoECP0EhbdqHsjAAAOTGPQSWRBigAGE95LEQN4nurRuR8nXKyA4HgfjUECAeYKqFyCoFZHYt8dAIHONce4gxcVQakCiWAAAEhUpxHhQTfDApEvAF9S4tFic8eJwokmbFSdcIMABmRJfQvy9PtHiGhuj5F9FYO6BhYB6CJXyT4YgchGCIA8KQiBcAFBwG4QAblseM043BAoGIAIqAIIPYDw4ICAUBYOEbRYAcknHHBdAAQu40gEQSEmTuRMIgOJylmMsBLUIHgwmpCcKdC63iCDUCgJwZYJD6CkAgD4Ig7i6BLR8BBYgEANCcJRWizgMAPBqJ8DiZ8Zx6A+Gsk8w5LzQjvM+d8sAvzoD-LpYcIxRB8nJw8MYxgjgylNLhQipFczUXosxXwOAOK4B4oJWwVGUqSVkopVSmANK6XPOOK8kgHzSBfO6D825HLwh9PKWEkItUSYZUFcK2F8LEVcKJdK0gWK5W4pIEq1gKriWkvJZSuo1LaUHJQvqiAhrjUGPZfcogPUmkkIACKBCUUQagrAnXitdVKjFHrZXysVYS1VgaNUOieaIhlSI16aPzeiFJMAkhqOYBWFCajwFwNZMaPp1bWjJNSdYeZdwFFqRIVUmpdSsHUCifXEWlVSAAHl3FuI8WAOKxlZCaPDXO-IqDEGzLUbwcgOiG6kGmQeZFCzLBrJxKgO4qEM3gPWZs7ZeyRHc11f27pcAh1EBHVjEhEKRyzp8uQO4S6V1FM8WMfO7hrCbvhVm+lWN92XrAEeump61JTJmT4+ZjB8m3vvY+vJL64BbJ2fssAKEv0tAHb+4do6FwkIdaY9+rBlGgbUuByDpBV0GLsEKuUfQGaBDeIh7dKHd2RngQenxmGT14H7uevDV7CM3sNCRzgT6MobIo2+6jtGq3iIKIA5d-HoPrt4NYDRqtCY7ovPOAgLANDMdaC5wj2x0b5IMWxwS4I-IeGTR2CY9B3Ewuk6cWQ8gLMCZIagTIISuwioSPA2gkhuCCVmV1Z897HMnFw+hgjRGtMPp02R-TlH300fnMoUwvtLBYIjn4IIIRGbdD4KuhI+buuoXcDgkgJdbjCdIMmhmUAPztFeVg9gwdWiUkCNQOqfhzBLRJrYExzhey00KaQAAJCUmCLw9v7bbovGS-xCZwPYIt5b+3ezZHlPUDw4ZPxbXu23AW90sZN3gxoYoBoCVRAwP4Zg8B3M+T-H62ooJITv3fpCLA4I5aIDuwdtu8s+0NyC7UdHD2NpiWDVjRegcvK-fCf9wHfhgdQFB+D9BpOULr1KSyWoXX3GHZs6UxkE4j6bnx+ODY-PaDY9OF9vH7glsY7g6OK+kuPsHZvnbB+Aupf3dV6Lp+u5X6SmuPjnML88ySjFycWn1w-sSf8G5OEblkS9c5xu14W6-VlgoPk9+C6uDsL4KQfwBjmYYAUP4bxHODtHejKQLmLQHcY9g5bhDzukNTfd5YT3EH2AIowC6SxoRLC7dXWd2X0eCix-20J4VLgojEgk0nzRKf8Vp69-NloMkw9c9oCgmC3gUw4jCj44DUKwhYI-aceikFUTt4jzEHvDV++sd5fTJTFVopAZIGaq25BhG1fhHb+cZe4p2cTg3-JX8nFzZQubyOW3xtRHYBdrMtP9uG73JKYbpxuJfEh49Z1ErNiWEEn-0Mh8AJUJltiTRk1slU2K2vVWTK1I2fXIQAA4NAhEoBqNTdOROAfcyB-cSEAB1U6bgFmDKS3BICdM4cTQSQJVGJwNRCjZoQPYPMcfFFmIPfwDAbjFpY4J-NuBIJ-G+DwAQu+cqGTJnYCPfGPKDA7RLOAZLFgFbT8RvRgMxOQfoFvAoK-XKG-Cbe-aSVECAf6NRTQCbfbWnbIViQWGKBcaQGLfobIZMdIBKavdBEhXjbxB9dpGHG4aJUueFQJagLhcEUxNIBnM6TwL5JJTINRIQ0LBgCLEgbxHBNKa4bhBw6JNDawL4IgcBPQ7mMnawzkZZRKNaDwKYRhPpLqZUFA+gcpUhOAPhLqAgPpAgOo7ZAgfhQFJNMhZUegQKXo7hOo-wPpZUAgHELlXw44RhHEX4AgUYuoyoqowKOAOonZPhLZLlHxUhZUQKKAXYwY7o0hHEbhKAOoJAwKWxQDGTJ-c3ZmeUZmaJFgPqcwTQdwByPySyO4h4yAgoGAdxZOHoX4MCa4IocfYeJSWoLqOcbgmE-INIIZOodgaHblIQEQbxf6YINzEsJyc+EhB4+lZpWElpaHOjbg6Ha4fwccRKJEveVgBIf4adZYEk7IL46JWwtQzPdwdgTwnxbxbw7EgIWgagQI2oZknSNkuAeYBtdgDtDQLtTpYo-mQ9Y9FYppT1WU+UjwdiRMaJYgBZawaqeFeREhZDBIUTQyXpdIn4-IcwKU3jTkmGfw4E2oJ06gc+aqHBDra4D06FEgKvNYewdgL4AAKyoJGTCkwO4OSLSQSCOlwLWBgOoG3wSEVK4UU1VKtJaRMn-2sH8CFK2DsFGE2CDJ-SZIzRKNR0MKIGMJuImwEHlkzNLkyOyNyKgQgjARSNxC6kbJDjQx6DgDWw0AwB9K9NmQmEyxFR7OFn8JhjzOFK4WA3SGQ3EN31M3yCICMCazgEhCwTIAL05zjX+TZA0PyECFQGBzgHBDyUsBcQEwgkRQum5S8SaQYwSUXjPIvKvMcVvKKXvMGwgG5WnycG8VfKVEpRt0kNL03MYCwR3Nqn3IO0PPCAUASBPI8A-OTi-PyR-PJAG0fJ8WfISFAo8D4XfPPMwuvIKTvLwpIEAu5xghAp-RGVuggrXI8A3Ighgu3N3P6HbyQqIF7UKJaAwvICwpvL2y4BooAoItl0YpSTSTIs-MopwskofNop8SAtSy6XkpGT6TClokgvXOgtgp4oQoezNXjShKErM3ItEuUokr-Pws8VkpfKYrYkUoou-Icqkros71KTkp6SVG4X0okL-jRN9l4H4GBHQHYEAWuEATNK3KVP6y4t0BEDADhHliAA" width="100%" height="800" scrolling="no" seamless="seamless" frameborder="0"></iframe>
-</div>
-</div>
+<p>This app helps explain the meaning of the <a href="https://en.wikipedia.org/wiki/Herfindahl%E2%80%93Hirschman_index">Herfindahl–Hirschman Index (HHI)</a>, which is an index from 0 to 1 that helps explain the level of concentration in a market.</p>
+<pre class="shinylive-r" data-engine="r"><code>#| '!! shinylive warning !!': |
+#|   shinylive does not work in self-contained HTML documents.
+#|   Please set `embed-resources: false` in your metadata.
+#| standalone: true
+#| viewerHeight: 800
+
+library(shiny)
+library(echarts4r)
+library(dplyr)
+library(bslib)
+
+generate_market_shares &lt;- function(target_hhi, n_companies) {
+  if (n_companies &lt;= 0) {
+    return(list(
+      shares = numeric(0),
+      n_companies = 0,
+      actual_hhi = 0,
+      min_hhi = 0,
+      max_hhi = 0,
+      is_achievable = FALSE
+    ))
+  }
+
+  if (n_companies == 1) {
+    return(list(
+      shares = 1,
+      n_companies = 1,
+      actual_hhi = 1,
+      min_hhi = 1,
+      max_hhi = 1,
+      is_achievable = (target_hhi &gt;= 0.99)
+    ))
+  }
+
+  min_hhi &lt;- 1 / n_companies
+  max_hhi &lt;- 1.0
+  is_achievable &lt;- (target_hhi &gt;= min_hhi - 0.001 &amp;&amp;
+    target_hhi &lt;= max_hhi + 0.001)
+
+  if (!is_achievable) {
+    shares &lt;- rep(1 / n_companies, n_companies)
+    return(list(
+      shares = shares,
+      n_companies = n_companies,
+      actual_hhi = min_hhi,
+      min_hhi = min_hhi,
+      max_hhi = max_hhi,
+      is_achievable = FALSE
+    ))
+  }
+
+  if (target_hhi &lt;= min_hhi + 0.001) {
+    shares &lt;- rep(1 / n_companies, n_companies)
+  } else if (target_hhi &gt;= 0.999) {
+    shares &lt;- c(0.9999, rep(0.0001 / (n_companies - 1), n_companies - 1))
+  } else if (n_companies == 2) {
+    discriminant &lt;- 2 * target_hhi - 1
+    if (discriminant &gt;= 0) {
+      s1 &lt;- (1 + sqrt(discriminant)) / 2
+      shares &lt;- c(s1, 1 - s1)
+    } else {
+      shares &lt;- c(0.5, 0.5)
+    }
+  } else {
+    hhi_normalized &lt;- (target_hhi - min_hhi) / (max_hhi - min_hhi)
+    exponent &lt;- 0.2 + hhi_normalized * 4
+    ranks &lt;- 1:n_companies
+    shares &lt;- (1 / ranks)^exponent
+    shares &lt;- shares / sum(shares)
+
+    for (iteration in 1:2000) {
+      current_hhi &lt;- sum(shares^2)
+      error &lt;- current_hhi - target_hhi
+      if (abs(error) &lt; 0.00001) {
+        break
+      }
+
+      learning_rate &lt;- 0.1 * (0.9^(iteration %/% 100))
+      if (error &gt; 0) {
+        transfer &lt;- min(shares[1] * learning_rate, abs(error) * 0.5)
+        shares[1] &lt;- shares[1] - transfer
+        shares[n_companies] &lt;- shares[n_companies] + transfer
+      } else {
+        transfer &lt;- min(shares[n_companies] * learning_rate, abs(error) * 0.5)
+        if (shares[n_companies] &gt; transfer) {
+          shares[1] &lt;- shares[1] + transfer
+          shares[n_companies] &lt;- shares[n_companies] - transfer
+        }
+      }
+      shares &lt;- pmax(shares, 0.00001)
+      shares &lt;- shares / sum(shares)
+    }
+  }
+
+  list(
+    shares = shares,
+    n_companies = n_companies,
+    actual_hhi = sum(shares^2),
+    min_hhi = min_hhi,
+    max_hhi = max_hhi,
+    is_achievable = TRUE
+  )
+}
+
+ui &lt;- page_sidebar(
+  theme = bs_theme(
+    version = 5,
+    bg = "#ffffff",
+    fg = "#000000",
+    primary = "#6c757d"
+  ),
+
+  sidebar = sidebar(
+    open = "always",
+    h4("Market Parameters"),
+    sliderInput(
+      "n_companies",
+      "Number of Companies:",
+      min = 1,
+      max = 10,
+      value = 5,
+      step = 1
+    ),
+    sliderInput(
+      "hhi_target",
+      "HHI Level:",
+      min = 0,
+      max = 1,
+      value = 0.30,
+      step = 0.01
+    ),
+    hr(style = "border-color: #dee2e6;"),
+    h5("Quick Scenarios"),
+    actionButton(
+      "scenario1",
+      "Perfect Competition",
+      class = "btn-outline-secondary btn-sm w-100 mb-2"
+    ),
+    actionButton(
+      "scenario2",
+      "Moderate Market",
+      class = "btn-outline-secondary btn-sm w-100 mb-2"
+    ),
+    actionButton(
+      "scenario3",
+      "Concentrated Market",
+      class = "btn-outline-secondary btn-sm w-100 mb-2"
+    ),
+    actionButton(
+      "scenario4",
+      "Duopoly",
+      class = "btn-outline-secondary btn-sm w-100"
+    )
+  ),
+
+  layout_column_wrap(
+    width = 1 / 3,
+    value_box(
+      "HHI Level",
+      textOutput("hhi_display"),
+      theme = "white",
+      style = "border: 1px solid #dee2e6;"
+    ),
+    value_box(
+      "Companies",
+      textOutput("num_companies_display"),
+      theme = "white",
+      style = "border: 1px solid #dee2e6;"
+    ),
+    value_box(
+      "Market Type",
+      textOutput("market_status_display"),
+      theme = "white",
+      style = "border: 1px solid #dee2e6;"
+    )
+  ),
+
+  uiOutput("hhi_warning"),
+
+  card(
+    card_header("Market Share Distribution"),
+    echarts4rOutput("pieChart", height = "400px"),
+    style = "border: 1px solid #dee2e6;"
+  )
+)
+
+server &lt;- function(input, output, session) {
+  marketData &lt;- reactive({
+    result &lt;- generate_market_shares(input$hhi_target, input$n_companies)
+    if (length(result$shares) &gt; 0 &amp;&amp; result$n_companies &gt; 0) {
+      companies_df &lt;- data.frame(
+        company = LETTERS[1:result$n_companies],
+        share = result$shares * 100
+      )
+    } else {
+      companies_df &lt;- data.frame()
+    }
+    list(
+      target_hhi = input$hhi_target,
+      actual_hhi = result$actual_hhi,
+      n_companies = result$n_companies,
+      min_hhi = result$min_hhi,
+      max_hhi = result$max_hhi,
+      is_achievable = result$is_achievable,
+      data = companies_df
+    )
+  })
+
+  output$hhi_display &lt;- renderText(sprintf("%.2f", input$hhi_target))
+  output$num_companies_display &lt;- renderText(as.character(input$n_companies))
+  output$market_status_display &lt;- renderText({
+    if (input$hhi_target &lt; 0.15) {
+      "Competitive"
+    } else if (input$hhi_target &lt; 0.25) {
+      "Moderate"
+    } else {
+      "Concentrated"
+    }
+  })
+
+  output$hhi_warning &lt;- renderUI({
+    data &lt;- marketData()
+    if (!data$is_achievable) {
+      div(
+        class = "alert alert-danger",
+        style = "border: 1px solid #f8d7da;",
+        sprintf(
+          "With %d companies, HHI must be between %.2f and %.2f.",
+          data$n_companies,
+          data$min_hhi,
+          data$max_hhi
+        )
+      )
+    }
+  })
+
+  output$pieChart &lt;- renderEcharts4r({
+    data &lt;- marketData()
+    if (nrow(data$data) == 0) {
+      data.frame(x = 1, y = 1) |&gt;
+        e_charts() |&gt;
+        e_title(
+          text = "Set parameters to view distribution",
+          left = "center",
+          top = "center"
+        )
+    } else {
+      colors &lt;- c(
+        "#3498db",
+        "#e74c3c",
+        "#2ecc71",
+        "#9b59b6",
+        "#f39c12",
+        "#1abc9c",
+        "#34495e",
+        "#e67e22",
+        "#95a5a6",
+        "#16a085"
+      )
+
+      data$data |&gt;
+        arrange(desc(share)) |&gt;
+        e_charts(company) |&gt;
+        e_pie(
+          share,
+          radius = c("40%", "70%"),
+          label = list(
+            formatter = "{b}\n{d}%",
+            fontSize = 14,
+            fontWeight = "bold"
+          )
+        ) |&gt;
+        e_tooltip(
+          trigger = "item",
+          formatter = htmlwidgets::JS(
+            "
+                        function(params) {
+                            return params.name + '&lt;br/&gt;' + 
+                                   'Market Share: ' + params.value.toFixed(1) + '%&lt;br/&gt;' +
+                                   'Proportion: ' + params.percent.toFixed(1) + '%';
+                        }
+                    "
+          )
+        ) |&gt;
+        e_legend(right = 10, top = "middle", orient = "vertical") |&gt;
+        e_color(colors[1:nrow(data$data)])
+    }
+  })
+
+  observeEvent(input$scenario1, {
+    updateSliderInput(session, "n_companies", value = 10)
+    updateSliderInput(session, "hhi_target", value = 0.10)
+  })
+
+  observeEvent(input$scenario2, {
+    updateSliderInput(session, "n_companies", value = 7)
+    updateSliderInput(session, "hhi_target", value = 0.20)
+  })
+
+  observeEvent(input$scenario3, {
+    updateSliderInput(session, "n_companies", value = 5)
+    updateSliderInput(session, "hhi_target", value = 0.35)
+  })
+
+  observeEvent(input$scenario4, {
+    updateSliderInput(session, "n_companies", value = 2)
+    updateSliderInput(session, "hhi_target", value = 0.65)
+  })
+}
+
+shinyApp(ui = ui, server = server)</code></pre>
 
 
 

@@ -46,6 +46,9 @@ website:
     - text: "Market Concentration"
       icon: person-lines-fill
       href: market-concentration.qmd
+    - text: "HHI Explained"
+      icon: geo-alt
+      href: hhi-explained.qmd
     - text: "Listings"
       icon: list-ul
       href: listings.qmd
@@ -55,10 +58,6 @@ website:
     - text: "Nearest Vehicles"
       icon: geo-alt
       href: nearest-vehicles.qmd
-    - text: "Understanding HHI"
-      icon: geo-alt
-      href: hhi-explained.qmd
-
 
   page-footer:
     center:

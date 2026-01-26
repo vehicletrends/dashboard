@@ -13,9 +13,9 @@ Encoding: UTF-8
 Imports:
     dplyr,
     shiny,
+    echarts4r,
     htmltools,
     kableExtra,
     knitr,
     reactable,
-    rmarkdown,
-    shinylive (>= 0.3.0)
+    rmarkdown

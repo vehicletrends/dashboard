@@ -18,4 +18,5 @@ Imports:
     kableExtra,
     knitr,
     reactable,
-    rmarkdown
+    rmarkdown,
+    shinylive (>= 0.3.0)

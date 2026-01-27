@@ -77,6 +77,16 @@
     ]
   },
   {
+    "objectID": "about.html#registrations",
+    "href": "about.html#registrations",
+    "title": "About",
+    "section": "Registrations",
+    "text": "Registrations\nThe Registrations page shows light-duty vehicle registration counts by state, powertrain, and year. Data are sourced from the Alternative Fuels Data Center (AFDC), which compiles registration data from IHS Markit. The page includes a choropleth map of the U.S. showing registration counts or market share for a selected powertrain and year, as well as a bar chart showing the trend over time for a selected state. Users can toggle between absolute registration counts and market share (the fraction of total registrations in each state attributed to a given powertrain). Clicking on a state in the map updates the bar chart to show that state’s trend.",
+    "crumbs": [
+      "About"
+    ]
+  },
+  {
     "objectID": "about.html#market-concentration",
     "href": "about.html#market-concentration",
     "title": "About",
@@ -138,10 +148,7 @@
     "href": "dealership-inventories.html",
     "title": "Dealership inventories",
     "section": "",
-    "text": "ChartsData\n\n\n\n\n\n\n\n\n\n\nDownload data",
-    "crumbs": [
-      "Dealerships Inventories"
-    ]
+    "text": "ChartsData\n\n\n\n\n\n\n\n\n\n\nDownload data"
   },
   {
     "objectID": "hhi-explained.html",
@@ -158,19 +165,13 @@
     "href": "listings.html",
     "title": "Listings",
     "section": "",
-    "text": "ChartsData\n\n\n\n\n\n\n\n\n\n\nDownload data",
-    "crumbs": [
-      "Listings"
-    ]
+    "text": "ChartsData\n\n\n\n\n\n\n\n\n\n\nDownload data"
   },
   {
     "objectID": "nearest-vehicles.html",
     "href": "nearest-vehicles.html",
     "title": "Distance to nearest vehicle",
     "section": "",
-    "text": "ChartsData\n\n\n\n\n\n\n\n\n\nThis is an interactive analysis tool that computes vehicle similarity based on selected parameters. The data is generated dynamically based on your search criteria in the Charts tab above.\nHow it works: - Select target vehicle characteristics (make, type, price range) - The app identifies similar vehicles based on multiple attributes - View results as scatter plots or data tables - Adjust the number of similar vehicles to display",
-    "crumbs": [
-      "Nearest Vehicles"
-    ]
+    "text": "ChartsData\n\n\n\n\n\n\n\n\n\nThis is an interactive analysis tool that computes vehicle similarity based on selected parameters. The data is generated dynamically based on your search criteria in the Charts tab above.\nHow it works: - Select target vehicle characteristics (make, type, price range) - The app identifies similar vehicles based on multiple attributes - View results as scatter plots or data tables - Adjust the number of similar vehicles to display"
   }
 ]

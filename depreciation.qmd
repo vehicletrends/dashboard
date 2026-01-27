@@ -2,6 +2,8 @@
 title: "Depreciation"
 ---
 
+This page shows median vehicle depreciation (retention rate) by vehicle age. A retention rate of 1.0 means the vehicle retains 100% of its original value, while 0.5 means it has lost half its value. Each chart displays the 50th quantile (median) retention rate for a given combination of powertrain and vehicle type. Lines in the charts below are smoothed using loess smoothihng. The "Data" tab shows the raw data, which also includes the 25th and 75th quantiles. See the [about](about.html#depreciation) page for more details. Note the [observation counts](about.html#listing-counts) by powertrain and vehicle type as some combinations have few observations.
+
 ```{r}
 #| include: false
 
@@ -81,8 +83,6 @@ make_chart <- function(data, facet_var, facet_value, line_var) {
     e_toolbox_feature(feature = "saveAsImage")
 }
 ```
-
-This page shows median vehicle depreciation (retention rate) by vehicle age. A retention rate of 1.0 means the vehicle retains 100% of its original value, while 0.5 means it has lost half its value. Each chart displays the 50th quantile (median) retention rate for a given combination of powertrain and vehicle type. The "Data" tab shows the raw data, which also includes the 25th and 75th quantiles.
 
 ::: {.panel-tabset}
 

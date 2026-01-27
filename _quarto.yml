@@ -43,6 +43,9 @@ website:
     - text: "Depreciation"
       icon: graph-down
       href: depreciation.qmd
+    - text: "Registrations"
+      icon: map
+      href: registrations.qmd
     - text: "Market Concentration"
       icon: person-lines-fill
       href: market-concentration.qmd

@@ -1,0 +1,347 @@
+---
+title: "Vehicle Registrations"
+format:
+  html:
+    include-in-header:
+      text: |
+        <style>
+        .shinylive-wrapper,
+        .shinylive-container {
+          box-shadow: none !important;
+          border: none !important;
+        }
+        </style>
+filters:
+  - shinylive
+---
+
+This page shows light-duty vehicle registration counts by state, powertrain, and year. Data are sourced from the [Alternative Fuels Data Center (AFDC)](https://afdc.energy.gov/vehicle-registration). Use the dropdown filters to explore registration counts and market share across the US. This page is a replication of [this dashboard](https://afdc.energy.gov/transatlas#/) by TransAtlas.
+
+::: {.panel-tabset}
+
+## Charts
+
+```{shinylive-r}
+#| standalone: true
+#| viewerHeight: 1150
+
+library(shiny)
+library(dplyr)
+library(bslib)
+library(echarts4r)
+library(jsonlite)
+
+# Load data
+data_url <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/registrations.csv"
+data <- read.csv(data_url)
+
+# Load pre-projected US GeoJSON (Albers USA with AK/HI insets via tigris::shift_geometry)
+us_json <- jsonlite::read_json(
+  "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/us-states-shifted.geojson"
+)
+
+# Compute market share
+data <- data |>
+  filter(state != "Puerto Rico") |>
+  group_by(year, state) |>
+  mutate(
+    total = sum(count),
+    share = round(count / total, 4)
+  ) |>
+  ungroup()
+
+states_no_total <- sort(unique(data$state[data$state != "United States"]))
+all_states <- c("United States", states_no_total)
+
+# Fixed powertrain order
+powertrain_order <- c(
+  "Gasoline",
+  "Flex Fuel (E85)",
+  "Hybrid Electric (HEV)",
+  "Plug-In Hybrid Electric (PHEV)",
+  "Battery Electric (BEV)",
+  "Diesel",
+  "Biodiesel",
+  "Fuel Cell",
+  "Compressed Natural Gas (CNG)",
+  "Methanol",
+  "Propane",
+  "Unknown"
+)
+powertrains <- powertrain_order[powertrain_order %in% unique(data$powertrain)]
+years <- sort(unique(data$year), decreasing = TRUE)
+
+ui <- page_sidebar(
+  title = "Vehicle Registrations",
+  sidebar = sidebar(
+    width = 250,
+    radioButtons(
+      "powertrain",
+      "Powertrain:",
+      choices = powertrains,
+      selected = powertrains[1]
+    ),
+    selectInput(
+      "year",
+      "Year (map):",
+      choices = years,
+      selected = max(years)
+    ),
+    selectInput(
+      "state",
+      "State (trend):",
+      choices = all_states,
+      selected = "United States"
+    ),
+    radioButtons(
+      "metric",
+      "Metric:",
+      choices = c("Count" = "count", "Market Share" = "share"),
+      selected = "count"
+    )
+  ),
+  layout_column_wrap(
+    width = 1,
+    card(
+      card_header(textOutput("map_title")),
+      echarts4rOutput("map", height = "550px")
+    ),
+    card(
+      card_header(textOutput("trend_title")),
+      echarts4rOutput("trend", height = "300px")
+    )
+  )
+)
+
+server <- function(input, output, session) {
+  # Click on a state in the map → update the state dropdown
+  observeEvent(input$map_clicked_data, {
+    clicked <- input$map_clicked_data$name
+    if (!is.null(clicked) && clicked %in% all_states) {
+      updateSelectInput(session, "state", selected = clicked)
+    }
+  })
+
+  output$map_title <- renderText({
+    metric_label <- if (input$metric == "share") {
+      "Market Share"
+    } else {
+      "Registrations"
+    }
+    paste0(metric_label, ": ", input$powertrain, " (", input$year, ")")
+  })
+
+  output$trend_title <- renderText({
+    metric_label <- if (input$metric == "share") {
+      "Market Share"
+    } else {
+      "Registrations"
+    }
+    paste0(metric_label, " Over Time: ", input$powertrain, " - ", input$state)
+  })
+
+  output$map <- renderEcharts4r({
+    map_data <- data |>
+      filter(
+        powertrain == input$powertrain,
+        year == as.integer(input$year),
+        state != "United States"
+      )
+
+    map_data$value <- if (input$metric == "share") {
+      map_data$share
+    } else {
+      map_data$count
+    }
+
+    chart <- if (input$metric == "share") {
+      map_data |>
+        e_charts(state) |>
+        e_map_register("USA_albers", us_json) |>
+        e_map(
+          value,
+          map = "USA_albers",
+          aspectScale = 1,
+          selectedMode = FALSE,
+          top = 0,
+          bottom = 40
+        ) |>
+        e_visual_map(
+          value,
+          orient = "horizontal",
+          left = "center",
+          bottom = 0,
+          inRange = list(color = c("#ffffcc", "#fd8d3c", "#bd0026")),
+          formatter = htmlwidgets::JS(
+            "
+            function(value) {
+              return (value * 100).toFixed(1) + '%';
+            }
+          "
+          )
+        ) |>
+        e_tooltip(
+          formatter = htmlwidgets::JS(
+            "
+            function(params) {
+              if (params.value) {
+                return params.name + '<br/>' + (params.value * 100).toFixed(2) + '%';
+              }
+              return params.name + '<br/>No data';
+            }
+          "
+          )
+        )
+    } else {
+      map_data |>
+        e_charts(state) |>
+        e_map_register("USA_albers", us_json) |>
+        e_map(
+          value,
+          map = "USA_albers",
+          aspectScale = 1,
+          selectedMode = FALSE,
+          top = 0,
+          bottom = 40
+        ) |>
+        e_visual_map(
+          value,
+          orient = "horizontal",
+          left = "center",
+          bottom = 0,
+          inRange = list(color = c("#ffffcc", "#fd8d3c", "#bd0026")),
+          formatter = htmlwidgets::JS(
+            "
+            function(value) {
+              return Math.round(value).toString().replace(/\\B(?=(\\d{3})+(?!\\d))/g, ',');
+            }
+          "
+          )
+        ) |>
+        e_tooltip(
+          formatter = htmlwidgets::JS(
+            "
+            function(params) {
+              if (params.value) {
+                return params.name + '<br/>' + params.value.toLocaleString();
+              }
+              return params.name + '<br/>No data';
+            }
+          "
+          )
+        )
+    }
+
+    chart
+  })
+
+  output$trend <- renderEcharts4r({
+    trend_data <- data |>
+      filter(
+        powertrain == input$powertrain,
+        state == input$state
+      ) |>
+      arrange(year)
+
+    trend_data$value <- if (input$metric == "share") {
+      trend_data$share
+    } else {
+      trend_data$count
+    }
+
+    if (input$metric == "share") {
+      trend_data |>
+        e_charts(year) |>
+        e_bar(value, name = input$powertrain) |>
+        e_x_axis(name = "Year", type = "category") |>
+        e_y_axis(
+          name = "Market Share",
+          axisLabel = list(
+            formatter = htmlwidgets::JS(
+              "
+              function(value) { return (value * 100).toFixed(1) + '%'; }
+            "
+            )
+          )
+        ) |>
+        e_tooltip(
+          formatter = htmlwidgets::JS(
+            "
+            function(params) {
+              return params.name + '<br/>' + (params.value[1] * 100).toFixed(2) + '%';
+            }
+          "
+          )
+        ) |>
+        e_grid(left = 80) |>
+        e_color(background = "transparent") |>
+        e_legend(show = FALSE) |>
+        e_toolbox_feature(feature = "saveAsImage")
+    } else {
+      trend_data |>
+        e_charts(year) |>
+        e_bar(value, name = input$powertrain) |>
+        e_x_axis(name = "Year", type = "category") |>
+        e_y_axis(name = "Count") |>
+        e_tooltip(
+          formatter = htmlwidgets::JS(
+            "
+            function(params) {
+              return params.name + '<br/>' + params.value[1].toLocaleString();
+            }
+          "
+          )
+        ) |>
+        e_grid(left = 100) |>
+        e_color(background = "transparent") |>
+        e_legend(show = FALSE) |>
+        e_toolbox_feature(feature = "saveAsImage")
+    }
+  })
+}
+
+shinyApp(ui, server)
+```
+
+## Data
+
+<center>
+[Download data](https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/registrations.csv)
+
+<div style="width:900px">
+
+```{r}
+#| include: false
+library(dplyr)
+library(tidyr)
+```
+
+```{r}
+data_url <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/registrations.csv"
+data <- read.csv(data_url)
+
+data |>
+  mutate(count = scales::comma(count)) |>
+  pivot_wider(
+    names_from = powertrain,
+    values_from = count,
+    values_fill = "0"
+  ) |>
+  rename(
+    Year = year,
+    State = state
+  ) |>
+  reactable::reactable(
+    searchable = TRUE,
+    highlight = TRUE,
+    filterable = TRUE,
+    defaultPageSize = 10,
+    showPageSizeOptions = TRUE,
+    pageSizeOptions = c(5, 10, 25, 50)
+  )
+```
+
+</div>
+</center>
+
+:::

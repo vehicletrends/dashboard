@@ -11,12 +11,14 @@ Depends: R (>= 4.0.2)
 License: CC-BY-SA
 Encoding: UTF-8
 Imports:
-    dplyr,
-    shiny,
+    bslib,
     echarts4r,
+    dplyr,
     htmltools,
+    jsonlite,
     kableExtra,
     knitr,
     reactable,
     rmarkdown,
+    shiny,
     shinylive (>= 0.3.0)

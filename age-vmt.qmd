@@ -8,24 +8,59 @@ title: "Vehicle Miles Traveled (VMT) by Age"
 library(dplyr)
 library(echarts4r)
 
+# Load data and convert age from months to years
 data_url <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/vmt_age.csv"
-data <- read.csv(data_url)
-
-# Filter to 50th quantile only and convert age from months to years
-data <- data |>
-  filter(quantile == 50) |>
+data <- read.csv(data_url) |>
   mutate(age_years = age_bin / 12)
+
+# Helper function to apply loess smoothing to a group
+smooth_group <- function(df, x_col, y_col, span = 0.5) {
+  if (nrow(df) < 10) {
+    df$miles_smooth <- df[[y_col]]
+    return(df)
+  }
+  tryCatch({
+    fit <- suppressWarnings(loess(df[[y_col]] ~ df[[x_col]], span = span))
+    df$miles_smooth <- predict(fit)
+    df
+  }, error = function(e) {
+    df$miles_smooth <- df[[y_col]]
+    df
+  })
+}
+
+# Apply smoothing to all data
+data <- data |>
+  group_by(powertrain, vehicle_type, quantile) |>
+  group_modify(~ smooth_group(.x, "age_years", "miles")) |>
+  ungroup()
+
+# Filter to 50th quantile for charts
+chart_data <- data |>
+  filter(quantile == 50)
 
 # Helper function to create a chart for a given facet
 make_chart <- function(data, facet_var, facet_value, line_var) {
-  chart_data <- data |>
+  plot_data <- data |>
     filter(.data[[facet_var]] == facet_value)
 
-  chart_data |>
+  plot_data |>
     group_by(.data[[line_var]]) |>
     e_charts(age_years) |>
-    e_line(miles, symbol = "none", smooth = FALSE) |>
-    e_tooltip(trigger = "axis") |>
+    e_line(miles_smooth, symbol = "none", smooth = FALSE) |>
+    e_tooltip(
+      trigger = "axis",
+      formatter = htmlwidgets::JS("
+        function(params) {
+          var result = params[0].axisValueLabel + '<br/>';
+          params.forEach(function(item) {
+            result += item.marker + ' ' + item.seriesName + ': ' +
+                      Math.round(item.value[1]).toLocaleString() + '<br/>';
+          });
+          return result;
+        }
+      ")
+    ) |>
     e_x_axis(name = "Age (years)") |>
     e_y_axis(name = "Miles") |>
     e_legend(
@@ -60,35 +95,35 @@ This page shows median cumulative vehicle miles traveled (VMT) by vehicle age. E
 ::: {.g-col-6}
 #### Car
 ```{r}
-make_chart(data, "vehicle_type", "Car", "powertrain")
+make_chart(chart_data, "vehicle_type", "Car", "powertrain")
 ```
 :::
 
 ::: {.g-col-6}
 #### SUV
 ```{r}
-make_chart(data, "vehicle_type", "SUV", "powertrain")
+make_chart(chart_data, "vehicle_type", "SUV", "powertrain")
 ```
 :::
 
 ::: {.g-col-6}
 #### CUV
 ```{r}
-make_chart(data, "vehicle_type", "CUV", "powertrain")
+make_chart(chart_data, "vehicle_type", "CUV", "powertrain")
 ```
 :::
 
 ::: {.g-col-6}
 #### Pickup
 ```{r}
-make_chart(data, "vehicle_type", "Pickup", "powertrain")
+make_chart(chart_data, "vehicle_type", "Pickup", "powertrain")
 ```
 :::
 
 ::: {.g-col-6}
 #### Minivan
 ```{r}
-make_chart(data, "vehicle_type", "Minivan", "powertrain")
+make_chart(chart_data, "vehicle_type", "Minivan", "powertrain")
 ```
 :::
 
@@ -103,63 +138,63 @@ make_chart(data, "vehicle_type", "Minivan", "powertrain")
 ::: {.g-col-6}
 #### BEV
 ```{r}
-make_chart(data, "powertrain", "BEV", "vehicle_type")
+make_chart(chart_data, "powertrain", "BEV", "vehicle_type")
 ```
 :::
 
 ::: {.g-col-6}
 #### BEV (Tesla)
 ```{r}
-make_chart(data, "powertrain", "BEV (Tesla)", "vehicle_type")
+make_chart(chart_data, "powertrain", "BEV (Tesla)", "vehicle_type")
 ```
 :::
 
 ::: {.g-col-6}
 #### BEV (Non-Tesla)
 ```{r}
-make_chart(data, "powertrain", "BEV (Non-Tesla)", "vehicle_type")
+make_chart(chart_data, "powertrain", "BEV (Non-Tesla)", "vehicle_type")
 ```
 :::
 
 ::: {.g-col-6}
 #### Conventional
 ```{r}
-make_chart(data, "powertrain", "Conventional", "vehicle_type")
+make_chart(chart_data, "powertrain", "Conventional", "vehicle_type")
 ```
 :::
 
 ::: {.g-col-6}
 #### Diesel
 ```{r}
-make_chart(data, "powertrain", "Diesel", "vehicle_type")
+make_chart(chart_data, "powertrain", "Diesel", "vehicle_type")
 ```
 :::
 
 ::: {.g-col-6}
 #### Flex Fuel
 ```{r}
-make_chart(data, "powertrain", "Flex Fuel", "vehicle_type")
+make_chart(chart_data, "powertrain", "Flex Fuel", "vehicle_type")
 ```
 :::
 
 ::: {.g-col-6}
 #### Fuel Cell EV
 ```{r}
-make_chart(data, "powertrain", "Fuel Cell EV", "vehicle_type")
+make_chart(chart_data, "powertrain", "Fuel Cell EV", "vehicle_type")
 ```
 :::
 
 ::: {.g-col-6}
 #### Hybrid
 ```{r}
-make_chart(data, "powertrain", "Hybrid", "vehicle_type")
+make_chart(chart_data, "powertrain", "Hybrid", "vehicle_type")
 ```
 :::
 
 ::: {.g-col-6}
 #### PHEV
 ```{r}
-make_chart(data, "powertrain", "PHEV", "vehicle_type")
+make_chart(chart_data, "powertrain", "PHEV", "vehicle_type")
 ```
 :::
 
@@ -173,22 +208,20 @@ make_chart(data, "powertrain", "PHEV", "vehicle_type")
 <div style="width:900px">
 
 ```{r}
-# Reload full data for the table
-data_url <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/vmt_age.csv"
-full_data <- read.csv(data_url)
-
-full_data |>
+data |>
   mutate(
-    age_years = round(age_bin / 12, 2),
-    miles = round(miles, 0)
+    age_years = round(age_years, 2),
+    miles = round(miles, 0),
+    miles_smooth = round(miles_smooth, 0)
   ) |>
-  select(powertrain, vehicle_type, age_years, quantile, miles) |>
+  select(powertrain, vehicle_type, age_years, quantile, miles, miles_smooth) |>
   rename(
     Powertrain = powertrain,
     `Vehicle Type` = vehicle_type,
     `Age (years)` = age_years,
     Quantile = quantile,
-    Miles = miles
+    Miles = miles,
+    `Miles (Smoothed)` = miles_smooth
   ) |>
   reactable::reactable(
     searchable = TRUE,

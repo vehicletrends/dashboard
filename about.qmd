@@ -20,7 +20,7 @@ n_used <- scales::comma(n_used)
 
 This dashboard provides summary information about various trends in the U.S. automobile market. The primary data source is `r n_new` new and `r n_used` used vehicle listings from over 100,000 dealerships across all 50 states in the U.S. The original data are licensed from marketcheck.com and cannot be made public, but this website provides public access to various summaries of the original listings data.
 
-The open-source project was created and is maintained by [Dr. John Paul Helveston](https://jhelvy.com), an Associate Professor in the Engineering Management and Systems Engineering Department at The George Washington University.
+The open-source project was created and is maintained by [Dr. John Paul Helveston](//https://jhelvy.com), an Associate Professor in the Engineering Management and Systems Engineering Department at The George Washington University.
 
 ## Vehicle Miles Traveled (VMT)
 
@@ -28,11 +28,13 @@ The [Daily VMT](daily-vmt.qmd) page shows the distribution of daily VMT across a
 
 The [VMT by Age](age-vmt.qmd) page shows median cumulative vehicle miles traveled (VMT) by vehicle age. Each chart displays the 50th quantile (median) of total mileage for a given combination of powertrain and vehicle type as vehicles age over time. 
 
-For both of the VMT pages, we estimate VMT by dividing the odometer readings (mileage) of used vehicles by their age, which gives an approximation of the VMT over time. We estimate the age of the vehicle as the listing date minus the production date, which we estimate as June 30 of the year previous to the model year (e.g., we estimate a 2020 model year vehicle was produced June 30, 2019). We summarize this quantity by taking quantiles of the observations. For daily VMT, we use all vehicles regardless of age and compute the VMT for every quantile from 1 to 99. For VMT by age, we only include the 25th, 50th, and 75th quantile.  
+For both of the VMT pages, we estimate VMT by dividing the odometer readings (mileage) of used vehicles by their age, which gives an approximation of the VMT over time. We estimate the age of the vehicle as the listing date minus the production date, which we estimate as June 30 of the year previous to the model year (e.g., we estimate a 2020 model year vehicle was produced June 30, 2019). We summarize this quantity by taking quantiles of the observations at each age bin (in 3-month intervals). For daily VMT, we use all vehicles regardless of age and compute the VMT for every quantile from 1 to 99. For VMT by age, we only include the 25th, 50th, and 75th quantile.  
 
 ## Depreciation
 
-Examines how vehicles retain value over time across different powertrains. Shows the percentage of original price (MSRP) retained at each vehicle age, revealing which powertrains hold their value best and how quickly vehicles depreciate in their first 5 years.
+The [Depreciation](depreciation.qmd) page shows how vehicles retain value over time across different powertrains and vehicle types. Each chart displays the retention rate, which is the ratio of the current listing price to the original MSRP (Manufacturer's Suggested Retail Price). A retention rate of 1.0 means the vehicle retains 100% of its original value, while 0.5 means it has lost half its value.
+
+We estimate the retention rate by dividing the listing price of used vehicles by the original MSRP for that make, model, and trim. Vehicle age is estimated as the listing date minus the production date, which we estimate as June 30 of the year previous to the model year (e.g., we estimate a 2020 model year vehicle was produced June 30, 2019). We summarize this quantity by taking the 25th, 50th, and 75th quantiles of the observations for each combination of powertrain and vehicle type at each age bin (in 3-month intervals). The charts display the 50th quantile (median) retention rate.
 
 ## Market Concentration
 

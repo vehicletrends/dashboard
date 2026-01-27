@@ -3,50 +3,218 @@ title: "Depreciation"
 ---
 
 ```{r}
-#| label: setup
 #| include: false
 
 library(dplyr)
+library(echarts4r)
 
-data_url <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/depreciation_powertrain_type.csv"
-depreciation_data <- read.csv(data_url)
+# Load data and convert age from months to years
+data_url <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/depreciation.csv"
+data <- read.csv(data_url) |>
+  mutate(age_years = age_bin / 12)
+
+# Helper function to apply loess smoothing to a group
+smooth_group <- function(df, x_col, y_col, span = 0.5) {
+  if (nrow(df) < 10) {
+    df$rr_smooth <- df[[y_col]]
+    return(df)
+  }
+  tryCatch({
+    fit <- suppressWarnings(loess(df[[y_col]] ~ df[[x_col]], span = span))
+    df$rr_smooth <- predict(fit)
+    df
+  }, error = function(e) {
+    df$rr_smooth <- df[[y_col]]
+    df
+  })
+}
+
+# Apply smoothing to all data
+data <- data |>
+  group_by(powertrain, vehicle_type, quantile) |>
+  group_modify(~ smooth_group(.x, "age_years", "rr")) |>
+  ungroup()
+
+# Filter to 50th quantile for charts
+chart_data <- data |>
+  filter(quantile == 50)
+
+# Helper function to create a chart for a given facet
+make_chart <- function(data, facet_var, facet_value, line_var) {
+  plot_data <- data |>
+    filter(.data[[facet_var]] == facet_value)
+
+  plot_data |>
+    group_by(.data[[line_var]]) |>
+    e_charts(age_years) |>
+    e_line(rr_smooth, symbol = "none", smooth = FALSE) |>
+    e_tooltip(
+      trigger = "axis",
+      formatter = htmlwidgets::JS("
+        function(params) {
+          var result = params[0].axisValueLabel + '<br/>';
+          params.forEach(function(item) {
+            result += item.marker + ' ' + item.seriesName + ': ' +
+                      item.value[1].toFixed(2) + '<br/>';
+          });
+          return result;
+        }
+      ")
+    ) |>
+    e_x_axis(name = "Age (years)") |>
+    e_y_axis(name = "Retention Rate") |>
+    e_legend(
+      show = TRUE,
+      orient = "horizontal",
+      left = "center",
+      bottom = 0,
+      width = "70%",
+      selector = list(
+        list(type = "all", title = "All"),
+        list(type = "inverse", title = "Inverse")
+      ),
+      selectorPosition = "start"
+    ) |>
+    e_grid(bottom = 100) |>
+    e_color(background = "transparent") |>
+    e_toolbox_feature(feature = "dataZoom") |>
+    e_toolbox_feature(feature = "saveAsImage")
+}
 ```
+
+This page shows median vehicle depreciation (retention rate) by vehicle age. A retention rate of 1.0 means the vehicle retains 100% of its original value, while 0.5 means it has lost half its value. Each chart displays the 50th quantile (median) retention rate for a given combination of powertrain and vehicle type. The "Data" tab shows the raw data, which also includes the 25th and 75th quantiles.
 
 ::: {.panel-tabset}
 
-## Charts
+## By Vehicle Type
 
+*Click legend items to show/hide lines.*
+
+::: {.grid}
+
+::: {.g-col-6}
+#### Car
 ```{r}
-#| echo: false
-
-htmltools::tags$iframe(
-  src = 'https://019ba196-b520-13ed-4198-caed05339ae5.share.connect.posit.cloud/',
-  width = "100%",
-  height = "800",
-  scrolling = "no",
-  seamless = "seamless",
-  frameBorder = "0"
-)
+make_chart(chart_data, "vehicle_type", "Car", "powertrain")
 ```
+:::
+
+::: {.g-col-6}
+#### SUV
+```{r}
+make_chart(chart_data, "vehicle_type", "SUV", "powertrain")
+```
+:::
+
+::: {.g-col-6}
+#### CUV
+```{r}
+make_chart(chart_data, "vehicle_type", "CUV", "powertrain")
+```
+:::
+
+::: {.g-col-6}
+#### Pickup
+```{r}
+make_chart(chart_data, "vehicle_type", "Pickup", "powertrain")
+```
+:::
+
+::: {.g-col-6}
+#### Minivan
+```{r}
+make_chart(chart_data, "vehicle_type", "Minivan", "powertrain")
+```
+:::
+
+:::
+
+## By Powertrain
+
+*Click legend items to show/hide lines.*
+
+::: {.grid}
+
+::: {.g-col-6}
+#### BEV
+```{r}
+make_chart(chart_data, "powertrain", "BEV", "vehicle_type")
+```
+:::
+
+::: {.g-col-6}
+#### BEV (Tesla)
+```{r}
+make_chart(chart_data, "powertrain", "BEV (Tesla)", "vehicle_type")
+```
+:::
+
+::: {.g-col-6}
+#### BEV (Non-Tesla)
+```{r}
+make_chart(chart_data, "powertrain", "BEV (Non-Tesla)", "vehicle_type")
+```
+:::
+
+::: {.g-col-6}
+#### Conventional
+```{r}
+make_chart(chart_data, "powertrain", "Conventional", "vehicle_type")
+```
+:::
+
+::: {.g-col-6}
+#### Flex Fuel
+```{r}
+make_chart(chart_data, "powertrain", "Flex Fuel", "vehicle_type")
+```
+:::
+
+::: {.g-col-6}
+#### Fuel Cell EV
+```{r}
+make_chart(chart_data, "powertrain", "Fuel Cell EV", "vehicle_type")
+```
+:::
+
+::: {.g-col-6}
+#### Hybrid
+```{r}
+make_chart(chart_data, "powertrain", "Hybrid", "vehicle_type")
+```
+:::
+
+::: {.g-col-6}
+#### PHEV
+```{r}
+make_chart(chart_data, "powertrain", "PHEV", "vehicle_type")
+```
+:::
+
+:::
 
 ## Data
 
 <center>
-[Download data](https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/depreciation_powertrain_type.csv)
+[Download data](https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/depreciation.csv)
 
-<div style="width:700px">
+<div style="width:900px">
 
 ```{r}
-depreciation_data |>
+data |>
   mutate(
-    rr_predicted = round(rr_predicted, 3),
-    age_years = round(age_years, 1)
+    age_years = round(age_years, 2),
+    rr = round(rr, 3),
+    rr_smooth = round(rr_smooth, 3)
   ) |>
+  select(powertrain, vehicle_type, age_years, quantile, rr, rr_smooth) |>
   rename(
     Powertrain = powertrain,
     `Vehicle Type` = vehicle_type,
     `Age (years)` = age_years,
-    `Retention Rate` = rr_predicted
+    Quantile = quantile,
+    `Retention Rate` = rr,
+    `Retention Rate (Smoothed)` = rr_smooth
   ) |>
   reactable::reactable(
     searchable = TRUE,

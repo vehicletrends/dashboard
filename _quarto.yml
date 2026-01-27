@@ -52,15 +52,15 @@ website:
     - text: "HHI Explained"
       icon: geo-alt
       href: hhi-explained.qmd
-    - text: "Listings"
-      icon: list-ul
-      href: listings.qmd
-    - text: "Dealerships Inventories"
-      icon: building
-      href: dealership-inventories.qmd
-    - text: "Nearest Vehicles"
-      icon: geo-alt
-      href: nearest-vehicles.qmd
+    # - text: "Listings"
+    #   icon: list-ul
+    #   href: listings.qmd
+    # - text: "Dealerships Inventories"
+    #   icon: building
+    #   href: dealership-inventories.qmd
+    # - text: "Nearest Vehicles"
+    #   icon: geo-alt
+    #   href: nearest-vehicles.qmd
 
   page-footer:
     center:

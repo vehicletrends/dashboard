@@ -36,6 +36,10 @@ The [Depreciation](depreciation.qmd) page shows how vehicles retain value over t
 
 We estimate the retention rate by dividing the listing price of used vehicles by the original MSRP for that make, model, and trim. Vehicle age is estimated as the listing date minus the production date, which we estimate as June 30 of the year previous to the model year (e.g., we estimate a 2020 model year vehicle was produced June 30, 2019). We summarize this quantity by taking the 25th, 50th, and 75th quantiles of the observations for each combination of powertrain and vehicle type at each age bin (in 3-month intervals). The charts display the 50th quantile (median) retention rate.
 
+## Registrations
+
+The [Registrations](registrations.qmd) page shows light-duty vehicle registration counts by state, powertrain, and year. Data are sourced from the [Alternative Fuels Data Center (AFDC)](https://afdc.energy.gov/vehicle-registration), which compiles registration data from IHS Markit. The page includes a choropleth map of the U.S. showing registration counts or market share for a selected powertrain and year, as well as a bar chart showing the trend over time for a selected state. Users can toggle between absolute registration counts and market share (the fraction of total registrations in each state attributed to a given powertrain). Clicking on a state in the map updates the bar chart to show that state's trend.
+
 ## Market Concentration
 
 Tracks market share and competitive dynamics across manufacturers within each powertrain category. Measures how concentrated or competitive each segment is, showing whether markets are dominated by a few manufacturers or have healthy competition across many brands.

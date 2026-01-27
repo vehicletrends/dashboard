@@ -71,7 +71,7 @@
     "href": "about.html#vehicle-miles-traveled-vmt",
     "title": "About",
     "section": "Vehicle Miles Traveled (VMT)",
-    "text": "Vehicle Miles Traveled (VMT)\nThe Daily VMT page shows the distribution of daily VMT across all vehicles in the dataset. Each chart displays quantiles of daily mileage for a given combination of powertrain and vehicle type. For example, the 0.5 quantile represents the median daily mileage (half of vehicles drive less than this amount and half drive more).\nThe VMT by Age page shows median cumulative vehicle miles traveled (VMT) by vehicle age. Each chart displays the 50th quantile (median) of total mileage for a given combination of powertrain and vehicle type as vehicles age over time.\nFor both of the VMT pages, we estimate VMT by dividing the odometer readings (mileage) of used vehicles by their age, which gives an approximation of the VMT over time. We estimate the age of the vehicle as the listing date minus the production date, which we estimate as June 30 of the year previous to the model year (e.g., we estimate a 2020 model year vehicle was produced June 30, 2019). We summarize this quantity by taking quantiles of the observations. For daily VMT, we use all vehicles regardless of age and compute the VMT for every quantile from 1 to 99. For VMT by age, we only include the 25th, 50th, and 75th quantile.",
+    "text": "Vehicle Miles Traveled (VMT)\nThe Daily VMT page shows the distribution of daily VMT across all vehicles in the dataset. Each chart displays quantiles of daily mileage for a given combination of powertrain and vehicle type. For example, the 0.5 quantile represents the median daily mileage (half of vehicles drive less than this amount and half drive more).\nThe VMT by Age page shows median cumulative vehicle miles traveled (VMT) by vehicle age. Each chart displays the 50th quantile (median) of total mileage for a given combination of powertrain and vehicle type as vehicles age over time.\nFor both of the VMT pages, we estimate VMT by dividing the odometer readings (mileage) of used vehicles by their age, which gives an approximation of the VMT over time. We estimate the age of the vehicle as the listing date minus the production date, which we estimate as June 30 of the year previous to the model year (e.g., we estimate a 2020 model year vehicle was produced June 30, 2019). We summarize this quantity by taking quantiles of the observations at each age bin (in 3-month intervals). For daily VMT, we use all vehicles regardless of age and compute the VMT for every quantile from 1 to 99. For VMT by age, we only include the 25th, 50th, and 75th quantile.",
     "crumbs": [
       "About"
     ]
@@ -81,7 +81,7 @@
     "href": "about.html#depreciation",
     "title": "About",
     "section": "Depreciation",
-    "text": "Depreciation\nExamines how vehicles retain value over time across different powertrains. Shows the percentage of original price (MSRP) retained at each vehicle age, revealing which powertrains hold their value best and how quickly vehicles depreciate in their first 5 years.",
+    "text": "Depreciation\nThe Depreciation page shows how vehicles retain value over time across different powertrains and vehicle types. Each chart displays the retention rate, which is the ratio of the current listing price to the original MSRP (Manufacturer’s Suggested Retail Price). A retention rate of 1.0 means the vehicle retains 100% of its original value, while 0.5 means it has lost half its value.\nWe estimate the retention rate by dividing the listing price of used vehicles by the original MSRP for that make, model, and trim. Vehicle age is estimated as the listing date minus the production date, which we estimate as June 30 of the year previous to the model year (e.g., we estimate a 2020 model year vehicle was produced June 30, 2019). We summarize this quantity by taking the 25th, 50th, and 75th quantiles of the observations for each combination of powertrain and vehicle type at each age bin (in 3-month intervals). The charts display the 50th quantile (median) retention rate.",
     "crumbs": [
       "About"
     ]
@@ -141,7 +141,7 @@
     "href": "depreciation.html",
     "title": "Depreciation",
     "section": "",
-    "text": "ChartsData\n\n\n\n\n\n\n\n\n\n\nDownload data",
+    "text": "This page shows median vehicle depreciation (retention rate) by vehicle age. A retention rate of 1.0 means the vehicle retains 100% of its original value, while 0.5 means it has lost half its value. Each chart displays the 50th quantile (median) retention rate for a given combination of powertrain and vehicle type. The “Data” tab shows the raw data, which also includes the 25th and 75th quantiles.\n\nBy Vehicle TypeBy PowertrainData\n\n\nClick legend items to show/hide lines.\n\n\nCar\n\n\n\n\n\n\n\n\nSUV\n\n\n\n\n\n\n\n\nCUV\n\n\n\n\n\n\n\n\nPickup\n\n\n\n\n\n\n\n\nMinivan\n\n\n\n\n\n\n\n\n\n\nClick legend items to show/hide lines.\n\n\nBEV\n\n\n\n\n\n\n\n\nBEV (Tesla)\n\n\n\n\n\n\n\n\nBEV (Non-Tesla)\n\n\n\n\n\n\n\n\nConventional\n\n\n\n\n\n\n\n\nFlex Fuel\n\n\n\n\n\n\n\n\nFuel Cell EV\n\n\n\n\n\n\n\n\nHybrid\n\n\n\n\n\n\n\n\nPHEV\n\n\n\n\n\n\n\n\n\n\n\nDownload data",
     "crumbs": [
       "Depreciation"
     ]

@@ -15,20 +15,31 @@ data_url <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/
 data <- read.csv(data_url) |>
   mutate(age_years = age_bin / 12)
 
+# Load annual VMT summary data
+vmt_annual_type <- read.csv(
+  "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/vmt_annual_type.csv"
+)
+vmt_annual_model <- read.csv(
+  "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/vmt_annual_model.csv"
+)
+
 # Helper function to apply loess smoothing to a group
 smooth_group <- function(df, x_col, y_col, span = 0.5) {
   if (nrow(df) < 10) {
     df$miles_smooth <- df[[y_col]]
     return(df)
   }
-  tryCatch({
-    fit <- suppressWarnings(loess(df[[y_col]] ~ df[[x_col]], span = span))
-    df$miles_smooth <- predict(fit)
-    df
-  }, error = function(e) {
-    df$miles_smooth <- df[[y_col]]
-    df
-  })
+  tryCatch(
+    {
+      fit <- suppressWarnings(loess(df[[y_col]] ~ df[[x_col]], span = span))
+      df$miles_smooth <- predict(fit)
+      df
+    },
+    error = function(e) {
+      df$miles_smooth <- df[[y_col]]
+      df
+    }
+  )
 }
 
 # Apply smoothing to all data
@@ -52,7 +63,8 @@ make_chart <- function(data, facet_var, facet_value, line_var) {
     e_line(miles_smooth, symbol = "none", smooth = FALSE) |>
     e_tooltip(
       trigger = "axis",
-      formatter = htmlwidgets::JS("
+      formatter = htmlwidgets::JS(
+        "
         function(params) {
           var result = params[0].axisValueLabel + '<br/>';
           params.forEach(function(item) {
@@ -61,7 +73,8 @@ make_chart <- function(data, facet_var, facet_value, line_var) {
           });
           return result;
         }
-      ")
+      "
+      )
     ) |>
     e_x_axis(name = "Age (years)") |>
     e_y_axis(name = "Miles") |>
@@ -104,20 +117,20 @@ make_chart(chart_data, "vehicle_type", "Car", "powertrain")
 
 ::: {.g-col-6}
 
-#### SUV
+#### CUV
 
 ```{r}
-make_chart(chart_data, "vehicle_type", "SUV", "powertrain")
+make_chart(chart_data, "vehicle_type", "CUV", "powertrain")
 ```
 
 :::
 
 ::: {.g-col-6}
 
-#### CUV
+#### SUV
 
 ```{r}
-make_chart(chart_data, "vehicle_type", "CUV", "powertrain")
+make_chart(chart_data, "vehicle_type", "SUV", "powertrain")
 ```
 
 :::
@@ -152,10 +165,50 @@ make_chart(chart_data, "vehicle_type", "Minivan", "powertrain")
 
 ::: {.g-col-6}
 
-#### BEV
+#### Gasoline
 
 ```{r}
-make_chart(chart_data, "powertrain", "BEV", "vehicle_type")
+make_chart(chart_data, "powertrain", "Gasoline", "vehicle_type")
+```
+
+:::
+
+::: {.g-col-6}
+
+#### Flex Fuel (E85)
+
+```{r}
+make_chart(chart_data, "powertrain", "Flex Fuel (E85)", "vehicle_type")
+```
+
+:::
+
+::: {.g-col-6}
+
+#### Hybrid Electric (HEV)
+
+```{r}
+make_chart(chart_data, "powertrain", "Hybrid Electric (HEV)", "vehicle_type")
+```
+
+:::
+
+::: {.g-col-6}
+
+#### Plug-In Hybrid Electric (PHEV)
+
+```{r}
+make_chart(chart_data, "powertrain", "Plug-In Hybrid Electric (PHEV)", "vehicle_type")
+```
+
+:::
+
+::: {.g-col-6}
+
+#### Battery Electric (BEV)
+
+```{r}
+make_chart(chart_data, "powertrain", "Battery Electric (BEV)", "vehicle_type")
 ```
 
 :::
@@ -182,16 +235,6 @@ make_chart(chart_data, "powertrain", "BEV (Non-Tesla)", "vehicle_type")
 
 ::: {.g-col-6}
 
-#### Conventional
-
-```{r}
-make_chart(chart_data, "powertrain", "Conventional", "vehicle_type")
-```
-
-:::
-
-::: {.g-col-6}
-
 #### Diesel
 
 ```{r}
@@ -202,47 +245,17 @@ make_chart(chart_data, "powertrain", "Diesel", "vehicle_type")
 
 ::: {.g-col-6}
 
-#### Flex Fuel
+#### Fuel Cell
 
 ```{r}
-make_chart(chart_data, "powertrain", "Flex Fuel", "vehicle_type")
-```
-
-:::
-
-::: {.g-col-6}
-
-#### Fuel Cell EV
-
-```{r}
-make_chart(chart_data, "powertrain", "Fuel Cell EV", "vehicle_type")
-```
-
-:::
-
-::: {.g-col-6}
-
-#### Hybrid
-
-```{r}
-make_chart(chart_data, "powertrain", "Hybrid", "vehicle_type")
-```
-
-:::
-
-::: {.g-col-6}
-
-#### PHEV
-
-```{r}
-make_chart(chart_data, "powertrain", "PHEV", "vehicle_type")
+make_chart(chart_data, "powertrain", "Fuel Cell", "vehicle_type")
 ```
 
 :::
 
 :::
 
-## Data
+## VMT by Age (Data)
 
 <center>
 [Download data](https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/vmt_age.csv)
@@ -264,6 +277,68 @@ data |>
     Quantile = quantile,
     Miles = miles,
     `Miles (Smoothed)` = miles_smooth
+  ) |>
+  reactable::reactable(
+    searchable = TRUE,
+    highlight = TRUE,
+    filterable = TRUE,
+    defaultPageSize = 10,
+    showPageSizeOptions = TRUE,
+    pageSizeOptions = c(5, 10, 25, 50)
+  )
+```
+
+</div>
+</center>
+
+## Annual VMT by Type (Data)
+
+This table shows the estimated annual vehicle miles traveled (VMT) by vehicle type and powertrain. Annual VMT is calculated as the slope of the linear relationship between vehicle age and cumulative mileage.
+
+<center>
+[Download data](https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/vmt_annual_type.csv)
+
+<div style="width:700px">
+
+```{r}
+vmt_annual_type |>
+  mutate(vmt_annual = round(vmt_annual, 0)) |>
+  rename(
+    `Vehicle Type` = vehicle_type,
+    Powertrain = powertrain,
+    `Annual VMT` = vmt_annual
+  ) |>
+  reactable::reactable(
+    searchable = TRUE,
+    highlight = TRUE,
+    filterable = TRUE,
+    defaultPageSize = 10,
+    showPageSizeOptions = TRUE,
+    pageSizeOptions = c(5, 10, 25, 50)
+  )
+```
+
+</div>
+</center>
+
+## Annual VMT by Model (Data)
+
+This table shows the estimated annual vehicle miles traveled (VMT) by make, model, vehicle type, and powertrain. Annual VMT is calculated as the slope of the linear relationship between vehicle age and cumulative mileage.
+
+<center>
+[Download data](https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/vmt_annual_model.csv)
+
+<div style="width:900px">
+
+```{r}
+vmt_annual_model |>
+  mutate(vmt_annual = round(vmt_annual, 0)) |>
+  rename(
+    Make = make,
+    Model = model,
+    `Vehicle Type` = vehicle_type,
+    Powertrain = powertrain,
+    `Annual VMT` = vmt_annual
   ) |>
   reactable::reactable(
     searchable = TRUE,

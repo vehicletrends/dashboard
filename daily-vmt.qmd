@@ -60,16 +60,16 @@ make_chart(data, "vehicle_type", "Car", "powertrain")
 :::
 
 ::: {.g-col-6}
-#### SUV
+#### CUV
 ```{r}
-make_chart(data, "vehicle_type", "SUV", "powertrain")
+make_chart(data, "vehicle_type", "CUV", "powertrain")
 ```
 :::
 
 ::: {.g-col-6}
-#### CUV
+#### SUV
 ```{r}
-make_chart(data, "vehicle_type", "CUV", "powertrain")
+make_chart(data, "vehicle_type", "SUV", "powertrain")
 ```
 :::
 
@@ -96,9 +96,37 @@ make_chart(data, "vehicle_type", "Minivan", "powertrain")
 ::: {.grid}
 
 ::: {.g-col-6}
-#### BEV
+#### Gasoline
 ```{r}
-make_chart(data, "powertrain", "BEV", "vehicle_type")
+make_chart(data, "powertrain", "Gasoline", "vehicle_type")
+```
+:::
+
+::: {.g-col-6}
+#### Flex Fuel (E85)
+```{r}
+make_chart(data, "powertrain", "Flex Fuel (E85)", "vehicle_type")
+```
+:::
+
+::: {.g-col-6}
+#### Hybrid Electric (HEV)
+```{r}
+make_chart(data, "powertrain", "Hybrid Electric (HEV)", "vehicle_type")
+```
+:::
+
+::: {.g-col-6}
+#### Plug-In Hybrid Electric (PHEV)
+```{r}
+make_chart(data, "powertrain", "Plug-In Hybrid Electric (PHEV)", "vehicle_type")
+```
+:::
+
+::: {.g-col-6}
+#### Battery Electric (BEV)
+```{r}
+make_chart(data, "powertrain", "Battery Electric (BEV)", "vehicle_type")
 ```
 :::
 
@@ -117,13 +145,6 @@ make_chart(data, "powertrain", "BEV (Non-Tesla)", "vehicle_type")
 :::
 
 ::: {.g-col-6}
-#### Conventional
-```{r}
-make_chart(data, "powertrain", "Conventional", "vehicle_type")
-```
-:::
-
-::: {.g-col-6}
 #### Diesel
 ```{r}
 make_chart(data, "powertrain", "Diesel", "vehicle_type")
@@ -131,30 +152,9 @@ make_chart(data, "powertrain", "Diesel", "vehicle_type")
 :::
 
 ::: {.g-col-6}
-#### Flex Fuel
+#### Fuel Cell
 ```{r}
-make_chart(data, "powertrain", "Flex Fuel", "vehicle_type")
-```
-:::
-
-::: {.g-col-6}
-#### Fuel Cell EV
-```{r}
-make_chart(data, "powertrain", "Fuel Cell EV", "vehicle_type")
-```
-:::
-
-::: {.g-col-6}
-#### Hybrid
-```{r}
-make_chart(data, "powertrain", "Hybrid", "vehicle_type")
-```
-:::
-
-::: {.g-col-6}
-#### PHEV
-```{r}
-make_chart(data, "powertrain", "PHEV", "vehicle_type")
+make_chart(data, "powertrain", "Fuel Cell", "vehicle_type")
 ```
 :::
 

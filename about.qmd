@@ -20,6 +20,17 @@ This dashboard provides summary information about various trends in the U.S. aut
 
 The open-source project was created and is maintained by [Dr. John Paul Helveston](//https://jhelvy.com), an Associate Professor in the Engineering Management and Systems Engineering Department at The George Washington University.
 
+## R Data Package
+
+The summary data powering this dashboard are available as the [{vehicletrends}](https://github.com/vehicletrends/vehicletrends) R package. Install it from GitHub to access all datasets directly in R:
+
+```r
+# install.packages("remotes")
+remotes::install_github("vehicletrends/vehicletrends")
+```
+
+See the [package documentation site](https://pkg.vehicletrends.us/) for details on available datasets.
+
 ## Vehicle Miles Traveled (VMT)
 
 The [Daily VMT](vmt-daily.qmd) page shows the distribution of daily VMT across all vehicles in the dataset. Each chart displays quantiles of daily mileage for a given combination of powertrain and vehicle type. For example, the 0.5 quantile represents the median daily mileage (half of vehicles drive less than this amount and half drive more). 

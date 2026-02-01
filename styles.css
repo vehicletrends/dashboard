@@ -144,6 +144,14 @@ a:hover {
   background-color: var(--gray-200) !important;
 }
 
+/* Sidebar logo - remove hover highlight */
+.sidebar-logo-link,
+.sidebar-logo-link:hover,
+.sidebar-logo-link a,
+.sidebar-logo-link a:hover {
+  background-color: transparent !important;
+}
+
 /* Sidebar icons */
 .sidebar-item i,
 .sidebar .bi {

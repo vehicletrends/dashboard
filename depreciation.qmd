@@ -7,12 +7,10 @@ This page shows median vehicle depreciation (retention rate) by vehicle age. A r
 ```{r}
 #| include: false
 
-library(dplyr)
-library(echarts4r)
+source("setup.R")
 
-# Load data and convert age from months to years
-data_url <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/depreciation.csv"
-data <- read.csv(data_url) |>
+# Convert age from months to years
+data <- depreciation |>
   mutate(age_years = age_bin / 12)
 
 # Helper function to apply loess smoothing to a group
@@ -196,7 +194,7 @@ make_chart(chart_data, "powertrain", "Fuel Cell", "vehicle_type")
 ## Data
 
 <center>
-[Download data](https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/depreciation.csv)
+[Download data](`r url_depreciation`)
 
 <div style="width:900px">
 

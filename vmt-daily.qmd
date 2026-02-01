@@ -5,11 +5,9 @@ title: "Daily Vehicle Miles Traveled (VMT)"
 ```{r}
 #| include: false
 
-library(dplyr)
-library(echarts4r)
+source("setup.R")
 
-data_url <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/vmt_daily.csv"
-data <- read.csv(data_url)
+data <- vmt_daily
 
 # Helper function to create a chart for a given facet
 make_chart <- function(data, facet_var, facet_value, line_var) {
@@ -163,7 +161,7 @@ make_chart(data, "powertrain", "Fuel Cell", "vehicle_type")
 ## Data
 
 <center>
-[Download data](https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/vmt_daily.csv)
+[Download data](`r url_vmt_daily`)
 
 <div style="width:900px">
 

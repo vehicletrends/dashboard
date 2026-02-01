@@ -7,21 +7,11 @@ This page shows median cumulative vehicle miles traveled (VMT) by vehicle age. E
 ```{r}
 #| include: false
 
-library(dplyr)
-library(echarts4r)
+source("setup.R")
 
-# Load data and convert age from months to years
-data_url <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/vmt_age.csv"
-data <- read.csv(data_url) |>
+# Convert age from months to years
+data <- vmt_age |>
   mutate(age_years = age_bin / 12)
-
-# Load annual VMT summary data
-vmt_annual_type <- read.csv(
-  "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/vmt_annual_type.csv"
-)
-vmt_annual_model <- read.csv(
-  "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/vmt_annual_model.csv"
-)
 
 # Helper function to apply loess smoothing to a group
 smooth_group <- function(df, x_col, y_col, span = 0.5) {
@@ -258,7 +248,7 @@ make_chart(chart_data, "powertrain", "Fuel Cell", "vehicle_type")
 ## VMT by Age (Data)
 
 <center>
-[Download data](https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/vmt_age.csv)
+[Download data](`r url_vmt_age`)
 
 <div style="width:900px">
 
@@ -296,7 +286,7 @@ data |>
 This table shows the estimated annual vehicle miles traveled (VMT) by vehicle type and powertrain. Annual VMT is calculated as the slope of the linear relationship between vehicle age and cumulative mileage.
 
 <center>
-[Download data](https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/vmt_annual_type.csv)
+[Download data](`r url_vmt_annual_type`)
 
 <div style="width:700px">
 
@@ -326,7 +316,7 @@ vmt_annual_type |>
 This table shows the estimated annual vehicle miles traveled (VMT) by make, model, vehicle type, and powertrain. Annual VMT is calculated as the slope of the linear relationship between vehicle age and cumulative mileage.
 
 <center>
-[Download data](https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/vmt_annual_model.csv)
+[Download data](`r url_vmt_annual_model`)
 
 <div style="width:900px">
 

@@ -21,4 +21,7 @@ Imports:
     reactable,
     rmarkdown,
     shiny,
-    shinylive (>= 0.3.0)
+    shinylive (>= 0.3.0),
+    vehicletrends
+Remotes:
+    vehicletrends/vehicletrends

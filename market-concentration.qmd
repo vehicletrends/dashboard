@@ -6,24 +6,14 @@ title: "Market Concentration"
 #| label: setup
 #| include: false
 
-library(dplyr)
+source("setup.R")
 
-# Load all three HHI datasets
-hhi_make <- read.csv(
-  "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/hhi_make.csv"
-) |>
-  mutate(metric = "Make")
-hhi_type <- read.csv(
-  "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/hhi_type.csv"
-) |>
-  mutate(metric = "Vehicle Type")
-hhi_price <- read.csv(
-  "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/hhi_price.csv"
-) |>
-  mutate(metric = "Price Bin")
-
-# Combine all datasets
-hhi_combined <- bind_rows(hhi_make, hhi_type, hhi_price)
+# Add metric labels and combine datasets
+hhi_combined <- bind_rows(
+  hhi_make  |> mutate(metric = "Make"),
+  hhi_type  |> mutate(metric = "Vehicle Type"),
+  hhi_price |> mutate(metric = "Price Bin")
+)
 ```
 
 ::: {.panel-tabset}
@@ -46,7 +36,7 @@ htmltools::tags$iframe(
 ## Data
 
 <center>
-Download data: [By Make](https://cdn.jsdelivr.net/gh/vehicletrends/data@main/data/hhi_make.csv) | [By Type](https://cdn.jsdelivr.net/gh/vehicletrends/data@main/data/hhi_type.csv) | [By Price](https://cdn.jsdelivr.net/gh/vehicletrends/data@main/data/hhi_price.csv)
+Download data: [By Make](`r url_hhi_make`) | [By Type](`r url_hhi_type`) | [By Price](`r url_hhi_price`)
 
 <div style="width:900px">
 

@@ -5,11 +5,9 @@ title: "About"
 ```{r}
 #| message: false
 
-library(dplyr)
+source("setup.R")
 
-data_url <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/listings_summary.csv"
-listing_summary <- read.csv(data_url)
-counts_type <- listing_summary |>
+counts_type <- listings_summary |>
   group_by(inventory_type) |>
   summarise(n = sum(n))
 n_new <- counts_type[counts_type$inventory_type == 'new', ]$n
@@ -59,11 +57,7 @@ The table below summarises how many observations of vehicle listings were includ
 ```{r}
 #| message: false
 
-library(dplyr)
-
-data_url <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/listings_summary.csv"
-
-read.csv(data_url) |>
+listings_summary |>
   mutate(
     inventory_type = tools::toTitleCase(inventory_type),
     count = scales::comma(n)

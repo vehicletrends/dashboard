@@ -71,6 +71,16 @@
     ]
   },
   {
+    "objectID": "about.html#r-data-package",
+    "href": "about.html#r-data-package",
+    "title": "About",
+    "section": "R Data Package",
+    "text": "R Data Package\nThe summary data powering this dashboard are available as the {vehicletrends} R package. Install it from GitHub to access all datasets directly in R:\n# install.packages(\"remotes\")\nremotes::install_github(\"vehicletrends/vehicletrends\")\nSee the package documentation site for details on available datasets.",
+    "crumbs": [
+      "About"
+    ]
+  },
+  {
     "objectID": "about.html#vehicle-miles-traveled-vmt",
     "href": "about.html#vehicle-miles-traveled-vmt",
     "title": "About",

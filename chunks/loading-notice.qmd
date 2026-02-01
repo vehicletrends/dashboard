@@ -1,0 +1,5 @@
+::: {.callout-note appearance="simple"}
+
+This page contains interactive content that may take a moment to load, please be patient. If you refresh this page, it will have to load again.
+
+:::

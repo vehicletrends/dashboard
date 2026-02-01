@@ -15,6 +15,8 @@ filters:
   - shinylive
 ---
 
+{{< include chunks/loading-notice.qmd >}}
+
 This page shows light-duty vehicle registration counts by state, powertrain, and year. Data are sourced from the [Alternative Fuels Data Center (AFDC)](https://afdc.energy.gov/vehicle-registration). Use the dropdown filters to explore registration counts and market share across the US. This page is a replication of [this dashboard](https://afdc.energy.gov/transatlas#/) by TransAtlas.
 
 ::: {.panel-tabset}

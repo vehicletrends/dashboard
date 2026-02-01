@@ -40,15 +40,15 @@ The [Registrations](registrations.qmd) page shows light-duty vehicle registratio
 
 ## Market Concentration
 
-Tracks market share and competitive dynamics across manufacturers within each powertrain category. Measures how concentrated or competitive each segment is, showing whether markets are dominated by a few manufacturers or have healthy competition across many brands.
+The [Market Concentration](market-concentration.qmd) page uses the [Herfindahl–Hirschman Index (HHI)](https://en.wikipedia.org/wiki/Herfindahl%E2%80%93Hirschman_Index) to measure how concentrated or competitive each powertrain segment is over time. The HHI ranges from 0 to 1, where values below 0.15 indicate a competitive market, values between 0.15 and 0.25 indicate moderate concentration, and values above 0.25 indicate a highly concentrated market. Concentration is measured across three dimensions: by make, by vehicle type, and by price bin. See the [HHI Explained](hhi-explained.qmd) page for an interactive tool that illustrates how HHI relates to market share distributions.
 
-## Listings
+<!-- ## Listings
 
 Detailed analysis of vehicle listings data, including pricing trends, availability, and inventory levels across different segments. Shows current market inventory patterns and pricing across vehicle types and powertrains.
 
 ## Dealerships Inventories
 
-Explores dealership inventory patterns, stock levels, and geographic distribution of vehicle availability. Shows how dealer inventory is distributed across regions and vehicle types.
+Explores dealership inventory patterns, stock levels, and geographic distribution of vehicle availability. Shows how dealer inventory is distributed across regions and vehicle types. -->
 
 ## Listing Counts
 

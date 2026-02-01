@@ -28,6 +28,7 @@ website:
   sidebar:
     style: "docked"
     background: "light"
+    logo: images/logo.png
     collapse-level: 1
     search: false
     contents:

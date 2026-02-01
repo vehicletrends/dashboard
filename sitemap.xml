@@ -2,50 +2,54 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://vehicletrends.us/vmt-daily.html</loc>
-    <lastmod>2026-02-01T13:10:14.852Z</lastmod>
+    <lastmod>2026-02-01T13:34:48.416Z</lastmod>
   </url>
   <url>
     <loc>https://vehicletrends.us/registrations.html</loc>
-    <lastmod>2026-02-01T13:10:14.852Z</lastmod>
+    <lastmod>2026-02-01T13:34:48.416Z</lastmod>
   </url>
   <url>
     <loc>https://vehicletrends.us/market-concentration.html</loc>
-    <lastmod>2026-02-01T13:10:14.851Z</lastmod>
+    <lastmod>2026-02-01T13:34:48.416Z</lastmod>
   </url>
   <url>
     <loc>https://vehicletrends.us/index.html</loc>
-    <lastmod>2026-02-01T13:10:14.851Z</lastmod>
+    <lastmod>2026-02-01T13:34:48.415Z</lastmod>
   </url>
   <url>
     <loc>https://vehicletrends.us/depreciation.html</loc>
-    <lastmod>2026-02-01T13:10:14.849Z</lastmod>
+    <lastmod>2026-02-01T13:34:48.413Z</lastmod>
   </url>
   <url>
-    <loc>https://vehicletrends.us/about.html</loc>
-    <lastmod>2026-02-01T13:10:14.849Z</lastmod>
+    <loc>https://vehicletrends.us/chunks/loading-notice.html</loc>
+    <lastmod>2026-02-01T13:34:48.413Z</lastmod>
   </url>
   <url>
     <loc>https://vehicletrends.us/LICENSE.html</loc>
-    <lastmod>2026-02-01T13:10:14.837Z</lastmod>
+    <lastmod>2026-02-01T13:34:48.401Z</lastmod>
+  </url>
+  <url>
+    <loc>https://vehicletrends.us/about.html</loc>
+    <lastmod>2026-02-01T13:34:48.413Z</lastmod>
   </url>
   <url>
     <loc>https://vehicletrends.us/dealership-inventories.html</loc>
-    <lastmod>2026-02-01T13:10:14.849Z</lastmod>
+    <lastmod>2026-02-01T13:34:48.413Z</lastmod>
   </url>
   <url>
     <loc>https://vehicletrends.us/hhi-explained.html</loc>
-    <lastmod>2026-02-01T13:10:14.849Z</lastmod>
+    <lastmod>2026-02-01T13:34:48.413Z</lastmod>
   </url>
   <url>
     <loc>https://vehicletrends.us/listings.html</loc>
-    <lastmod>2026-02-01T13:10:14.851Z</lastmod>
+    <lastmod>2026-02-01T13:34:48.416Z</lastmod>
   </url>
   <url>
     <loc>https://vehicletrends.us/nearest-vehicles.html</loc>
-    <lastmod>2026-02-01T13:10:14.852Z</lastmod>
+    <lastmod>2026-02-01T13:34:48.416Z</lastmod>
   </url>
   <url>
     <loc>https://vehicletrends.us/vmt-age.html</loc>
-    <lastmod>2026-02-01T13:10:14.852Z</lastmod>
+    <lastmod>2026-02-01T13:34:48.416Z</lastmod>
   </url>
 </urlset>

@@ -125,7 +125,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta property="og:title" content="About – US Vehicle Trends">
 <meta property="og:description" content="Something">
 <meta property="og:image" content="https://vehicletrends.us/images/logo.png">
-<meta property="og:site_name" content="https://github.com/vehicletrends">
+<meta property="og:site_name" content="https://vehicletrends.us">
 <meta property="og:locale" content="es_ES">
 <meta property="og:image:height" content="1800">
 <meta property="og:image:width" content="1800">
@@ -168,21 +168,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./about.html" class="sidebar-item-text sidebar-link active"><i class="bi bi-question-square-fill" role="img">
+  <a href="./about.html" class="sidebar-item-text sidebar-link active"><i class="bi bi-info-circle-fill" role="img">
 </i> 
  <span class="menu-text">About</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./vmt-daily.html" class="sidebar-item-text sidebar-link"><i class="bi bi-clock-fill" role="img">
+  <a href="./vmt-daily.html" class="sidebar-item-text sidebar-link"><i class="bi bi-speedometer2" role="img">
 </i> 
  <span class="menu-text">Daily VMT</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./vmt-age.html" class="sidebar-item-text sidebar-link"><i class="bi bi-calendar-range" role="img">
+  <a href="./vmt-age.html" class="sidebar-item-text sidebar-link"><i class="bi bi-graph-up" role="img">
 </i> 
  <span class="menu-text">VMT by Age</span></a>
   </div>
@@ -196,23 +196,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./registrations.html" class="sidebar-item-text sidebar-link"><i class="bi bi-map" role="img">
+  <a href="./percent-market.html" class="sidebar-item-text sidebar-link"><i class="bi bi-pie-chart-fill" role="img">
 </i> 
- <span class="menu-text">Registrations</span></a>
+ <span class="menu-text">Percent of Market</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./market-concentration.html" class="sidebar-item-text sidebar-link"><i class="bi bi-person-lines-fill" role="img">
+  <a href="./market-concentration.html" class="sidebar-item-text sidebar-link"><i class="bi bi-diagram-3-fill" role="img">
 </i> 
  <span class="menu-text">Market Concentration</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./hhi-explained.html" class="sidebar-item-text sidebar-link"><i class="bi bi-geo-alt" role="img">
+  <a href="./hhi-explained.html" class="sidebar-item-text sidebar-link"><i class="bi bi-lightbulb-fill" role="img">
 </i> 
  <span class="menu-text">HHI Explained</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./registrations.html" class="sidebar-item-text sidebar-link"><i class="bi bi-map-fill" role="img">
+</i> 
+ <span class="menu-text">Registrations</span></a>
   </div>
 </li>
     </ul>
@@ -228,11 +235,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#r-data-package" id="toc-r-data-package" class="nav-link active" data-scroll-target="#r-data-package">R Data Package</a></li>
   <li><a href="#vehicle-miles-traveled-vmt" id="toc-vehicle-miles-traveled-vmt" class="nav-link" data-scroll-target="#vehicle-miles-traveled-vmt">Vehicle Miles Traveled (VMT)</a></li>
   <li><a href="#depreciation" id="toc-depreciation" class="nav-link" data-scroll-target="#depreciation">Depreciation</a></li>
-  <li><a href="#registrations" id="toc-registrations" class="nav-link" data-scroll-target="#registrations">Registrations</a></li>
+  <li><a href="#percent-of-market" id="toc-percent-of-market" class="nav-link" data-scroll-target="#percent-of-market">Percent of Market</a></li>
   <li><a href="#market-concentration" id="toc-market-concentration" class="nav-link" data-scroll-target="#market-concentration">Market Concentration</a></li>
+  <li><a href="#registrations" id="toc-registrations" class="nav-link" data-scroll-target="#registrations">Registrations</a></li>
   <li><a href="#listing-counts" id="toc-listing-counts" class="nav-link" data-scroll-target="#listing-counts">Listing Counts</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/vehicletrends/edit/main/about.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/vehicletrends/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/vehicletrends/dashboard/edit/main/about.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/vehicletrends/dashboard/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content column-body" id="quarto-document-content">
@@ -276,13 +284,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The <a href="./depreciation.html">Depreciation</a> page shows how vehicles retain value over time across different powertrains and vehicle types. Each chart displays the retention rate, which is the ratio of the current listing price to the original MSRP (Manufacturer’s Suggested Retail Price). A retention rate of 1.0 means the vehicle retains 100% of its original value, while 0.5 means it has lost half its value.</p>
 <p>We estimate the retention rate by dividing the listing price of used vehicles by the original MSRP for that make, model, and trim. Vehicle age is estimated as the listing date minus the production date, which we estimate as June 30 of the year previous to the model year (e.g., we estimate a 2020 model year vehicle was produced June 30, 2019). We summarize this quantity by taking the 25th, 50th, and 75th quantiles of the observations for each combination of powertrain and vehicle type at each age bin (in 3-month intervals). The charts display the 50th quantile (median) retention rate.</p>
 </section>
-<section id="registrations" class="level2">
-<h2 class="anchored" data-anchor-id="registrations">Registrations</h2>
-<p>The <a href="./registrations.html">Registrations</a> page shows light-duty vehicle registration counts by state, powertrain, and year. Data are sourced from the <a href="https://afdc.energy.gov/vehicle-registration">Alternative Fuels Data Center (AFDC)</a>, which compiles registration data from IHS Markit. The page includes a choropleth map of the U.S. showing registration counts or market share for a selected powertrain and year, as well as a bar chart showing the trend over time for a selected state. Users can toggle between absolute registration counts and market share (the fraction of total registrations in each state attributed to a given powertrain). Clicking on a state in the map updates the bar chart to show that state’s trend.</p>
+<section id="percent-of-market" class="level2">
+<h2 class="anchored" data-anchor-id="percent-of-market">Percent of Market</h2>
+<p>The <a href="./percent-market.html">Percent of Market</a> page shows how the composition of vehicle listings has changed over time across different market dimensions. Each chart displays the percentage of listings for a given group (e.g., powertrain, vehicle type, or price bin) broken down by a category dimension, with separate views for new and used inventory. For example, the “Powertrain by Vehicle Type” tab shows, for each powertrain, what percentage of listings fall into each vehicle type category over time. This helps reveal shifts in the market, such as the growing share of CUVs among BEV listings or changing price distributions across powertrains.</p>
 </section>
 <section id="market-concentration" class="level2">
 <h2 class="anchored" data-anchor-id="market-concentration">Market Concentration</h2>
 <p>The <a href="./market-concentration.html">Market Concentration</a> page uses the <a href="https://en.wikipedia.org/wiki/Herfindahl%E2%80%93Hirschman_Index">Herfindahl–Hirschman Index (HHI)</a> to measure how concentrated or competitive each powertrain segment is over time. The HHI ranges from 0 to 1, where values below 0.15 indicate a competitive market, values between 0.15 and 0.25 indicate moderate concentration, and values above 0.25 indicate a highly concentrated market. Concentration is measured across three dimensions: by make, by vehicle type, and by price bin. See the <a href="./hhi-explained.html">HHI Explained</a> page for an interactive tool that illustrates how HHI relates to market share distributions.</p>
+</section>
+<section id="registrations" class="level2">
+<h2 class="anchored" data-anchor-id="registrations">Registrations</h2>
+<p>The <a href="./registrations.html">Registrations</a> page shows light-duty vehicle registration counts by state, powertrain, and year. Data are sourced from the <a href="https://afdc.energy.gov/vehicle-registration">Alternative Fuels Data Center (AFDC)</a>, which compiles registration data from IHS Markit. The page includes a choropleth map of the U.S. showing registration counts or market share for a selected powertrain and year, as well as a bar chart showing the trend over time for a selected state. Users can toggle between absolute registration counts and market share (the fraction of total registrations in each state attributed to a given powertrain). Clicking on a state in the map updates the bar chart to show that state’s trend.</p>
 <!-- ## Listings
 
 Detailed analysis of vehicle listings data, including pricing trends, availability, and inventory levels across different segments. Shows current market inventory patterns and pricing across vehicle types and powertrains.
@@ -296,8 +308,8 @@ Explores dealership inventory patterns, stock levels, and geographic distributio
 <p>The table below summarises how many observations of vehicle listings were included in the summary data presented on this website.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="reactable html-widget html-fill-item" id="htmlwidget-3466da7ffaa1a418e02e" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-3466da7ffaa1a418e02e">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Market":["New","New","New","New","New","New","New","New","New","New","New","New","New","New","New","New","New","New","New","New","New","New","New","New","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used"],"Powertrain":["BEV","BEV","BEV","BEV","BEV","Conventional","Conventional","Conventional","Conventional","Conventional","Flex Fuel","Flex Fuel","Flex Fuel","Flex Fuel","Flex Fuel","Fuel Cell EV","Fuel Cell EV","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","PHEV","PHEV","BEV","BEV","BEV","BEV","BEV","Conventional","Conventional","Conventional","Conventional","Conventional","Diesel","Diesel","Diesel","Diesel","Diesel","Flex Fuel","Flex Fuel","Flex Fuel","Flex Fuel","Flex Fuel","Fuel Cell EV","Fuel Cell EV","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","PHEV","PHEV","PHEV","PHEV"],"Vehicle Type":["CUV","Car","Minivan","Pickup","SUV","CUV","Car","Minivan","Pickup","SUV","CUV","Car","Minivan","Pickup","SUV","CUV","Car","CUV","Car","Minivan","Pickup","SUV","CUV","Car","CUV","Car","Minivan","Pickup","SUV","CUV","Car","Minivan","Pickup","SUV","CUV","Car","Minivan","Pickup","SUV","CUV","Car","Minivan","Pickup","SUV","CUV","Car","CUV","Car","Minivan","Pickup","SUV","CUV","Car","Minivan","SUV"],"count":["878,374","295,929","965","65,299","12,200","25,610,437","13,580,820","882,878","10,708,928","6,777,427","275,731","70,081","61,740","1,062,172","135,152","319","1,696","986,801","843,052","320,859","44,348","98,590","59,299","115,932","249,233","482,198","1,867","10,692","2,777","23,497,780","24,537,412","1,582,106","9,254,198","7,924,548","81,734","241,613","471","2,038,671","73,644","1,358,229","1,382,802","751,325","2,951,345","1,707,008","352","4,371","353,676","1,098,501","153,878","88,490","35,441","65,353","176,987","90","25,319"]},"columns":[{"id":"Market","name":"Market","type":"character"},{"id":"Powertrain","name":"Powertrain","type":"character"},{"id":"Vehicle Type","name":"Vehicle Type","type":"character"},{"id":"count","name":"count","type":"character"}],"filterable":true,"searchable":true,"defaultPageSize":55,"showPageSizeOptions":true,"highlight":true,"dataKey":"eac7132b8c64e5e150ad213ff0c9dbab"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item" id="htmlwidget-a304187c26815edc5334" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-a304187c26815edc5334">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Market":["New","New","New","New","New","New","New","New","New","New","New","New","New","New","New","New","New","New","New","New","New","New","New","New","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used","Used"],"Powertrain":["BEV","BEV","BEV","BEV","BEV","Conventional","Conventional","Conventional","Conventional","Conventional","Flex Fuel","Flex Fuel","Flex Fuel","Flex Fuel","Flex Fuel","Fuel Cell EV","Fuel Cell EV","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","PHEV","PHEV","BEV","BEV","BEV","BEV","BEV","Conventional","Conventional","Conventional","Conventional","Conventional","Diesel","Diesel","Diesel","Diesel","Diesel","Flex Fuel","Flex Fuel","Flex Fuel","Flex Fuel","Flex Fuel","Fuel Cell EV","Fuel Cell EV","Hybrid","Hybrid","Hybrid","Hybrid","Hybrid","PHEV","PHEV","PHEV","PHEV"],"Vehicle Type":["CUV","Car","Minivan","Pickup","SUV","CUV","Car","Minivan","Pickup","SUV","CUV","Car","Minivan","Pickup","SUV","CUV","Car","CUV","Car","Minivan","Pickup","SUV","CUV","Car","CUV","Car","Minivan","Pickup","SUV","CUV","Car","Minivan","Pickup","SUV","CUV","Car","Minivan","Pickup","SUV","CUV","Car","Minivan","Pickup","SUV","CUV","Car","CUV","Car","Minivan","Pickup","SUV","CUV","Car","Minivan","SUV"],"count":["878,374","295,929","965","65,299","12,200","25,610,437","13,580,820","882,878","10,708,928","6,777,427","275,731","70,081","61,740","1,062,172","135,152","319","1,696","986,801","843,052","320,859","44,348","98,590","59,299","115,932","249,233","482,198","1,867","10,692","2,777","23,497,780","24,537,412","1,582,106","9,254,198","7,924,548","81,734","241,613","471","2,038,671","73,644","1,358,229","1,382,802","751,325","2,951,345","1,707,008","352","4,371","353,676","1,098,501","153,878","88,490","35,441","65,353","176,987","90","25,319"]},"columns":[{"id":"Market","name":"Market","type":"character"},{"id":"Powertrain","name":"Powertrain","type":"character"},{"id":"Vehicle Type","name":"Vehicle Type","type":"character"},{"id":"count","name":"count","type":"character"}],"filterable":true,"searchable":true,"defaultPageSize":55,"showPageSizeOptions":true,"highlight":true,"dataKey":"eac7132b8c64e5e150ad213ff0c9dbab"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 
@@ -722,7 +734,7 @@ Explores dealership inventory patterns, stock levels, and geographic distributio
  © 2025 John Paul Helveston  <a href="LICENSE.html"><i class="fab fa-creative-commons"></i><i class="fab fa-creative-commons-by"></i><i class="fab fa-creative-commons-sa"></i></a> | <a href="https://github.com/vehicletrends/"><i class="fab fa-github"></i></a>
   </li>  
 </ul>
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/vehicletrends/edit/main/about.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/vehicletrends/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/vehicletrends/dashboard/edit/main/about.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/vehicletrends/dashboard/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

@@ -20,14 +20,11 @@
     ]
   },
   {
-    "objectID": "market-concentration.html",
-    "href": "market-concentration.html",
-    "title": "Market Concentration",
+    "objectID": "nearest-vehicles.html",
+    "href": "nearest-vehicles.html",
+    "title": "Distance to nearest vehicle",
     "section": "",
-    "text": "This page contains interactive content that may take a moment to load, please be patient. If you refresh this page, it will have to load again.\n\n\n\nThe Market Concentration page uses the Herfindahl–Hirschman Index (HHI) to measure how concentrated or competitive each powertrain segment is over time. The HHI ranges from 0 to 1, where values below 0.15 indicate a competitive market, values between 0.15 and 0.25 indicate moderate concentration, and values above 0.25 indicate a highly concentrated market. Concentration is measured across three dimensions: by make, by vehicle type, and by price bin. See the HHI Explained page for an interactive tool that illustrates how HHI relates to market share distributions.\n\nChartsData\n\n\n\n\n\n\n\n\n\n\nDownload data: By Make | By Type | By Price",
-    "crumbs": [
-      "Market Concentration"
-    ]
+    "text": "ChartsData\n\n\n\n\n\n\n\n\n\nThis is an interactive analysis tool that computes vehicle similarity based on selected parameters. The data is generated dynamically based on your search criteria in the Charts tab above.\nHow it works: - Select target vehicle characteristics (make, type, price range) - The app identifies similar vehicles based on multiple attributes - View results as scatter plots or data tables - Adjust the number of similar vehicles to display"
   },
   {
     "objectID": "index.html",
@@ -101,11 +98,11 @@
     ]
   },
   {
-    "objectID": "about.html#registrations",
-    "href": "about.html#registrations",
+    "objectID": "about.html#percent-of-market",
+    "href": "about.html#percent-of-market",
     "title": "About",
-    "section": "Registrations",
-    "text": "Registrations\nThe Registrations page shows light-duty vehicle registration counts by state, powertrain, and year. Data are sourced from the Alternative Fuels Data Center (AFDC), which compiles registration data from IHS Markit. The page includes a choropleth map of the U.S. showing registration counts or market share for a selected powertrain and year, as well as a bar chart showing the trend over time for a selected state. Users can toggle between absolute registration counts and market share (the fraction of total registrations in each state attributed to a given powertrain). Clicking on a state in the map updates the bar chart to show that state’s trend.",
+    "section": "Percent of Market",
+    "text": "Percent of Market\nThe Percent of Market page shows how the composition of vehicle listings has changed over time across different market dimensions. Each chart displays the percentage of listings for a given group (e.g., powertrain, vehicle type, or price bin) broken down by a category dimension, with separate views for new and used inventory. For example, the “Powertrain by Vehicle Type” tab shows, for each powertrain, what percentage of listings fall into each vehicle type category over time. This helps reveal shifts in the market, such as the growing share of CUVs among BEV listings or changing price distributions across powertrains.",
     "crumbs": [
       "About"
     ]
@@ -116,6 +113,16 @@
     "title": "About",
     "section": "Market Concentration",
     "text": "Market Concentration\nThe Market Concentration page uses the Herfindahl–Hirschman Index (HHI) to measure how concentrated or competitive each powertrain segment is over time. The HHI ranges from 0 to 1, where values below 0.15 indicate a competitive market, values between 0.15 and 0.25 indicate moderate concentration, and values above 0.25 indicate a highly concentrated market. Concentration is measured across three dimensions: by make, by vehicle type, and by price bin. See the HHI Explained page for an interactive tool that illustrates how HHI relates to market share distributions.",
+    "crumbs": [
+      "About"
+    ]
+  },
+  {
+    "objectID": "about.html#registrations",
+    "href": "about.html#registrations",
+    "title": "About",
+    "section": "Registrations",
+    "text": "Registrations\nThe Registrations page shows light-duty vehicle registration counts by state, powertrain, and year. Data are sourced from the Alternative Fuels Data Center (AFDC), which compiles registration data from IHS Markit. The page includes a choropleth map of the U.S. showing registration counts or market share for a selected powertrain and year, as well as a bar chart showing the trend over time for a selected state. Users can toggle between absolute registration counts and market share (the fraction of total registrations in each state attributed to a given powertrain). Clicking on a state in the map updates the bar chart to show that state’s trend.",
     "crumbs": [
       "About"
     ]
@@ -148,18 +155,24 @@
     ]
   },
   {
-    "objectID": "listings.html",
-    "href": "listings.html",
-    "title": "Listings",
+    "objectID": "market-concentration.html",
+    "href": "market-concentration.html",
+    "title": "Market Concentration",
     "section": "",
-    "text": "ChartsData\n\n\n\n\n\n\n\n\n\n\nDownload data"
+    "text": "This page contains interactive content that may take a moment to load, please be patient. If you refresh this page, it will have to load again.\n\n\n\nThe Market Concentration page uses the Herfindahl–Hirschman Index (HHI) to measure how concentrated or competitive each powertrain segment is over time. The HHI ranges from 0 to 1, where values below 0.15 indicate a competitive market, values between 0.15 and 0.25 indicate moderate concentration, and values above 0.25 indicate a highly concentrated market. Concentration is measured across three dimensions: by make, by vehicle type, and by price bin. See the HHI Explained page for an interactive tool that illustrates how HHI relates to market share distributions.\n\nChartsData\n\n\n\n\n\n\n\n\n\n\nDownload data: By Make | By Type | By Price",
+    "crumbs": [
+      "Market Concentration"
+    ]
   },
   {
-    "objectID": "nearest-vehicles.html",
-    "href": "nearest-vehicles.html",
-    "title": "Distance to nearest vehicle",
+    "objectID": "percent-market.html",
+    "href": "percent-market.html",
+    "title": "Percent of Market",
     "section": "",
-    "text": "ChartsData\n\n\n\n\n\n\n\n\n\nThis is an interactive analysis tool that computes vehicle similarity based on selected parameters. The data is generated dynamically based on your search criteria in the Charts tab above.\nHow it works: - Select target vehicle characteristics (make, type, price range) - The app identifies similar vehicles based on multiple attributes - View results as scatter plots or data tables - Adjust the number of similar vehicles to display"
+    "text": "This page shows how the composition of vehicle listings has changed over time across different market dimensions. Each chart displays the percentage of listings for a given group broken down by category, with separate views for new and used inventory. The x-axis is the listing year and the y-axis is the percent of listings.\n\nPowertrain by Vehicle TypePowertrain by Price BinVehicle Type by PowertrainVehicle Type by Price BinPrice Bin by PowertrainPrice Bin by Vehicle TypeData\n\n\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)\n\n\n\n\n\n\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nDiesel\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)\n\n\n\n\n\n\n\n\n\n\n\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)\n\n\n\n\n\n\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nDiesel\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)\n\n\n\n\n\n\n\n\n\n\n\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\nCar\n\n\n\n\nCUV\n\n\n\n\nMinivan\n\n\n\n\nPickup\n\n\n\n\nSUV\n\n\n\n\n\n\n\n\n\n\n\n\nCar\n\n\n\n\nCUV\n\n\n\n\nMinivan\n\n\n\n\nPickup\n\n\n\n\nSUV\n\n\n\n\n\n\n\n\n\n\n\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\nCar\n\n\n\n\nCUV\n\n\n\n\nMinivan\n\n\n\n\nPickup\n\n\n\n\nSUV\n\n\n\n\n\n\n\n\n\n\n\n\nCar\n\n\n\n\nCUV\n\n\n\n\nMinivan\n\n\n\n\nPickup\n\n\n\n\nSUV\n\n\n\n\n\n\n\n\n\n\n\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\n$0-$10k\n\n\n\n\n$10k-$20k\n\n\n\n\n$20k-$30k\n\n\n\n\n$30k-$40k\n\n\n\n\n$40k-$50k\n\n\n\n\n$50k-$60k\n\n\n\n\n$60k-$70k\n\n\n\n\n$70k+\n\n\n\n\n\n\n\n\n\n\n\n\n$0-$10k\n\n\n\n\n$10k-$20k\n\n\n\n\n$20k-$30k\n\n\n\n\n$30k-$40k\n\n\n\n\n$40k-$50k\n\n\n\n\n$50k-$60k\n\n\n\n\n$60k-$70k\n\n\n\n\n$70k+\n\n\n\n\n\n\n\n\n\n\n\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\n$0-$10k\n\n\n\n\n$10k-$20k\n\n\n\n\n$20k-$30k\n\n\n\n\n$30k-$40k\n\n\n\n\n$40k-$50k\n\n\n\n\n$50k-$60k\n\n\n\n\n$60k-$70k\n\n\n\n\n$70k+\n\n\n\n\n\n\n\n\n\n\n\n\n$0-$10k\n\n\n\n\n$10k-$20k\n\n\n\n\n$20k-$30k\n\n\n\n\n$30k-$40k\n\n\n\n\n$40k-$50k\n\n\n\n\n$50k-$60k\n\n\n\n\n$60k-$70k\n\n\n\n\n$70k+\n\n\n\n\n\n\n\n\n\n\n\n\nDownload data",
+    "crumbs": [
+      "Percent of Market"
+    ]
   },
   {
     "objectID": "vmt-age.html",

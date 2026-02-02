@@ -107,6 +107,8 @@ a:hover {
 .sidebar {
   background-color: var(--gray-100) !important;
   border-right: 1px solid var(--gray-200);
+  width: 280px !important;
+  min-width: 280px !important;
 }
 
 .sidebar-title,

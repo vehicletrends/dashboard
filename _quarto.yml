@@ -12,14 +12,14 @@ website:
   image: images/logo.png
   site-url: https://vehicletrends.us
   favicon: images/favicon.ico
-  repo-url: https://github.com/vehicletrends
+  repo-url: https://github.com/vehicletrends/dashboard
   search: true
   back-to-top-navigation: false
   repo-actions: [edit, issue]
   description: 'Something'
   open-graph:
     locale: es_ES
-    site-name: https://github.com/vehicletrends
+    site-name: https://vehicletrends.us
   twitter-card:
     creator: "@johnhelveston"
     site: "@johnhelveston"

@@ -191,7 +191,7 @@ make_chart(chart_data, "powertrain", "Fuel Cell", "vehicle_type")
 
 :::
 
-## Data
+## Depreciation by Age (Data)
 
 <center>
 [Download data](`r url_depreciation`)
@@ -213,6 +213,68 @@ data |>
     Quantile = quantile,
     `Retention Rate` = rr,
     `Retention Rate (Smoothed)` = rr_smooth
+  ) |>
+  reactable::reactable(
+    searchable = TRUE,
+    highlight = TRUE,
+    filterable = TRUE,
+    defaultPageSize = 10,
+    showPageSizeOptions = TRUE,
+    pageSizeOptions = c(5, 10, 25, 50)
+  )
+```
+
+</div>
+</center>
+
+## Annual Depreciation by Type (Data)
+
+This table shows the estimated annual depreciation rate by vehicle type and powertrain. Annual depreciation is computed by fitting log-linear regressions of retention rate on vehicle age; the rate is `1 - exp(b)` where `b` is the age coefficient.
+
+<center>
+[Download data](`r url_dep_annual_type`)
+
+<div style="width:700px">
+
+```{r}
+dep_annual_type |>
+  mutate(dep_annual = round(dep_annual, 4)) |>
+  rename(
+    `Vehicle Type` = vehicle_type,
+    Powertrain = powertrain,
+    `Annual Depreciation Rate` = dep_annual
+  ) |>
+  reactable::reactable(
+    searchable = TRUE,
+    highlight = TRUE,
+    filterable = TRUE,
+    defaultPageSize = 10,
+    showPageSizeOptions = TRUE,
+    pageSizeOptions = c(5, 10, 25, 50)
+  )
+```
+
+</div>
+</center>
+
+## Annual Depreciation by Model (Data)
+
+This table shows the estimated annual depreciation rate by make, model, vehicle type, and powertrain. Annual depreciation is computed by fitting log-linear regressions of retention rate on vehicle age; the rate is `1 - exp(b)` where `b` is the age coefficient. Only make/model combinations with at least 100 listings are included.
+
+<center>
+[Download data](`r url_dep_annual_model`)
+
+<div style="width:900px">
+
+```{r}
+dep_annual_model |>
+  mutate(dep_annual = round(dep_annual, 4)) |>
+  rename(
+    Make = make,
+    Model = model,
+    `Vehicle Type` = vehicle_type,
+    Powertrain = powertrain,
+    `Annual Depreciation Rate` = dep_annual
   ) |>
   reactable::reactable(
     searchable = TRUE,

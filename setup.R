@@ -9,6 +9,8 @@ url_vmt_age <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/re
 url_vmt_annual_type <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/vmt_annual_type.csv"
 url_vmt_annual_model <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/vmt_annual_model.csv"
 url_depreciation <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/depreciation.csv"
+url_dep_annual_type <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/dep_annual_type.csv"
+url_dep_annual_model <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/dep_annual_model.csv"
 url_listings_summary <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/listings_summary.csv"
 url_percent_market <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/percent_market.csv"
 

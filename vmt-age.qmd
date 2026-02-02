@@ -188,7 +188,12 @@ make_chart(chart_data, "powertrain", "Hybrid Electric (HEV)", "vehicle_type")
 #### Plug-In Hybrid Electric (PHEV)
 
 ```{r}
-make_chart(chart_data, "powertrain", "Plug-In Hybrid Electric (PHEV)", "vehicle_type")
+make_chart(
+  chart_data,
+  "powertrain",
+  "Plug-In Hybrid Electric (PHEV)",
+  "vehicle_type"
+)
 ```
 
 :::

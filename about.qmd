@@ -45,13 +45,17 @@ The [Depreciation](depreciation.qmd) page shows how vehicles retain value over t
 
 We estimate the retention rate by dividing the listing price of used vehicles by the original MSRP for that make, model, and trim. Vehicle age is estimated as the listing date minus the production date, which we estimate as June 30 of the year previous to the model year (e.g., we estimate a 2020 model year vehicle was produced June 30, 2019). We summarize this quantity by taking the 25th, 50th, and 75th quantiles of the observations for each combination of powertrain and vehicle type at each age bin (in 3-month intervals). The charts display the 50th quantile (median) retention rate.
 
-## Registrations
+## Percent of Market
 
-The [Registrations](registrations.qmd) page shows light-duty vehicle registration counts by state, powertrain, and year. Data are sourced from the [Alternative Fuels Data Center (AFDC)](https://afdc.energy.gov/vehicle-registration), which compiles registration data from IHS Markit. The page includes a choropleth map of the U.S. showing registration counts or market share for a selected powertrain and year, as well as a bar chart showing the trend over time for a selected state. Users can toggle between absolute registration counts and market share (the fraction of total registrations in each state attributed to a given powertrain). Clicking on a state in the map updates the bar chart to show that state's trend.
+The [Percent of Market](percent-market.qmd) page shows how the composition of vehicle listings has changed over time across different market dimensions. Each chart displays the percentage of listings for a given group (e.g., powertrain, vehicle type, or price bin) broken down by a category dimension, with separate views for new and used inventory. For example, the "Powertrain by Vehicle Type" tab shows, for each powertrain, what percentage of listings fall into each vehicle type category over time. This helps reveal shifts in the market, such as the growing share of CUVs among BEV listings or changing price distributions across powertrains.
 
 ## Market Concentration
 
 The [Market Concentration](market-concentration.qmd) page uses the [Herfindahl–Hirschman Index (HHI)](https://en.wikipedia.org/wiki/Herfindahl%E2%80%93Hirschman_Index) to measure how concentrated or competitive each powertrain segment is over time. The HHI ranges from 0 to 1, where values below 0.15 indicate a competitive market, values between 0.15 and 0.25 indicate moderate concentration, and values above 0.25 indicate a highly concentrated market. Concentration is measured across three dimensions: by make, by vehicle type, and by price bin. See the [HHI Explained](hhi-explained.qmd) page for an interactive tool that illustrates how HHI relates to market share distributions.
+
+## Registrations
+
+The [Registrations](registrations.qmd) page shows light-duty vehicle registration counts by state, powertrain, and year. Data are sourced from the [Alternative Fuels Data Center (AFDC)](https://afdc.energy.gov/vehicle-registration), which compiles registration data from IHS Markit. The page includes a choropleth map of the U.S. showing registration counts or market share for a selected powertrain and year, as well as a bar chart showing the trend over time for a selected state. Users can toggle between absolute registration counts and market share (the fraction of total registrations in each state attributed to a given powertrain). Clicking on a state in the map updates the bar chart to show that state's trend.
 
 <!-- ## Listings
 

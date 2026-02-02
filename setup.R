@@ -10,6 +10,7 @@ url_vmt_annual_type <- "https://raw.githubusercontent.com/vehicletrends/vehiclet
 url_vmt_annual_model <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/vmt_annual_model.csv"
 url_depreciation <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/depreciation.csv"
 url_listings_summary <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/listings_summary.csv"
+url_percent_market <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/percent_market.csv"
 
 # Download URLs for HHI data (loaded from URLs, not yet in package)
 url_hhi_make <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/hhi_make.csv"

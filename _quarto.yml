@@ -33,26 +33,29 @@ website:
     search: false
     contents:
     - text: About
-      icon: question-square-fill
+      icon: info-circle-fill
       href: about.qmd
     - text: "Daily VMT"
-      icon: clock-fill
+      icon: speedometer2
       href: vmt-daily.qmd
     - text: "VMT by Age"
-      icon: calendar-range
+      icon: graph-up
       href: vmt-age.qmd
     - text: "Depreciation"
       icon: graph-down
       href: depreciation.qmd
-    - text: "Registrations"
-      icon: map
-      href: registrations.qmd
+    - text: "Percent of Market"
+      icon: pie-chart-fill
+      href: percent-market.qmd
     - text: "Market Concentration"
-      icon: person-lines-fill
+      icon: diagram-3-fill
       href: market-concentration.qmd
     - text: "HHI Explained"
-      icon: geo-alt
+      icon: lightbulb-fill
       href: hhi-explained.qmd
+    - text: "Registrations"
+      icon: map-fill
+      href: registrations.qmd
     # - text: "Listings"
     #   icon: list-ul
     #   href: listings.qmd

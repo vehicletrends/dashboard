@@ -108,9 +108,158 @@ render_combo <- function(data, grp_var, cat_var, inv_type) {
 
   htmltools::div(class = "grid", charts)
 }
+
+# Helper to compute overall shares and create horizontal dumbbell chart
+make_summary_dumbbell <- function(data, var_name, inv_type) {
+  cat_var <- setdiff(c("powertrain", "vehicle_type", "price_bin"), var_name)[1]
+
+  db <- data |>
+    filter(
+      group_var == var_name,
+      category_var == cat_var,
+      inventory_type == inv_type,
+      listing_year %in% c(2018, 2024)
+    ) |>
+    group_by(listing_year, group_level) |>
+    summarise(total_n = sum(n), .groups = "drop") |>
+    group_by(listing_year) |>
+    mutate(pct = round(total_n / sum(total_n) * 100, 2)) |>
+    ungroup() |>
+    select(listing_year, group_level, pct) |>
+    tidyr::pivot_wider(
+      names_from = listing_year,
+      values_from = pct,
+      names_prefix = "y"
+    ) |>
+    mutate(
+      y2018 = ifelse(is.na(y2018), 0, y2018),
+      y2024 = ifelse(is.na(y2024), 0, y2024),
+      bar_base = pmin(y2018, y2024),
+      bar_height = abs(y2024 - y2018)
+    )
+
+  db |>
+    e_charts(group_level, height = "350px") |>
+    e_bar(
+      bar_base,
+      stack = "conn",
+      name = "\u200b",
+      barWidth = 3,
+      itemStyle = list(color = "transparent"),
+      emphasis = list(disabled = TRUE)
+    ) |>
+    e_bar(
+      bar_height,
+      stack = "conn",
+      name = "\u200b\u200b",
+      barWidth = 3,
+      itemStyle = list(color = "#999"),
+      emphasis = list(disabled = TRUE)
+    ) |>
+    e_scatter(
+      y2018,
+      name = "2018",
+      symbol_size = 14,
+      itemStyle = list(
+        color = "white",
+        borderColor = "#5470c6",
+        borderWidth = 2.5
+      )
+    ) |>
+    e_scatter(
+      y2024,
+      name = "2024",
+      symbol_size = 14,
+      itemStyle = list(color = "#ee6666")
+    ) |>
+    e_flip_coords() |>
+    e_y_axis(axisLabel = list(fontSize = 11)) |>
+    e_x_axis(
+      name = "% of Listings",
+      axisLabel = list(formatter = "{value}%")
+    ) |>
+    e_tooltip(
+      trigger = "axis",
+      formatter = htmlwidgets::JS(
+        "
+        function(params) {
+          var result = params[0].name + '<br/>';
+          params.forEach(function(item) {
+            if (item.seriesName === '2018' || item.seriesName === '2024') {
+              var val = parseFloat(item.value[0]);
+              if (!isNaN(val)) {
+                result += item.marker + ' ' + item.seriesName +
+                  ': ' + val.toFixed(2) + '%<br/>';
+              }
+            }
+          });
+          return result;
+        }
+      "
+      )
+    ) |>
+    e_legend(
+      show = TRUE,
+      bottom = 0,
+      left = "center",
+      data = list("2018", "2024")
+    ) |>
+    e_grid(bottom = 60, left = 200, right = 40, top = 10) |>
+    e_color(background = "transparent") |>
+    e_toolbox_feature(feature = "dataZoom") |>
+    e_toolbox_feature(feature = "saveAsImage")
+}
 ```
 
 ::: {.panel-tabset}
+
+## Summary
+
+*Hollow circles show 2018 values. Filled dots show 2024 values. Lines connect the two, showing the direction and magnitude of change.*
+
+::: {.panel-tabset}
+
+### New
+
+#### By Powertrain
+
+```{r}
+make_summary_dumbbell(data, "powertrain", "New")
+```
+
+#### By Vehicle Type
+
+```{r}
+make_summary_dumbbell(data, "vehicle_type", "New")
+```
+
+#### By Price Bin
+
+```{r}
+make_summary_dumbbell(data, "price_bin", "New")
+```
+
+### Used
+
+#### By Powertrain
+
+```{r}
+make_summary_dumbbell(data, "powertrain", "Used")
+```
+
+#### By Vehicle Type
+
+```{r}
+make_summary_dumbbell(data, "vehicle_type", "Used")
+```
+
+#### By Price Bin
+
+```{r}
+make_summary_dumbbell(data, "price_bin", "Used")
+```
+
+:::
 
 ## Powertrain by Vehicle Type
 

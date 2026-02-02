@@ -49,6 +49,10 @@ We estimate the retention rate by dividing the listing price of used vehicles by
 
 The [Percent of Market](percent-market.qmd) page shows how the composition of vehicle listings has changed over time across different market dimensions. Each chart displays the percentage of listings for a given group (e.g., powertrain, vehicle type, or price bin) broken down by a category dimension, with separate views for new and used inventory. For example, the "Powertrain by Vehicle Type" tab shows, for each powertrain, what percentage of listings fall into each vehicle type category over time. This helps reveal shifts in the market, such as the growing share of CUVs among BEV listings or changing price distributions across powertrains.
 
+## Percent of Dealers
+
+The [Percent of Dealers](percent-dealers.qmd) page shows the percentage of dealerships that have at least one vehicle of a given type in their inventory over time. While the Percent of Market page measures the share of total listings, this page measures how widely a vehicle type is distributed across dealerships. For example, a powertrain may represent a small share of total listings but still be stocked by a large share of dealers (or vice versa). Each chart displays the share of dealers carrying a specific combination of powertrain and category (vehicle type or price bin), with separate views for new and used inventory.
+
 ## Market Concentration
 
 The [Market Concentration](market-concentration.qmd) page uses the [Herfindahl–Hirschman Index (HHI)](https://en.wikipedia.org/wiki/Herfindahl%E2%80%93Hirschman_Index) to measure how concentrated or competitive each powertrain segment is over time. The HHI ranges from 0 to 1, where values below 0.15 indicate a competitive market, values between 0.15 and 0.25 indicate moderate concentration, and values above 0.25 indicate a highly concentrated market. Concentration is measured across three dimensions: by make, by vehicle type, and by price bin. See the [HHI Explained](hhi-explained.qmd) page for an interactive tool that illustrates how HHI relates to market share distributions.

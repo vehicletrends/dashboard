@@ -47,6 +47,9 @@ website:
     - text: "Percent of Market"
       icon: pie-chart-fill
       href: percent-market.qmd
+    - text: "Percent of Dealers"
+      icon: shop
+      href: percent-dealers.qmd
     - text: "Market Concentration"
       icon: diagram-3-fill
       href: market-concentration.qmd

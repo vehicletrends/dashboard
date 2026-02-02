@@ -1,0 +1,203 @@
+---
+title: "Percent of Dealers"
+---
+
+This page shows the percentage of dealerships that have at least one vehicle of a given type in their inventory over time. Each chart displays the share of dealers carrying a specific combination of powertrain and category (vehicle type or price bin), with separate views for new and used inventory. The x-axis is the listing year and the y-axis is the percent of dealers.
+
+```{r}
+#| include: false
+
+source("setup.R")
+
+# Load data - use URL since package may not have it yet
+percent_dealers <- read.csv(url_percent_dealers)
+
+data <- percent_dealers |>
+  mutate(percent = round(p * 100, 2))
+
+# Helper function to create a chart for a given group_level
+make_chart <- function(data, grp_var, grp_level, cat_var, inv_type) {
+  plot_data <- data |>
+    filter(
+      group_var == grp_var,
+      group_level == grp_level,
+      category_var == cat_var,
+      inventory_type == inv_type
+    )
+
+  if (nrow(plot_data) == 0) {
+    return(NULL)
+  }
+
+  plot_data |>
+    mutate(listing_year = as.character(listing_year)) |>
+    arrange(listing_year) |>
+    group_by(category_level) |>
+    e_charts(listing_year) |>
+    e_line(percent, symbol = "circle", symbolSize = 6) |>
+    e_tooltip(
+      trigger = "axis",
+      formatter = htmlwidgets::JS(
+        "
+        function(params) {
+          var result = params[0].axisValueLabel + '<br/>';
+          params.forEach(function(item) {
+            result += item.marker + ' ' + item.seriesName + ': ' +
+                      item.value[1].toFixed(2) + '%<br/>';
+          });
+          return result;
+        }
+      "
+      )
+    ) |>
+    e_x_axis(
+      name = "Listing Year",
+      type = "category"
+    ) |>
+    e_y_axis(name = "% of Dealers") |>
+    e_legend(
+      show = TRUE,
+      orient = "horizontal",
+      left = "center",
+      bottom = 0,
+      width = "70%",
+      selector = list(
+        list(type = "all", title = "All"),
+        list(type = "inverse", title = "Inverse")
+      ),
+      selectorPosition = "start"
+    ) |>
+    e_grid(bottom = 100) |>
+    e_color(background = "transparent") |>
+    e_toolbox_feature(feature = "dataZoom") |>
+    e_toolbox_feature(feature = "saveAsImage")
+}
+
+# Helper to render a grid of charts for a group×category combo
+render_combo <- function(data, grp_var, cat_var, inv_type) {
+  levels <- data |>
+    filter(
+      group_var == grp_var,
+      category_var == cat_var,
+      inventory_type == inv_type
+    ) |>
+    distinct(group_level) |>
+    pull(group_level) |>
+    sort()
+
+  charts <- lapply(levels, function(lvl) {
+    chart <- make_chart(data, grp_var, lvl, cat_var, inv_type)
+    if (is.null(chart)) {
+      return(NULL)
+    }
+    htmltools::div(
+      class = "g-col-6",
+      htmltools::h4(lvl),
+      chart
+    )
+  })
+
+  # Remove NULLs
+  charts <- Filter(Negate(is.null), charts)
+
+  htmltools::div(class = "grid", charts)
+}
+```
+
+::: {.panel-tabset}
+
+## Powertrain by Vehicle Type
+
+*Click legend items to show/hide lines.*
+
+::: {.panel-tabset}
+
+### New
+
+```{r}
+render_combo(data, "powertrain", "vehicle_type", "New")
+```
+
+### Used
+
+```{r}
+render_combo(data, "powertrain", "vehicle_type", "Used")
+```
+
+:::
+
+## Powertrain by Price Bin
+
+*Click legend items to show/hide lines.*
+
+::: {.panel-tabset}
+
+### New
+
+```{r}
+render_combo(data, "powertrain", "price_bin", "New")
+```
+
+### Used
+
+```{r}
+render_combo(data, "powertrain", "price_bin", "Used")
+```
+
+:::
+
+## Vehicle Type by Price Bin
+
+*Click legend items to show/hide lines.*
+
+::: {.panel-tabset}
+
+### New
+
+```{r}
+render_combo(data, "vehicle_type", "price_bin", "New")
+```
+
+### Used
+
+```{r}
+render_combo(data, "vehicle_type", "price_bin", "Used")
+```
+
+:::
+
+## Data
+
+<center>
+[Download data](`r url_percent_dealers`)
+
+<div style="width:900px">
+
+```{r}
+percent_dealers |>
+  mutate(
+    p = round(p, 4)
+  ) |>
+  rename(
+    `Inventory Type` = inventory_type,
+    `Group Variable` = group_var,
+    `Group Level` = group_level,
+    `Category Variable` = category_var,
+    `Category Level` = category_level,
+    `Listing Year` = listing_year,
+    `Percent` = p
+  ) |>
+  reactable::reactable(
+    searchable = TRUE,
+    highlight = TRUE,
+    filterable = TRUE,
+    defaultPageSize = 10,
+    showPageSizeOptions = TRUE,
+    pageSizeOptions = c(5, 10, 25, 50)
+  )
+```
+
+</div>
+</center>
+
+:::

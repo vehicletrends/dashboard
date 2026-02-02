@@ -38,6 +38,8 @@ make_chart <- function(data, grp_var, grp_level, cat_var, inv_type) {
   }
 
   plot_data |>
+    mutate(listing_year = as.character(listing_year)) |>
+    arrange(listing_year) |>
     group_by(category_level) |>
     e_charts(listing_year) |>
     e_line(percent, symbol = "circle", symbolSize = 6) |>

@@ -159,16 +159,14 @@ make_summary_dumbbell <- function(data, var_name, inv_type) {
     e_scatter(
       y2018,
       name = "2018",
-      symbol_size = 14,
-      itemStyle = list(
-        color = "white",
-        borderColor = "#5470c6",
-        borderWidth = 2.5
-      )
+      symbol_size = 12,
+      symbol = "circle",
+      itemStyle = list(color = "#999")
     ) |>
     e_scatter(
       y2024,
       name = "2024",
+      symbol = "diamond",
       symbol_size = 14,
       itemStyle = list(color = "#ee6666")
     ) |>

@@ -4,7 +4,37 @@
     "href": "vmt-daily.html",
     "title": "Daily Vehicle Miles Traveled (VMT)",
     "section": "",
-    "text": "This page shows the distribution of daily vehicle miles traveled (VMT) across all vehicles in the dataset. Each chart displays quantiles of daily mileage for a given combination of powertrain and vehicle type. For example, the 0.5 quantile represents the median daily mileage (half of vehicles drive less than this amount and half drive more). See the about page for more details.\n\nBy Vehicle TypeBy PowertrainData\n\n\nClick legend items to show/hide lines.\n\n\nCar\n\n\n\n\n\n\n\n\nCUV\n\n\n\n\n\n\n\n\nSUV\n\n\n\n\n\n\n\n\nPickup\n\n\n\n\n\n\n\n\nMinivan\n\n\n\n\n\n\n\n\n\n\nClick legend items to show/hide lines.\n\n\nGasoline\n\n\n\n\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\n\n\n\n\nPlug-In Hybrid Electric (PHEV)\n\n\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\n\n\n\n\nBEV (Tesla)\n\n\n\n\n\n\n\n\nBEV (Non-Tesla)\n\n\n\n\n\n\n\n\nDiesel\n\n\n\n\n\n\n\n\nFuel Cell\n\n\n\n\n\n\n\n\n\n\n\nDownload data",
+    "text": "This page shows the distribution of daily vehicle miles traveled (VMT) across all vehicles in the dataset. Each chart displays quantiles of daily mileage for a given combination of powertrain and vehicle type. For example, the 0.5 quantile represents the median daily mileage (half of vehicles drive less than this amount and half drive more). See the about page for more details.",
+    "crumbs": [
+      "Daily VMT"
+    ]
+  },
+  {
+    "objectID": "vmt-daily.html#by-vehicle-type",
+    "href": "vmt-daily.html#by-vehicle-type",
+    "title": "Daily Vehicle Miles Traveled (VMT)",
+    "section": "By Vehicle Type",
+    "text": "By Vehicle Type\nClick legend items to show/hide lines.\n\n\nCar\n\n\n\n\n\n\n\n\nCUV\n\n\n\n\n\n\n\n\nSUV\n\n\n\n\n\n\n\n\nPickup\n\n\n\n\n\n\n\n\nMinivan",
+    "crumbs": [
+      "Daily VMT"
+    ]
+  },
+  {
+    "objectID": "vmt-daily.html#by-powertrain",
+    "href": "vmt-daily.html#by-powertrain",
+    "title": "Daily Vehicle Miles Traveled (VMT)",
+    "section": "By Powertrain",
+    "text": "By Powertrain\nClick legend items to show/hide lines.\n\n\nGasoline\n\n\n\n\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\n\n\n\n\nPlug-In Hybrid Electric (PHEV)\n\n\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\n\n\n\n\nBEV (Tesla)\n\n\n\n\n\n\n\n\nBEV (Non-Tesla)\n\n\n\n\n\n\n\n\nDiesel\n\n\n\n\n\n\n\n\nFuel Cell",
+    "crumbs": [
+      "Daily VMT"
+    ]
+  },
+  {
+    "objectID": "vmt-daily.html#data",
+    "href": "vmt-daily.html#data",
+    "title": "Daily Vehicle Miles Traveled (VMT)",
+    "section": "Data",
+    "text": "Data\n\nDownload data",
     "crumbs": [
       "Daily VMT"
     ]
@@ -24,7 +54,47 @@
     "href": "percent-dealers.html",
     "title": "Percent of Dealers",
     "section": "",
-    "text": "This page shows the percentage of dealerships that have at least one vehicle of a given type in their inventory over time. Each chart displays the share of dealers carrying a specific combination of powertrain and category (vehicle type or price bin), with separate views for new and used inventory. The x-axis is the listing year and the y-axis is the percent of dealers.\n\nPowertrain by Vehicle TypePowertrain by Price BinVehicle Type by Price BinData\n\n\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)\n\n\n\n\n\n\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nDiesel\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)\n\n\n\n\n\n\n\n\n\n\n\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)\n\n\n\n\n\n\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nDiesel\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)\n\n\n\n\n\n\n\n\n\n\n\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\nCar\n\n\n\n\nCUV\n\n\n\n\nMinivan\n\n\n\n\nPickup\n\n\n\n\nSUV\n\n\n\n\n\n\n\n\n\n\n\n\nCar\n\n\n\n\nCUV\n\n\n\n\nMinivan\n\n\n\n\nPickup\n\n\n\n\nSUV\n\n\n\n\n\n\n\n\n\n\n\n\nDownload data",
+    "text": "This page shows the percentage of dealerships that have at least one vehicle of a given type in their inventory over time. Each chart displays the share of dealers carrying a specific combination of powertrain and category (vehicle type or price bin), with separate views for new and used inventory. The x-axis is the listing year and the y-axis is the percent of dealers.",
+    "crumbs": [
+      "Percent of Dealers"
+    ]
+  },
+  {
+    "objectID": "percent-dealers.html#powertrain-by-vehicle-type",
+    "href": "percent-dealers.html#powertrain-by-vehicle-type",
+    "title": "Percent of Dealers",
+    "section": "Powertrain by Vehicle Type",
+    "text": "Powertrain by Vehicle Type\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)\n\n\n\n\n\n\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nDiesel\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)",
+    "crumbs": [
+      "Percent of Dealers"
+    ]
+  },
+  {
+    "objectID": "percent-dealers.html#powertrain-by-price-bin",
+    "href": "percent-dealers.html#powertrain-by-price-bin",
+    "title": "Percent of Dealers",
+    "section": "Powertrain by Price Bin",
+    "text": "Powertrain by Price Bin\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)\n\n\n\n\n\n\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nDiesel\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)",
+    "crumbs": [
+      "Percent of Dealers"
+    ]
+  },
+  {
+    "objectID": "percent-dealers.html#vehicle-type-by-price-bin",
+    "href": "percent-dealers.html#vehicle-type-by-price-bin",
+    "title": "Percent of Dealers",
+    "section": "Vehicle Type by Price Bin",
+    "text": "Vehicle Type by Price Bin\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\nCar\n\n\n\n\nCUV\n\n\n\n\nMinivan\n\n\n\n\nPickup\n\n\n\n\nSUV\n\n\n\n\n\n\n\n\n\n\n\n\nCar\n\n\n\n\nCUV\n\n\n\n\nMinivan\n\n\n\n\nPickup\n\n\n\n\nSUV",
+    "crumbs": [
+      "Percent of Dealers"
+    ]
+  },
+  {
+    "objectID": "percent-dealers.html#data",
+    "href": "percent-dealers.html#data",
+    "title": "Percent of Dealers",
+    "section": "Data",
+    "text": "Data\n\nDownload data",
     "crumbs": [
       "Percent of Dealers"
     ]
@@ -34,7 +104,27 @@
     "href": "market-concentration.html",
     "title": "Market Concentration",
     "section": "",
-    "text": "This page contains interactive content that may take a moment to load, please be patient. If you refresh this page, it will have to load again.\n\n\n\nThe Market Concentration page uses the Herfindahl–Hirschman Index (HHI) to measure how concentrated or competitive each powertrain segment is over time. The HHI ranges from 0 to 1, where values below 0.15 indicate a competitive market, values between 0.15 and 0.25 indicate moderate concentration, and values above 0.25 indicate a highly concentrated market. Concentration is measured across three dimensions: by make, by vehicle type, and by price bin. See the HHI Explained page for an interactive tool that illustrates how HHI relates to market share distributions.\n\nChartsData\n\n\n\n\n\n\n\n\n\n\nDownload data: By Make | By Type | By Price",
+    "text": "This page contains interactive content that may take a moment to load, please be patient. If you refresh this page, it will have to load again.\nThe Market Concentration page uses the Herfindahl–Hirschman Index (HHI) to measure how concentrated or competitive each powertrain segment is over time. The HHI ranges from 0 to 1, where values below 0.15 indicate a competitive market, values between 0.15 and 0.25 indicate moderate concentration, and values above 0.25 indicate a highly concentrated market. Concentration is measured across three dimensions: by make, by vehicle type, and by price bin. See the HHI Explained page for an interactive tool that illustrates how HHI relates to market share distributions.",
+    "crumbs": [
+      "Market Concentration"
+    ]
+  },
+  {
+    "objectID": "market-concentration.html#charts",
+    "href": "market-concentration.html#charts",
+    "title": "Market Concentration",
+    "section": "Charts",
+    "text": "Charts",
+    "crumbs": [
+      "Market Concentration"
+    ]
+  },
+  {
+    "objectID": "market-concentration.html#data",
+    "href": "market-concentration.html#data",
+    "title": "Market Concentration",
+    "section": "Data",
+    "text": "Data\n\nDownload data: By Make | By Type | By Price",
     "crumbs": [
       "Market Concentration"
     ]
@@ -165,7 +255,57 @@
     "href": "depreciation.html",
     "title": "Depreciation",
     "section": "",
-    "text": "This page shows median vehicle depreciation (retention rate) by vehicle age. A retention rate of 1.0 means the vehicle retains 100% of its original value, while 0.5 means it has lost half its value. Each chart displays the 50th quantile (median) retention rate for a given combination of powertrain and vehicle type. Lines in the charts below are smoothed using loess smoothihng. The “Data” tab shows the raw data, which also includes the 25th and 75th quantiles. See the about page for more details. Note the observation counts by powertrain and vehicle type as some combinations have few observations.\n\nBy Vehicle TypeBy PowertrainDepreciation by Age (Data)Annual Depreciation by Type (Data)Annual Depreciation by Model (Data)\n\n\nClick legend items to show/hide lines.\n\n\nCar\n\n\n\n\n\n\n\n\nCUV\n\n\n\n\n\n\n\n\nSUV\n\n\n\n\n\n\n\n\nPickup\n\n\n\n\n\n\n\n\nMinivan\n\n\n\n\n\n\n\n\n\n\nClick legend items to show/hide lines.\n\n\nGasoline\n\n\n\n\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\n\n\n\n\nPlug-In Hybrid Electric (PHEV)\n\n\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\n\n\n\n\nBEV (Tesla)\n\n\n\n\n\n\n\n\nBEV (Non-Tesla)\n\n\n\n\n\n\n\n\nFuel Cell\n\n\n\n\n\n\n\n\n\n\n\nDownload data\n\n\n\n\n\n\n\n\n\n\n\nThis table shows the estimated annual depreciation rate by vehicle type and powertrain. Annual depreciation is computed by fitting log-linear regressions of retention rate on vehicle age; the rate is 1 - exp(b) where b is the age coefficient.\n\nDownload data\n\n\n\n\n\n\n\n\n\n\n\nThis table shows the estimated annual depreciation rate by make, model, vehicle type, and powertrain. Annual depreciation is computed by fitting log-linear regressions of retention rate on vehicle age; the rate is 1 - exp(b) where b is the age coefficient. Only make/model combinations with at least 100 listings are included.\n\nDownload data",
+    "text": "This page shows median vehicle depreciation (retention rate) by vehicle age. A retention rate of 1.0 means the vehicle retains 100% of its original value, while 0.5 means it has lost half its value. Each chart displays the 50th quantile (median) retention rate for a given combination of powertrain and vehicle type. Lines in the charts below are smoothed using loess smoothihng. The “Data” tab shows the raw data, which also includes the 25th and 75th quantiles. See the about page for more details. Note the observation counts by powertrain and vehicle type as some combinations have few observations.",
+    "crumbs": [
+      "Depreciation"
+    ]
+  },
+  {
+    "objectID": "depreciation.html#by-vehicle-type",
+    "href": "depreciation.html#by-vehicle-type",
+    "title": "Depreciation",
+    "section": "By Vehicle Type",
+    "text": "By Vehicle Type\nClick legend items to show/hide lines.\n\n\nCar\n\n\n\n\n\n\n\n\nCUV\n\n\n\n\n\n\n\n\nSUV\n\n\n\n\n\n\n\n\nPickup\n\n\n\n\n\n\n\n\nMinivan",
+    "crumbs": [
+      "Depreciation"
+    ]
+  },
+  {
+    "objectID": "depreciation.html#by-powertrain",
+    "href": "depreciation.html#by-powertrain",
+    "title": "Depreciation",
+    "section": "By Powertrain",
+    "text": "By Powertrain\nClick legend items to show/hide lines.\n\n\nGasoline\n\n\n\n\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\n\n\n\n\nPlug-In Hybrid Electric (PHEV)\n\n\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\n\n\n\n\nBEV (Tesla)\n\n\n\n\n\n\n\n\nBEV (Non-Tesla)\n\n\n\n\n\n\n\n\nFuel Cell",
+    "crumbs": [
+      "Depreciation"
+    ]
+  },
+  {
+    "objectID": "depreciation.html#data-depreciation-by-age",
+    "href": "depreciation.html#data-depreciation-by-age",
+    "title": "Depreciation",
+    "section": "Data: Depreciation by Age",
+    "text": "Data: Depreciation by Age\n\nDownload data",
+    "crumbs": [
+      "Depreciation"
+    ]
+  },
+  {
+    "objectID": "depreciation.html#data-annual-depreciation-by-type",
+    "href": "depreciation.html#data-annual-depreciation-by-type",
+    "title": "Depreciation",
+    "section": "Data: Annual Depreciation by Type",
+    "text": "Data: Annual Depreciation by Type\nThis table shows the estimated annual depreciation rate by vehicle type and powertrain. Annual depreciation is computed by fitting log-linear regressions of retention rate on vehicle age; the rate is 1 - exp(b) where b is the age coefficient.\n\nDownload data",
+    "crumbs": [
+      "Depreciation"
+    ]
+  },
+  {
+    "objectID": "depreciation.html#data-annual-depreciation-by-model",
+    "href": "depreciation.html#data-annual-depreciation-by-model",
+    "title": "Depreciation",
+    "section": "Data: Annual Depreciation by Model",
+    "text": "Data: Annual Depreciation by Model\nThis table shows the estimated annual depreciation rate by make, model, vehicle type, and powertrain. Annual depreciation is computed by fitting log-linear regressions of retention rate on vehicle age; the rate is 1 - exp(b) where b is the age coefficient. Only make/model combinations with at least 100 listings are included.\n\nDownload data",
     "crumbs": [
       "Depreciation"
     ]
@@ -189,7 +329,87 @@
     "href": "percent-market.html",
     "title": "Percent of Market",
     "section": "",
-    "text": "This page shows how the composition of vehicle listings has changed over time across different market dimensions. Each chart displays the percentage of listings for a given group broken down by category, with separate views for new and used inventory. The x-axis is the listing year and the y-axis is the percent of listings.\n\nSummaryPowertrain by Vehicle TypePowertrain by Price BinVehicle Type by PowertrainVehicle Type by Price BinPrice Bin by PowertrainPrice Bin by Vehicle TypeData\n\n\nHollow circles show 2018 values. Filled dots show 2024 values. Lines connect the two, showing the direction and magnitude of change.\n\nNewUsed\n\n\n\nBy Powertrain\n\n\n\n\n\n\n\n\nBy Vehicle Type\n\n\n\n\n\n\n\n\nBy Price Bin\n\n\n\n\n\n\n\n\n\n\nBy Powertrain\n\n\n\n\n\n\n\n\nBy Vehicle Type\n\n\n\n\n\n\n\n\nBy Price Bin\n\n\n\n\n\n\n\n\n\n\n\n\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)\n\n\n\n\n\n\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nDiesel\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)\n\n\n\n\n\n\n\n\n\n\n\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)\n\n\n\n\n\n\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nDiesel\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)\n\n\n\n\n\n\n\n\n\n\n\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\nCar\n\n\n\n\nCUV\n\n\n\n\nMinivan\n\n\n\n\nPickup\n\n\n\n\nSUV\n\n\n\n\n\n\n\n\n\n\n\n\nCar\n\n\n\n\nCUV\n\n\n\n\nMinivan\n\n\n\n\nPickup\n\n\n\n\nSUV\n\n\n\n\n\n\n\n\n\n\n\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\nCar\n\n\n\n\nCUV\n\n\n\n\nMinivan\n\n\n\n\nPickup\n\n\n\n\nSUV\n\n\n\n\n\n\n\n\n\n\n\n\nCar\n\n\n\n\nCUV\n\n\n\n\nMinivan\n\n\n\n\nPickup\n\n\n\n\nSUV\n\n\n\n\n\n\n\n\n\n\n\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\n$0-$10k\n\n\n\n\n$10k-$20k\n\n\n\n\n$20k-$30k\n\n\n\n\n$30k-$40k\n\n\n\n\n$40k-$50k\n\n\n\n\n$50k-$60k\n\n\n\n\n$60k-$70k\n\n\n\n\n$70k+\n\n\n\n\n\n\n\n\n\n\n\n\n$0-$10k\n\n\n\n\n$10k-$20k\n\n\n\n\n$20k-$30k\n\n\n\n\n$30k-$40k\n\n\n\n\n$40k-$50k\n\n\n\n\n$50k-$60k\n\n\n\n\n$60k-$70k\n\n\n\n\n$70k+\n\n\n\n\n\n\n\n\n\n\n\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\n$0-$10k\n\n\n\n\n$10k-$20k\n\n\n\n\n$20k-$30k\n\n\n\n\n$30k-$40k\n\n\n\n\n$40k-$50k\n\n\n\n\n$50k-$60k\n\n\n\n\n$60k-$70k\n\n\n\n\n$70k+\n\n\n\n\n\n\n\n\n\n\n\n\n$0-$10k\n\n\n\n\n$10k-$20k\n\n\n\n\n$20k-$30k\n\n\n\n\n$30k-$40k\n\n\n\n\n$40k-$50k\n\n\n\n\n$50k-$60k\n\n\n\n\n$60k-$70k\n\n\n\n\n$70k+\n\n\n\n\n\n\n\n\n\n\n\n\nDownload data",
+    "text": "This page shows how the composition of vehicle listings has changed over time across different market dimensions. Each chart displays the percentage of listings for a given group broken down by category, with separate views for new and used inventory. The x-axis is the listing year and the y-axis is the percent of listings.",
+    "crumbs": [
+      "Percent of Market"
+    ]
+  },
+  {
+    "objectID": "percent-market.html#summary",
+    "href": "percent-market.html#summary",
+    "title": "Percent of Market",
+    "section": "Summary",
+    "text": "Summary\nHollow circles show 2018 values. Filled dots show 2024 values. Lines connect the two, showing the direction and magnitude of change.\n\nNewUsed\n\n\n\nBy Powertrain\n\n\n\n\n\n\n\n\nBy Vehicle Type\n\n\n\n\n\n\n\n\nBy Price Bin\n\n\n\n\n\n\n\n\n\n\nBy Powertrain\n\n\n\n\n\n\n\n\nBy Vehicle Type\n\n\n\n\n\n\n\n\nBy Price Bin",
+    "crumbs": [
+      "Percent of Market"
+    ]
+  },
+  {
+    "objectID": "percent-market.html#powertrain-by-vehicle-type",
+    "href": "percent-market.html#powertrain-by-vehicle-type",
+    "title": "Percent of Market",
+    "section": "Powertrain by Vehicle Type",
+    "text": "Powertrain by Vehicle Type\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)\n\n\n\n\n\n\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nDiesel\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)",
+    "crumbs": [
+      "Percent of Market"
+    ]
+  },
+  {
+    "objectID": "percent-market.html#powertrain-by-price-bin",
+    "href": "percent-market.html#powertrain-by-price-bin",
+    "title": "Percent of Market",
+    "section": "Powertrain by Price Bin",
+    "text": "Powertrain by Price Bin\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)\n\n\n\n\n\n\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nDiesel\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)",
+    "crumbs": [
+      "Percent of Market"
+    ]
+  },
+  {
+    "objectID": "percent-market.html#vehicle-type-by-powertrain",
+    "href": "percent-market.html#vehicle-type-by-powertrain",
+    "title": "Percent of Market",
+    "section": "Vehicle Type by Powertrain",
+    "text": "Vehicle Type by Powertrain\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\nCar\n\n\n\n\nCUV\n\n\n\n\nMinivan\n\n\n\n\nPickup\n\n\n\n\nSUV\n\n\n\n\n\n\n\n\n\n\n\n\nCar\n\n\n\n\nCUV\n\n\n\n\nMinivan\n\n\n\n\nPickup\n\n\n\n\nSUV",
+    "crumbs": [
+      "Percent of Market"
+    ]
+  },
+  {
+    "objectID": "percent-market.html#vehicle-type-by-price-bin",
+    "href": "percent-market.html#vehicle-type-by-price-bin",
+    "title": "Percent of Market",
+    "section": "Vehicle Type by Price Bin",
+    "text": "Vehicle Type by Price Bin\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\nCar\n\n\n\n\nCUV\n\n\n\n\nMinivan\n\n\n\n\nPickup\n\n\n\n\nSUV\n\n\n\n\n\n\n\n\n\n\n\n\nCar\n\n\n\n\nCUV\n\n\n\n\nMinivan\n\n\n\n\nPickup\n\n\n\n\nSUV",
+    "crumbs": [
+      "Percent of Market"
+    ]
+  },
+  {
+    "objectID": "percent-market.html#price-bin-by-powertrain",
+    "href": "percent-market.html#price-bin-by-powertrain",
+    "title": "Percent of Market",
+    "section": "Price Bin by Powertrain",
+    "text": "Price Bin by Powertrain\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\n$0-$10k\n\n\n\n\n$10k-$20k\n\n\n\n\n$20k-$30k\n\n\n\n\n$30k-$40k\n\n\n\n\n$40k-$50k\n\n\n\n\n$50k-$60k\n\n\n\n\n$60k-$70k\n\n\n\n\n$70k+\n\n\n\n\n\n\n\n\n\n\n\n\n$0-$10k\n\n\n\n\n$10k-$20k\n\n\n\n\n$20k-$30k\n\n\n\n\n$30k-$40k\n\n\n\n\n$40k-$50k\n\n\n\n\n$50k-$60k\n\n\n\n\n$60k-$70k\n\n\n\n\n$70k+",
+    "crumbs": [
+      "Percent of Market"
+    ]
+  },
+  {
+    "objectID": "percent-market.html#price-bin-by-vehicle-type",
+    "href": "percent-market.html#price-bin-by-vehicle-type",
+    "title": "Percent of Market",
+    "section": "Price Bin by Vehicle Type",
+    "text": "Price Bin by Vehicle Type\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\n$0-$10k\n\n\n\n\n$10k-$20k\n\n\n\n\n$20k-$30k\n\n\n\n\n$30k-$40k\n\n\n\n\n$40k-$50k\n\n\n\n\n$50k-$60k\n\n\n\n\n$60k-$70k\n\n\n\n\n$70k+\n\n\n\n\n\n\n\n\n\n\n\n\n$0-$10k\n\n\n\n\n$10k-$20k\n\n\n\n\n$20k-$30k\n\n\n\n\n$30k-$40k\n\n\n\n\n$40k-$50k\n\n\n\n\n$50k-$60k\n\n\n\n\n$60k-$70k\n\n\n\n\n$70k+",
+    "crumbs": [
+      "Percent of Market"
+    ]
+  },
+  {
+    "objectID": "percent-market.html#data",
+    "href": "percent-market.html#data",
+    "title": "Percent of Market",
+    "section": "Data",
+    "text": "Data\n\nDownload data",
     "crumbs": [
       "Percent of Market"
     ]
@@ -199,7 +419,57 @@
     "href": "vmt-age.html",
     "title": "Vehicle Miles Traveled (VMT) by Age",
     "section": "",
-    "text": "This page shows median cumulative vehicle miles traveled (VMT) by vehicle age. Each chart displays the 50th quantile (median) of total mileage for a given combination of powertrain and vehicle type as vehicles age over time. Lines in the charts below are smoothed using loess smoothihng. The “Data” tab shows the raw data, which also includes the 25th and 75th quantiles. See the about page for more details. Note the observation counts by powertrain and vehicle type as some combinations have few observations.\n\nBy Vehicle TypeBy PowertrainVMT by Age (Data)Annual VMT by Type (Data)Annual VMT by Model (Data)\n\n\nClick legend items to show/hide lines.\n\n\nCar\n\n\n\n\n\n\n\n\nCUV\n\n\n\n\n\n\n\n\nSUV\n\n\n\n\n\n\n\n\nPickup\n\n\n\n\n\n\n\n\nMinivan\n\n\n\n\n\n\n\n\n\n\nClick legend items to show/hide lines.\n\n\nGasoline\n\n\n\n\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\n\n\n\n\nPlug-In Hybrid Electric (PHEV)\n\n\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\n\n\n\n\nBEV (Tesla)\n\n\n\n\n\n\n\n\nBEV (Non-Tesla)\n\n\n\n\n\n\n\n\nDiesel\n\n\n\n\n\n\n\n\nFuel Cell\n\n\n\n\n\n\n\n\n\n\n\nDownload data\n\n\n\n\n\n\n\n\n\n\n\nThis table shows the estimated annual vehicle miles traveled (VMT) by vehicle type and powertrain. Annual VMT is calculated as the slope of the linear relationship between vehicle age and cumulative mileage.\n\nDownload data\n\n\n\n\n\n\n\n\n\n\n\nThis table shows the estimated annual vehicle miles traveled (VMT) by make, model, vehicle type, and powertrain. Annual VMT is calculated as the slope of the linear relationship between vehicle age and cumulative mileage.\n\nDownload data",
+    "text": "This page shows median cumulative vehicle miles traveled (VMT) by vehicle age. Each chart displays the 50th quantile (median) of total mileage for a given combination of powertrain and vehicle type as vehicles age over time. Lines in the charts below are smoothed using loess smoothihng. The “Data” tab shows the raw data, which also includes the 25th and 75th quantiles. See the about page for more details. Note the observation counts by powertrain and vehicle type as some combinations have few observations.",
+    "crumbs": [
+      "VMT by Age"
+    ]
+  },
+  {
+    "objectID": "vmt-age.html#by-vehicle-type",
+    "href": "vmt-age.html#by-vehicle-type",
+    "title": "Vehicle Miles Traveled (VMT) by Age",
+    "section": "By Vehicle Type",
+    "text": "By Vehicle Type\nClick legend items to show/hide lines.\n\n\nCar\n\n\n\n\n\n\n\n\nCUV\n\n\n\n\n\n\n\n\nSUV\n\n\n\n\n\n\n\n\nPickup\n\n\n\n\n\n\n\n\nMinivan",
+    "crumbs": [
+      "VMT by Age"
+    ]
+  },
+  {
+    "objectID": "vmt-age.html#by-powertrain",
+    "href": "vmt-age.html#by-powertrain",
+    "title": "Vehicle Miles Traveled (VMT) by Age",
+    "section": "By Powertrain",
+    "text": "By Powertrain\nClick legend items to show/hide lines.\n\n\nGasoline\n\n\n\n\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\n\n\n\n\nPlug-In Hybrid Electric (PHEV)\n\n\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\n\n\n\n\nBEV (Tesla)\n\n\n\n\n\n\n\n\nBEV (Non-Tesla)\n\n\n\n\n\n\n\n\nDiesel\n\n\n\n\n\n\n\n\nFuel Cell",
+    "crumbs": [
+      "VMT by Age"
+    ]
+  },
+  {
+    "objectID": "vmt-age.html#data-vmt-by-age",
+    "href": "vmt-age.html#data-vmt-by-age",
+    "title": "Vehicle Miles Traveled (VMT) by Age",
+    "section": "Data: VMT by Age",
+    "text": "Data: VMT by Age\n\nDownload data",
+    "crumbs": [
+      "VMT by Age"
+    ]
+  },
+  {
+    "objectID": "vmt-age.html#data-annual-vmt-by-type",
+    "href": "vmt-age.html#data-annual-vmt-by-type",
+    "title": "Vehicle Miles Traveled (VMT) by Age",
+    "section": "Data: Annual VMT by Type",
+    "text": "Data: Annual VMT by Type\nThis table shows the estimated annual vehicle miles traveled (VMT) by vehicle type and powertrain. Annual VMT is calculated as the slope of the linear relationship between vehicle age and cumulative mileage.\n\nDownload data",
+    "crumbs": [
+      "VMT by Age"
+    ]
+  },
+  {
+    "objectID": "vmt-age.html#data-annual-vmt-by-model",
+    "href": "vmt-age.html#data-annual-vmt-by-model",
+    "title": "Vehicle Miles Traveled (VMT) by Age",
+    "section": "Data: Annual VMT by Model",
+    "text": "Data: Annual VMT by Model\nThis table shows the estimated annual vehicle miles traveled (VMT) by make, model, vehicle type, and powertrain. Annual VMT is calculated as the slope of the linear relationship between vehicle age and cumulative mileage.\n\nDownload data",
     "crumbs": [
       "VMT by Age"
     ]

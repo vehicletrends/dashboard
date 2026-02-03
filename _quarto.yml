@@ -30,7 +30,7 @@ website:
     background: "light"
     logo: images/logo.png
     collapse-level: 1
-    search: false
+    search: true
     contents:
     - text: About
       icon: info-circle-fill

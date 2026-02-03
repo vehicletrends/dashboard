@@ -82,8 +82,6 @@ make_chart <- function(data, facet_var, facet_value, line_var) {
 }
 ```
 
-::: {.panel-tabset}
-
 ## By Vehicle Type
 
 *Click legend items to show/hide lines.*
@@ -91,35 +89,35 @@ make_chart <- function(data, facet_var, facet_value, line_var) {
 ::: {.grid}
 
 ::: {.g-col-6}
-#### Car
+### Car
 ```{r}
 make_chart(chart_data, "vehicle_type", "Car", "powertrain")
 ```
 :::
 
 ::: {.g-col-6}
-#### CUV
+### CUV
 ```{r}
 make_chart(chart_data, "vehicle_type", "CUV", "powertrain")
 ```
 :::
 
 ::: {.g-col-6}
-#### SUV
+### SUV
 ```{r}
 make_chart(chart_data, "vehicle_type", "SUV", "powertrain")
 ```
 :::
 
 ::: {.g-col-6}
-#### Pickup
+### Pickup
 ```{r}
 make_chart(chart_data, "vehicle_type", "Pickup", "powertrain")
 ```
 :::
 
 ::: {.g-col-6}
-#### Minivan
+### Minivan
 ```{r}
 make_chart(chart_data, "vehicle_type", "Minivan", "powertrain")
 ```
@@ -134,56 +132,56 @@ make_chart(chart_data, "vehicle_type", "Minivan", "powertrain")
 ::: {.grid}
 
 ::: {.g-col-6}
-#### Gasoline
+### Gasoline
 ```{r}
 make_chart(chart_data, "powertrain", "Gasoline", "vehicle_type")
 ```
 :::
 
 ::: {.g-col-6}
-#### Flex Fuel (E85)
+### Flex Fuel (E85)
 ```{r}
 make_chart(chart_data, "powertrain", "Flex Fuel (E85)", "vehicle_type")
 ```
 :::
 
 ::: {.g-col-6}
-#### Hybrid Electric (HEV)
+### Hybrid Electric (HEV)
 ```{r}
 make_chart(chart_data, "powertrain", "Hybrid Electric (HEV)", "vehicle_type")
 ```
 :::
 
 ::: {.g-col-6}
-#### Plug-In Hybrid Electric (PHEV)
+### Plug-In Hybrid Electric (PHEV)
 ```{r}
 make_chart(chart_data, "powertrain", "Plug-In Hybrid Electric (PHEV)", "vehicle_type")
 ```
 :::
 
 ::: {.g-col-6}
-#### Battery Electric (BEV)
+### Battery Electric (BEV)
 ```{r}
 make_chart(chart_data, "powertrain", "Battery Electric (BEV)", "vehicle_type")
 ```
 :::
 
 ::: {.g-col-6}
-#### BEV (Tesla)
+### BEV (Tesla)
 ```{r}
 make_chart(chart_data, "powertrain", "BEV (Tesla)", "vehicle_type")
 ```
 :::
 
 ::: {.g-col-6}
-#### BEV (Non-Tesla)
+### BEV (Non-Tesla)
 ```{r}
 make_chart(chart_data, "powertrain", "BEV (Non-Tesla)", "vehicle_type")
 ```
 :::
 
 ::: {.g-col-6}
-#### Fuel Cell
+### Fuel Cell
 ```{r}
 make_chart(chart_data, "powertrain", "Fuel Cell", "vehicle_type")
 ```
@@ -191,7 +189,7 @@ make_chart(chart_data, "powertrain", "Fuel Cell", "vehicle_type")
 
 :::
 
-## Depreciation by Age (Data)
+## Data: Depreciation by Age
 
 <center>
 [Download data](`r url_depreciation`)
@@ -227,7 +225,7 @@ data |>
 </div>
 </center>
 
-## Annual Depreciation by Type (Data)
+## Data: Annual Depreciation by Type
 
 This table shows the estimated annual depreciation rate by vehicle type and powertrain. Annual depreciation is computed by fitting log-linear regressions of retention rate on vehicle age; the rate is `1 - exp(b)` where `b` is the age coefficient.
 
@@ -257,7 +255,7 @@ dep_annual_type |>
 </div>
 </center>
 
-## Annual Depreciation by Model (Data)
+## Data: Annual Depreciation by Model
 
 This table shows the estimated annual depreciation rate by make, model, vehicle type, and powertrain. Annual depreciation is computed by fitting log-linear regressions of retention rate on vehicle age; the rate is `1 - exp(b)` where `b` is the age coefficient. Only make/model combinations with at least 100 listings are included.
 
@@ -288,5 +286,3 @@ dep_annual_model |>
 
 </div>
 </center>
-
-:::

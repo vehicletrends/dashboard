@@ -42,8 +42,6 @@ make_chart <- function(data, facet_var, facet_value, line_var) {
 
 This page shows the distribution of daily vehicle miles traveled (VMT) across all vehicles in the dataset. Each chart displays quantiles of daily mileage for a given combination of powertrain and vehicle type. For example, the 0.5 quantile represents the median daily mileage (half of vehicles drive less than this amount and half drive more). See the [about](about.html#vehicle-miles-traveled-vmt) page for more details.
 
-::: {.panel-tabset}
-
 ## By Vehicle Type
 
 *Click legend items to show/hide lines.*
@@ -51,35 +49,35 @@ This page shows the distribution of daily vehicle miles traveled (VMT) across al
 ::: {.grid}
 
 ::: {.g-col-6}
-#### Car
+### Car
 ```{r}
 make_chart(data, "vehicle_type", "Car", "powertrain")
 ```
 :::
 
 ::: {.g-col-6}
-#### CUV
+### CUV
 ```{r}
 make_chart(data, "vehicle_type", "CUV", "powertrain")
 ```
 :::
 
 ::: {.g-col-6}
-#### SUV
+### SUV
 ```{r}
 make_chart(data, "vehicle_type", "SUV", "powertrain")
 ```
 :::
 
 ::: {.g-col-6}
-#### Pickup
+### Pickup
 ```{r}
 make_chart(data, "vehicle_type", "Pickup", "powertrain")
 ```
 :::
 
 ::: {.g-col-6}
-#### Minivan
+### Minivan
 ```{r}
 make_chart(data, "vehicle_type", "Minivan", "powertrain")
 ```
@@ -94,63 +92,63 @@ make_chart(data, "vehicle_type", "Minivan", "powertrain")
 ::: {.grid}
 
 ::: {.g-col-6}
-#### Gasoline
+### Gasoline
 ```{r}
 make_chart(data, "powertrain", "Gasoline", "vehicle_type")
 ```
 :::
 
 ::: {.g-col-6}
-#### Flex Fuel (E85)
+### Flex Fuel (E85)
 ```{r}
 make_chart(data, "powertrain", "Flex Fuel (E85)", "vehicle_type")
 ```
 :::
 
 ::: {.g-col-6}
-#### Hybrid Electric (HEV)
+### Hybrid Electric (HEV)
 ```{r}
 make_chart(data, "powertrain", "Hybrid Electric (HEV)", "vehicle_type")
 ```
 :::
 
 ::: {.g-col-6}
-#### Plug-In Hybrid Electric (PHEV)
+### Plug-In Hybrid Electric (PHEV)
 ```{r}
 make_chart(data, "powertrain", "Plug-In Hybrid Electric (PHEV)", "vehicle_type")
 ```
 :::
 
 ::: {.g-col-6}
-#### Battery Electric (BEV)
+### Battery Electric (BEV)
 ```{r}
 make_chart(data, "powertrain", "Battery Electric (BEV)", "vehicle_type")
 ```
 :::
 
 ::: {.g-col-6}
-#### BEV (Tesla)
+### BEV (Tesla)
 ```{r}
 make_chart(data, "powertrain", "BEV (Tesla)", "vehicle_type")
 ```
 :::
 
 ::: {.g-col-6}
-#### BEV (Non-Tesla)
+### BEV (Non-Tesla)
 ```{r}
 make_chart(data, "powertrain", "BEV (Non-Tesla)", "vehicle_type")
 ```
 :::
 
 ::: {.g-col-6}
-#### Diesel
+### Diesel
 ```{r}
 make_chart(data, "powertrain", "Diesel", "vehicle_type")
 ```
 :::
 
 ::: {.g-col-6}
-#### Fuel Cell
+### Fuel Cell
 ```{r}
 make_chart(data, "powertrain", "Fuel Cell", "vehicle_type")
 ```
@@ -188,5 +186,3 @@ data |>
 
 </div>
 </center>
-
-:::

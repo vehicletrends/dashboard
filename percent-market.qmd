@@ -211,8 +211,6 @@ make_summary_dumbbell <- function(data, var_name, inv_type) {
 }
 ```
 
-::: {.panel-tabset}
-
 ## Summary
 
 *Hollow circles show 2018 values. Filled dots show 2024 values. Lines connect the two, showing the direction and magnitude of change.*
@@ -415,5 +413,3 @@ percent_market |>
 
 </div>
 </center>
-
-:::

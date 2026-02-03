@@ -104,8 +104,6 @@ render_combo <- function(data, grp_var, cat_var, inv_type) {
 }
 ```
 
-::: {.panel-tabset}
-
 ## Powertrain by Vehicle Type
 
 *Click legend items to show/hide lines.*
@@ -199,5 +197,3 @@ percent_dealers |>
 
 </div>
 </center>
-
-:::

@@ -20,8 +20,6 @@ hhi_combined <- bind_rows(
 
 The [Market Concentration](market-concentration.qmd) page uses the [Herfindahl–Hirschman Index (HHI)](https://en.wikipedia.org/wiki/Herfindahl%E2%80%93Hirschman_Index) to measure how concentrated or competitive each powertrain segment is over time. The HHI ranges from 0 to 1, where values below 0.15 indicate a competitive market, values between 0.15 and 0.25 indicate moderate concentration, and values above 0.25 indicate a highly concentrated market. Concentration is measured across three dimensions: by make, by vehicle type, and by price bin. See the [HHI Explained](hhi-explained.qmd) page for an interactive tool that illustrates how HHI relates to market share distributions.
 
-::: {.panel-tabset}
-
 ## Charts
 
 ```{r}
@@ -82,5 +80,3 @@ hhi_combined |>
 
 </div>
 </center>
-
-:::

@@ -151,7 +151,7 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "This dashboard provides summary information about various trends in the U.S. automobile market. The primary data source is 62,889,029 new and 80,132,111 used vehicle listings from over 100,000 dealerships across all 50 states in the U.S. The original data are licensed from marketcheck.com and cannot be made public, but this website provides public access to various summaries of the original listings data.\nThe open-source project was created and is maintained by Dr. John Paul Helveston, an Associate Professor in the Engineering Management and Systems Engineering Department at The George Washington University.",
+    "text": "This dashboard provides summary information about various trends in the U.S. automobile market. The primary data source is 74,894,001 new and 94,658,664 used vehicle listings from over 100,000 dealerships across all 50 states in the U.S. between 2018 and 2025 (inclusive). The original data are licensed from marketcheck.com and cannot be made public, but this website provides public access to various summaries of the original listings data.\nThe open-source project was created and is maintained by Dr. John Paul Helveston, an Associate Professor in the Engineering Management and Systems Engineering Department at The George Washington University.",
     "crumbs": [
       "About"
     ]
@@ -339,7 +339,7 @@
     "href": "percent-market.html#summary",
     "title": "Percent of Market",
     "section": "Summary",
-    "text": "Summary\nHollow circles show 2018 values. Filled dots show 2024 values. Lines connect the two, showing the direction and magnitude of change.\n\nNewUsed\n\n\n\nBy Powertrain\n\n\n\n\n\n\n\n\nBy Vehicle Type\n\n\n\n\n\n\n\n\nBy Price Bin\n\n\n\n\n\n\n\n\n\n\nBy Powertrain\n\n\n\n\n\n\n\n\nBy Vehicle Type\n\n\n\n\n\n\n\n\nBy Price Bin",
+    "text": "Summary\nHollow circles show 2018 values. Filled dots show 2025 values. Lines connect the two, showing the direction and magnitude of change.\n\nNewUsed\n\n\n\nBy Powertrain\n\n\n\n\n\n\n\n\nBy Vehicle Type\n\n\n\n\n\n\n\n\nBy Price Bin\n\n\n\n\n\n\n\n\n\n\nBy Powertrain\n\n\n\n\n\n\n\n\nBy Vehicle Type\n\n\n\n\n\n\n\n\nBy Price Bin",
     "crumbs": [
       "Percent of Market"
     ]
@@ -389,7 +389,7 @@
     "href": "percent-market.html#price-bin-by-powertrain",
     "title": "Percent of Market",
     "section": "Price Bin by Powertrain",
-    "text": "Price Bin by Powertrain\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\n$0-$10k\n\n\n\n\n$10k-$20k\n\n\n\n\n$20k-$30k\n\n\n\n\n$30k-$40k\n\n\n\n\n$40k-$50k\n\n\n\n\n$50k-$60k\n\n\n\n\n$60k-$70k\n\n\n\n\n$70k+\n\n\n\n\n\n\n\n\n\n\n\n\n$0-$10k\n\n\n\n\n$10k-$20k\n\n\n\n\n$20k-$30k\n\n\n\n\n$30k-$40k\n\n\n\n\n$40k-$50k\n\n\n\n\n$50k-$60k\n\n\n\n\n$60k-$70k\n\n\n\n\n$70k+",
+    "text": "Price Bin by Powertrain\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\n$0-$10k\n\n\n\n\n$10k-$20k\n\n\n\n\n$20k-$30k\n\n\n\n\n$30k-$40k\n\n\n\n\n$40k-$50k\n\n\n\n\n$50k-$60k\n\n\n\n\n$60k-$70k\n\n\n\n\n$70k+\n\n\n\n\nOther\n\n\n\n\n\n\n\n\n\n\n\n\n$0-$10k\n\n\n\n\n$10k-$20k\n\n\n\n\n$20k-$30k\n\n\n\n\n$30k-$40k\n\n\n\n\n$40k-$50k\n\n\n\n\n$50k-$60k\n\n\n\n\n$60k-$70k\n\n\n\n\n$70k+\n\n\n\n\nOther",
     "crumbs": [
       "Percent of Market"
     ]
@@ -399,7 +399,7 @@
     "href": "percent-market.html#price-bin-by-vehicle-type",
     "title": "Percent of Market",
     "section": "Price Bin by Vehicle Type",
-    "text": "Price Bin by Vehicle Type\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\n$0-$10k\n\n\n\n\n$10k-$20k\n\n\n\n\n$20k-$30k\n\n\n\n\n$30k-$40k\n\n\n\n\n$40k-$50k\n\n\n\n\n$50k-$60k\n\n\n\n\n$60k-$70k\n\n\n\n\n$70k+\n\n\n\n\n\n\n\n\n\n\n\n\n$0-$10k\n\n\n\n\n$10k-$20k\n\n\n\n\n$20k-$30k\n\n\n\n\n$30k-$40k\n\n\n\n\n$40k-$50k\n\n\n\n\n$50k-$60k\n\n\n\n\n$60k-$70k\n\n\n\n\n$70k+",
+    "text": "Price Bin by Vehicle Type\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\n$0-$10k\n\n\n\n\n$10k-$20k\n\n\n\n\n$20k-$30k\n\n\n\n\n$30k-$40k\n\n\n\n\n$40k-$50k\n\n\n\n\n$50k-$60k\n\n\n\n\n$60k-$70k\n\n\n\n\n$70k+\n\n\n\n\nOther\n\n\n\n\n\n\n\n\n\n\n\n\n$0-$10k\n\n\n\n\n$10k-$20k\n\n\n\n\n$20k-$30k\n\n\n\n\n$30k-$40k\n\n\n\n\n$40k-$50k\n\n\n\n\n$50k-$60k\n\n\n\n\n$60k-$70k\n\n\n\n\n$70k+\n\n\n\n\nOther",
     "crumbs": [
       "Percent of Market"
     ]

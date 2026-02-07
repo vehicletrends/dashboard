@@ -120,7 +120,7 @@ make_summary_dumbbell <- function(data, var_name, inv_type) {
       group_var == var_name,
       category_var == cat_var,
       inventory_type == inv_type,
-      listing_year %in% c(2018, 2024)
+      listing_year %in% c(2018, 2025)
     ) |>
     group_by(listing_year, group_level) |>
     summarise(total_n = sum(n), .groups = "drop") |>
@@ -135,9 +135,9 @@ make_summary_dumbbell <- function(data, var_name, inv_type) {
     ) |>
     mutate(
       y2018 = ifelse(is.na(y2018), 0, y2018),
-      y2024 = ifelse(is.na(y2024), 0, y2024),
-      bar_base = pmin(y2018, y2024),
-      bar_height = abs(y2024 - y2018)
+      y2025 = ifelse(is.na(y2025), 0, y2025),
+      bar_base = pmin(y2018, y2025),
+      bar_height = abs(y2025 - y2018)
     )
 
   db |>
@@ -166,8 +166,8 @@ make_summary_dumbbell <- function(data, var_name, inv_type) {
       itemStyle = list(color = "#999")
     ) |>
     e_scatter(
-      y2024,
-      name = "2024",
+      y2025,
+      name = "2025",
       symbol = "diamond",
       symbol_size = 14,
       itemStyle = list(color = "#ee6666")
@@ -185,7 +185,7 @@ make_summary_dumbbell <- function(data, var_name, inv_type) {
         function(params) {
           var result = params[0].name + '<br/>';
           params.forEach(function(item) {
-            if (item.seriesName === '2018' || item.seriesName === '2024') {
+            if (item.seriesName === '2018' || item.seriesName === '2025') {
               var val = parseFloat(item.value[0]);
               if (!isNaN(val)) {
                 result += item.marker + ' ' + item.seriesName +
@@ -202,7 +202,7 @@ make_summary_dumbbell <- function(data, var_name, inv_type) {
       show = TRUE,
       bottom = 0,
       left = "center",
-      data = list("2018", "2024")
+      data = list("2018", "2025")
     ) |>
     e_grid(bottom = 60, left = 200, right = 40, top = 10) |>
     e_color(background = "transparent") |>
@@ -213,7 +213,7 @@ make_summary_dumbbell <- function(data, var_name, inv_type) {
 
 ## Summary
 
-*Hollow circles show 2018 values. Filled dots show 2024 values. Lines connect the two, showing the direction and magnitude of change.*
+*Hollow circles show 2018 values. Filled dots show 2025 values. Lines connect the two, showing the direction and magnitude of change.*
 
 ::: {.panel-tabset}
 

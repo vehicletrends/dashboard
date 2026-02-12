@@ -20,6 +20,8 @@ website:
   open-graph:
     locale: es_ES
     site-name: https://vehicletrends.us
+  google-analytics:
+    tracking-id: "G-GL9TW3F8RJ"
   twitter-card:
     creator: "@johnhelveston"
     site: "@johnhelveston"

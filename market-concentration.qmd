@@ -8,45 +8,131 @@ title: "Market Concentration"
 
 source("setup.R")
 
-# Add metric labels and combine datasets
-hhi_combined <- bind_rows(
-  hhi_make |> mutate(metric = "Make"),
-  hhi_type |> mutate(metric = "Vehicle Type"),
-  hhi_price |> mutate(metric = "Price Bin")
+data <- vehicletrends::hhi |>
+  filter(!(group_var == "price_bin" & group_level == "Other")) |>
+  mutate(lower = pmax(lower, 0))
+
+hhi_labels <- c(
+  "make" = "Make",
+  "vehicle_type" = "Vehicle Type",
+  "price_bin" = "Price Bin"
 )
+
+make_boxplot <- function(data, gv, hv) {
+  plot_data <- data |>
+    filter(group_var == gv, hhi_var == hv)
+
+  years <- sort(unique(plot_data$listing_year))
+  levels <- sort(unique(plot_data$group_level))
+
+  # Chart height based on number of categories
+  chart_height <- paste0(max(300, length(levels) * 50 + 120), "px")
+
+  # Left margin based on longest label
+  grid_left <- max(100, max(nchar(levels)) * 7.5 + 30)
+
+  # Build timeline options (one per year)
+  opts <- lapply(years, function(yr) {
+    yr_data <- plot_data |> filter(listing_year == yr)
+
+    box_data <- lapply(levels, function(lvl) {
+      row <- yr_data |> filter(group_level == lvl)
+      if (nrow(row) == 0) return(list(0, 0, 0, 0, 0))
+      c(row$lower[1], row$q25[1], row$median[1], row$q75[1], row$upper[1])
+    })
+
+    list(series = list(list(data = box_data)))
+  })
+
+  echarts4r::e_charts(height = chart_height) |>
+    echarts4r::e_list(list(
+      baseOption = list(
+        timeline = list(
+          data = as.character(years),
+          autoPlay = FALSE,
+          bottom = 0,
+          playInterval = 1500
+        ),
+        tooltip = list(trigger = "item"),
+        grid = list(left = grid_left, bottom = 80),
+        yAxis = list(
+          type = "category",
+          data = levels,
+          inverse = TRUE
+        ),
+        xAxis = list(
+          type = "value",
+          name = "HHI",
+          min = 0
+        ),
+        series = list(
+          list(type = "boxplot")
+        ),
+        toolbox = list(
+          feature = list(saveAsImage = list())
+        )
+      ),
+      options = opts
+    ))
+}
 ```
 
 {{< include chunks/loading-notice.qmd >}}
 
-The [Market Concentration](market-concentration.qmd) page uses the [Herfindahl–Hirschman Index (HHI)](https://en.wikipedia.org/wiki/Herfindahl%E2%80%93Hirschman_Index) to measure how concentrated or competitive each powertrain segment is over time. The HHI ranges from 0 to 1, where values below 0.15 indicate a competitive market, values between 0.15 and 0.25 indicate moderate concentration, and values above 0.25 indicate a highly concentrated market. Concentration is measured across three dimensions: by make, by vehicle type, and by price bin. See the [HHI Explained](hhi-explained.qmd) page for an interactive tool that illustrates how HHI relates to market share distributions.
+The [Market Concentration](market-concentration.qmd) page uses the [Herfindahl–Hirschman Index (HHI)](https://en.wikipedia.org/wiki/Herfindahl%E2%80%93Hirschman_Index) to measure how concentrated or competitive each market segment is over time. The HHI ranges from 0 to 1, where values below 0.15 indicate a competitive market, values between 0.15 and 0.25 indicate moderate concentration, and values above 0.25 indicate a highly concentrated market. Concentration is measured across three dimensions: by make, by vehicle type, and by price bin. Each boxplot summarizes the distribution of HHI values across DMAs for a given year. Use the timeline slider below each chart to switch between years. See the [HHI Explained](hhi-explained.qmd) page for an interactive tool that illustrates how HHI relates to market share distributions.
 
-## Charts
+## By Powertrain
 
+### HHI by Make
 ```{r}
-#| echo: false
+make_boxplot(data, "powertrain", "make")
+```
 
-htmltools::tags$iframe(
-  src = 'https://019ba305-5eb9-798a-0dd9-7a01ccfc937f.share.connect.posit.cloud/',
-  width = "100%",
-  height = "800",
-  scrolling = "no",
-  seamless = "seamless",
-  frameBorder = "0"
-)
+### HHI by Vehicle Type
+```{r}
+make_boxplot(data, "powertrain", "vehicle_type")
+```
+
+### HHI by Price Bin
+```{r}
+make_boxplot(data, "powertrain", "price_bin")
+```
+
+## By Vehicle Type
+
+### HHI by Make
+```{r}
+make_boxplot(data, "vehicle_type", "make")
+```
+
+### HHI by Price Bin
+```{r}
+make_boxplot(data, "vehicle_type", "price_bin")
+```
+
+## By Price Bin
+
+### HHI by Make
+```{r}
+make_boxplot(data, "price_bin", "make")
+```
+
+### HHI by Vehicle Type
+```{r}
+make_boxplot(data, "price_bin", "vehicle_type")
 ```
 
 ## Data
 
 <center>
-Download data: [By Make](`r url_hhi_make`) | [By Type](`r url_hhi_type`) | [By Price](`r url_hhi_price`)
+[Download data](`r url_hhi`)
 
 <div style="width:900px">
 
 ```{r}
-#| echo: false
-
-hhi_combined |>
+data |>
   mutate(
+    mean = round(mean, 3),
     median = round(median, 3),
     q25 = round(q25, 3),
     q75 = round(q75, 3),
@@ -54,11 +140,12 @@ hhi_combined |>
     upper = round(upper, 3),
     lower = round(lower, 3)
   ) |>
-  select(metric, powertrain, year, median, q25, q75, IQR, upper, lower) |>
   rename(
-    Metric = metric,
-    Powertrain = powertrain,
-    Year = year,
+    `Group Variable` = group_var,
+    `Group Level` = group_level,
+    `HHI Variable` = hhi_var,
+    Year = listing_year,
+    Mean = mean,
     Median = median,
     Q25 = q25,
     Q75 = q75,

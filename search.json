@@ -104,17 +104,37 @@
     "href": "market-concentration.html",
     "title": "Market Concentration",
     "section": "",
-    "text": "This page contains interactive content that may take a moment to load, please be patient. If you refresh this page, it will have to load again.\nThe Market Concentration page uses the Herfindahl–Hirschman Index (HHI) to measure how concentrated or competitive each powertrain segment is over time. The HHI ranges from 0 to 1, where values below 0.15 indicate a competitive market, values between 0.15 and 0.25 indicate moderate concentration, and values above 0.25 indicate a highly concentrated market. Concentration is measured across three dimensions: by make, by vehicle type, and by price bin. See the HHI Explained page for an interactive tool that illustrates how HHI relates to market share distributions.",
+    "text": "This page contains interactive content that may take a moment to load, please be patient. If you refresh this page, it will have to load again.\nThe Market Concentration page uses the Herfindahl–Hirschman Index (HHI) to measure how concentrated or competitive each market segment is over time. The HHI ranges from 0 to 1, where values below 0.15 indicate a competitive market, values between 0.15 and 0.25 indicate moderate concentration, and values above 0.25 indicate a highly concentrated market. Concentration is measured across three dimensions: by make, by vehicle type, and by price bin. Each boxplot summarizes the distribution of HHI values across DMAs for a given year. Use the timeline slider below each chart to switch between years. See the HHI Explained page for an interactive tool that illustrates how HHI relates to market share distributions.",
     "crumbs": [
       "Market Concentration"
     ]
   },
   {
-    "objectID": "market-concentration.html#charts",
-    "href": "market-concentration.html#charts",
+    "objectID": "market-concentration.html#by-powertrain",
+    "href": "market-concentration.html#by-powertrain",
     "title": "Market Concentration",
-    "section": "Charts",
-    "text": "Charts",
+    "section": "By Powertrain",
+    "text": "By Powertrain\n\nHHI by Make\n\n\n\n\n\n\n\n\nHHI by Vehicle Type\n\n\n\n\n\n\n\n\nHHI by Price Bin",
+    "crumbs": [
+      "Market Concentration"
+    ]
+  },
+  {
+    "objectID": "market-concentration.html#by-vehicle-type",
+    "href": "market-concentration.html#by-vehicle-type",
+    "title": "Market Concentration",
+    "section": "By Vehicle Type",
+    "text": "By Vehicle Type\n\nHHI by Make\n\n\n\n\n\n\n\n\nHHI by Price Bin",
+    "crumbs": [
+      "Market Concentration"
+    ]
+  },
+  {
+    "objectID": "market-concentration.html#by-price-bin",
+    "href": "market-concentration.html#by-price-bin",
+    "title": "Market Concentration",
+    "section": "By Price Bin",
+    "text": "By Price Bin\n\nHHI by Make\n\n\n\n\n\n\n\n\nHHI by Vehicle Type",
     "crumbs": [
       "Market Concentration"
     ]
@@ -124,7 +144,7 @@
     "href": "market-concentration.html#data",
     "title": "Market Concentration",
     "section": "Data",
-    "text": "Data\n\nDownload data: By Make | By Type | By Price",
+    "text": "Data\n\nDownload data",
     "crumbs": [
       "Market Concentration"
     ]

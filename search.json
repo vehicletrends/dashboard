@@ -104,7 +104,17 @@
     "href": "market-concentration.html",
     "title": "Market Concentration",
     "section": "",
-    "text": "This page contains interactive content that may take a moment to load, please be patient. If you refresh this page, it will have to load again.\nThe Market Concentration page uses the Herfindahl–Hirschman Index (HHI) to measure how concentrated or competitive each market segment is over time. The HHI ranges from 0 to 1, where values below 0.15 indicate a competitive market, values between 0.15 and 0.25 indicate moderate concentration, and values above 0.25 indicate a highly concentrated market. Concentration is measured across three dimensions: by make, by vehicle type, and by price bin. Each boxplot summarizes the distribution of HHI values across DMAs for a given year. Use the timeline slider below each chart to switch between years. See the HHI Explained page for an interactive tool that illustrates how HHI relates to market share distributions.",
+    "text": "We use the Herfindahl–Hirschman Index (HHI) to measure how concentrated or competitive each market segment is over time. The HHI ranges from 0 to 1, with the following general guidelines:\nSee the HHI Explained page for an interactive tool that illustrates how HHI relates to market share distributions.\nConcentration is measured across three groups: Powertrain, Vehicle Type (Body Style), and Price Bin. Within each group, you can choose a level and HHI dimension to view: make, vehicle type (body style), and price bin. The map below allows you to select any of these dimensions for any listing year for every U.S. census tract.\nBelow the map are boxplots that summarize the distribution of HHI values across all census tracts for a given year. Use the timeline slider below each chart to switch between years.",
+    "crumbs": [
+      "Market Concentration"
+    ]
+  },
+  {
+    "objectID": "market-concentration.html#map",
+    "href": "market-concentration.html#map",
+    "title": "Market Concentration",
+    "section": "Map",
+    "text": "Map",
     "crumbs": [
       "Market Concentration"
     ]

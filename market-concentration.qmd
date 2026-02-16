@@ -37,7 +37,9 @@ make_boxplot <- function(data, gv, hv) {
 
     box_data <- lapply(levels, function(lvl) {
       row <- yr_data |> filter(group_level == lvl)
-      if (nrow(row) == 0) return(list(0, 0, 0, 0, 0))
+      if (nrow(row) == 0) {
+        return(list(0, 0, 0, 0, 0))
+      }
       c(row$lower[1], row$q25[1], row$median[1], row$q75[1], row$upper[1])
     })
 
@@ -77,9 +79,30 @@ make_boxplot <- function(data, gv, hv) {
 }
 ```
 
-{{< include chunks/loading-notice.qmd >}}
+We use the [Herfindahl–Hirschman Index (HHI)](https://en.wikipedia.org/wiki/Herfindahl%E2%80%93Hirschman_Index) to measure how concentrated or competitive each market segment is over time. The HHI ranges from 0 to 1, with the following general guidelines: 
 
-The [Market Concentration](market-concentration.qmd) page uses the [Herfindahl–Hirschman Index (HHI)](https://en.wikipedia.org/wiki/Herfindahl%E2%80%93Hirschman_Index) to measure how concentrated or competitive each market segment is over time. The HHI ranges from 0 to 1, where values below 0.15 indicate a competitive market, values between 0.15 and 0.25 indicate moderate concentration, and values above 0.25 indicate a highly concentrated market. Concentration is measured across three dimensions: by make, by vehicle type, and by price bin. Each boxplot summarizes the distribution of HHI values across DMAs for a given year. Use the timeline slider below each chart to switch between years. See the [HHI Explained](hhi-explained.qmd) page for an interactive tool that illustrates how HHI relates to market share distributions.
+- <0.10: Very competitive market
+- 0.10 - 0.15: Competitive market
+- 0.15 - 0.25: Moderate concentration
+- 0.25 - 0.5: Concentrated market 
+- \>0.5: Very concentrated market 
+
+See the [HHI Explained](hhi-explained.qmd) page for an interactive tool that illustrates how HHI relates to market share distributions.
+
+Concentration is measured across three groups: **Powertrain**, **Vehicle Type** (Body Style), and **Price Bin**. Within each group, you can choose a level and HHI dimension to view: **make**, **vehicle type** (body style), and **price bin**. The map below allows you to select any of these dimensions for any listing year for every U.S. census tract.
+
+Below the map are boxplots that summarize the distribution of HHI values across all census tracts for a given year. Use the timeline slider below each chart to switch between years. 
+
+## Map
+
+```{r}
+htmltools::tags$iframe(
+  src = "https://vehicletrends.github.io/hhi-map/",
+  height = "700px",
+  width = "100%",
+  style = "border: none;"
+)
+```
 
 ## By Powertrain
 

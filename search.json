@@ -40,319 +40,64 @@
     ]
   },
   {
-    "objectID": "registrations.html",
-    "href": "registrations.html",
-    "title": "Vehicle Registrations",
+    "objectID": "tech-stack.html",
+    "href": "tech-stack.html",
+    "title": "Tech Stack",
     "section": "",
-    "text": "This page contains interactive content that may take a moment to load, please be patient. If you refresh this page, it will have to load again.\n\n\n\nThis page shows light-duty vehicle registration counts by state, powertrain, and year. Data are sourced from the Alternative Fuels Data Center (AFDC). Use the dropdown filters to explore registration counts and market share across the US. This page is a replication of this dashboard by TransAtlas.\n\nChartsData\n\n\n#| '!! shinylive warning !!': |\n#|   shinylive does not work in self-contained HTML documents.\n#|   Please set `embed-resources: false` in your metadata.\n#| standalone: true\n#| viewerHeight: 1150\n\nlibrary(shiny)\nlibrary(dplyr)\nlibrary(bslib)\nlibrary(echarts4r)\nlibrary(jsonlite)\n\n# Load data\ndata_url &lt;- \"https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/registrations.csv\"\ndata &lt;- read.csv(data_url)\n\n# Load pre-projected US GeoJSON (Albers USA with AK/HI insets via tigris::shift_geometry)\nus_json &lt;- jsonlite::read_json(\n  \"https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/us-states-shifted.geojson\"\n)\n\n# Compute market share\ndata &lt;- data |&gt;\n  filter(state != \"Puerto Rico\") |&gt;\n  group_by(year, state) |&gt;\n  mutate(\n    total = sum(count),\n    share = round(count / total, 4)\n  ) |&gt;\n  ungroup()\n\nstates_no_total &lt;- sort(unique(data$state[data$state != \"United States\"]))\nall_states &lt;- c(\"United States\", states_no_total)\n\n# Fixed powertrain order\npowertrain_order &lt;- c(\n  \"Gasoline\",\n  \"Flex Fuel (E85)\",\n  \"Hybrid Electric (HEV)\",\n  \"Plug-In Hybrid Electric (PHEV)\",\n  \"Battery Electric (BEV)\",\n  \"Diesel\",\n  \"Biodiesel\",\n  \"Fuel Cell\",\n  \"Compressed Natural Gas (CNG)\",\n  \"Methanol\",\n  \"Propane\",\n  \"Unknown\"\n)\npowertrains &lt;- powertrain_order[powertrain_order %in% unique(data$powertrain)]\nyears &lt;- sort(unique(data$year), decreasing = TRUE)\n\nui &lt;- page_sidebar(\n  title = \"Vehicle Registrations\",\n  sidebar = sidebar(\n    width = 250,\n    radioButtons(\n      \"powertrain\",\n      \"Powertrain:\",\n      choices = powertrains,\n      selected = powertrains[1]\n    ),\n    selectInput(\n      \"year\",\n      \"Year (map):\",\n      choices = years,\n      selected = max(years)\n    ),\n    selectInput(\n      \"state\",\n      \"State (trend):\",\n      choices = all_states,\n      selected = \"United States\"\n    ),\n    radioButtons(\n      \"metric\",\n      \"Metric:\",\n      choices = c(\"Count\" = \"count\", \"Market Share\" = \"share\"),\n      selected = \"count\"\n    )\n  ),\n  layout_column_wrap(\n    width = 1,\n    card(\n      card_header(textOutput(\"map_title\")),\n      echarts4rOutput(\"map\", height = \"550px\")\n    ),\n    card(\n      card_header(textOutput(\"trend_title\")),\n      echarts4rOutput(\"trend\", height = \"300px\")\n    )\n  )\n)\n\nserver &lt;- function(input, output, session) {\n  # Click on a state in the map → update the state dropdown\n  observeEvent(input$map_clicked_data, {\n    clicked &lt;- input$map_clicked_data$name\n    if (!is.null(clicked) && clicked %in% all_states) {\n      updateSelectInput(session, \"state\", selected = clicked)\n    }\n  })\n\n  output$map_title &lt;- renderText({\n    metric_label &lt;- if (input$metric == \"share\") {\n      \"Market Share\"\n    } else {\n      \"Registrations\"\n    }\n    paste0(metric_label, \": \", input$powertrain, \" (\", input$year, \")\")\n  })\n\n  output$trend_title &lt;- renderText({\n    metric_label &lt;- if (input$metric == \"share\") {\n      \"Market Share\"\n    } else {\n      \"Registrations\"\n    }\n    paste0(metric_label, \" Over Time: \", input$powertrain, \" - \", input$state)\n  })\n\n  output$map &lt;- renderEcharts4r({\n    map_data &lt;- data |&gt;\n      filter(\n        powertrain == input$powertrain,\n        year == as.integer(input$year),\n        state != \"United States\"\n      )\n\n    map_data$value &lt;- if (input$metric == \"share\") {\n      map_data$share\n    } else {\n      map_data$count\n    }\n\n    chart &lt;- if (input$metric == \"share\") {\n      map_data |&gt;\n        e_charts(state) |&gt;\n        e_map_register(\"USA_albers\", us_json) |&gt;\n        e_map(\n          value,\n          map = \"USA_albers\",\n          aspectScale = 1,\n          selectedMode = FALSE,\n          top = 0,\n          bottom = 40\n        ) |&gt;\n        e_visual_map(\n          value,\n          orient = \"horizontal\",\n          left = \"center\",\n          bottom = 0,\n          inRange = list(color = c(\"#ffffcc\", \"#fd8d3c\", \"#bd0026\")),\n          formatter = htmlwidgets::JS(\n            \"\n            function(value) {\n              return (value * 100).toFixed(1) + '%';\n            }\n          \"\n          )\n        ) |&gt;\n        e_tooltip(\n          formatter = htmlwidgets::JS(\n            \"\n            function(params) {\n              if (params.value) {\n                return params.name + '&lt;br/&gt;' + (params.value * 100).toFixed(2) + '%';\n              }\n              return params.name + '&lt;br/&gt;No data';\n            }\n          \"\n          )\n        )\n    } else {\n      map_data |&gt;\n        e_charts(state) |&gt;\n        e_map_register(\"USA_albers\", us_json) |&gt;\n        e_map(\n          value,\n          map = \"USA_albers\",\n          aspectScale = 1,\n          selectedMode = FALSE,\n          top = 0,\n          bottom = 40\n        ) |&gt;\n        e_visual_map(\n          value,\n          orient = \"horizontal\",\n          left = \"center\",\n          bottom = 0,\n          inRange = list(color = c(\"#ffffcc\", \"#fd8d3c\", \"#bd0026\")),\n          formatter = htmlwidgets::JS(\n            \"\n            function(value) {\n              return Math.round(value).toString().replace(/\\\\B(?=(\\\\d{3})+(?!\\\\d))/g, ',');\n            }\n          \"\n          )\n        ) |&gt;\n        e_tooltip(\n          formatter = htmlwidgets::JS(\n            \"\n            function(params) {\n              if (params.value) {\n                return params.name + '&lt;br/&gt;' + params.value.toLocaleString();\n              }\n              return params.name + '&lt;br/&gt;No data';\n            }\n          \"\n          )\n        )\n    }\n\n    chart\n  })\n\n  output$trend &lt;- renderEcharts4r({\n    trend_data &lt;- data |&gt;\n      filter(\n        powertrain == input$powertrain,\n        state == input$state\n      ) |&gt;\n      arrange(year)\n\n    trend_data$value &lt;- if (input$metric == \"share\") {\n      trend_data$share\n    } else {\n      trend_data$count\n    }\n\n    if (input$metric == \"share\") {\n      trend_data |&gt;\n        e_charts(year) |&gt;\n        e_bar(value, name = input$powertrain) |&gt;\n        e_x_axis(name = \"Year\", type = \"category\") |&gt;\n        e_y_axis(\n          name = \"Market Share\",\n          axisLabel = list(\n            formatter = htmlwidgets::JS(\n              \"\n              function(value) { return (value * 100).toFixed(1) + '%'; }\n            \"\n            )\n          )\n        ) |&gt;\n        e_tooltip(\n          formatter = htmlwidgets::JS(\n            \"\n            function(params) {\n              return params.name + '&lt;br/&gt;' + (params.value[1] * 100).toFixed(2) + '%';\n            }\n          \"\n          )\n        ) |&gt;\n        e_grid(left = 80) |&gt;\n        e_color(background = \"transparent\") |&gt;\n        e_legend(show = FALSE) |&gt;\n        e_toolbox_feature(feature = \"saveAsImage\")\n    } else {\n      trend_data |&gt;\n        e_charts(year) |&gt;\n        e_bar(value, name = input$powertrain) |&gt;\n        e_x_axis(name = \"Year\", type = \"category\") |&gt;\n        e_y_axis(name = \"Count\") |&gt;\n        e_tooltip(\n          formatter = htmlwidgets::JS(\n            \"\n            function(params) {\n              return params.name + '&lt;br/&gt;' + params.value[1].toLocaleString();\n            }\n          \"\n          )\n        ) |&gt;\n        e_grid(left = 100) |&gt;\n        e_color(background = \"transparent\") |&gt;\n        e_legend(show = FALSE) |&gt;\n        e_toolbox_feature(feature = \"saveAsImage\")\n    }\n  })\n}\n\nshinyApp(ui, server)\n\n\n\nDownload data",
+    "text": "This page describes the technologies used to build and deploy the US Vehicle Trends dashboard.",
     "crumbs": [
-      "Registrations"
+      "Tech Stack"
     ]
   },
   {
-    "objectID": "percent-dealers.html",
-    "href": "percent-dealers.html",
-    "title": "Percent of Dealers",
-    "section": "",
-    "text": "This page shows the percentage of dealerships that have at least one vehicle of a given type in their inventory over time. Each chart displays the share of dealers carrying a specific combination of powertrain and category (vehicle type or price bin), with separate views for new and used inventory. The x-axis is the listing year and the y-axis is the percent of dealers.",
+    "objectID": "tech-stack.html#site-framework",
+    "href": "tech-stack.html#site-framework",
+    "title": "Tech Stack",
+    "section": "Site Framework",
+    "text": "Site Framework\nThe dashboard is built with Quarto, an open-source scientific and technical publishing system. Quarto renders the .qmd (Quarto Markdown) source files into the static HTML pages that make up this website.",
     "crumbs": [
-      "Percent of Dealers"
+      "Tech Stack"
     ]
   },
   {
-    "objectID": "percent-dealers.html#powertrain-by-vehicle-type",
-    "href": "percent-dealers.html#powertrain-by-vehicle-type",
-    "title": "Percent of Dealers",
-    "section": "Powertrain by Vehicle Type",
-    "text": "Powertrain by Vehicle Type\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)\n\n\n\n\n\n\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nDiesel\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)",
+    "objectID": "tech-stack.html#data-processing",
+    "href": "tech-stack.html#data-processing",
+    "title": "Tech Stack",
+    "section": "Data Processing",
+    "text": "Data Processing\nAll data processing and analysis is done in R. Key R packages used on the site include:\n\n\n\nPackage\nPurpose\n\n\n\n\ndplyr\nData manipulation and transformation\n\n\nreactable\nInteractive data tables\n\n\nhtmltools\nHTML generation for embedded content\n\n\nkableExtra\nEnhanced table formatting\n\n\npmtiles\nGeneration of PMTiles tiled map data for the HHI map\n\n\nvehicletrends\nSummary data package for this project",
     "crumbs": [
-      "Percent of Dealers"
+      "Tech Stack"
     ]
   },
   {
-    "objectID": "percent-dealers.html#powertrain-by-price-bin",
-    "href": "percent-dealers.html#powertrain-by-price-bin",
-    "title": "Percent of Dealers",
-    "section": "Powertrain by Price Bin",
-    "text": "Powertrain by Price Bin\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)\n\n\n\n\n\n\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nDiesel\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)",
+    "objectID": "tech-stack.html#interactive-charts",
+    "href": "tech-stack.html#interactive-charts",
+    "title": "Tech Stack",
+    "section": "Interactive Charts",
+    "text": "Interactive Charts\nMost of the interactive chart visualizations are built with echarts4r, an R interface to Apache ECharts.\nThe interactive map on the Market Concentration page is built with MapLibre GL JS, an open-source map rendering library. The underlying census tract geometries and HHI data are served as PMTiles, a cloud-optimized format for tiled map data. The PMTiles archive is generated in R using the {pmtiles} package (which wraps Tippecanoe) and hosted on Cloudflare R2 for low-latency delivery. The base map tiles are provided by CARTO.\nThe HHI Explained page features an interactive Shiny application that runs entirely in the browser using Shinylive, which compiles R and Shiny to WebAssembly via webR. This means the app requires no server — all computation happens client-side.",
     "crumbs": [
-      "Percent of Dealers"
+      "Tech Stack"
     ]
   },
   {
-    "objectID": "percent-dealers.html#vehicle-type-by-price-bin",
-    "href": "percent-dealers.html#vehicle-type-by-price-bin",
-    "title": "Percent of Dealers",
-    "section": "Vehicle Type by Price Bin",
-    "text": "Vehicle Type by Price Bin\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\nCar\n\n\n\n\nCUV\n\n\n\n\nMinivan\n\n\n\n\nPickup\n\n\n\n\nSUV\n\n\n\n\n\n\n\n\n\n\n\n\nCar\n\n\n\n\nCUV\n\n\n\n\nMinivan\n\n\n\n\nPickup\n\n\n\n\nSUV",
+    "objectID": "tech-stack.html#hosting-and-deployment",
+    "href": "tech-stack.html#hosting-and-deployment",
+    "title": "Tech Stack",
+    "section": "Hosting and Deployment",
+    "text": "Hosting and Deployment\nThe site is rendered automatically via GitHub Actions on every push to the main branch and on a weekly scheduled build. The rendered site is deployed to and hosted on Netlify.",
     "crumbs": [
-      "Percent of Dealers"
+      "Tech Stack"
     ]
   },
   {
-    "objectID": "percent-dealers.html#data",
-    "href": "percent-dealers.html#data",
-    "title": "Percent of Dealers",
-    "section": "Data",
-    "text": "Data\n\nDownload data",
+    "objectID": "tech-stack.html#acknowledgements",
+    "href": "tech-stack.html#acknowledgements",
+    "title": "Tech Stack",
+    "section": "Acknowledgements",
+    "text": "Acknowledgements\nThis project would not be possible without the work of many open-source developers and communities. I include a comprehensive list below, but I want to especially thank Kyle Walker not just for developing amazing R packages like {pmtiles} but also for creating so many helpful posts on his website from which I learned so much.\n\nQuarto — J.J. Allaire, Charles Teague, and the Posit team for creating a powerful publishing framework.\nR — The R Core Team and the broader R community.\ndplyr — Hadley Wickham, Romain François, Lionel Henry, Kirill Müller, and the tidyverse team.\nreactable — Greg Lin for a flexible interactive table library.\necharts4r — John Coene for bringing Apache ECharts to R.\nApache ECharts — The Apache Software Foundation for a powerful charting library.\nMapLibre GL JS — The MapLibre community for an open-source map rendering library.\nPMTiles and Protomaps — Brandon Liu for a cloud-optimized tiled map format.\npmtiles (R) — Kyle Walker for bringing PMTiles generation to R.\nTippecanoe — Felt and Mapbox for building efficient vector tilesets.\nShinylive and webR — George Stagg, Winston Chang, and the Posit team for running Shiny apps entirely in the browser.\nCARTO — For providing base map tiles.\nCloudflare R2 — Cloudflare for object storage hosting.\nhtmltools — Joe Cheng, Carson Sievert, and the Posit team.\nkableExtra — Hao Zhu for extended table formatting capabilities.\nGitHub Actions — GitHub for CI/CD infrastructure.\nNetlify — For site hosting and deployment.\nPosit Cloud Connect — Posit for hosting the interactive chart applications.\nMarketCheck — For providing the underlying vehicle listings data.",
     "crumbs": [
-      "Percent of Dealers"
+      "Tech Stack"
     ]
-  },
-  {
-    "objectID": "market-concentration.html",
-    "href": "market-concentration.html",
-    "title": "Market Concentration",
-    "section": "",
-    "text": "We use the Herfindahl–Hirschman Index (HHI) to measure how concentrated or competitive each market segment is over time. The HHI ranges from 0 to 1, with the following general guidelines:\nSee the HHI Explained page for an interactive tool that illustrates how HHI relates to market share distributions.\nConcentration is measured across three groups: Powertrain, Vehicle Type (Body Style), and Price Bin. Within each group, you can choose a level and HHI dimension to view: make, vehicle type (body style), and price bin. The map below allows you to select any of these dimensions for any listing year for every U.S. census tract.\nBelow the map are boxplots that summarize the distribution of HHI values across all census tracts for a given year. Use the timeline slider below each chart to switch between years.",
-    "crumbs": [
-      "Market Concentration"
-    ]
-  },
-  {
-    "objectID": "market-concentration.html#map",
-    "href": "market-concentration.html#map",
-    "title": "Market Concentration",
-    "section": "Map",
-    "text": "Map",
-    "crumbs": [
-      "Market Concentration"
-    ]
-  },
-  {
-    "objectID": "market-concentration.html#by-powertrain",
-    "href": "market-concentration.html#by-powertrain",
-    "title": "Market Concentration",
-    "section": "By Powertrain",
-    "text": "By Powertrain\n\nHHI by Make\n\n\n\n\n\n\n\n\nHHI by Vehicle Type\n\n\n\n\n\n\n\n\nHHI by Price Bin",
-    "crumbs": [
-      "Market Concentration"
-    ]
-  },
-  {
-    "objectID": "market-concentration.html#by-vehicle-type",
-    "href": "market-concentration.html#by-vehicle-type",
-    "title": "Market Concentration",
-    "section": "By Vehicle Type",
-    "text": "By Vehicle Type\n\nHHI by Make\n\n\n\n\n\n\n\n\nHHI by Price Bin",
-    "crumbs": [
-      "Market Concentration"
-    ]
-  },
-  {
-    "objectID": "market-concentration.html#by-price-bin",
-    "href": "market-concentration.html#by-price-bin",
-    "title": "Market Concentration",
-    "section": "By Price Bin",
-    "text": "By Price Bin\n\nHHI by Make\n\n\n\n\n\n\n\n\nHHI by Vehicle Type",
-    "crumbs": [
-      "Market Concentration"
-    ]
-  },
-  {
-    "objectID": "market-concentration.html#data",
-    "href": "market-concentration.html#data",
-    "title": "Market Concentration",
-    "section": "Data",
-    "text": "Data\n\nDownload data",
-    "crumbs": [
-      "Market Concentration"
-    ]
-  },
-  {
-    "objectID": "hhi-explained.html",
-    "href": "hhi-explained.html",
-    "title": "HHI Explained",
-    "section": "",
-    "text": "This app helps explain the meaning of the Herfindahl–Hirschman Index (HHI), which is an index from 0 to 1 that helps explain the level of concentration in a market.\n#| '!! shinylive warning !!': |\n#|   shinylive does not work in self-contained HTML documents.\n#|   Please set `embed-resources: false` in your metadata.\n#| standalone: true\n#| viewerHeight: 800\n\nlibrary(shiny)\nlibrary(echarts4r)\nlibrary(dplyr)\nlibrary(bslib)\n\ngenerate_market_shares &lt;- function(target_hhi, n_companies) {\n  if (n_companies &lt;= 0) {\n    return(list(\n      shares = numeric(0),\n      n_companies = 0,\n      actual_hhi = 0,\n      min_hhi = 0,\n      max_hhi = 0,\n      is_achievable = FALSE\n    ))\n  }\n\n  if (n_companies == 1) {\n    return(list(\n      shares = 1,\n      n_companies = 1,\n      actual_hhi = 1,\n      min_hhi = 1,\n      max_hhi = 1,\n      is_achievable = (target_hhi &gt;= 0.99)\n    ))\n  }\n\n  min_hhi &lt;- 1 / n_companies\n  max_hhi &lt;- 1.0\n  is_achievable &lt;- (target_hhi &gt;= min_hhi - 0.001 &&\n    target_hhi &lt;= max_hhi + 0.001)\n\n  if (!is_achievable) {\n    shares &lt;- rep(1 / n_companies, n_companies)\n    return(list(\n      shares = shares,\n      n_companies = n_companies,\n      actual_hhi = min_hhi,\n      min_hhi = min_hhi,\n      max_hhi = max_hhi,\n      is_achievable = FALSE\n    ))\n  }\n\n  if (target_hhi &lt;= min_hhi + 0.001) {\n    shares &lt;- rep(1 / n_companies, n_companies)\n  } else if (target_hhi &gt;= 0.999) {\n    shares &lt;- c(0.9999, rep(0.0001 / (n_companies - 1), n_companies - 1))\n  } else if (n_companies == 2) {\n    discriminant &lt;- 2 * target_hhi - 1\n    if (discriminant &gt;= 0) {\n      s1 &lt;- (1 + sqrt(discriminant)) / 2\n      shares &lt;- c(s1, 1 - s1)\n    } else {\n      shares &lt;- c(0.5, 0.5)\n    }\n  } else {\n    hhi_normalized &lt;- (target_hhi - min_hhi) / (max_hhi - min_hhi)\n    exponent &lt;- 0.2 + hhi_normalized * 4\n    ranks &lt;- 1:n_companies\n    shares &lt;- (1 / ranks)^exponent\n    shares &lt;- shares / sum(shares)\n\n    for (iteration in 1:2000) {\n      current_hhi &lt;- sum(shares^2)\n      error &lt;- current_hhi - target_hhi\n      if (abs(error) &lt; 0.00001) {\n        break\n      }\n\n      learning_rate &lt;- 0.1 * (0.9^(iteration %/% 100))\n      if (error &gt; 0) {\n        transfer &lt;- min(shares[1] * learning_rate, abs(error) * 0.5)\n        shares[1] &lt;- shares[1] - transfer\n        shares[n_companies] &lt;- shares[n_companies] + transfer\n      } else {\n        transfer &lt;- min(shares[n_companies] * learning_rate, abs(error) * 0.5)\n        if (shares[n_companies] &gt; transfer) {\n          shares[1] &lt;- shares[1] + transfer\n          shares[n_companies] &lt;- shares[n_companies] - transfer\n        }\n      }\n      shares &lt;- pmax(shares, 0.00001)\n      shares &lt;- shares / sum(shares)\n    }\n  }\n\n  list(\n    shares = shares,\n    n_companies = n_companies,\n    actual_hhi = sum(shares^2),\n    min_hhi = min_hhi,\n    max_hhi = max_hhi,\n    is_achievable = TRUE\n  )\n}\n\nui &lt;- page_sidebar(\n  theme = bs_theme(\n    version = 5,\n    bg = \"#ffffff\",\n    fg = \"#000000\",\n    primary = \"#6c757d\"\n  ),\n\n  sidebar = sidebar(\n    open = \"always\",\n    h4(\"Market Parameters\"),\n    sliderInput(\n      \"n_companies\",\n      \"Number of Companies:\",\n      min = 1,\n      max = 10,\n      value = 5,\n      step = 1\n    ),\n    sliderInput(\n      \"hhi_target\",\n      \"HHI Level:\",\n      min = 0,\n      max = 1,\n      value = 0.30,\n      step = 0.01\n    ),\n    hr(style = \"border-color: #dee2e6;\"),\n    h5(\"Quick Scenarios\"),\n    actionButton(\n      \"scenario1\",\n      \"Perfect Competition\",\n      class = \"btn-outline-secondary btn-sm w-100 mb-2\"\n    ),\n    actionButton(\n      \"scenario2\",\n      \"Moderate Market\",\n      class = \"btn-outline-secondary btn-sm w-100 mb-2\"\n    ),\n    actionButton(\n      \"scenario3\",\n      \"Concentrated Market\",\n      class = \"btn-outline-secondary btn-sm w-100 mb-2\"\n    ),\n    actionButton(\n      \"scenario4\",\n      \"Duopoly\",\n      class = \"btn-outline-secondary btn-sm w-100\"\n    )\n  ),\n\n  layout_column_wrap(\n    width = 1 / 3,\n    value_box(\n      \"HHI Level\",\n      textOutput(\"hhi_display\"),\n      theme = \"white\",\n      style = \"border: 1px solid #dee2e6;\"\n    ),\n    value_box(\n      \"Companies\",\n      textOutput(\"num_companies_display\"),\n      theme = \"white\",\n      style = \"border: 1px solid #dee2e6;\"\n    ),\n    value_box(\n      \"Market Type\",\n      textOutput(\"market_status_display\"),\n      theme = \"white\",\n      style = \"border: 1px solid #dee2e6;\"\n    )\n  ),\n\n  uiOutput(\"hhi_warning\"),\n\n  card(\n    card_header(\"Market Share Distribution\"),\n    echarts4rOutput(\"pieChart\", height = \"400px\"),\n    style = \"border: 1px solid #dee2e6;\"\n  )\n)\n\nserver &lt;- function(input, output, session) {\n  marketData &lt;- reactive({\n    result &lt;- generate_market_shares(input$hhi_target, input$n_companies)\n    if (length(result$shares) &gt; 0 && result$n_companies &gt; 0) {\n      companies_df &lt;- data.frame(\n        company = LETTERS[1:result$n_companies],\n        share = result$shares * 100\n      )\n    } else {\n      companies_df &lt;- data.frame()\n    }\n    list(\n      target_hhi = input$hhi_target,\n      actual_hhi = result$actual_hhi,\n      n_companies = result$n_companies,\n      min_hhi = result$min_hhi,\n      max_hhi = result$max_hhi,\n      is_achievable = result$is_achievable,\n      data = companies_df\n    )\n  })\n\n  output$hhi_display &lt;- renderText(sprintf(\"%.2f\", input$hhi_target))\n  output$num_companies_display &lt;- renderText(as.character(input$n_companies))\n  output$market_status_display &lt;- renderText({\n    if (input$hhi_target &lt; 0.15) {\n      \"Competitive\"\n    } else if (input$hhi_target &lt; 0.25) {\n      \"Moderate\"\n    } else {\n      \"Concentrated\"\n    }\n  })\n\n  output$hhi_warning &lt;- renderUI({\n    data &lt;- marketData()\n    if (!data$is_achievable) {\n      div(\n        class = \"alert alert-danger\",\n        style = \"border: 1px solid #f8d7da;\",\n        sprintf(\n          \"With %d companies, HHI must be between %.2f and %.2f.\",\n          data$n_companies,\n          data$min_hhi,\n          data$max_hhi\n        )\n      )\n    }\n  })\n\n  output$pieChart &lt;- renderEcharts4r({\n    data &lt;- marketData()\n    if (nrow(data$data) == 0) {\n      data.frame(x = 1, y = 1) |&gt;\n        e_charts() |&gt;\n        e_title(\n          text = \"Set parameters to view distribution\",\n          left = \"center\",\n          top = \"center\"\n        )\n    } else {\n      colors &lt;- c(\n        \"#3498db\",\n        \"#e74c3c\",\n        \"#2ecc71\",\n        \"#9b59b6\",\n        \"#f39c12\",\n        \"#1abc9c\",\n        \"#34495e\",\n        \"#e67e22\",\n        \"#95a5a6\",\n        \"#16a085\"\n      )\n\n      data$data |&gt;\n        arrange(desc(share)) |&gt;\n        e_charts(company) |&gt;\n        e_pie(\n          share,\n          radius = c(\"40%\", \"70%\"),\n          label = list(\n            formatter = \"{b}\\n{d}%\",\n            fontSize = 14,\n            fontWeight = \"bold\"\n          )\n        ) |&gt;\n        e_tooltip(\n          trigger = \"item\",\n          formatter = htmlwidgets::JS(\n            \"\n                        function(params) {\n                            return params.name + '&lt;br/&gt;' + \n                                   'Market Share: ' + params.value.toFixed(1) + '%&lt;br/&gt;' +\n                                   'Proportion: ' + params.percent.toFixed(1) + '%';\n                        }\n                    \"\n          )\n        ) |&gt;\n        e_legend(right = 10, top = \"middle\", orient = \"vertical\") |&gt;\n        e_color(colors[1:nrow(data$data)])\n    }\n  })\n\n  observeEvent(input$scenario1, {\n    updateSliderInput(session, \"n_companies\", value = 10)\n    updateSliderInput(session, \"hhi_target\", value = 0.10)\n  })\n\n  observeEvent(input$scenario2, {\n    updateSliderInput(session, \"n_companies\", value = 7)\n    updateSliderInput(session, \"hhi_target\", value = 0.20)\n  })\n\n  observeEvent(input$scenario3, {\n    updateSliderInput(session, \"n_companies\", value = 5)\n    updateSliderInput(session, \"hhi_target\", value = 0.35)\n  })\n\n  observeEvent(input$scenario4, {\n    updateSliderInput(session, \"n_companies\", value = 2)\n    updateSliderInput(session, \"hhi_target\", value = 0.65)\n  })\n}\n\nshinyApp(ui = ui, server = server)",
-    "crumbs": [
-      "HHI Explained"
-    ]
-  },
-  {
-    "objectID": "dealership-inventories.html",
-    "href": "dealership-inventories.html",
-    "title": "Dealership inventories",
-    "section": "",
-    "text": "ChartsData\n\n\n\n\n\n\n\n\n\n\nDownload data"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "This dashboard provides summary information about various trends in the U.S. automobile market. The primary data source is 74,894,001 new and 94,658,664 used vehicle listings from over 100,000 dealerships across all 50 states in the U.S. between 2018 and 2025 (inclusive). The original data are licensed from marketcheck.com and cannot be made public, but this website provides public access to various summaries of the original listings data.\nThe open-source project was created and is maintained by Dr. John Paul Helveston, an Associate Professor in the Engineering Management and Systems Engineering Department at The George Washington University.",
-    "crumbs": [
-      "About"
-    ]
-  },
-  {
-    "objectID": "about.html#r-data-package",
-    "href": "about.html#r-data-package",
-    "title": "About",
-    "section": "R Data Package",
-    "text": "R Data Package\nThe summary data powering this dashboard are available as the {vehicletrends} R package. Install it from GitHub to access all datasets directly in R:\n# install.packages(\"remotes\")\nremotes::install_github(\"vehicletrends/vehicletrends\")\nSee the package documentation site for details on available datasets.",
-    "crumbs": [
-      "About"
-    ]
-  },
-  {
-    "objectID": "about.html#vehicle-miles-traveled-vmt",
-    "href": "about.html#vehicle-miles-traveled-vmt",
-    "title": "About",
-    "section": "Vehicle Miles Traveled (VMT)",
-    "text": "Vehicle Miles Traveled (VMT)\nThe Daily VMT page shows the distribution of daily VMT across all vehicles in the dataset. Each chart displays quantiles of daily mileage for a given combination of powertrain and vehicle type. For example, the 0.5 quantile represents the median daily mileage (half of vehicles drive less than this amount and half drive more).\nThe VMT by Age page shows median cumulative vehicle miles traveled (VMT) by vehicle age. Each chart displays the 50th quantile (median) of total mileage for a given combination of powertrain and vehicle type as vehicles age over time.\nFor both of the VMT pages, we estimate VMT by dividing the odometer readings (mileage) of used vehicles by their age, which gives an approximation of the VMT over time. We estimate the age of the vehicle as the listing date minus the production date, which we estimate as June 30 of the year previous to the model year (e.g., we estimate a 2020 model year vehicle was produced June 30, 2019). We summarize this quantity by taking quantiles of the observations at each age bin (in 3-month intervals). For daily VMT, we use all vehicles regardless of age and compute the VMT for every quantile from 1 to 99. For VMT by age, we only include the 25th, 50th, and 75th quantile.",
-    "crumbs": [
-      "About"
-    ]
-  },
-  {
-    "objectID": "about.html#depreciation",
-    "href": "about.html#depreciation",
-    "title": "About",
-    "section": "Depreciation",
-    "text": "Depreciation\nThe Depreciation page shows how vehicles retain value over time across different powertrains and vehicle types. Each chart displays the retention rate, which is the ratio of the current listing price to the original MSRP (Manufacturer’s Suggested Retail Price). A retention rate of 1.0 means the vehicle retains 100% of its original value, while 0.5 means it has lost half its value.\nWe estimate the retention rate by dividing the listing price of used vehicles by the original MSRP for that make, model, and trim. Vehicle age is estimated as the listing date minus the production date, which we estimate as June 30 of the year previous to the model year (e.g., we estimate a 2020 model year vehicle was produced June 30, 2019). We summarize this quantity by taking the 25th, 50th, and 75th quantiles of the observations for each combination of powertrain and vehicle type at each age bin (in 3-month intervals). The charts display the 50th quantile (median) retention rate.",
-    "crumbs": [
-      "About"
-    ]
-  },
-  {
-    "objectID": "about.html#percent-of-market",
-    "href": "about.html#percent-of-market",
-    "title": "About",
-    "section": "Percent of Market",
-    "text": "Percent of Market\nThe Percent of Market page shows how the composition of vehicle listings has changed over time across different market dimensions. Each chart displays the percentage of listings for a given group (e.g., powertrain, vehicle type, or price bin) broken down by a category dimension, with separate views for new and used inventory. For example, the “Powertrain by Vehicle Type” tab shows, for each powertrain, what percentage of listings fall into each vehicle type category over time. This helps reveal shifts in the market, such as the growing share of CUVs among BEV listings or changing price distributions across powertrains.",
-    "crumbs": [
-      "About"
-    ]
-  },
-  {
-    "objectID": "about.html#percent-of-dealers",
-    "href": "about.html#percent-of-dealers",
-    "title": "About",
-    "section": "Percent of Dealers",
-    "text": "Percent of Dealers\nThe Percent of Dealers page shows the percentage of dealerships that have at least one vehicle of a given type in their inventory over time. While the Percent of Market page measures the share of total listings, this page measures how widely a vehicle type is distributed across dealerships. For example, a powertrain may represent a small share of total listings but still be stocked by a large share of dealers (or vice versa). Each chart displays the share of dealers carrying a specific combination of powertrain and category (vehicle type or price bin), with separate views for new and used inventory.",
-    "crumbs": [
-      "About"
-    ]
-  },
-  {
-    "objectID": "about.html#market-concentration",
-    "href": "about.html#market-concentration",
-    "title": "About",
-    "section": "Market Concentration",
-    "text": "Market Concentration\nThe Market Concentration page uses the Herfindahl–Hirschman Index (HHI) to measure how concentrated or competitive each powertrain segment is over time. The HHI ranges from 0 to 1, where values below 0.15 indicate a competitive market, values between 0.15 and 0.25 indicate moderate concentration, and values above 0.25 indicate a highly concentrated market. Concentration is measured across three dimensions: by make, by vehicle type, and by price bin. See the HHI Explained page for an interactive tool that illustrates how HHI relates to market share distributions.",
-    "crumbs": [
-      "About"
-    ]
-  },
-  {
-    "objectID": "about.html#registrations",
-    "href": "about.html#registrations",
-    "title": "About",
-    "section": "Registrations",
-    "text": "Registrations\nThe Registrations page shows light-duty vehicle registration counts by state, powertrain, and year. Data are sourced from the Alternative Fuels Data Center (AFDC), which compiles registration data from IHS Markit. The page includes a choropleth map of the U.S. showing registration counts or market share for a selected powertrain and year, as well as a bar chart showing the trend over time for a selected state. Users can toggle between absolute registration counts and market share (the fraction of total registrations in each state attributed to a given powertrain). Clicking on a state in the map updates the bar chart to show that state’s trend.",
-    "crumbs": [
-      "About"
-    ]
-  },
-  {
-    "objectID": "about.html#listing-counts",
-    "href": "about.html#listing-counts",
-    "title": "About",
-    "section": "Listing Counts",
-    "text": "Listing Counts\nThe table below summarises how many observations of vehicle listings were included in the summary data presented on this website.",
-    "crumbs": [
-      "About"
-    ]
-  },
-  {
-    "objectID": "LICENSE.html",
-    "href": "LICENSE.html",
-    "title": "Licensing and copyright information",
-    "section": "",
-    "text": "The course material is licensed under the Creative Commons ShareAlike 4.0 International License. In addition to my own developed material, I have also modified material from the courses, workshops, and textbooks listed below:\n\nCourses / workshops\n\n\n\nName\nAuthor(s)\nLinks\n\n\n\n\nSTAT 545\nU. of British Columbia\ncourse; GitHub\n\n\nPatrick Meyer’s Youtube lectures\nProf. Patrick Meyer\nplaylists\n\n\nAndrew Heiss’s data viz courses\nAndrew Heiss\nMPA 635, more here\n\n\nIntro. to Data Visualization, Fall 2018\nPeter Aldhous\ncourse site\n\n\n\n\n\nBooks\n\n\n\nName\nAuthor(s)\nLinks\n\n\n\n\nR for Data Science\nGarrett Grolemund & Hadley Wickham\nonline book; GitHub; purchase\n\n\nData Visualization: A practical introduction\nKieran Healy\nonline book; GitHub; purchase\n\n\nFundamentals of Data Visualization\nClaus O. Wilke\nonline book; purchase"
-  },
-  {
-    "objectID": "chunks/loading-notice.html",
-    "href": "chunks/loading-notice.html",
-    "title": "US Vehicle Trends",
-    "section": "",
-    "text": "This page contains interactive content that may take a moment to load, please be patient. If you refresh this page, it will have to load again."
-  },
-  {
-    "objectID": "depreciation.html",
-    "href": "depreciation.html",
-    "title": "Depreciation",
-    "section": "",
-    "text": "This page shows median vehicle depreciation (retention rate) by vehicle age. A retention rate of 1.0 means the vehicle retains 100% of its original value, while 0.5 means it has lost half its value. Each chart displays the 50th quantile (median) retention rate for a given combination of powertrain and vehicle type. Lines in the charts below are smoothed using loess smoothihng. The “Data” tab shows the raw data, which also includes the 25th and 75th quantiles. See the about page for more details. Note the observation counts by powertrain and vehicle type as some combinations have few observations.",
-    "crumbs": [
-      "Depreciation"
-    ]
-  },
-  {
-    "objectID": "depreciation.html#by-vehicle-type",
-    "href": "depreciation.html#by-vehicle-type",
-    "title": "Depreciation",
-    "section": "By Vehicle Type",
-    "text": "By Vehicle Type\nClick legend items to show/hide lines.\n\n\nCar\n\n\n\n\n\n\n\n\nCUV\n\n\n\n\n\n\n\n\nSUV\n\n\n\n\n\n\n\n\nPickup\n\n\n\n\n\n\n\n\nMinivan",
-    "crumbs": [
-      "Depreciation"
-    ]
-  },
-  {
-    "objectID": "depreciation.html#by-powertrain",
-    "href": "depreciation.html#by-powertrain",
-    "title": "Depreciation",
-    "section": "By Powertrain",
-    "text": "By Powertrain\nClick legend items to show/hide lines.\n\n\nGasoline\n\n\n\n\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\n\n\n\n\nPlug-In Hybrid Electric (PHEV)\n\n\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\n\n\n\n\nBEV (Tesla)\n\n\n\n\n\n\n\n\nBEV (Non-Tesla)\n\n\n\n\n\n\n\n\nFuel Cell",
-    "crumbs": [
-      "Depreciation"
-    ]
-  },
-  {
-    "objectID": "depreciation.html#data-depreciation-by-age",
-    "href": "depreciation.html#data-depreciation-by-age",
-    "title": "Depreciation",
-    "section": "Data: Depreciation by Age",
-    "text": "Data: Depreciation by Age\n\nDownload data",
-    "crumbs": [
-      "Depreciation"
-    ]
-  },
-  {
-    "objectID": "depreciation.html#data-annual-depreciation-by-type",
-    "href": "depreciation.html#data-annual-depreciation-by-type",
-    "title": "Depreciation",
-    "section": "Data: Annual Depreciation by Type",
-    "text": "Data: Annual Depreciation by Type\nThis table shows the estimated annual depreciation rate by vehicle type and powertrain. Annual depreciation is computed by fitting log-linear regressions of retention rate on vehicle age; the rate is 1 - exp(b) where b is the age coefficient.\n\nDownload data",
-    "crumbs": [
-      "Depreciation"
-    ]
-  },
-  {
-    "objectID": "depreciation.html#data-annual-depreciation-by-model",
-    "href": "depreciation.html#data-annual-depreciation-by-model",
-    "title": "Depreciation",
-    "section": "Data: Annual Depreciation by Model",
-    "text": "Data: Annual Depreciation by Model\nThis table shows the estimated annual depreciation rate by make, model, vehicle type, and powertrain. Annual depreciation is computed by fitting log-linear regressions of retention rate on vehicle age; the rate is 1 - exp(b) where b is the age coefficient. Only make/model combinations with at least 100 listings are included.\n\nDownload data",
-    "crumbs": [
-      "Depreciation"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Welcome to vehicletrends.us!",
-    "section": "",
-    "text": "Welcome to vehicletrends.us!\nThis site is an ongoing project designed to make publicly available information about trends in the U.S. automotive market. The site pulls together a variety of data sources to reveal trends. See the about page for more details on the data sources and calculations."
-  },
-  {
-    "objectID": "nearest-vehicles.html",
-    "href": "nearest-vehicles.html",
-    "title": "Distance to nearest vehicle",
-    "section": "",
-    "text": "ChartsData\n\n\n\n\n\n\n\n\n\nThis is an interactive analysis tool that computes vehicle similarity based on selected parameters. The data is generated dynamically based on your search criteria in the Charts tab above.\nHow it works: - Select target vehicle characteristics (make, type, price range) - The app identifies similar vehicles based on multiple attributes - View results as scatter plots or data tables - Adjust the number of similar vehicles to display"
   },
   {
     "objectID": "percent-market.html",
@@ -442,6 +187,349 @@
     "text": "Data\n\nDownload data",
     "crumbs": [
       "Percent of Market"
+    ]
+  },
+  {
+    "objectID": "nearest-vehicles.html",
+    "href": "nearest-vehicles.html",
+    "title": "Distance to nearest vehicle",
+    "section": "",
+    "text": "ChartsData\n\n\n\n\n\n\n\n\n\nThis is an interactive analysis tool that computes vehicle similarity based on selected parameters. The data is generated dynamically based on your search criteria in the Charts tab above.\nHow it works: - Select target vehicle characteristics (make, type, price range) - The app identifies similar vehicles based on multiple attributes - View results as scatter plots or data tables - Adjust the number of similar vehicles to display"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome to vehicletrends.us!",
+    "section": "",
+    "text": "Welcome to vehicletrends.us!\nThis site is an ongoing project designed to make publicly available information about trends in the U.S. automotive market. The site pulls together a variety of data sources to reveal trends. See the about page for more details on the data sources and calculations."
+  },
+  {
+    "objectID": "depreciation.html",
+    "href": "depreciation.html",
+    "title": "Depreciation",
+    "section": "",
+    "text": "This page shows median vehicle depreciation (retention rate) by vehicle age. A retention rate of 1.0 means the vehicle retains 100% of its original value, while 0.5 means it has lost half its value. Each chart displays the 50th quantile (median) retention rate for a given combination of powertrain and vehicle type. Lines in the charts below are smoothed using loess smoothihng. The “Data” tab shows the raw data, which also includes the 25th and 75th quantiles. See the about page for more details. Note the observation counts by powertrain and vehicle type as some combinations have few observations.",
+    "crumbs": [
+      "Depreciation"
+    ]
+  },
+  {
+    "objectID": "depreciation.html#by-vehicle-type",
+    "href": "depreciation.html#by-vehicle-type",
+    "title": "Depreciation",
+    "section": "By Vehicle Type",
+    "text": "By Vehicle Type\nClick legend items to show/hide lines.\n\n\nCar\n\n\n\n\n\n\n\n\nCUV\n\n\n\n\n\n\n\n\nSUV\n\n\n\n\n\n\n\n\nPickup\n\n\n\n\n\n\n\n\nMinivan",
+    "crumbs": [
+      "Depreciation"
+    ]
+  },
+  {
+    "objectID": "depreciation.html#by-powertrain",
+    "href": "depreciation.html#by-powertrain",
+    "title": "Depreciation",
+    "section": "By Powertrain",
+    "text": "By Powertrain\nClick legend items to show/hide lines.\n\n\nGasoline\n\n\n\n\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\n\n\n\n\nPlug-In Hybrid Electric (PHEV)\n\n\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\n\n\n\n\nBEV (Tesla)\n\n\n\n\n\n\n\n\nBEV (Non-Tesla)\n\n\n\n\n\n\n\n\nFuel Cell",
+    "crumbs": [
+      "Depreciation"
+    ]
+  },
+  {
+    "objectID": "depreciation.html#data-depreciation-by-age",
+    "href": "depreciation.html#data-depreciation-by-age",
+    "title": "Depreciation",
+    "section": "Data: Depreciation by Age",
+    "text": "Data: Depreciation by Age\n\nDownload data",
+    "crumbs": [
+      "Depreciation"
+    ]
+  },
+  {
+    "objectID": "depreciation.html#data-annual-depreciation-by-type",
+    "href": "depreciation.html#data-annual-depreciation-by-type",
+    "title": "Depreciation",
+    "section": "Data: Annual Depreciation by Type",
+    "text": "Data: Annual Depreciation by Type\nThis table shows the estimated annual depreciation rate by vehicle type and powertrain. Annual depreciation is computed by fitting log-linear regressions of retention rate on vehicle age; the rate is 1 - exp(b) where b is the age coefficient.\n\nDownload data",
+    "crumbs": [
+      "Depreciation"
+    ]
+  },
+  {
+    "objectID": "depreciation.html#data-annual-depreciation-by-model",
+    "href": "depreciation.html#data-annual-depreciation-by-model",
+    "title": "Depreciation",
+    "section": "Data: Annual Depreciation by Model",
+    "text": "Data: Annual Depreciation by Model\nThis table shows the estimated annual depreciation rate by make, model, vehicle type, and powertrain. Annual depreciation is computed by fitting log-linear regressions of retention rate on vehicle age; the rate is 1 - exp(b) where b is the age coefficient. Only make/model combinations with at least 100 listings are included.\n\nDownload data",
+    "crumbs": [
+      "Depreciation"
+    ]
+  },
+  {
+    "objectID": "chunks/loading-notice.html",
+    "href": "chunks/loading-notice.html",
+    "title": "US Vehicle Trends",
+    "section": "",
+    "text": "This page contains interactive content that may take a moment to load, please be patient. If you refresh this page, it will have to load again."
+  },
+  {
+    "objectID": "LICENSE.html",
+    "href": "LICENSE.html",
+    "title": "License",
+    "section": "",
+    "text": "This website and its content are licensed under the Creative Commons Attribution-ShareAlike 4.0 International License (CC-BY-SA 4.0)."
+  },
+  {
+    "objectID": "LICENSE.html#you-are-free-to",
+    "href": "LICENSE.html#you-are-free-to",
+    "title": "License",
+    "section": "You are free to",
+    "text": "You are free to\n\nShare — copy and redistribute the material in any medium or format for any purpose, even commercially.\nAdapt — remix, transform, and build upon the material for any purpose, even commercially."
+  },
+  {
+    "objectID": "LICENSE.html#under-the-following-terms",
+    "href": "LICENSE.html#under-the-following-terms",
+    "title": "License",
+    "section": "Under the following terms",
+    "text": "Under the following terms\n\nAttribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.\nShareAlike — If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.\nNo additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits."
+  },
+  {
+    "objectID": "LICENSE.html#data",
+    "href": "LICENSE.html#data",
+    "title": "License",
+    "section": "Data",
+    "text": "Data\nThe summary data presented on this dashboard are available as the {vehicletrends} R package, which is licensed under the MIT License. The original vehicle listings data are licensed from marketcheck.com and cannot be redistributed."
+  },
+  {
+    "objectID": "LICENSE.html#citation",
+    "href": "LICENSE.html#citation",
+    "title": "License",
+    "section": "Citation",
+    "text": "Citation\nIf you use content from this dashboard, please cite it as:\n\nHelveston, John Paul (2025). US Vehicle Trends Dashboard. https://vehicletrends.us"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "This dashboard provides summary information about various trends in the U.S. automobile market. The primary data source is 74,894,001 new and 94,658,664 used vehicle listings from over 100,000 dealerships across all 50 states in the U.S. between 2018 and 2025 (inclusive). The original data are licensed from marketcheck.com and cannot be made public, but this website provides public access to various summaries of the original listings data.\nThe open-source project was created and is maintained by Dr. John Paul Helveston, an Associate Professor in the Engineering Management and Systems Engineering Department at The George Washington University.\nThis website and its content are licensed under CC-BY-SA 4.0. For details on the technologies and open-source tools used to build this site, see the Tech Stack page.",
+    "crumbs": [
+      "About"
+    ]
+  },
+  {
+    "objectID": "about.html#r-data-package",
+    "href": "about.html#r-data-package",
+    "title": "About",
+    "section": "R Data Package",
+    "text": "R Data Package\nThe summary data powering this dashboard are available as the {vehicletrends} R package. Install it from GitHub to access all datasets directly in R:\n# install.packages(\"remotes\")\nremotes::install_github(\"vehicletrends/vehicletrends\")\nSee the package documentation site for details on available datasets.",
+    "crumbs": [
+      "About"
+    ]
+  },
+  {
+    "objectID": "about.html#vehicle-miles-traveled-vmt",
+    "href": "about.html#vehicle-miles-traveled-vmt",
+    "title": "About",
+    "section": "Vehicle Miles Traveled (VMT)",
+    "text": "Vehicle Miles Traveled (VMT)\nThe Daily VMT page shows the distribution of daily VMT across all vehicles in the dataset. Each chart displays quantiles of daily mileage for a given combination of powertrain and vehicle type. For example, the 0.5 quantile represents the median daily mileage (half of vehicles drive less than this amount and half drive more).\nThe VMT by Age page shows median cumulative vehicle miles traveled (VMT) by vehicle age. Each chart displays the 50th quantile (median) of total mileage for a given combination of powertrain and vehicle type as vehicles age over time.\nFor both of the VMT pages, we estimate VMT by dividing the odometer readings (mileage) of used vehicles by their age, which gives an approximation of the VMT over time. We estimate the age of the vehicle as the listing date minus the production date, which we estimate as June 30 of the year previous to the model year (e.g., we estimate a 2020 model year vehicle was produced June 30, 2019). We summarize this quantity by taking quantiles of the observations at each age bin (in 3-month intervals). For daily VMT, we use all vehicles regardless of age and compute the VMT for every quantile from 1 to 99. For VMT by age, we only include the 25th, 50th, and 75th quantile.",
+    "crumbs": [
+      "About"
+    ]
+  },
+  {
+    "objectID": "about.html#depreciation",
+    "href": "about.html#depreciation",
+    "title": "About",
+    "section": "Depreciation",
+    "text": "Depreciation\nThe Depreciation page shows how vehicles retain value over time across different powertrains and vehicle types. Each chart displays the retention rate, which is the ratio of the current listing price to the original MSRP (Manufacturer’s Suggested Retail Price). A retention rate of 1.0 means the vehicle retains 100% of its original value, while 0.5 means it has lost half its value.\nWe estimate the retention rate by dividing the listing price of used vehicles by the original MSRP for that make, model, and trim. Vehicle age is estimated as the listing date minus the production date, which we estimate as June 30 of the year previous to the model year (e.g., we estimate a 2020 model year vehicle was produced June 30, 2019). We summarize this quantity by taking the 25th, 50th, and 75th quantiles of the observations for each combination of powertrain and vehicle type at each age bin (in 3-month intervals). The charts display the 50th quantile (median) retention rate.",
+    "crumbs": [
+      "About"
+    ]
+  },
+  {
+    "objectID": "about.html#percent-of-market",
+    "href": "about.html#percent-of-market",
+    "title": "About",
+    "section": "Percent of Market",
+    "text": "Percent of Market\nThe Percent of Market page shows how the composition of vehicle listings has changed over time across different market dimensions. Each chart displays the percentage of listings for a given group (e.g., powertrain, vehicle type, or price bin) broken down by a category dimension, with separate views for new and used inventory. For example, the “Powertrain by Vehicle Type” tab shows, for each powertrain, what percentage of listings fall into each vehicle type category over time. This helps reveal shifts in the market, such as the growing share of CUVs among BEV listings or changing price distributions across powertrains.",
+    "crumbs": [
+      "About"
+    ]
+  },
+  {
+    "objectID": "about.html#percent-of-dealers",
+    "href": "about.html#percent-of-dealers",
+    "title": "About",
+    "section": "Percent of Dealers",
+    "text": "Percent of Dealers\nThe Percent of Dealers page shows the percentage of dealerships that have at least one vehicle of a given type in their inventory over time. While the Percent of Market page measures the share of total listings, this page measures how widely a vehicle type is distributed across dealerships. For example, a powertrain may represent a small share of total listings but still be stocked by a large share of dealers (or vice versa). Each chart displays the share of dealers carrying a specific combination of powertrain and category (vehicle type or price bin), with separate views for new and used inventory.",
+    "crumbs": [
+      "About"
+    ]
+  },
+  {
+    "objectID": "about.html#market-concentration",
+    "href": "about.html#market-concentration",
+    "title": "About",
+    "section": "Market Concentration",
+    "text": "Market Concentration\nThe Market Concentration page uses the Herfindahl–Hirschman Index (HHI) to measure how concentrated or competitive each powertrain segment is over time. The HHI ranges from 0 to 1, where values below 0.15 indicate a competitive market, values between 0.15 and 0.25 indicate moderate concentration, and values above 0.25 indicate a highly concentrated market. Concentration is measured across three dimensions: by make, by vehicle type, and by price bin. See the HHI Explained page for an interactive tool that illustrates how HHI relates to market share distributions.",
+    "crumbs": [
+      "About"
+    ]
+  },
+  {
+    "objectID": "about.html#registrations",
+    "href": "about.html#registrations",
+    "title": "About",
+    "section": "Registrations",
+    "text": "Registrations\nThe Registrations page shows light-duty vehicle registration counts by state, powertrain, and year. Data are sourced from the Alternative Fuels Data Center (AFDC), which compiles registration data from IHS Markit. The page includes a choropleth map of the U.S. showing registration counts or market share for a selected powertrain and year, as well as a bar chart showing the trend over time for a selected state. Users can toggle between absolute registration counts and market share (the fraction of total registrations in each state attributed to a given powertrain). Clicking on a state in the map updates the bar chart to show that state’s trend.",
+    "crumbs": [
+      "About"
+    ]
+  },
+  {
+    "objectID": "about.html#listing-counts",
+    "href": "about.html#listing-counts",
+    "title": "About",
+    "section": "Listing Counts",
+    "text": "Listing Counts\nThe table below summarises how many observations of vehicle listings were included in the summary data presented on this website.",
+    "crumbs": [
+      "About"
+    ]
+  },
+  {
+    "objectID": "dealership-inventories.html",
+    "href": "dealership-inventories.html",
+    "title": "Dealership inventories",
+    "section": "",
+    "text": "ChartsData\n\n\n\n\n\n\n\n\n\n\nDownload data"
+  },
+  {
+    "objectID": "hhi-explained.html",
+    "href": "hhi-explained.html",
+    "title": "HHI Explained",
+    "section": "",
+    "text": "This app helps explain the meaning of the Herfindahl–Hirschman Index (HHI), which is an index from 0 to 1 that helps explain the level of concentration in a market.\n#| '!! shinylive warning !!': |\n#|   shinylive does not work in self-contained HTML documents.\n#|   Please set `embed-resources: false` in your metadata.\n#| standalone: true\n#| viewerHeight: 800\n\nlibrary(shiny)\nlibrary(echarts4r)\nlibrary(dplyr)\nlibrary(bslib)\n\ngenerate_market_shares &lt;- function(target_hhi, n_companies) {\n  if (n_companies &lt;= 0) {\n    return(list(\n      shares = numeric(0),\n      n_companies = 0,\n      actual_hhi = 0,\n      min_hhi = 0,\n      max_hhi = 0,\n      is_achievable = FALSE\n    ))\n  }\n\n  if (n_companies == 1) {\n    return(list(\n      shares = 1,\n      n_companies = 1,\n      actual_hhi = 1,\n      min_hhi = 1,\n      max_hhi = 1,\n      is_achievable = (target_hhi &gt;= 0.99)\n    ))\n  }\n\n  min_hhi &lt;- 1 / n_companies\n  max_hhi &lt;- 1.0\n  is_achievable &lt;- (target_hhi &gt;= min_hhi - 0.001 &&\n    target_hhi &lt;= max_hhi + 0.001)\n\n  if (!is_achievable) {\n    shares &lt;- rep(1 / n_companies, n_companies)\n    return(list(\n      shares = shares,\n      n_companies = n_companies,\n      actual_hhi = min_hhi,\n      min_hhi = min_hhi,\n      max_hhi = max_hhi,\n      is_achievable = FALSE\n    ))\n  }\n\n  if (target_hhi &lt;= min_hhi + 0.001) {\n    shares &lt;- rep(1 / n_companies, n_companies)\n  } else if (target_hhi &gt;= 0.999) {\n    shares &lt;- c(0.9999, rep(0.0001 / (n_companies - 1), n_companies - 1))\n  } else if (n_companies == 2) {\n    discriminant &lt;- 2 * target_hhi - 1\n    if (discriminant &gt;= 0) {\n      s1 &lt;- (1 + sqrt(discriminant)) / 2\n      shares &lt;- c(s1, 1 - s1)\n    } else {\n      shares &lt;- c(0.5, 0.5)\n    }\n  } else {\n    hhi_normalized &lt;- (target_hhi - min_hhi) / (max_hhi - min_hhi)\n    exponent &lt;- 0.2 + hhi_normalized * 4\n    ranks &lt;- 1:n_companies\n    shares &lt;- (1 / ranks)^exponent\n    shares &lt;- shares / sum(shares)\n\n    for (iteration in 1:2000) {\n      current_hhi &lt;- sum(shares^2)\n      error &lt;- current_hhi - target_hhi\n      if (abs(error) &lt; 0.00001) {\n        break\n      }\n\n      learning_rate &lt;- 0.1 * (0.9^(iteration %/% 100))\n      if (error &gt; 0) {\n        transfer &lt;- min(shares[1] * learning_rate, abs(error) * 0.5)\n        shares[1] &lt;- shares[1] - transfer\n        shares[n_companies] &lt;- shares[n_companies] + transfer\n      } else {\n        transfer &lt;- min(shares[n_companies] * learning_rate, abs(error) * 0.5)\n        if (shares[n_companies] &gt; transfer) {\n          shares[1] &lt;- shares[1] + transfer\n          shares[n_companies] &lt;- shares[n_companies] - transfer\n        }\n      }\n      shares &lt;- pmax(shares, 0.00001)\n      shares &lt;- shares / sum(shares)\n    }\n  }\n\n  list(\n    shares = shares,\n    n_companies = n_companies,\n    actual_hhi = sum(shares^2),\n    min_hhi = min_hhi,\n    max_hhi = max_hhi,\n    is_achievable = TRUE\n  )\n}\n\nui &lt;- page_sidebar(\n  theme = bs_theme(\n    version = 5,\n    bg = \"#ffffff\",\n    fg = \"#000000\",\n    primary = \"#6c757d\"\n  ),\n\n  sidebar = sidebar(\n    open = \"always\",\n    h4(\"Market Parameters\"),\n    sliderInput(\n      \"n_companies\",\n      \"Number of Companies:\",\n      min = 1,\n      max = 10,\n      value = 5,\n      step = 1\n    ),\n    sliderInput(\n      \"hhi_target\",\n      \"HHI Level:\",\n      min = 0,\n      max = 1,\n      value = 0.30,\n      step = 0.01\n    ),\n    hr(style = \"border-color: #dee2e6;\"),\n    h5(\"Quick Scenarios\"),\n    actionButton(\n      \"scenario1\",\n      \"Perfect Competition\",\n      class = \"btn-outline-secondary btn-sm w-100 mb-2\"\n    ),\n    actionButton(\n      \"scenario2\",\n      \"Moderate Market\",\n      class = \"btn-outline-secondary btn-sm w-100 mb-2\"\n    ),\n    actionButton(\n      \"scenario3\",\n      \"Concentrated Market\",\n      class = \"btn-outline-secondary btn-sm w-100 mb-2\"\n    ),\n    actionButton(\n      \"scenario4\",\n      \"Duopoly\",\n      class = \"btn-outline-secondary btn-sm w-100\"\n    )\n  ),\n\n  layout_column_wrap(\n    width = 1 / 3,\n    value_box(\n      \"HHI Level\",\n      textOutput(\"hhi_display\"),\n      theme = \"white\",\n      style = \"border: 1px solid #dee2e6;\"\n    ),\n    value_box(\n      \"Companies\",\n      textOutput(\"num_companies_display\"),\n      theme = \"white\",\n      style = \"border: 1px solid #dee2e6;\"\n    ),\n    value_box(\n      \"Market Type\",\n      textOutput(\"market_status_display\"),\n      theme = \"white\",\n      style = \"border: 1px solid #dee2e6;\"\n    )\n  ),\n\n  uiOutput(\"hhi_warning\"),\n\n  card(\n    card_header(\"Market Share Distribution\"),\n    echarts4rOutput(\"pieChart\", height = \"400px\"),\n    style = \"border: 1px solid #dee2e6;\"\n  )\n)\n\nserver &lt;- function(input, output, session) {\n  marketData &lt;- reactive({\n    result &lt;- generate_market_shares(input$hhi_target, input$n_companies)\n    if (length(result$shares) &gt; 0 && result$n_companies &gt; 0) {\n      companies_df &lt;- data.frame(\n        company = LETTERS[1:result$n_companies],\n        share = result$shares * 100\n      )\n    } else {\n      companies_df &lt;- data.frame()\n    }\n    list(\n      target_hhi = input$hhi_target,\n      actual_hhi = result$actual_hhi,\n      n_companies = result$n_companies,\n      min_hhi = result$min_hhi,\n      max_hhi = result$max_hhi,\n      is_achievable = result$is_achievable,\n      data = companies_df\n    )\n  })\n\n  output$hhi_display &lt;- renderText(sprintf(\"%.2f\", input$hhi_target))\n  output$num_companies_display &lt;- renderText(as.character(input$n_companies))\n  output$market_status_display &lt;- renderText({\n    if (input$hhi_target &lt; 0.15) {\n      \"Competitive\"\n    } else if (input$hhi_target &lt; 0.25) {\n      \"Moderate\"\n    } else {\n      \"Concentrated\"\n    }\n  })\n\n  output$hhi_warning &lt;- renderUI({\n    data &lt;- marketData()\n    if (!data$is_achievable) {\n      div(\n        class = \"alert alert-danger\",\n        style = \"border: 1px solid #f8d7da;\",\n        sprintf(\n          \"With %d companies, HHI must be between %.2f and %.2f.\",\n          data$n_companies,\n          data$min_hhi,\n          data$max_hhi\n        )\n      )\n    }\n  })\n\n  output$pieChart &lt;- renderEcharts4r({\n    data &lt;- marketData()\n    if (nrow(data$data) == 0) {\n      data.frame(x = 1, y = 1) |&gt;\n        e_charts() |&gt;\n        e_title(\n          text = \"Set parameters to view distribution\",\n          left = \"center\",\n          top = \"center\"\n        )\n    } else {\n      colors &lt;- c(\n        \"#3498db\",\n        \"#e74c3c\",\n        \"#2ecc71\",\n        \"#9b59b6\",\n        \"#f39c12\",\n        \"#1abc9c\",\n        \"#34495e\",\n        \"#e67e22\",\n        \"#95a5a6\",\n        \"#16a085\"\n      )\n\n      data$data |&gt;\n        arrange(desc(share)) |&gt;\n        e_charts(company) |&gt;\n        e_pie(\n          share,\n          radius = c(\"40%\", \"70%\"),\n          label = list(\n            formatter = \"{b}\\n{d}%\",\n            fontSize = 14,\n            fontWeight = \"bold\"\n          )\n        ) |&gt;\n        e_tooltip(\n          trigger = \"item\",\n          formatter = htmlwidgets::JS(\n            \"\n                        function(params) {\n                            return params.name + '&lt;br/&gt;' + \n                                   'Market Share: ' + params.value.toFixed(1) + '%&lt;br/&gt;' +\n                                   'Proportion: ' + params.percent.toFixed(1) + '%';\n                        }\n                    \"\n          )\n        ) |&gt;\n        e_legend(right = 10, top = \"middle\", orient = \"vertical\") |&gt;\n        e_color(colors[1:nrow(data$data)])\n    }\n  })\n\n  observeEvent(input$scenario1, {\n    updateSliderInput(session, \"n_companies\", value = 10)\n    updateSliderInput(session, \"hhi_target\", value = 0.10)\n  })\n\n  observeEvent(input$scenario2, {\n    updateSliderInput(session, \"n_companies\", value = 7)\n    updateSliderInput(session, \"hhi_target\", value = 0.20)\n  })\n\n  observeEvent(input$scenario3, {\n    updateSliderInput(session, \"n_companies\", value = 5)\n    updateSliderInput(session, \"hhi_target\", value = 0.35)\n  })\n\n  observeEvent(input$scenario4, {\n    updateSliderInput(session, \"n_companies\", value = 2)\n    updateSliderInput(session, \"hhi_target\", value = 0.65)\n  })\n}\n\nshinyApp(ui = ui, server = server)",
+    "crumbs": [
+      "HHI Explained"
+    ]
+  },
+  {
+    "objectID": "market-concentration.html",
+    "href": "market-concentration.html",
+    "title": "Market Concentration",
+    "section": "",
+    "text": "We use the Herfindahl–Hirschman Index (HHI) to measure how concentrated or competitive each market segment is over time. The HHI ranges from 0 to 1, with the following general guidelines:\nSee the HHI Explained page for an interactive tool that illustrates how HHI relates to market share distributions.\nConcentration is measured across three groups: Powertrain, Vehicle Type (Body Style), and Price Bin. Within each group, you can choose a level and HHI dimension to view: make, vehicle type (body style), and price bin. The map below allows you to select any of these dimensions for any listing year for every U.S. census tract.\nBelow the map are boxplots that summarize the distribution of HHI values across all census tracts for a given year. Use the timeline slider below each chart to switch between years.",
+    "crumbs": [
+      "Market Concentration"
+    ]
+  },
+  {
+    "objectID": "market-concentration.html#map",
+    "href": "market-concentration.html#map",
+    "title": "Market Concentration",
+    "section": "Map",
+    "text": "Map",
+    "crumbs": [
+      "Market Concentration"
+    ]
+  },
+  {
+    "objectID": "market-concentration.html#by-powertrain",
+    "href": "market-concentration.html#by-powertrain",
+    "title": "Market Concentration",
+    "section": "By Powertrain",
+    "text": "By Powertrain\n\nHHI by Make\n\n\n\n\n\n\n\n\nHHI by Vehicle Type\n\n\n\n\n\n\n\n\nHHI by Price Bin",
+    "crumbs": [
+      "Market Concentration"
+    ]
+  },
+  {
+    "objectID": "market-concentration.html#by-vehicle-type",
+    "href": "market-concentration.html#by-vehicle-type",
+    "title": "Market Concentration",
+    "section": "By Vehicle Type",
+    "text": "By Vehicle Type\n\nHHI by Make\n\n\n\n\n\n\n\n\nHHI by Price Bin",
+    "crumbs": [
+      "Market Concentration"
+    ]
+  },
+  {
+    "objectID": "market-concentration.html#by-price-bin",
+    "href": "market-concentration.html#by-price-bin",
+    "title": "Market Concentration",
+    "section": "By Price Bin",
+    "text": "By Price Bin\n\nHHI by Make\n\n\n\n\n\n\n\n\nHHI by Vehicle Type",
+    "crumbs": [
+      "Market Concentration"
+    ]
+  },
+  {
+    "objectID": "market-concentration.html#data",
+    "href": "market-concentration.html#data",
+    "title": "Market Concentration",
+    "section": "Data",
+    "text": "Data\n\nDownload data",
+    "crumbs": [
+      "Market Concentration"
+    ]
+  },
+  {
+    "objectID": "percent-dealers.html",
+    "href": "percent-dealers.html",
+    "title": "Percent of Dealers",
+    "section": "",
+    "text": "This page shows the percentage of dealerships that have at least one vehicle of a given type in their inventory over time. Each chart displays the share of dealers carrying a specific combination of powertrain and category (vehicle type or price bin), with separate views for new and used inventory. The x-axis is the listing year and the y-axis is the percent of dealers.",
+    "crumbs": [
+      "Percent of Dealers"
+    ]
+  },
+  {
+    "objectID": "percent-dealers.html#powertrain-by-vehicle-type",
+    "href": "percent-dealers.html#powertrain-by-vehicle-type",
+    "title": "Percent of Dealers",
+    "section": "Powertrain by Vehicle Type",
+    "text": "Powertrain by Vehicle Type\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)\n\n\n\n\n\n\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nDiesel\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)",
+    "crumbs": [
+      "Percent of Dealers"
+    ]
+  },
+  {
+    "objectID": "percent-dealers.html#powertrain-by-price-bin",
+    "href": "percent-dealers.html#powertrain-by-price-bin",
+    "title": "Percent of Dealers",
+    "section": "Powertrain by Price Bin",
+    "text": "Powertrain by Price Bin\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)\n\n\n\n\n\n\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nDiesel\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)",
+    "crumbs": [
+      "Percent of Dealers"
+    ]
+  },
+  {
+    "objectID": "percent-dealers.html#vehicle-type-by-price-bin",
+    "href": "percent-dealers.html#vehicle-type-by-price-bin",
+    "title": "Percent of Dealers",
+    "section": "Vehicle Type by Price Bin",
+    "text": "Vehicle Type by Price Bin\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\nCar\n\n\n\n\nCUV\n\n\n\n\nMinivan\n\n\n\n\nPickup\n\n\n\n\nSUV\n\n\n\n\n\n\n\n\n\n\n\n\nCar\n\n\n\n\nCUV\n\n\n\n\nMinivan\n\n\n\n\nPickup\n\n\n\n\nSUV",
+    "crumbs": [
+      "Percent of Dealers"
+    ]
+  },
+  {
+    "objectID": "percent-dealers.html#data",
+    "href": "percent-dealers.html#data",
+    "title": "Percent of Dealers",
+    "section": "Data",
+    "text": "Data\n\nDownload data",
+    "crumbs": [
+      "Percent of Dealers"
+    ]
+  },
+  {
+    "objectID": "registrations.html",
+    "href": "registrations.html",
+    "title": "Vehicle Registrations",
+    "section": "",
+    "text": "This page contains interactive content that may take a moment to load, please be patient. If you refresh this page, it will have to load again.\n\n\n\nThis page shows light-duty vehicle registration counts by state, powertrain, and year. Data are sourced from the Alternative Fuels Data Center (AFDC). Use the dropdown filters to explore registration counts and market share across the US. This page is a replication of this dashboard by TransAtlas.\n\nChartsData\n\n\n#| '!! shinylive warning !!': |\n#|   shinylive does not work in self-contained HTML documents.\n#|   Please set `embed-resources: false` in your metadata.\n#| standalone: true\n#| viewerHeight: 1150\n\nlibrary(shiny)\nlibrary(dplyr)\nlibrary(bslib)\nlibrary(echarts4r)\nlibrary(jsonlite)\n\n# Load data\ndata_url &lt;- \"https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/registrations.csv\"\ndata &lt;- read.csv(data_url)\n\n# Load pre-projected US GeoJSON (Albers USA with AK/HI insets via tigris::shift_geometry)\nus_json &lt;- jsonlite::read_json(\n  \"https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/us-states-shifted.geojson\"\n)\n\n# Compute market share\ndata &lt;- data |&gt;\n  filter(state != \"Puerto Rico\") |&gt;\n  group_by(year, state) |&gt;\n  mutate(\n    total = sum(count),\n    share = round(count / total, 4)\n  ) |&gt;\n  ungroup()\n\nstates_no_total &lt;- sort(unique(data$state[data$state != \"United States\"]))\nall_states &lt;- c(\"United States\", states_no_total)\n\n# Fixed powertrain order\npowertrain_order &lt;- c(\n  \"Gasoline\",\n  \"Flex Fuel (E85)\",\n  \"Hybrid Electric (HEV)\",\n  \"Plug-In Hybrid Electric (PHEV)\",\n  \"Battery Electric (BEV)\",\n  \"Diesel\",\n  \"Biodiesel\",\n  \"Fuel Cell\",\n  \"Compressed Natural Gas (CNG)\",\n  \"Methanol\",\n  \"Propane\",\n  \"Unknown\"\n)\npowertrains &lt;- powertrain_order[powertrain_order %in% unique(data$powertrain)]\nyears &lt;- sort(unique(data$year), decreasing = TRUE)\n\nui &lt;- page_sidebar(\n  title = \"Vehicle Registrations\",\n  sidebar = sidebar(\n    width = 250,\n    radioButtons(\n      \"powertrain\",\n      \"Powertrain:\",\n      choices = powertrains,\n      selected = powertrains[1]\n    ),\n    selectInput(\n      \"year\",\n      \"Year (map):\",\n      choices = years,\n      selected = max(years)\n    ),\n    selectInput(\n      \"state\",\n      \"State (trend):\",\n      choices = all_states,\n      selected = \"United States\"\n    ),\n    radioButtons(\n      \"metric\",\n      \"Metric:\",\n      choices = c(\"Count\" = \"count\", \"Market Share\" = \"share\"),\n      selected = \"count\"\n    )\n  ),\n  layout_column_wrap(\n    width = 1,\n    card(\n      card_header(textOutput(\"map_title\")),\n      echarts4rOutput(\"map\", height = \"550px\")\n    ),\n    card(\n      card_header(textOutput(\"trend_title\")),\n      echarts4rOutput(\"trend\", height = \"300px\")\n    )\n  )\n)\n\nserver &lt;- function(input, output, session) {\n  # Click on a state in the map → update the state dropdown\n  observeEvent(input$map_clicked_data, {\n    clicked &lt;- input$map_clicked_data$name\n    if (!is.null(clicked) && clicked %in% all_states) {\n      updateSelectInput(session, \"state\", selected = clicked)\n    }\n  })\n\n  output$map_title &lt;- renderText({\n    metric_label &lt;- if (input$metric == \"share\") {\n      \"Market Share\"\n    } else {\n      \"Registrations\"\n    }\n    paste0(metric_label, \": \", input$powertrain, \" (\", input$year, \")\")\n  })\n\n  output$trend_title &lt;- renderText({\n    metric_label &lt;- if (input$metric == \"share\") {\n      \"Market Share\"\n    } else {\n      \"Registrations\"\n    }\n    paste0(metric_label, \" Over Time: \", input$powertrain, \" - \", input$state)\n  })\n\n  output$map &lt;- renderEcharts4r({\n    map_data &lt;- data |&gt;\n      filter(\n        powertrain == input$powertrain,\n        year == as.integer(input$year),\n        state != \"United States\"\n      )\n\n    map_data$value &lt;- if (input$metric == \"share\") {\n      map_data$share\n    } else {\n      map_data$count\n    }\n\n    chart &lt;- if (input$metric == \"share\") {\n      map_data |&gt;\n        e_charts(state) |&gt;\n        e_map_register(\"USA_albers\", us_json) |&gt;\n        e_map(\n          value,\n          map = \"USA_albers\",\n          aspectScale = 1,\n          selectedMode = FALSE,\n          top = 0,\n          bottom = 40\n        ) |&gt;\n        e_visual_map(\n          value,\n          orient = \"horizontal\",\n          left = \"center\",\n          bottom = 0,\n          inRange = list(color = c(\"#ffffcc\", \"#fd8d3c\", \"#bd0026\")),\n          formatter = htmlwidgets::JS(\n            \"\n            function(value) {\n              return (value * 100).toFixed(1) + '%';\n            }\n          \"\n          )\n        ) |&gt;\n        e_tooltip(\n          formatter = htmlwidgets::JS(\n            \"\n            function(params) {\n              if (params.value) {\n                return params.name + '&lt;br/&gt;' + (params.value * 100).toFixed(2) + '%';\n              }\n              return params.name + '&lt;br/&gt;No data';\n            }\n          \"\n          )\n        )\n    } else {\n      map_data |&gt;\n        e_charts(state) |&gt;\n        e_map_register(\"USA_albers\", us_json) |&gt;\n        e_map(\n          value,\n          map = \"USA_albers\",\n          aspectScale = 1,\n          selectedMode = FALSE,\n          top = 0,\n          bottom = 40\n        ) |&gt;\n        e_visual_map(\n          value,\n          orient = \"horizontal\",\n          left = \"center\",\n          bottom = 0,\n          inRange = list(color = c(\"#ffffcc\", \"#fd8d3c\", \"#bd0026\")),\n          formatter = htmlwidgets::JS(\n            \"\n            function(value) {\n              return Math.round(value).toString().replace(/\\\\B(?=(\\\\d{3})+(?!\\\\d))/g, ',');\n            }\n          \"\n          )\n        ) |&gt;\n        e_tooltip(\n          formatter = htmlwidgets::JS(\n            \"\n            function(params) {\n              if (params.value) {\n                return params.name + '&lt;br/&gt;' + params.value.toLocaleString();\n              }\n              return params.name + '&lt;br/&gt;No data';\n            }\n          \"\n          )\n        )\n    }\n\n    chart\n  })\n\n  output$trend &lt;- renderEcharts4r({\n    trend_data &lt;- data |&gt;\n      filter(\n        powertrain == input$powertrain,\n        state == input$state\n      ) |&gt;\n      arrange(year)\n\n    trend_data$value &lt;- if (input$metric == \"share\") {\n      trend_data$share\n    } else {\n      trend_data$count\n    }\n\n    if (input$metric == \"share\") {\n      trend_data |&gt;\n        e_charts(year) |&gt;\n        e_bar(value, name = input$powertrain) |&gt;\n        e_x_axis(name = \"Year\", type = \"category\") |&gt;\n        e_y_axis(\n          name = \"Market Share\",\n          axisLabel = list(\n            formatter = htmlwidgets::JS(\n              \"\n              function(value) { return (value * 100).toFixed(1) + '%'; }\n            \"\n            )\n          )\n        ) |&gt;\n        e_tooltip(\n          formatter = htmlwidgets::JS(\n            \"\n            function(params) {\n              return params.name + '&lt;br/&gt;' + (params.value[1] * 100).toFixed(2) + '%';\n            }\n          \"\n          )\n        ) |&gt;\n        e_grid(left = 80) |&gt;\n        e_color(background = \"transparent\") |&gt;\n        e_legend(show = FALSE) |&gt;\n        e_toolbox_feature(feature = \"saveAsImage\")\n    } else {\n      trend_data |&gt;\n        e_charts(year) |&gt;\n        e_bar(value, name = input$powertrain) |&gt;\n        e_x_axis(name = \"Year\", type = \"category\") |&gt;\n        e_y_axis(name = \"Count\") |&gt;\n        e_tooltip(\n          formatter = htmlwidgets::JS(\n            \"\n            function(params) {\n              return params.name + '&lt;br/&gt;' + params.value[1].toLocaleString();\n            }\n          \"\n          )\n        ) |&gt;\n        e_grid(left = 100) |&gt;\n        e_color(background = \"transparent\") |&gt;\n        e_legend(show = FALSE) |&gt;\n        e_toolbox_feature(feature = \"saveAsImage\")\n    }\n  })\n}\n\nshinyApp(ui, server)\n\n\n\nDownload data",
+    "crumbs": [
+      "Registrations"
     ]
   },
   {

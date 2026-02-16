@@ -1,0 +1,58 @@
+---
+title: "Tech Stack"
+---
+
+This page describes the technologies used to build and deploy the US Vehicle Trends dashboard.
+
+## Site Framework
+
+The dashboard is built with [Quarto](https://quarto.org/), an open-source scientific and technical publishing system. Quarto renders the `.qmd` (Quarto Markdown) source files into the static HTML pages that make up this website.
+
+## Data Processing
+
+All data processing and analysis is done in [R](https://www.r-project.org/). Key R packages used on the site include:
+
+| Package | Purpose |
+|:--------|:--------|
+| [dplyr](https://dplyr.tidyverse.org/) | Data manipulation and transformation |
+| [reactable](https://glin.github.io/reactable/) | Interactive data tables |
+| [htmltools](https://rstudio.github.io/htmltools/) | HTML generation for embedded content |
+| [kableExtra](https://haozhu233.github.io/kableExtra/) | Enhanced table formatting |
+| [pmtiles](https://walker-data.com/pmtiles/) | Generation of PMTiles tiled map data for the HHI map |
+| [vehicletrends](https://pkg.vehicletrends.us/) | Summary data package for this project |
+
+## Interactive Charts
+
+Most of the interactive chart visualizations are built with [echarts4r](https://echarts4r.john-coene.com/), an R interface to [Apache ECharts](https://echarts.apache.org/).
+
+The interactive map on the [Market Concentration](market-concentration.qmd#map) page is built with [MapLibre GL JS](https://maplibre.org/), an open-source map rendering library. The underlying census tract geometries and HHI data are served as [PMTiles](https://protomaps.com/docs/pmtiles), a cloud-optimized format for tiled map data. The PMTiles archive is generated in R using the [{pmtiles}](https://walker-data.com/pmtiles/) package (which wraps [Tippecanoe](https://github.com/felt/tippecanoe)) and hosted on [Cloudflare R2](https://developers.cloudflare.com/r2/) for low-latency delivery. The base map tiles are provided by [CARTO](https://carto.com/).
+
+The [HHI Explained](hhi-explained.qmd) page features an interactive Shiny application that runs entirely in the browser using [Shinylive](https://posit-dev.github.io/r-shinylive/), which compiles R and Shiny to [WebAssembly](https://webassembly.org/) via [webR](https://docs.r-wasm.org/webr/latest/). This means the app requires no server — all computation happens client-side.
+
+## Hosting and Deployment
+
+The site is rendered automatically via [GitHub Actions](https://github.com/features/actions) on every push to the main branch and on a weekly scheduled build. The rendered site is deployed to and hosted on [Netlify](https://www.netlify.com/).
+
+## Acknowledgements
+
+This project would not be possible without the work of many open-source developers and communities. I include a comprehensive list below, but I want to especially thank Kyle Walker not just for developing amazing R packages like {pmtiles} but also for creating so many helpful posts on his [website](https://walker-data.com) from which I learned so much. 
+
+- **[Quarto](https://quarto.org/)** — J.J. Allaire, Charles Teague, and the Posit team for creating a powerful publishing framework.
+- **[R](https://www.r-project.org/)** — The R Core Team and the broader R community.
+- **[dplyr](https://dplyr.tidyverse.org/)** — Hadley Wickham, Romain Fran&ccedil;ois, Lionel Henry, Kirill M&uuml;ller, and the tidyverse team.
+- **[reactable](https://glin.github.io/reactable/)** — Greg Lin for a flexible interactive table library.
+- **[echarts4r](https://echarts4r.john-coene.com/)** — John Coene for bringing Apache ECharts to R.
+- **[Apache ECharts](https://echarts.apache.org/)** — The Apache Software Foundation for a powerful charting library.
+- **[MapLibre GL JS](https://maplibre.org/)** — The MapLibre community for an open-source map rendering library.
+- **[PMTiles](https://protomaps.com/docs/pmtiles)** and **[Protomaps](https://protomaps.com/)** — Brandon Liu for a cloud-optimized tiled map format.
+- **[pmtiles (R)](https://walker-data.com/pmtiles/)** — Kyle Walker for bringing PMTiles generation to R.
+- **[Tippecanoe](https://github.com/felt/tippecanoe)** — Felt and Mapbox for building efficient vector tilesets.
+- **[Shinylive](https://posit-dev.github.io/r-shinylive/)** and **[webR](https://docs.r-wasm.org/webr/latest/)** — George Stagg, Winston Chang, and the Posit team for running Shiny apps entirely in the browser.
+- **[CARTO](https://carto.com/)** — For providing base map tiles.
+- **[Cloudflare R2](https://developers.cloudflare.com/r2/)** — Cloudflare for object storage hosting.
+- **[htmltools](https://rstudio.github.io/htmltools/)** — Joe Cheng, Carson Sievert, and the Posit team.
+- **[kableExtra](https://haozhu233.github.io/kableExtra/)** — Hao Zhu for extended table formatting capabilities.
+- **[GitHub Actions](https://github.com/features/actions)** — GitHub for CI/CD infrastructure.
+- **[Netlify](https://www.netlify.com/)** — For site hosting and deployment.
+- **[Posit Cloud Connect](https://connect.posit.cloud/)** — Posit for hosting the interactive chart applications.
+- **[MarketCheck](https://www.marketcheck.com/)** — For providing the underlying vehicle listings data.

@@ -65,6 +65,23 @@ Build the site:
 quarto render
 ```
 
+## Citation
+
+If you use this dashboard or its data in your research or publications, please cite it as:
+
+> Helveston, John Paul (2026). *US Vehicle Trends Dashboard*. https://vehicletrends.us
+
+Or in BibTeX format:
+
+```bibtex
+@misc{helveston2026vehicletrends,
+  author = {Helveston, John Paul},
+  title  = {{US Vehicle Trends Dashboard}},
+  year   = {2026},
+  url    = {https://vehicletrends.us}
+}
+```
+
 ## License
 
 This website and its content are licensed under [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). The [{vehicletrends}](https://github.com/vehicletrends/vehicletrends) R data package is licensed under the MIT License.

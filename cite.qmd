@@ -1,0 +1,50 @@
+---
+title: "Cite"
+---
+
+If you use this dashboard or its data in your research or publications, please cite the relevant work below.
+
+## Dashboard
+
+> Helveston, John Paul (2026). *US Vehicle Trends Dashboard*. https://vehicletrends.us
+
+```bibtex
+@misc{helveston2026vehicletrends,
+  author = {Helveston, John Paul},
+  title  = {{US Vehicle Trends Dashboard}},
+  year   = {2026},
+  url    = {https://vehicletrends.us}
+}
+```
+
+## R Data Package
+
+The summary data powering this dashboard are also available as the [{vehicletrends}](https://pkg.vehicletrends.us/) R package. If you use the package data directly, please also cite it. You can get the citation information by typing `citation("vehicletrends")` into R:
+
+```{r}
+#| echo: true
+#| eval: false
+
+citation('vehicletrends')
+```
+
+```{r}
+#| echo: true
+#| eval: false
+
+To cite vehicletrends in publications use:
+
+  John Paul Helveston (2026). vehicletrends: Data on Vehicle Trends in
+  the USA. R package version 0.0.3.
+  https://github.com/vehicletrends/vehicletrends
+
+A BibTeX entry for LaTeX users is
+
+  @Manual{,
+    title = {vehicletrends: Data on Vehicle Trends in the USA},
+    author = {John Paul Helveston},
+    year = {2026},
+    note = {R package version 0.0.3},
+    url = {https://github.com/vehicletrends/vehicletrends},
+  }
+```

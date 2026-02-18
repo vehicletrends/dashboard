@@ -4,6 +4,8 @@ title: "Tech Stack"
 
 This page describes the technologies used to build and deploy the US Vehicle Trends dashboard.
 
+{{< include chunks/cite.qmd >}}
+
 ## Site Framework
 
 The dashboard is built with [Quarto](https://quarto.org/), an open-source scientific and technical publishing system. Quarto renders the `.qmd` (Quarto Markdown) source files into the static HTML pages that make up this website.
@@ -19,7 +21,7 @@ All data processing and analysis is done in [R](https://www.r-project.org/). Key
 | [htmltools](https://rstudio.github.io/htmltools/) | HTML generation for embedded content |
 | [kableExtra](https://haozhu233.github.io/kableExtra/) | Enhanced table formatting |
 | [pmtiles](https://walker-data.com/pmtiles/) | Generation of PMTiles tiled map data for the HHI map |
-| [vehicletrends](https://pkg.vehicletrends.us/) | Summary data package for this project |
+| [vehicletrends](https://pkg.vehicletrends.us/) | Summary data package for this project (see [Cite](cite.qmd)) |
 
 ## Interactive Charts
 

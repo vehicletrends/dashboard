@@ -76,7 +76,7 @@ website:
 
   page-footer:
     center:
-      - text: "© 2025 John Paul Helveston {{< fa creative-commons-sa >}} <a href='LICENSE.html'><i class='fab fa-creative-commons'></i><i class='fab fa-creative-commons-by'></i><i class='fab fa-creative-commons-sa'></i></a> | <a href='https://github.com/vehicletrends/'><i class='fab fa-github'></i></a>"
+      - text: "© 2025 John Paul Helveston {{< fa creative-commons-sa >}} <a href='LICENSE.html'><i class='fab fa-creative-commons'></i><i class='fab fa-creative-commons-by'></i><i class='fab fa-creative-commons-sa'></i></a> | <a href='cite.html'>Cite</a> | <a href='https://github.com/vehicletrends/'><i class='fab fa-github'></i></a>"
 
 format:
   html:

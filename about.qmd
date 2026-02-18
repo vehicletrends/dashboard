@@ -20,7 +20,9 @@ This dashboard provides summary information about various trends in the U.S. aut
 
 The open-source project was created and is maintained by [Dr. John Paul Helveston](//https://jhelvy.com), an Associate Professor in the [Engineering Management and Systems Engineering Department](https://emse.engineering.gwu.edu/) at The George Washington University. 
 
-This website and its content are licensed under [CC-BY-SA 4.0](LICENSE.qmd). For details on the technologies and open-source tools used to build this site, see the [Tech Stack](tech-stack.qmd) page.
+This website and its content are licensed under [CC-BY-SA 4.0](LICENSE.qmd). For details on the technologies and open-source tools used to build this site, see the [Tech Stack](tech-stack.qmd) page. 
+
+{{< include chunks/cite.qmd >}}
 
 ## R Data Package
 

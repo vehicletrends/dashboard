@@ -64,7 +64,7 @@
     "href": "tech-stack.html#data-processing",
     "title": "Tech Stack",
     "section": "Data Processing",
-    "text": "Data Processing\nAll data processing and analysis is done in R. Key R packages used on the site include:\n\n\n\nPackage\nPurpose\n\n\n\n\ndplyr\nData manipulation and transformation\n\n\nreactable\nInteractive data tables\n\n\nhtmltools\nHTML generation for embedded content\n\n\nkableExtra\nEnhanced table formatting\n\n\npmtiles\nGeneration of PMTiles tiled map data for the HHI map\n\n\nvehicletrends\nSummary data package for this project",
+    "text": "Data Processing\nAll data processing and analysis is done in R. Key R packages used on the site include:\n\n\n\nPackage\nPurpose\n\n\n\n\ndplyr\nData manipulation and transformation\n\n\nreactable\nInteractive data tables\n\n\nhtmltools\nHTML generation for embedded content\n\n\nkableExtra\nEnhanced table formatting\n\n\npmtiles\nGeneration of PMTiles tiled map data for the HHI map\n\n\nvehicletrends\nSummary data package for this project (see Cite)",
     "crumbs": [
       "Tech Stack"
     ]
@@ -264,11 +264,32 @@
     ]
   },
   {
-    "objectID": "chunks/loading-notice.html",
-    "href": "chunks/loading-notice.html",
+    "objectID": "cite.html",
+    "href": "cite.html",
+    "title": "Cite",
+    "section": "",
+    "text": "If you use this dashboard or its data in your research or publications, please cite the relevant work below."
+  },
+  {
+    "objectID": "cite.html#dashboard",
+    "href": "cite.html#dashboard",
+    "title": "Cite",
+    "section": "Dashboard",
+    "text": "Dashboard\n\nHelveston, John Paul (2026). US Vehicle Trends Dashboard. https://vehicletrends.us\n\n@misc{helveston2026vehicletrends,\n  author = {Helveston, John Paul},\n  title  = {{US Vehicle Trends Dashboard}},\n  year   = {2026},\n  url    = {https://vehicletrends.us}\n}"
+  },
+  {
+    "objectID": "cite.html#r-data-package",
+    "href": "cite.html#r-data-package",
+    "title": "Cite",
+    "section": "R Data Package",
+    "text": "R Data Package\nThe summary data powering this dashboard are also available as the {vehicletrends} R package. If you use the package data directly, please also cite it. You can get the citation information by typing citation(\"vehicletrends\") into R:\n\ncitation('vehicletrends')\n\n\nTo cite vehicletrends in publications use:\n\n  John Paul Helveston (2026). vehicletrends: Data on Vehicle Trends in\n  the USA. R package version 0.0.3.\n  https://github.com/vehicletrends/vehicletrends\n\nA BibTeX entry for LaTeX users is\n\n  @Manual{,\n    title = {vehicletrends: Data on Vehicle Trends in the USA},\n    author = {John Paul Helveston},\n    year = {2026},\n    note = {R package version 0.0.3},\n    url = {https://github.com/vehicletrends/vehicletrends},\n  }"
+  },
+  {
+    "objectID": "chunks/cite.html",
+    "href": "chunks/cite.html",
     "title": "US Vehicle Trends",
     "section": "",
-    "text": "This page contains interactive content that may take a moment to load, please be patient. If you refresh this page, it will have to load again."
+    "text": "If you use this dashboard or its data in your work, see the Cite page for citation information."
   },
   {
     "objectID": "LICENSE.html",
@@ -394,6 +415,13 @@
     "crumbs": [
       "About"
     ]
+  },
+  {
+    "objectID": "chunks/loading-notice.html",
+    "href": "chunks/loading-notice.html",
+    "title": "US Vehicle Trends",
+    "section": "",
+    "text": "This page contains interactive content that may take a moment to load, please be patient. If you refresh this page, it will have to load again."
   },
   {
     "objectID": "dealership-inventories.html",

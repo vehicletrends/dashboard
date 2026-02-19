@@ -1,5 +1,5 @@
 ---
-title: "Percent of Market"
+title: "Percent of Listings"
 ---
 
 This page shows how the composition of vehicle listings has changed over time across different market dimensions. Each chart displays the percentage of listings for a given group broken down by category, with separate views for new and used inventory. The x-axis is the listing year and the y-axis is the percent of listings.
@@ -9,7 +9,7 @@ This page shows how the composition of vehicle listings has changed over time ac
 
 source("setup.R")
 
-data <- percent_market |>
+data <- percent_listings |>
   mutate(percent = round(p * 100, 2))
 
 # Nice labels for group/category variables
@@ -382,12 +382,12 @@ render_combo(data, "price_bin", "vehicle_type", "Used")
 ## Data
 
 <center>
-[Download data](`r url_percent_market`)
+[Download data](`r url_percent_listings`)
 
 <div style="width:900px">
 
 ```{r}
-percent_market |>
+percent_listings |>
   mutate(
     p = round(p, 4)
   ) |>

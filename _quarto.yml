@@ -46,9 +46,9 @@ website:
     - text: "Depreciation"
       icon: graph-down
       href: depreciation.qmd
-    - text: "Percent of Market"
+    - text: "Percent of Listings"
       icon: pie-chart-fill
-      href: percent-market.qmd
+      href: percent-listings.qmd
     - text: "Percent of Dealers"
       icon: shop
       href: percent-dealers.qmd

@@ -331,7 +331,7 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "This dashboard provides summary information about various trends in the U.S. automobile market. The primary data source is 74,894,001 new and 94,658,664 used vehicle listings from over 100,000 dealerships across all 50 states in the U.S. between 2018 and 2025 (inclusive). The original data are licensed from marketcheck.com and cannot be made public, but this website provides public access to various summaries of the original listings data.\nThe open-source project was created and is maintained by Dr. John Paul Helveston, an Associate Professor in the Engineering Management and Systems Engineering Department at The George Washington University.\nThis website and its content are licensed under CC-BY-SA 4.0. For details on the technologies and open-source tools used to build this site, see the Tech Stack page.",
+    "text": "This dashboard provides summary information about various trends in the U.S. automobile market. The primary data source is 74,894,001 new and 94,658,664 used vehicle listings from over 100,000 dealerships across all 50 states in the U.S. between 2018 and 2025 (inclusive). The original data are licensed from marketcheck.com and cannot be made public, but this website provides public access to various summaries of the original listings data.\nThe open-source project was created by Nithin Sarva and Dr. John Paul Helveston, an Associate Professor in the Engineering Management and Systems Engineering Department at The George Washington University.\nThis website and its content are licensed under CC-BY-SA 4.0. For details on the technologies and open-source tools used to build this site, see the Tech Stack page.",
     "crumbs": [
       "About"
     ]

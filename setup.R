@@ -14,7 +14,7 @@ url_depreciation <- "https://raw.githubusercontent.com/vehicletrends/vehicletren
 url_dep_annual_type <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/dep_annual_type.csv"
 url_dep_annual_model <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/dep_annual_model.csv"
 url_listings_summary <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/listings_summary.csv"
-url_percent_market <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/percent_market.csv"
+url_percent_listings <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/percent_listings.csv"
 url_percent_dealers <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/percent_dealers.csv"
 
 # Download URL for HHI data

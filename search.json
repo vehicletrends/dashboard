@@ -100,93 +100,93 @@
     ]
   },
   {
-    "objectID": "percent-market.html",
-    "href": "percent-market.html",
-    "title": "Percent of Market",
+    "objectID": "percent-listings.html",
+    "href": "percent-listings.html",
+    "title": "Percent of Listings",
     "section": "",
     "text": "This page shows how the composition of vehicle listings has changed over time across different market dimensions. Each chart displays the percentage of listings for a given group broken down by category, with separate views for new and used inventory. The x-axis is the listing year and the y-axis is the percent of listings.",
     "crumbs": [
-      "Percent of Market"
+      "Percent of Listings"
     ]
   },
   {
-    "objectID": "percent-market.html#summary",
-    "href": "percent-market.html#summary",
-    "title": "Percent of Market",
+    "objectID": "percent-listings.html#summary",
+    "href": "percent-listings.html#summary",
+    "title": "Percent of Listings",
     "section": "Summary",
     "text": "Summary\nHollow circles show 2018 values. Filled dots show 2025 values. Lines connect the two, showing the direction and magnitude of change.\n\nNewUsed\n\n\n\nBy Powertrain\n\n\n\n\n\n\n\n\nBy Vehicle Type\n\n\n\n\n\n\n\n\nBy Price Bin\n\n\n\n\n\n\n\n\n\n\nBy Powertrain\n\n\n\n\n\n\n\n\nBy Vehicle Type\n\n\n\n\n\n\n\n\nBy Price Bin",
     "crumbs": [
-      "Percent of Market"
+      "Percent of Listings"
     ]
   },
   {
-    "objectID": "percent-market.html#powertrain-by-vehicle-type",
-    "href": "percent-market.html#powertrain-by-vehicle-type",
-    "title": "Percent of Market",
+    "objectID": "percent-listings.html#powertrain-by-vehicle-type",
+    "href": "percent-listings.html#powertrain-by-vehicle-type",
+    "title": "Percent of Listings",
     "section": "Powertrain by Vehicle Type",
     "text": "Powertrain by Vehicle Type\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)\n\n\n\n\n\n\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nDiesel\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)",
     "crumbs": [
-      "Percent of Market"
+      "Percent of Listings"
     ]
   },
   {
-    "objectID": "percent-market.html#powertrain-by-price-bin",
-    "href": "percent-market.html#powertrain-by-price-bin",
-    "title": "Percent of Market",
+    "objectID": "percent-listings.html#powertrain-by-price-bin",
+    "href": "percent-listings.html#powertrain-by-price-bin",
+    "title": "Percent of Listings",
     "section": "Powertrain by Price Bin",
     "text": "Powertrain by Price Bin\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)\n\n\n\n\n\n\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nDiesel\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)",
     "crumbs": [
-      "Percent of Market"
+      "Percent of Listings"
     ]
   },
   {
-    "objectID": "percent-market.html#vehicle-type-by-powertrain",
-    "href": "percent-market.html#vehicle-type-by-powertrain",
-    "title": "Percent of Market",
+    "objectID": "percent-listings.html#vehicle-type-by-powertrain",
+    "href": "percent-listings.html#vehicle-type-by-powertrain",
+    "title": "Percent of Listings",
     "section": "Vehicle Type by Powertrain",
     "text": "Vehicle Type by Powertrain\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\nCar\n\n\n\n\nCUV\n\n\n\n\nMinivan\n\n\n\n\nPickup\n\n\n\n\nSUV\n\n\n\n\n\n\n\n\n\n\n\n\nCar\n\n\n\n\nCUV\n\n\n\n\nMinivan\n\n\n\n\nPickup\n\n\n\n\nSUV",
     "crumbs": [
-      "Percent of Market"
+      "Percent of Listings"
     ]
   },
   {
-    "objectID": "percent-market.html#vehicle-type-by-price-bin",
-    "href": "percent-market.html#vehicle-type-by-price-bin",
-    "title": "Percent of Market",
+    "objectID": "percent-listings.html#vehicle-type-by-price-bin",
+    "href": "percent-listings.html#vehicle-type-by-price-bin",
+    "title": "Percent of Listings",
     "section": "Vehicle Type by Price Bin",
     "text": "Vehicle Type by Price Bin\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\nCar\n\n\n\n\nCUV\n\n\n\n\nMinivan\n\n\n\n\nPickup\n\n\n\n\nSUV\n\n\n\n\n\n\n\n\n\n\n\n\nCar\n\n\n\n\nCUV\n\n\n\n\nMinivan\n\n\n\n\nPickup\n\n\n\n\nSUV",
     "crumbs": [
-      "Percent of Market"
+      "Percent of Listings"
     ]
   },
   {
-    "objectID": "percent-market.html#price-bin-by-powertrain",
-    "href": "percent-market.html#price-bin-by-powertrain",
-    "title": "Percent of Market",
+    "objectID": "percent-listings.html#price-bin-by-powertrain",
+    "href": "percent-listings.html#price-bin-by-powertrain",
+    "title": "Percent of Listings",
     "section": "Price Bin by Powertrain",
     "text": "Price Bin by Powertrain\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\n$0-$10k\n\n\n\n\n$10k-$20k\n\n\n\n\n$20k-$30k\n\n\n\n\n$30k-$40k\n\n\n\n\n$40k-$50k\n\n\n\n\n$50k-$60k\n\n\n\n\n$60k-$70k\n\n\n\n\n$70k+\n\n\n\n\nOther\n\n\n\n\n\n\n\n\n\n\n\n\n$0-$10k\n\n\n\n\n$10k-$20k\n\n\n\n\n$20k-$30k\n\n\n\n\n$30k-$40k\n\n\n\n\n$40k-$50k\n\n\n\n\n$50k-$60k\n\n\n\n\n$60k-$70k\n\n\n\n\n$70k+\n\n\n\n\nOther",
     "crumbs": [
-      "Percent of Market"
+      "Percent of Listings"
     ]
   },
   {
-    "objectID": "percent-market.html#price-bin-by-vehicle-type",
-    "href": "percent-market.html#price-bin-by-vehicle-type",
-    "title": "Percent of Market",
+    "objectID": "percent-listings.html#price-bin-by-vehicle-type",
+    "href": "percent-listings.html#price-bin-by-vehicle-type",
+    "title": "Percent of Listings",
     "section": "Price Bin by Vehicle Type",
     "text": "Price Bin by Vehicle Type\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\n$0-$10k\n\n\n\n\n$10k-$20k\n\n\n\n\n$20k-$30k\n\n\n\n\n$30k-$40k\n\n\n\n\n$40k-$50k\n\n\n\n\n$50k-$60k\n\n\n\n\n$60k-$70k\n\n\n\n\n$70k+\n\n\n\n\nOther\n\n\n\n\n\n\n\n\n\n\n\n\n$0-$10k\n\n\n\n\n$10k-$20k\n\n\n\n\n$20k-$30k\n\n\n\n\n$30k-$40k\n\n\n\n\n$40k-$50k\n\n\n\n\n$50k-$60k\n\n\n\n\n$60k-$70k\n\n\n\n\n$70k+\n\n\n\n\nOther",
     "crumbs": [
-      "Percent of Market"
+      "Percent of Listings"
     ]
   },
   {
-    "objectID": "percent-market.html#data",
-    "href": "percent-market.html#data",
-    "title": "Percent of Market",
+    "objectID": "percent-listings.html#data",
+    "href": "percent-listings.html#data",
+    "title": "Percent of Listings",
     "section": "Data",
     "text": "Data\n\nDownload data",
     "crumbs": [
-      "Percent of Market"
+      "Percent of Listings"
     ]
   },
   {

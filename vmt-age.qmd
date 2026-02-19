@@ -145,6 +145,8 @@ make_chart(chart_data, "vehicle_type", "Minivan", "powertrain")
 
 :::
 
+
+
 ## By Powertrain
 
 *Click legend items to show/hide lines.*
@@ -247,6 +249,8 @@ make_chart(chart_data, "powertrain", "Fuel Cell", "vehicle_type")
 :::
 
 :::
+
+
 
 ## Data: VMT by Age
 

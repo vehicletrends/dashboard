@@ -89,38 +89,48 @@ make_chart <- function(data, facet_var, facet_value, line_var) {
 ::: {.grid}
 
 ::: {.g-col-6}
+
 ### Car
 ```{r}
 make_chart(chart_data, "vehicle_type", "Car", "powertrain")
 ```
+
 :::
 
 ::: {.g-col-6}
+
 ### CUV
 ```{r}
 make_chart(chart_data, "vehicle_type", "CUV", "powertrain")
 ```
+
 :::
 
 ::: {.g-col-6}
+
 ### SUV
 ```{r}
 make_chart(chart_data, "vehicle_type", "SUV", "powertrain")
 ```
+
 :::
 
 ::: {.g-col-6}
+
 ### Pickup
 ```{r}
 make_chart(chart_data, "vehicle_type", "Pickup", "powertrain")
 ```
+
 :::
 
 ::: {.g-col-6}
+
 ### Minivan
 ```{r}
 make_chart(chart_data, "vehicle_type", "Minivan", "powertrain")
 ```
+
 :::
 
 :::
@@ -132,59 +142,75 @@ make_chart(chart_data, "vehicle_type", "Minivan", "powertrain")
 ::: {.grid}
 
 ::: {.g-col-6}
+
 ### Gasoline
 ```{r}
 make_chart(chart_data, "powertrain", "Gasoline", "vehicle_type")
 ```
+
 :::
 
 ::: {.g-col-6}
+
 ### Flex Fuel (E85)
 ```{r}
 make_chart(chart_data, "powertrain", "Flex Fuel (E85)", "vehicle_type")
 ```
+
 :::
 
 ::: {.g-col-6}
+
 ### Hybrid Electric (HEV)
 ```{r}
 make_chart(chart_data, "powertrain", "Hybrid Electric (HEV)", "vehicle_type")
 ```
+
 :::
 
 ::: {.g-col-6}
+
 ### Plug-In Hybrid Electric (PHEV)
 ```{r}
 make_chart(chart_data, "powertrain", "Plug-In Hybrid Electric (PHEV)", "vehicle_type")
 ```
+
 :::
 
 ::: {.g-col-6}
+
 ### Battery Electric (BEV)
 ```{r}
 make_chart(chart_data, "powertrain", "Battery Electric (BEV)", "vehicle_type")
 ```
+
 :::
 
 ::: {.g-col-6}
+
 ### BEV (Tesla)
 ```{r}
 make_chart(chart_data, "powertrain", "BEV (Tesla)", "vehicle_type")
 ```
+
 :::
 
 ::: {.g-col-6}
+
 ### BEV (Non-Tesla)
 ```{r}
 make_chart(chart_data, "powertrain", "BEV (Non-Tesla)", "vehicle_type")
 ```
+
 :::
 
 ::: {.g-col-6}
+
 ### Fuel Cell
 ```{r}
 make_chart(chart_data, "powertrain", "Fuel Cell", "vehicle_type")
 ```
+
 :::
 
 :::

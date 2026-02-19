@@ -2,7 +2,13 @@
 title: "Percent of Listings"
 ---
 
-This page shows how the composition of vehicle listings has changed over time across different market dimensions. Each chart displays the percentage of listings for a given group broken down by category, with separate views for new and used inventory. The x-axis is the listing year and the y-axis is the percent of listings.
+This page shows how the composition of vehicle listings has changed over time across different market dimensions. The analysis breaks down listings by three key variables:
+
+- **Powertrain**: Gasoline, Diesel, Hybrid Electric (HEV), Plug-in Hybrid Electric (PHEV), and Battery Electric (BEV)
+- **Vehicle Type**: Car, Crossover (CUV), Sport Utility Vehicle (SUV), Pickup, and Minivan
+- **Price Bin**: Price ranges grouping vehicles into different market segments
+
+All charts separate new and used vehicle markets, showing trends from 2018-2024. The "Summary Over Time" section highlights changes between 2018 and 2024, while the "Overall Trends" section displays year-by-year changes. The remaining sections show how these variables interact with each other (e.g., how powertrain distribution varies across different vehicle types).
 
 ```{r}
 #| include: false
@@ -42,18 +48,20 @@ make_chart <- function(data, grp_var, grp_level, cat_var, inv_type) {
     arrange(listing_year) |>
     group_by(category_level) |>
     e_charts(listing_year) |>
-    e_line(percent, symbol = "circle", symbolSize = 6) |>
+    e_line(
+      percent,
+      symbol = "circle",
+      symbolSize = 8,
+      emphasis = list(focus = "series")
+    ) |>
     e_tooltip(
-      trigger = "axis",
+      trigger = "item",
       formatter = htmlwidgets::JS(
         "
         function(params) {
-          var result = params[0].axisValueLabel + '<br/>';
-          params.forEach(function(item) {
-            result += item.marker + ' ' + item.seriesName + ': ' +
-                      item.value[1].toFixed(2) + '%<br/>';
-          });
-          return result;
+          return params.seriesName + '<br/>' +
+                 'Year: ' + params.name + '<br/>' +
+                 'Percent: ' + params.value[1].toFixed(2) + '%';
         }
       "
       )
@@ -69,6 +77,7 @@ make_chart <- function(data, grp_var, grp_level, cat_var, inv_type) {
       left = "center",
       bottom = 0,
       width = "70%",
+      selectedMode = "multiple",
       selector = list(
         list(type = "all", title = "All"),
         list(type = "inverse", title = "Inverse")
@@ -111,6 +120,69 @@ render_combo <- function(data, grp_var, cat_var, inv_type) {
   htmltools::div(class = "grid", charts)
 }
 
+# Helper to create a single overall time series chart
+make_overall_chart <- function(data, var_name, inv_type) {
+  cat_var <- setdiff(c("powertrain", "vehicle_type", "price_bin"), var_name)[1]
+
+  plot_data <- data |>
+    filter(
+      group_var == var_name,
+      category_var == cat_var,
+      inventory_type == inv_type
+    ) |>
+    group_by(listing_year, group_level) |>
+    summarise(total_n = sum(n), .groups = "drop") |>
+    group_by(listing_year) |>
+    mutate(percent = round(total_n / sum(total_n) * 100, 2)) |>
+    ungroup()
+
+  plot_data |>
+    mutate(listing_year = as.character(listing_year)) |>
+    arrange(listing_year) |>
+    group_by(group_level) |>
+    e_charts(listing_year, height = "500px") |>
+    e_line(
+      percent,
+      symbol = "circle",
+      symbolSize = 8,
+      emphasis = list(focus = "series")
+    ) |>
+    e_tooltip(
+      trigger = "item",
+      formatter = htmlwidgets::JS(
+        "
+        function(params) {
+          return params.seriesName + '<br/>' +
+                 'Year: ' + params.name + '<br/>' +
+                 'Percent: ' + params.value[1].toFixed(2) + '%';
+        }
+      "
+      )
+    ) |>
+    e_x_axis(
+      name = "Listing Year",
+      type = "category"
+    ) |>
+    e_y_axis(name = "% of Listings") |>
+    e_legend(
+      show = TRUE,
+      orient = "horizontal",
+      left = "center",
+      bottom = 0,
+      width = "70%",
+      selectedMode = "multiple",
+      selector = list(
+        list(type = "all", title = "All"),
+        list(type = "inverse", title = "Inverse")
+      ),
+      selectorPosition = "start"
+    ) |>
+    e_grid(bottom = 100) |>
+    e_color(background = "transparent") |>
+    e_toolbox_feature(feature = "dataZoom") |>
+    e_toolbox_feature(feature = "saveAsImage")
+}
+
 # Helper to compute overall shares and create horizontal dumbbell chart
 make_summary_dumbbell <- function(data, var_name, inv_type) {
   cat_var <- setdiff(c("powertrain", "vehicle_type", "price_bin"), var_name)[1]
@@ -120,7 +192,7 @@ make_summary_dumbbell <- function(data, var_name, inv_type) {
       group_var == var_name,
       category_var == cat_var,
       inventory_type == inv_type,
-      listing_year %in% c(2018, 2025)
+      listing_year %in% c(2018, 2024)
     ) |>
     group_by(listing_year, group_level) |>
     summarise(total_n = sum(n), .groups = "drop") |>
@@ -135,9 +207,9 @@ make_summary_dumbbell <- function(data, var_name, inv_type) {
     ) |>
     mutate(
       y2018 = ifelse(is.na(y2018), 0, y2018),
-      y2025 = ifelse(is.na(y2025), 0, y2025),
-      bar_base = pmin(y2018, y2025),
-      bar_height = abs(y2025 - y2018)
+      y2024 = ifelse(is.na(y2024), 0, y2024),
+      bar_base = pmin(y2018, y2024),
+      bar_height = abs(y2024 - y2018)
     )
 
   db |>
@@ -166,8 +238,8 @@ make_summary_dumbbell <- function(data, var_name, inv_type) {
       itemStyle = list(color = "#999")
     ) |>
     e_scatter(
-      y2025,
-      name = "2025",
+      y2024,
+      name = "2024",
       symbol = "diamond",
       symbol_size = 14,
       itemStyle = list(color = "#ee6666")
@@ -185,7 +257,7 @@ make_summary_dumbbell <- function(data, var_name, inv_type) {
         function(params) {
           var result = params[0].name + '<br/>';
           params.forEach(function(item) {
-            if (item.seriesName === '2018' || item.seriesName === '2025') {
+            if (item.seriesName === '2018' || item.seriesName === '2024') {
               var val = parseFloat(item.value[0]);
               if (!isNaN(val)) {
                 result += item.marker + ' ' + item.seriesName +
@@ -202,7 +274,7 @@ make_summary_dumbbell <- function(data, var_name, inv_type) {
       show = TRUE,
       bottom = 0,
       left = "center",
-      data = list("2018", "2025")
+      data = list("2018", "2024")
     ) |>
     e_grid(bottom = 60, left = 200, right = 40, top = 10) |>
     e_color(background = "transparent") |>
@@ -211,51 +283,167 @@ make_summary_dumbbell <- function(data, var_name, inv_type) {
 }
 ```
 
-## Summary
+## Overall Trends
 
-*Hollow circles show 2018 values. Filled dots show 2025 values. Lines connect the two, showing the direction and magnitude of change.*
+*Click legend items to show/hide lines.*
 
-::: {.panel-tabset}
+### By Powertrain
 
-### New
+::: {.grid}
 
-#### By Powertrain
+::: {.g-col-6}
+
+#### New Market
+
+```{r}
+make_overall_chart(data, "powertrain", "New")
+```
+
+:::
+
+::: {.g-col-6}
+
+#### Used Market
+
+```{r}
+make_overall_chart(data, "powertrain", "Used")
+```
+
+:::
+
+:::
+
+### By Vehicle Type
+
+::: {.grid}
+
+::: {.g-col-6}
+
+#### New Market
+
+```{r}
+make_overall_chart(data, "vehicle_type", "New")
+```
+
+:::
+
+::: {.g-col-6}
+
+#### Used Market
+
+```{r}
+make_overall_chart(data, "vehicle_type", "Used")
+```
+
+:::
+
+:::
+
+### By Price Bin
+
+::: {.grid}
+
+::: {.g-col-6}
+
+#### New Market
+
+```{r}
+make_overall_chart(data, "price_bin", "New")
+```
+
+:::
+
+::: {.g-col-6}
+
+#### Used Market
+
+```{r}
+make_overall_chart(data, "price_bin", "Used")
+```
+
+:::
+
+:::
+
+## Summary Over Time
+
+*Hollow circles show 2018 values. Filled dots show 2024 values. Lines connect the two, showing the direction and magnitude of change.*
+
+### By Powertrain
+
+::: {.grid}
+
+::: {.g-col-6}
+
+#### New Market
 
 ```{r}
 make_summary_dumbbell(data, "powertrain", "New")
 ```
 
-#### By Vehicle Type
+:::
 
-```{r}
-make_summary_dumbbell(data, "vehicle_type", "New")
-```
+::: {.g-col-6}
 
-#### By Price Bin
-
-```{r}
-make_summary_dumbbell(data, "price_bin", "New")
-```
-
-### Used
-
-#### By Powertrain
+#### Used Market
 
 ```{r}
 make_summary_dumbbell(data, "powertrain", "Used")
 ```
 
-#### By Vehicle Type
+:::
+
+:::
+
+### By Vehicle Type
+
+::: {.grid}
+
+::: {.g-col-6}
+
+#### New Market
+
+```{r}
+make_summary_dumbbell(data, "vehicle_type", "New")
+```
+
+:::
+
+::: {.g-col-6}
+
+#### Used Market
 
 ```{r}
 make_summary_dumbbell(data, "vehicle_type", "Used")
 ```
 
-#### By Price Bin
+:::
+
+:::
+
+### By Price Bin
+
+::: {.grid}
+
+::: {.g-col-6}
+
+#### New Market
+
+```{r}
+make_summary_dumbbell(data, "price_bin", "New")
+```
+
+:::
+
+::: {.g-col-6}
+
+#### Used Market
 
 ```{r}
 make_summary_dumbbell(data, "price_bin", "Used")
 ```
+
+:::
 
 :::
 

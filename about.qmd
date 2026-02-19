@@ -18,7 +18,7 @@ n_used <- scales::comma(n_used)
 
 This dashboard provides summary information about various trends in the U.S. automobile market. The primary data source is `r n_new` new and `r n_used` used vehicle listings from over 100,000 dealerships across all 50 states in the U.S. between 2018 and 2025 (inclusive). The original data are licensed from marketcheck.com and cannot be made public, but this website provides public access to various summaries of the original listings data.
 
-The open-source project was created and is maintained by [Dr. John Paul Helveston](//https://jhelvy.com), an Associate Professor in the [Engineering Management and Systems Engineering Department](https://emse.engineering.gwu.edu/) at The George Washington University. 
+The open-source project was created by [Nithin Sarva](https://www.linkedin.com/in/nithin-sarva/) and [Dr. John Paul Helveston](//https://jhelvy.com), an Associate Professor in the [Engineering Management and Systems Engineering Department](https://emse.engineering.gwu.edu/) at The George Washington University.
 
 This website and its content are licensed under [CC-BY-SA 4.0](LICENSE.qmd). For details on the technologies and open-source tools used to build this site, see the [Tech Stack](tech-stack.qmd) page. 
 

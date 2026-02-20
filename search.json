@@ -104,7 +104,7 @@
     "href": "percent-listings.html",
     "title": "Percent of Listings",
     "section": "",
-    "text": "This page shows how the composition of vehicle listings has changed over time across different market dimensions. The analysis breaks down listings by three key variables:\nAll charts separate new and used vehicle markets, showing trends from 2018-2024. The “Summary Over Time” section highlights changes between 2018 and 2024, while the “Overall Trends” section displays year-by-year changes. The remaining sections show how these variables interact with each other (e.g., how powertrain distribution varies across different vehicle types).",
+    "text": "This page shows how the composition of vehicle listings has changed over time across different market dimensions. The analysis breaks down listings by three key variables:\nAll charts separate new and used vehicle markets, showing trends from 2018-2025. The “Summary Over Time” section highlights changes between 2018 and 2025, while the “Overall Trends” section displays year-by-year changes. The remaining sections show how these variables interact with each other (e.g., how powertrain distribution varies across different vehicle types).",
     "crumbs": [
       "Percent of Listings"
     ]
@@ -124,7 +124,7 @@
     "href": "percent-listings.html#summary-over-time",
     "title": "Percent of Listings",
     "section": "Summary Over Time",
-    "text": "Summary Over Time\nHollow circles show 2018 values. Filled dots show 2024 values. Lines connect the two, showing the direction and magnitude of change.\n\nBy Powertrain\n\n\nNew Market\n\n\n\n\n\n\n\n\nUsed Market\n\n\n\n\n\n\n\n\n\n\nBy Vehicle Type\n\n\nNew Market\n\n\n\n\n\n\n\n\nUsed Market\n\n\n\n\n\n\n\n\n\n\nBy Price Bin\n\n\nNew Market\n\n\n\n\n\n\n\n\nUsed Market",
+    "text": "Summary Over Time\nHollow circles show 2018 values. Filled dots show 2025 values. Lines connect the two, showing the direction and magnitude of change.\n\nBy Powertrain\n\n\nNew Market\n\n\n\n\n\n\n\n\nUsed Market\n\n\n\n\n\n\n\n\n\n\nBy Vehicle Type\n\n\nNew Market\n\n\n\n\n\n\n\n\nUsed Market\n\n\n\n\n\n\n\n\n\n\nBy Price Bin\n\n\nNew Market\n\n\n\n\n\n\n\n\nUsed Market",
     "crumbs": [
       "Percent of Listings"
     ]
@@ -134,7 +134,7 @@
     "href": "percent-listings.html#powertrain-by-vehicle-type",
     "title": "Percent of Listings",
     "section": "Powertrain by Vehicle Type",
-    "text": "Powertrain by Vehicle Type\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)\n\n\n\n\n\n\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nDiesel\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)",
+    "text": "Powertrain by Vehicle Type\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)\n\n\n\n\n\n\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nDiesel\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)",
     "crumbs": [
       "Percent of Listings"
     ]
@@ -144,7 +144,7 @@
     "href": "percent-listings.html#powertrain-by-price-bin",
     "title": "Percent of Listings",
     "section": "Powertrain by Price Bin",
-    "text": "Powertrain by Price Bin\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)\n\n\n\n\n\n\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nDiesel\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)",
+    "text": "Powertrain by Price Bin\nClick legend items to show/hide lines.\n\nNewUsed\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)\n\n\n\n\n\n\n\n\n\n\n\n\nBattery Electric (BEV)\n\n\n\n\nDiesel\n\n\n\n\nFlex Fuel (E85)\n\n\n\n\nFuel Cell\n\n\n\n\nGasoline\n\n\n\n\nHybrid Electric (HEV)\n\n\n\n\nPlug-In Hybrid Electric (PHEV)",
     "crumbs": [
       "Percent of Listings"
     ]

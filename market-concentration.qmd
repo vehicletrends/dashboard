@@ -8,7 +8,7 @@ title: "Market Concentration"
 
 source("setup.R")
 
-data <- vehicletrends::hhi |>
+data <- vehicletrends::hhi_local |>
   filter(!(group_var == "price_bin" & group_level == "Other")) |>
   mutate(lower = pmax(lower, 0))
 

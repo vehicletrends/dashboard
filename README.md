@@ -11,7 +11,7 @@ Interactive data visualization dashboard analyzing millions of vehicle listings 
 <div align="center">
 
 <a href="https://vehicletrends.us/">
-<img src="images/vehicletrends.gif" alt="Watch the surveydown video" width="600"/>
+<img src="images/vehicletrends.gif" alt="gif of browsing through the main dashboard site" width="600"/>
 </a>
 
 </div>
@@ -27,7 +27,7 @@ The open-source project was created by [Nithin Sarva](https://www.linkedin.com/i
 - **Daily VMT** — Distribution of daily vehicle miles traveled by powertrain and vehicle type
 - **VMT by Age** — Median cumulative mileage by vehicle age
 - **Depreciation** — Vehicle value retention rates over time
-- **Percent of Market** — Market composition trends across powertrains, vehicle types, and price bins
+- **Percent of Listings** — Listing composition trends across powertrains, vehicle types, and price bins
 - **Percent of Dealers** — Share of dealerships stocking each vehicle type over time
 - **Market Concentration** — Herfindahl–Hirschman Index (HHI) measuring market competitiveness
 - **Registrations** — State-level vehicle registration counts and market share by powertrain

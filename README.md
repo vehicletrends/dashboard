@@ -8,11 +8,15 @@ Interactive data visualization dashboard analyzing millions of vehicle listings 
 
 **Live site:** https://vehicletrends.us
 
+<center>
+<img src="images/vehicletrends.gif" width=400>
+</center>
+
 ## About
 
 This dashboard provides summary information about various trends in the U.S. automobile market. The primary data source is millions of new and used vehicle listings from over 100,000 dealerships across all 50 states between 2018 and 2025. The original data are licensed from [marketcheck.com](https://www.marketcheck.com/) and cannot be made public, but this website provides public access to various summaries of the original listings data.
 
-The project was created and is maintained by [Dr. John Paul Helveston](https://jhelvy.com), an Associate Professor in the [Engineering Management and Systems Engineering Department](https://emse.engineering.gwu.edu/) at The George Washington University.
+The open-source project was created by [Nithin Sarva](https://www.linkedin.com/in/nithin-sarva/) and [Dr. John Paul Helveston](//https://jhelvy.com), an Associate Professor in the [Engineering Management and Systems Engineering Department](https://emse.engineering.gwu.edu/) at The George Washington University.
 
 ## Dashboard Pages
 
@@ -69,13 +73,13 @@ quarto render
 
 If you use this dashboard or its data in your research or publications, please cite it as:
 
-> Helveston, John Paul (2026). *US Vehicle Trends Dashboard*. https://vehicletrends.us
+> Helveston, John Paul and Sarva, Nithin (2026). *US Vehicle Trends Dashboard*. https://vehicletrends.us
 
 Or in BibTeX format:
 
 ```bibtex
 @misc{helveston2026vehicletrends,
-  author = {Helveston, John Paul},
+  author = {Helveston, John Paul and Sarva, Nithin},
   title  = {{US Vehicle Trends Dashboard}},
   year   = {2026},
   url    = {https://vehicletrends.us}

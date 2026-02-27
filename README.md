@@ -8,9 +8,13 @@ Interactive data visualization dashboard analyzing millions of vehicle listings 
 
 **Live site:** https://vehicletrends.us
 
-<center>
-<img src="images/vehicletrends.gif" width=400>
-</center>
+<div align="center">
+
+<a href="https://vehicletrends.us/">
+<img src="images/vehicletrends.gif" alt="Watch the surveydown video" width="600"/>
+</a>
+
+</div>
 
 ## About
 

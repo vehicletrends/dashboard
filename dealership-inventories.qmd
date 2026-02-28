@@ -32,7 +32,7 @@ htmltools::tags$iframe(
 ## Data
 
 <center>
-[Download data](https://cdn.jsdelivr.net/gh/jhelvy/vehicletrends@main/data/p_one_powertrain_vehicle_type.csv)
+<a href="https://cdn.jsdelivr.net/gh/jhelvy/vehicletrends@main/data/p_one_powertrain_vehicle_type.csv" style="display: inline-block; padding: 8px 16px; background-color: #0066cc; color: white; text-decoration: none; border-radius: 4px; margin-bottom: 10px;">Download data</a>
 
 <div style="width:700px">
 

@@ -187,7 +187,7 @@ make_chart(data, "powertrain", "Fuel Cell", "vehicle_type")
 ## Data
 
 <center>
-[Download data](`r url_vmt_daily`)
+<a href="`r url_vmt_daily`" style="display: inline-block; padding: 8px 16px; background-color: #0066cc; color: white; text-decoration: none; border-radius: 4px; margin-bottom: 10px;">Download data</a>
 
 <div style="width:900px">
 

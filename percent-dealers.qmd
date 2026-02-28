@@ -167,7 +167,7 @@ render_combo(data, "vehicle_type", "price_bin", "Used")
 ## Data
 
 <center>
-[Download data](`r url_percent_dealers`)
+<a href="`r url_percent_dealers`" style="display: inline-block; padding: 8px 16px; background-color: #0066cc; color: white; text-decoration: none; border-radius: 4px; margin-bottom: 10px;">Download data</a>
 
 <div style="width:900px">
 

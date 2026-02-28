@@ -95,6 +95,10 @@ Below the map are boxplots that summarize the distribution of HHI values across 
 
 ## Map
 
+<center>
+<a href="https://vehicletrends.github.io/hhi-map/" target="_blank" style="display: inline-block; padding: 8px 16px; background-color: #0066cc; color: white; text-decoration: none; border-radius: 4px; margin-bottom: 10px;">View map in new tab</a>
+</center>
+
 ```{r}
 htmltools::tags$iframe(
   src = "https://vehicletrends.github.io/hhi-map/",
@@ -148,7 +152,7 @@ make_boxplot(data, "price_bin", "vehicle_type")
 ## Data
 
 <center>
-[Download data](`r url_hhi`)
+<a href="`r url_hhi`" style="display: inline-block; padding: 8px 16px; background-color: #0066cc; color: white; text-decoration: none; border-radius: 4px; margin-bottom: 10px;">Download data</a>
 
 <div style="width:900px">
 

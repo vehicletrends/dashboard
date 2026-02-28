@@ -308,7 +308,7 @@ shinyApp(ui, server)
 ## Data
 
 <center>
-[Download data](https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/registrations.csv)
+<a href="https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/registrations.csv" style="display: inline-block; padding: 8px 16px; background-color: #0066cc; color: white; text-decoration: none; border-radius: 4px; margin-bottom: 10px;">Download data</a>
 
 <div style="width:900px">
 

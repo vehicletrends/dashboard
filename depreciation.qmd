@@ -19,14 +19,17 @@ smooth_group <- function(df, x_col, y_col, span = 0.5) {
     df$rr_smooth <- df[[y_col]]
     return(df)
   }
-  tryCatch({
-    fit <- suppressWarnings(loess(df[[y_col]] ~ df[[x_col]], span = span))
-    df$rr_smooth <- predict(fit)
-    df
-  }, error = function(e) {
-    df$rr_smooth <- df[[y_col]]
-    df
-  })
+  tryCatch(
+    {
+      fit <- suppressWarnings(loess(df[[y_col]] ~ df[[x_col]], span = span))
+      df$rr_smooth <- predict(fit)
+      df
+    },
+    error = function(e) {
+      df$rr_smooth <- df[[y_col]]
+      df
+    }
+  )
 }
 
 # Apply smoothing to all data
@@ -50,7 +53,8 @@ make_chart <- function(data, facet_var, facet_value, line_var) {
     e_line(rr_smooth, symbol = "none", smooth = FALSE) |>
     e_tooltip(
       trigger = "axis",
-      formatter = htmlwidgets::JS("
+      formatter = htmlwidgets::JS(
+        "
         function(params) {
           var result = params[0].axisValueLabel + '<br/>';
           params.forEach(function(item) {
@@ -59,7 +63,8 @@ make_chart <- function(data, facet_var, facet_value, line_var) {
           });
           return result;
         }
-      ")
+      "
+      )
     ) |>
     e_x_axis(name = "Age (years)") |>
     e_y_axis(name = "Retention Rate") |>
@@ -172,7 +177,12 @@ make_chart(chart_data, "powertrain", "Hybrid Electric (HEV)", "vehicle_type")
 
 ### Plug-In Hybrid Electric (PHEV)
 ```{r}
-make_chart(chart_data, "powertrain", "Plug-In Hybrid Electric (PHEV)", "vehicle_type")
+make_chart(
+  chart_data,
+  "powertrain",
+  "Plug-In Hybrid Electric (PHEV)",
+  "vehicle_type"
+)
 ```
 
 :::
@@ -218,7 +228,7 @@ make_chart(chart_data, "powertrain", "Fuel Cell", "vehicle_type")
 ## Data: Depreciation by Age
 
 <center>
-[Download data](`r url_depreciation`)
+<a href="`r url_depreciation`" style="display: inline-block; padding: 8px 16px; background-color: #0066cc; color: white; text-decoration: none; border-radius: 4px; margin-bottom: 10px;">Download data</a>
 
 <div style="width:900px">
 
@@ -256,7 +266,7 @@ data |>
 This table shows the estimated annual depreciation rate by vehicle type and powertrain. Annual depreciation is computed by fitting log-linear regressions of retention rate on vehicle age; the rate is `1 - exp(b)` where `b` is the age coefficient.
 
 <center>
-[Download data](`r url_dep_annual_type`)
+<a href="`r url_dep_annual_type`" style="display: inline-block; padding: 8px 16px; background-color: #0066cc; color: white; text-decoration: none; border-radius: 4px; margin-bottom: 10px;">Download data</a>
 
 <div style="width:700px">
 
@@ -286,7 +296,7 @@ dep_annual_type |>
 This table shows the estimated annual depreciation rate by make, model, vehicle type, and powertrain. Annual depreciation is computed by fitting log-linear regressions of retention rate on vehicle age; the rate is `1 - exp(b)` where `b` is the age coefficient. Only make/model combinations with at least 100 listings are included.
 
 <center>
-[Download data](`r url_dep_annual_model`)
+<a href="`r url_dep_annual_model`" style="display: inline-block; padding: 8px 16px; background-color: #0066cc; color: white; text-decoration: none; border-radius: 4px; margin-bottom: 10px;">Download data</a>
 
 <div style="width:900px">
 

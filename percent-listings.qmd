@@ -283,6 +283,23 @@ make_summary_dumbbell <- function(data, var_name, inv_type) {
 }
 ```
 
+## Map
+
+The map below shows the percentage of vehicle listings for the selected group, level, and year across every US census tract.
+
+<center>
+<a href="https://vehicletrends.github.io/p-map/" target="_blank" style="display: inline-block; padding: 8px 16px; background-color: #0066cc; color: white; text-decoration: none; border-radius: 4px; margin-bottom: 10px;">View map in new tab</a>
+</center>
+
+```{r}
+htmltools::tags$iframe(
+  src = "https://vehicletrends.github.io/p-map/",
+  height = "700px",
+  width = "100%",
+  style = "border: none;"
+)
+```
+
 ## Overall Trends
 
 *Click legend items to show/hide lines.*

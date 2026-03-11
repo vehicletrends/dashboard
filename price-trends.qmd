@@ -1,0 +1,339 @@
+---
+title: "Price Trends"
+format:
+  html:
+    include-in-header:
+      text: |
+        <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+---
+
+This page shows average vehicle price trends over time by state, vehicle type, and vehicle year. Select a state from the dropdown to explore pricing patterns for both new and used vehicles. New vehicle prices are shown for vehicles listed between 2018-2024, while used vehicle prices include vehicles from 2004-2024 with depreciation rate information.
+
+```{r}
+#| include: false
+
+source("setup.R")
+
+# Load price data - no filtering
+data_new <- price_trends_new
+data_used <- price_trends_used
+
+# Get unique states and listing years (sorted)
+states <- sort(unique(c(data_new$state, data_used$state)))
+listing_years <- sort(unique(c(data_new$listing_year, data_used$listing_year)), decreasing = TRUE)
+```
+
+<div style="margin-bottom: 20px;">
+  <label for="stateSelector" style="font-weight: bold; margin-right: 10px;">State:</label>
+  <select id="stateSelector" style="padding: 5px 10px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px;">
+    <option value="CA">California</option>
+  </select>
+
+  <label for="listingYearSelector" style="font-weight: bold; margin-left: 20px; margin-right: 10px;">Listing Year:</label>
+  <select id="listingYearSelector" style="padding: 5px 10px; font-size: 14px; border: 1px solid #ccc; border-radius: 4px;">
+    <option value="2025">2025</option>
+  </select>
+</div>
+
+::: {.panel-tabset}
+
+## New Vehicles
+
+<div style="margin-bottom: 20px;">
+  <p><em>Average prices for new vehicles by vehicle type and model year. Data shown for listings from 2018-2024.</em></p>
+</div>
+
+```{r}
+#| echo: false
+
+library(jsonlite)
+
+# Prepare data for JavaScript
+data_new_json <- data_new |>
+  mutate(
+    listing_year = as.integer(listing_year),
+    year = as.integer(year),
+    avg_price = round(avg_price, 2)
+  ) |>
+  select(listing_year, state, year, vehicle_type, avg_price, n_listings) |>
+  toJSON(dataframe = "rows")
+
+# Create the chart container
+htmltools::tags$div(
+  id = "chart-new",
+  style = "width: 100%; height: 600px;"
+)
+```
+
+## Used Vehicles
+
+<div style="margin-bottom: 20px;">
+  <p><em>Average prices for used vehicles by vehicle type and model year. Data shown for listings from 2018-2024 and includes vehicle years from 2004-2024.</em></p>
+</div>
+
+```{r}
+#| echo: false
+
+# Prepare data for JavaScript
+data_used_json <- data_used |>
+  mutate(
+    listing_year = as.integer(listing_year),
+    year = as.integer(year),
+    avg_price = round(avg_price, 2),
+    dep_annual_rate = round(dep_annual_rate, 4)
+  ) |>
+  select(
+    listing_year,
+    state,
+    year,
+    vehicle_type,
+    avg_price,
+    n_listings,
+    dep_annual_rate
+  ) |>
+  toJSON(dataframe = "rows")
+
+# Create the chart container
+htmltools::tags$div(
+  id = "chart-used",
+  style = "width: 100%; height: 600px;"
+)
+```
+
+## Data
+
+<center>
+<div style="width:900px">
+
+### New Vehicle Prices
+
+```{r}
+data_new |>
+  mutate(avg_price = round(avg_price)) |>
+  rename(
+    "Listing Year" = listing_year,
+    "State" = state,
+    "Vehicle Year" = year,
+    "Vehicle Type" = vehicle_type,
+    "Average Price" = avg_price,
+    "Number of Listings" = n_listings,
+    "Number of Make/Model/Year" = n_make_model_year
+  ) |>
+  reactable::reactable(
+    searchable = TRUE,
+    highlight = TRUE,
+    filterable = TRUE,
+    defaultPageSize = 10,
+    showPageSizeOptions = TRUE,
+    pageSizeOptions = c(5, 10, 25, 50)
+  )
+```
+
+### Used Vehicle Prices
+
+```{r}
+data_used |>
+  mutate(
+    avg_price = round(avg_price),
+    dep_annual_rate = round(dep_annual_rate, 3)
+  ) |>
+  rename(
+    "Listing Year" = listing_year,
+    "State" = state,
+    "Vehicle Year" = year,
+    "Vehicle Type" = vehicle_type,
+    "Average Price" = avg_price,
+    "Number of Listings" = n_listings,
+    "Annual Depreciation Rate" = dep_annual_rate,
+    "Number of Make/Model/Year" = n_make_model_year
+  ) |>
+  reactable::reactable(
+    searchable = TRUE,
+    highlight = TRUE,
+    filterable = TRUE,
+    defaultPageSize = 10,
+    showPageSizeOptions = TRUE,
+    pageSizeOptions = c(5, 10, 25, 50)
+  )
+```
+
+</div>
+</center>
+
+:::
+
+```{r}
+#| echo: false
+
+# Inject the data and JavaScript
+htmltools::tags$script(htmltools::HTML(sprintf(
+  '
+// Data
+const dataNew = %s;
+const dataUsed = %s;
+const states = %s;
+const listingYears = %s;
+
+// Wait for DOM to be ready
+document.addEventListener("DOMContentLoaded", function() {
+  console.log("Data loaded - New:", dataNew.length, "Used:", dataUsed.length);
+
+  // Populate state selector
+  const stateSelector = document.getElementById("stateSelector");
+  stateSelector.innerHTML = "";
+  states.forEach(state => {
+    const option = document.createElement("option");
+    option.value = state;
+    option.textContent = state;
+    stateSelector.appendChild(option);
+  });
+  stateSelector.value = "CA";
+
+  // Populate listing year selector
+  const yearSelector = document.getElementById("listingYearSelector");
+  yearSelector.innerHTML = "";
+  listingYears.forEach(year => {
+    const option = document.createElement("option");
+    option.value = year;
+    option.textContent = year;
+    yearSelector.appendChild(option);
+  });
+  yearSelector.value = listingYears[0]; // Most recent year
+
+  // Function to create chart
+  function createChart(containerId, data, state, listingYear, isUsed = false) {
+    const container = document.getElementById(containerId);
+    if (!container) {
+      console.error("Container not found:", containerId);
+      return null;
+    }
+
+    // Filter data for selected state and listing year
+    const filtered = data.filter(d => d.state === state && d.listing_year === parseInt(listingYear));
+
+    if (filtered.length === 0) {
+      console.warn("No data for state:", state);
+      return null;
+    }
+
+    // Get unique vehicle types
+    const vehicleTypes = [...new Set(filtered.map(d => d.vehicle_type))];
+
+    // Prepare series data
+    const series = vehicleTypes.map(vt => {
+      const vtData = filtered
+        .filter(d => d.vehicle_type === vt)
+        .sort((a, b) => a.year - b.year);
+
+      return {
+        name: vt,
+        type: "line",
+        data: vtData.map(d => [d.year, d.avg_price]),
+        symbol: "circle",
+        symbolSize: 6,
+        emphasis: { focus: "series" }
+      };
+    });
+
+    // Get unique years for x-axis
+    const years = [...new Set(filtered.map(d => d.year))].sort();
+
+    // Create chart
+    const chart = echarts.init(container);
+
+    const option = {
+      tooltip: {
+        trigger: "axis",
+        formatter: function(params) {
+          let result = "Year: " + params[0].axisValue + "<br/>";
+          params.forEach(item => {
+            result += item.marker + " " + item.seriesName + ": $" +
+                     item.value[1].toLocaleString() + "<br/>";
+          });
+          return result;
+        }
+      },
+      legend: {
+        data: vehicleTypes,
+        orient: "horizontal",
+        left: "center",
+        bottom: 0,
+        type: "scroll"
+      },
+      grid: {
+        left: "10%%",
+        right: "5%%",
+        bottom: "80",
+        top: "40",
+        containLabel: true
+      },
+      toolbox: {
+        feature: {
+          dataZoom: { yAxisIndex: "none" },
+          saveAsImage: {}
+        }
+      },
+      xAxis: {
+        type: "value",
+        name: "Vehicle Year",
+        nameLocation: "middle",
+        nameGap: 30,
+        min: Math.min(...years),
+        max: Math.max(...years),
+        axisLabel: {
+          formatter: function(value) {
+            return Math.round(value);
+          }
+        }
+      },
+      yAxis: {
+        type: "value",
+        name: "Average Price ($)",
+        nameLocation: "middle",
+        nameGap: 50,
+        axisLabel: {
+          formatter: function(value) {
+            return "$" + (value / 1000).toFixed(0) + "k";
+          }
+        }
+      },
+      series: series
+    };
+
+    chart.setOption(option);
+
+    // Responsive resize
+    const resizeHandler = function() { chart.resize(); };
+    window.addEventListener("resize", resizeHandler);
+
+    return chart;
+  }
+
+  // Function to update charts
+  function updateCharts() {
+    const state = stateSelector.value;
+    const listingYear = yearSelector.value;
+
+    // Dispose old charts
+    if (window.chartNew) window.chartNew.dispose();
+    if (window.chartUsed) window.chartUsed.dispose();
+
+    // Create new charts
+    window.chartNew = createChart("chart-new", dataNew, state, listingYear, false);
+    window.chartUsed = createChart("chart-used", dataUsed, state, listingYear, true);
+  }
+
+  // Initialize charts
+  updateCharts();
+
+  // Update charts when selectors change
+  stateSelector.addEventListener("change", updateCharts);
+  yearSelector.addEventListener("change", updateCharts);
+});
+',
+  data_new_json,
+  data_used_json,
+  toJSON(states),
+  toJSON(listing_years)
+)))
+```

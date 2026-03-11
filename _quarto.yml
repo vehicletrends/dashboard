@@ -43,6 +43,9 @@ website:
     - text: "VMT by Age"
       icon: graph-up
       href: vmt-age.qmd
+    - text: "Price Trends"
+      icon: currency-dollar
+      href: price-trends.qmd
     - text: "Depreciation"
       icon: graph-down
       href: depreciation.qmd

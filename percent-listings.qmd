@@ -300,88 +300,6 @@ htmltools::tags$iframe(
 )
 ```
 
-## Overall Trends
-
-*Click legend items to show/hide lines.*
-
-### By Powertrain
-
-::: {.grid}
-
-::: {.g-col-6}
-
-#### New Market
-
-```{r}
-make_overall_chart(data, "powertrain", "New")
-```
-
-:::
-
-::: {.g-col-6}
-
-#### Used Market
-
-```{r}
-make_overall_chart(data, "powertrain", "Used")
-```
-
-:::
-
-:::
-
-### By Vehicle Type
-
-::: {.grid}
-
-::: {.g-col-6}
-
-#### New Market
-
-```{r}
-make_overall_chart(data, "vehicle_type", "New")
-```
-
-:::
-
-::: {.g-col-6}
-
-#### Used Market
-
-```{r}
-make_overall_chart(data, "vehicle_type", "Used")
-```
-
-:::
-
-:::
-
-### By Price Bin
-
-::: {.grid}
-
-::: {.g-col-6}
-
-#### New Market
-
-```{r}
-make_overall_chart(data, "price_bin", "New")
-```
-
-:::
-
-::: {.g-col-6}
-
-#### Used Market
-
-```{r}
-make_overall_chart(data, "price_bin", "Used")
-```
-
-:::
-
-:::
-
 ## Summary Over Time
 
 *Hollow circles show 2018 values. Filled dots show 2025 values. Lines connect the two, showing the direction and magnitude of change.*
@@ -458,6 +376,88 @@ make_summary_dumbbell(data, "price_bin", "New")
 
 ```{r}
 make_summary_dumbbell(data, "price_bin", "Used")
+```
+
+:::
+
+:::
+
+## Overall Trends
+
+*Click legend items to show/hide lines.*
+
+### By Powertrain
+
+::: {.grid}
+
+::: {.g-col-6}
+
+#### New Market
+
+```{r}
+make_overall_chart(data, "powertrain", "New")
+```
+
+:::
+
+::: {.g-col-6}
+
+#### Used Market
+
+```{r}
+make_overall_chart(data, "powertrain", "Used")
+```
+
+:::
+
+:::
+
+### By Vehicle Type
+
+::: {.grid}
+
+::: {.g-col-6}
+
+#### New Market
+
+```{r}
+make_overall_chart(data, "vehicle_type", "New")
+```
+
+:::
+
+::: {.g-col-6}
+
+#### Used Market
+
+```{r}
+make_overall_chart(data, "vehicle_type", "Used")
+```
+
+:::
+
+:::
+
+### By Price Bin
+
+::: {.grid}
+
+::: {.g-col-6}
+
+#### New Market
+
+```{r}
+make_overall_chart(data, "price_bin", "New")
+```
+
+:::
+
+::: {.g-col-6}
+
+#### Used Market
+
+```{r}
+make_overall_chart(data, "price_bin", "Used")
 ```
 
 :::

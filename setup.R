@@ -18,5 +18,6 @@ url_percent_listings <- "https://raw.githubusercontent.com/vehicletrends/vehicle
 url_percent_dealers <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/percent_dealers.csv"
 
 # Download URL for HHI data
-url_hhi <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/hhi.csv"
+url_hhi_local_summary <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/hhi_local_summary.csv"
+url_p_local_summary <- "https://raw.githubusercontent.com/vehicletrends/vehicletrends/refs/heads/main/data-raw/p_local_summary.csv"
 listings_summary <- read.csv(url_listings_summary)

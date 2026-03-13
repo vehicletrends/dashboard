@@ -110,11 +110,11 @@
     ]
   },
   {
-    "objectID": "percent-listings.html#overall-trends",
-    "href": "percent-listings.html#overall-trends",
+    "objectID": "percent-listings.html#map",
+    "href": "percent-listings.html#map",
     "title": "Percent of Listings",
-    "section": "Overall Trends",
-    "text": "Overall Trends\nClick legend items to show/hide lines.\n\nBy Powertrain\n\n\nNew Market\n\n\n\n\n\n\n\n\nUsed Market\n\n\n\n\n\n\n\n\n\n\nBy Vehicle Type\n\n\nNew Market\n\n\n\n\n\n\n\n\nUsed Market\n\n\n\n\n\n\n\n\n\n\nBy Price Bin\n\n\nNew Market\n\n\n\n\n\n\n\n\nUsed Market",
+    "section": "Map",
+    "text": "Map\nThe map below shows the percentage of vehicle listings for the selected group, level, and year across every US census tract.\n\nView map in new tab",
     "crumbs": [
       "Percent of Listings"
     ]
@@ -125,6 +125,16 @@
     "title": "Percent of Listings",
     "section": "Summary Over Time",
     "text": "Summary Over Time\nHollow circles show 2018 values. Filled dots show 2025 values. Lines connect the two, showing the direction and magnitude of change.\n\nBy Powertrain\n\n\nNew Market\n\n\n\n\n\n\n\n\nUsed Market\n\n\n\n\n\n\n\n\n\n\nBy Vehicle Type\n\n\nNew Market\n\n\n\n\n\n\n\n\nUsed Market\n\n\n\n\n\n\n\n\n\n\nBy Price Bin\n\n\nNew Market\n\n\n\n\n\n\n\n\nUsed Market",
+    "crumbs": [
+      "Percent of Listings"
+    ]
+  },
+  {
+    "objectID": "percent-listings.html#overall-trends",
+    "href": "percent-listings.html#overall-trends",
+    "title": "Percent of Listings",
+    "section": "Overall Trends",
+    "text": "Overall Trends\nClick legend items to show/hide lines.\n\nBy Powertrain\n\n\nNew Market\n\n\n\n\n\n\n\n\nUsed Market\n\n\n\n\n\n\n\n\n\n\nBy Vehicle Type\n\n\nNew Market\n\n\n\n\n\n\n\n\nUsed Market\n\n\n\n\n\n\n\n\n\n\nBy Price Bin\n\n\nNew Market\n\n\n\n\n\n\n\n\nUsed Market",
     "crumbs": [
       "Percent of Listings"
     ]
@@ -274,67 +284,11 @@
     ]
   },
   {
-    "objectID": "cite.html",
-    "href": "cite.html",
-    "title": "Cite",
-    "section": "",
-    "text": "If you use this dashboard or its data in your research or publications, please cite the relevant work below."
-  },
-  {
-    "objectID": "cite.html#dashboard",
-    "href": "cite.html#dashboard",
-    "title": "Cite",
-    "section": "Dashboard",
-    "text": "Dashboard\n\nHelveston, John Paul (2026). US Vehicle Trends Dashboard. https://vehicletrends.us\n\n@misc{helveston2026vehicletrends,\n  author = {Helveston, John Paul},\n  title  = {{US Vehicle Trends Dashboard}},\n  year   = {2026},\n  url    = {https://vehicletrends.us}\n}"
-  },
-  {
-    "objectID": "cite.html#r-data-package",
-    "href": "cite.html#r-data-package",
-    "title": "Cite",
-    "section": "R Data Package",
-    "text": "R Data Package\nThe summary data powering this dashboard are also available as the {vehicletrends} R package. If you use the package data directly, please also cite it. You can get the citation information by typing citation(\"vehicletrends\") into R:\n\ncitation('vehicletrends')\n\n\nTo cite vehicletrends in publications use:\n\n  John Paul Helveston (2026). vehicletrends: Data on Vehicle Trends in\n  the USA. R package version 0.0.3.\n  https://github.com/vehicletrends/vehicletrends\n\nA BibTeX entry for LaTeX users is\n\n  @Manual{,\n    title = {vehicletrends: Data on Vehicle Trends in the USA},\n    author = {John Paul Helveston},\n    year = {2026},\n    note = {R package version 0.0.3},\n    url = {https://github.com/vehicletrends/vehicletrends},\n  }"
-  },
-  {
-    "objectID": "chunks/cite.html",
-    "href": "chunks/cite.html",
+    "objectID": "chunks/loading-notice.html",
+    "href": "chunks/loading-notice.html",
     "title": "US Vehicle Trends",
     "section": "",
-    "text": "If you use this dashboard or its data in your work, see the Cite page for citation information."
-  },
-  {
-    "objectID": "LICENSE.html",
-    "href": "LICENSE.html",
-    "title": "License",
-    "section": "",
-    "text": "This website and its content are licensed under the Creative Commons Attribution-ShareAlike 4.0 International License (CC-BY-SA 4.0)."
-  },
-  {
-    "objectID": "LICENSE.html#you-are-free-to",
-    "href": "LICENSE.html#you-are-free-to",
-    "title": "License",
-    "section": "You are free to",
-    "text": "You are free to\n\nShare — copy and redistribute the material in any medium or format for any purpose, even commercially.\nAdapt — remix, transform, and build upon the material for any purpose, even commercially."
-  },
-  {
-    "objectID": "LICENSE.html#under-the-following-terms",
-    "href": "LICENSE.html#under-the-following-terms",
-    "title": "License",
-    "section": "Under the following terms",
-    "text": "Under the following terms\n\nAttribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.\nShareAlike — If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.\nNo additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits."
-  },
-  {
-    "objectID": "LICENSE.html#data",
-    "href": "LICENSE.html#data",
-    "title": "License",
-    "section": "Data",
-    "text": "Data\nThe summary data presented on this dashboard are available as the {vehicletrends} R package, which is licensed under the MIT License. The original vehicle listings data are licensed from marketcheck.com and cannot be redistributed."
-  },
-  {
-    "objectID": "LICENSE.html#citation",
-    "href": "LICENSE.html#citation",
-    "title": "License",
-    "section": "Citation",
-    "text": "Citation\nIf you use content from this dashboard, please cite it as:\n\nHelveston, John Paul (2025). US Vehicle Trends Dashboard. https://vehicletrends.us"
+    "text": "This page contains interactive content that may take a moment to load, please be patient. If you refresh this page, it will have to load again."
   },
   {
     "objectID": "about.html",
@@ -427,18 +381,67 @@
     ]
   },
   {
-    "objectID": "chunks/loading-notice.html",
-    "href": "chunks/loading-notice.html",
-    "title": "US Vehicle Trends",
+    "objectID": "LICENSE.html",
+    "href": "LICENSE.html",
+    "title": "License",
     "section": "",
-    "text": "This page contains interactive content that may take a moment to load, please be patient. If you refresh this page, it will have to load again."
+    "text": "This website and its content are licensed under the Creative Commons Attribution-ShareAlike 4.0 International License (CC-BY-SA 4.0)."
   },
   {
-    "objectID": "dealership-inventories.html",
-    "href": "dealership-inventories.html",
-    "title": "Dealership inventories",
+    "objectID": "LICENSE.html#you-are-free-to",
+    "href": "LICENSE.html#you-are-free-to",
+    "title": "License",
+    "section": "You are free to",
+    "text": "You are free to\n\nShare — copy and redistribute the material in any medium or format for any purpose, even commercially.\nAdapt — remix, transform, and build upon the material for any purpose, even commercially."
+  },
+  {
+    "objectID": "LICENSE.html#under-the-following-terms",
+    "href": "LICENSE.html#under-the-following-terms",
+    "title": "License",
+    "section": "Under the following terms",
+    "text": "Under the following terms\n\nAttribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.\nShareAlike — If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.\nNo additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits."
+  },
+  {
+    "objectID": "LICENSE.html#data",
+    "href": "LICENSE.html#data",
+    "title": "License",
+    "section": "Data",
+    "text": "Data\nThe summary data presented on this dashboard are available as the {vehicletrends} R package, which is licensed under the MIT License. The original vehicle listings data are licensed from marketcheck.com and cannot be redistributed."
+  },
+  {
+    "objectID": "LICENSE.html#citation",
+    "href": "LICENSE.html#citation",
+    "title": "License",
+    "section": "Citation",
+    "text": "Citation\nIf you use content from this dashboard, please cite it as:\n\nHelveston, John Paul (2025). US Vehicle Trends Dashboard. https://vehicletrends.us"
+  },
+  {
+    "objectID": "chunks/cite.html",
+    "href": "chunks/cite.html",
+    "title": "US Vehicle Trends",
     "section": "",
-    "text": "ChartsData\n\n\n\n\n\n\n\n\n\n\nDownload data"
+    "text": "If you use this dashboard or its data in your work, see the Cite page for citation information."
+  },
+  {
+    "objectID": "cite.html",
+    "href": "cite.html",
+    "title": "Cite",
+    "section": "",
+    "text": "If you use this dashboard or its data in your research or publications, please cite the relevant work below."
+  },
+  {
+    "objectID": "cite.html#dashboard",
+    "href": "cite.html#dashboard",
+    "title": "Cite",
+    "section": "Dashboard",
+    "text": "Dashboard\n\nHelveston, John Paul (2026). US Vehicle Trends Dashboard. https://vehicletrends.us\n\n@misc{helveston2026vehicletrends,\n  author = {Helveston, John Paul},\n  title  = {{US Vehicle Trends Dashboard}},\n  year   = {2026},\n  url    = {https://vehicletrends.us}\n}"
+  },
+  {
+    "objectID": "cite.html#r-data-package",
+    "href": "cite.html#r-data-package",
+    "title": "Cite",
+    "section": "R Data Package",
+    "text": "R Data Package\nThe summary data powering this dashboard are also available as the {vehicletrends} R package. If you use the package data directly, please also cite it. You can get the citation information by typing citation(\"vehicletrends\") into R:\n\ncitation('vehicletrends')\n\n\nTo cite vehicletrends in publications use:\n\n  John Paul Helveston (2026). vehicletrends: Data on Vehicle Trends in\n  the USA. R package version 0.0.3.\n  https://github.com/vehicletrends/vehicletrends\n\nA BibTeX entry for LaTeX users is\n\n  @Manual{,\n    title = {vehicletrends: Data on Vehicle Trends in the USA},\n    author = {John Paul Helveston},\n    year = {2026},\n    note = {R package version 0.0.3},\n    url = {https://github.com/vehicletrends/vehicletrends},\n  }"
   },
   {
     "objectID": "hhi-explained.html",
@@ -501,11 +504,51 @@
     ]
   },
   {
-    "objectID": "market-concentration.html#data",
-    "href": "market-concentration.html#data",
+    "objectID": "market-concentration.html#hhi-data",
+    "href": "market-concentration.html#hhi-data",
     "title": "Market Concentration",
-    "section": "Data",
-    "text": "Data\n\nDownload data",
+    "section": "HHI Data",
+    "text": "HHI Data\n\nDownload data",
+    "crumbs": [
+      "Market Concentration"
+    ]
+  },
+  {
+    "objectID": "market-concentration.html#by-powertrain-1",
+    "href": "market-concentration.html#by-powertrain-1",
+    "title": "Market Concentration",
+    "section": "By Powertrain",
+    "text": "By Powertrain\n\nNew Inventory\n\n\n\n\n\n\n\n\nUsed Inventory",
+    "crumbs": [
+      "Market Concentration"
+    ]
+  },
+  {
+    "objectID": "market-concentration.html#by-vehicle-type-1",
+    "href": "market-concentration.html#by-vehicle-type-1",
+    "title": "Market Concentration",
+    "section": "By Vehicle Type",
+    "text": "By Vehicle Type\n\nNew Inventory\n\n\n\n\n\n\n\n\nUsed Inventory",
+    "crumbs": [
+      "Market Concentration"
+    ]
+  },
+  {
+    "objectID": "market-concentration.html#by-price-bin-1",
+    "href": "market-concentration.html#by-price-bin-1",
+    "title": "Market Concentration",
+    "section": "By Price Bin",
+    "text": "By Price Bin\n\nNew Inventory\n\n\n\n\n\n\n\n\nUsed Inventory",
+    "crumbs": [
+      "Market Concentration"
+    ]
+  },
+  {
+    "objectID": "market-concentration.html#proportion-data",
+    "href": "market-concentration.html#proportion-data",
+    "title": "Market Concentration",
+    "section": "Proportion Data",
+    "text": "Proportion Data",
     "crumbs": [
       "Market Concentration"
     ]

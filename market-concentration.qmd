@@ -8,19 +8,17 @@ title: "Market Concentration"
 
 source("setup.R")
 
-data <- vehicletrends::hhi_local |>
+hhi_data <- vehicletrends::hhi_local_summary |>
   filter(!(group_var == "price_bin" & group_level == "Other")) |>
   mutate(lower = pmax(lower, 0))
 
-hhi_labels <- c(
-  "make" = "Make",
-  "vehicle_type" = "Vehicle Type",
-  "price_bin" = "Price Bin"
-)
+p_data <- vehicletrends::p_local_summary |>
+  filter(!(group_var == "price_bin" & group_level == "Other")) |>
+  mutate(lower = pmax(lower, 0))
 
-make_boxplot <- function(data, gv, hv) {
+make_boxplot <- function(data, gv, hv, hv_col, x_name) {
   plot_data <- data |>
-    filter(group_var == gv, hhi_var == hv)
+    filter(group_var == gv, .data[[hv_col]] == hv)
 
   years <- sort(unique(plot_data$listing_year))
   levels <- sort(unique(plot_data$group_level))
@@ -64,7 +62,7 @@ make_boxplot <- function(data, gv, hv) {
         ),
         xAxis = list(
           type = "value",
-          name = "HHI",
+          name = x_name,
           min = 0
         ),
         series = list(
@@ -76,6 +74,20 @@ make_boxplot <- function(data, gv, hv) {
       ),
       options = opts
     ))
+}
+
+hhi_boxplot <- function(gv, hv) {
+  make_boxplot(hhi_data, gv, hv, hv_col = "hhi_var", x_name = "HHI")
+}
+
+p_boxplot <- function(gv, inv_type) {
+  make_boxplot(
+    p_data,
+    gv,
+    inv_type,
+    hv_col = "inventory_type",
+    x_name = "Proportion"
+  )
 }
 ```
 
@@ -112,52 +124,52 @@ htmltools::tags$iframe(
 
 ### HHI by Make
 ```{r}
-make_boxplot(data, "powertrain", "make")
+hhi_boxplot("powertrain", "make")
 ```
 
 ### HHI by Vehicle Type
 ```{r}
-make_boxplot(data, "powertrain", "vehicle_type")
+hhi_boxplot("powertrain", "vehicle_type")
 ```
 
 ### HHI by Price Bin
 ```{r}
-make_boxplot(data, "powertrain", "price_bin")
+hhi_boxplot("powertrain", "price_bin")
 ```
 
 ## By Vehicle Type
 
 ### HHI by Make
 ```{r}
-make_boxplot(data, "vehicle_type", "make")
+hhi_boxplot("vehicle_type", "make")
 ```
 
 ### HHI by Price Bin
 ```{r}
-make_boxplot(data, "vehicle_type", "price_bin")
+hhi_boxplot("vehicle_type", "price_bin")
 ```
 
 ## By Price Bin
 
 ### HHI by Make
 ```{r}
-make_boxplot(data, "price_bin", "make")
+hhi_boxplot("price_bin", "make")
 ```
 
 ### HHI by Vehicle Type
 ```{r}
-make_boxplot(data, "price_bin", "vehicle_type")
+hhi_boxplot("price_bin", "vehicle_type")
 ```
 
-## Data
+## HHI Data
 
 <center>
-<a href="`r url_hhi`" style="display: inline-block; padding: 8px 16px; background-color: #0066cc; color: white; text-decoration: none; border-radius: 4px; margin-bottom: 10px;">Download data</a>
+<a href="`r url_hhi_local_summary`" style="display: inline-block; padding: 8px 16px; background-color: #0066cc; color: white; text-decoration: none; border-radius: 4px; margin-bottom: 10px;">Download data</a>
 
 <div style="width:900px">
 
 ```{r}
-data |>
+hhi_data |>
   mutate(
     mean = round(mean, 3),
     median = round(median, 3),
@@ -171,6 +183,90 @@ data |>
     `Group Variable` = group_var,
     `Group Level` = group_level,
     `HHI Variable` = hhi_var,
+    Year = listing_year,
+    Mean = mean,
+    Median = median,
+    Q25 = q25,
+    Q75 = q75,
+    Upper = upper,
+    Lower = lower
+  ) |>
+  reactable::reactable(
+    searchable = TRUE,
+    highlight = TRUE,
+    filterable = TRUE,
+    defaultPageSize = 10,
+    showPageSizeOptions = TRUE,
+    pageSizeOptions = c(5, 10, 25, 50),
+    defaultColDef = reactable::colDef(
+      minWidth = 70
+    )
+  )
+```
+
+</div>
+</center>
+
+# Local Market Proportions
+
+The charts below show the distribution of local market proportions across U.S. census tracts for each group and inventory type (New or Used). Each boxplot summarizes the share of listings for a given category in each local market. Use the timeline slider to switch between years.
+
+## By Powertrain
+
+### New Inventory
+```{r}
+p_boxplot("powertrain", "New")
+```
+
+### Used Inventory
+```{r}
+p_boxplot("powertrain", "Used")
+```
+
+## By Vehicle Type
+
+### New Inventory
+```{r}
+p_boxplot("vehicle_type", "New")
+```
+
+### Used Inventory
+```{r}
+p_boxplot("vehicle_type", "Used")
+```
+
+## By Price Bin
+
+### New Inventory
+```{r}
+p_boxplot("price_bin", "New")
+```
+
+### Used Inventory
+```{r}
+p_boxplot("price_bin", "Used")
+```
+
+## Proportion Data
+
+<center>
+<div style="width:900px">
+
+```{r}
+p_data |>
+  mutate(
+    mean = round(mean, 3),
+    median = round(median, 3),
+    q25 = round(q25, 3),
+    q75 = round(q75, 3),
+    IQR = round(IQR, 3),
+    upper = round(upper, 3),
+    lower = round(lower, 3)
+  ) |>
+  rename(
+    `Group Variable` = group_var,
+    `Group Level` = group_level,
+    `Inventory Type` = inventory_type,
     Year = listing_year,
     Mean = mean,
     Median = median,

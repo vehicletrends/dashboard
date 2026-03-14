@@ -283,87 +283,22 @@ make_summary_dumbbell <- function(data, var_name, inv_type) {
 }
 ```
 
-## Overall Trends
+## Map
 
-*Click legend items to show/hide lines.*
+The map below shows the percentage of vehicle listings for the selected group, level, and year across every US census tract.
 
-### By Powertrain
-
-::: {.grid}
-
-::: {.g-col-6}
-
-#### New Market
+<center>
+<a href="https://vehicletrends.github.io/p-map/" target="_blank" style="display: inline-block; padding: 8px 16px; background-color: #0066cc; color: white; text-decoration: none; border-radius: 4px; margin-bottom: 10px;">View map in new tab</a>
+</center>
 
 ```{r}
-make_overall_chart(data, "powertrain", "New")
+htmltools::tags$iframe(
+  src = "https://vehicletrends.github.io/p-map/",
+  height = "700px",
+  width = "100%",
+  style = "border: none;"
+)
 ```
-
-:::
-
-::: {.g-col-6}
-
-#### Used Market
-
-```{r}
-make_overall_chart(data, "powertrain", "Used")
-```
-
-:::
-
-:::
-
-### By Vehicle Type
-
-::: {.grid}
-
-::: {.g-col-6}
-
-#### New Market
-
-```{r}
-make_overall_chart(data, "vehicle_type", "New")
-```
-
-:::
-
-::: {.g-col-6}
-
-#### Used Market
-
-```{r}
-make_overall_chart(data, "vehicle_type", "Used")
-```
-
-:::
-
-:::
-
-### By Price Bin
-
-::: {.grid}
-
-::: {.g-col-6}
-
-#### New Market
-
-```{r}
-make_overall_chart(data, "price_bin", "New")
-```
-
-:::
-
-::: {.g-col-6}
-
-#### Used Market
-
-```{r}
-make_overall_chart(data, "price_bin", "Used")
-```
-
-:::
-
-:::
 
 ## Summary Over Time
 
@@ -441,6 +376,88 @@ make_summary_dumbbell(data, "price_bin", "New")
 
 ```{r}
 make_summary_dumbbell(data, "price_bin", "Used")
+```
+
+:::
+
+:::
+
+## Overall Trends
+
+*Click legend items to show/hide lines.*
+
+### By Powertrain
+
+::: {.grid}
+
+::: {.g-col-6}
+
+#### New Market
+
+```{r}
+make_overall_chart(data, "powertrain", "New")
+```
+
+:::
+
+::: {.g-col-6}
+
+#### Used Market
+
+```{r}
+make_overall_chart(data, "powertrain", "Used")
+```
+
+:::
+
+:::
+
+### By Vehicle Type
+
+::: {.grid}
+
+::: {.g-col-6}
+
+#### New Market
+
+```{r}
+make_overall_chart(data, "vehicle_type", "New")
+```
+
+:::
+
+::: {.g-col-6}
+
+#### Used Market
+
+```{r}
+make_overall_chart(data, "vehicle_type", "Used")
+```
+
+:::
+
+:::
+
+### By Price Bin
+
+::: {.grid}
+
+::: {.g-col-6}
+
+#### New Market
+
+```{r}
+make_overall_chart(data, "price_bin", "New")
+```
+
+:::
+
+::: {.g-col-6}
+
+#### Used Market
+
+```{r}
+make_overall_chart(data, "price_bin", "Used")
 ```
 
 :::

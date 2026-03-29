@@ -1,5 +1,6 @@
 ---
 title: "HHI Explained"
+engine: knitr
 format:
   html:
     include-in-header:
